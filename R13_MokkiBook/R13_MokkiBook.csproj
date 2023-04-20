@@ -46,16 +46,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmAlkunaytto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmAlkunaytto.Designer.cs">
+      <DependentUpon>frmAlkunaytto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAlueet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAlueet.Designer.cs">
+      <DependentUpon>frmAlueet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAsiakkaat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAsiakkaat.Designer.cs">
+      <DependentUpon>frmAsiakkaat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLaskut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLaskut.Designer.cs">
+      <DependentUpon>frmLaskut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMokit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMokit.Designer.cs">
+      <DependentUpon>frmMokit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPalvelut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPalvelut.Designer.cs">
+      <DependentUpon>frmPalvelut.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmVaraukset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVaraukset.Designer.cs">
+      <DependentUpon>frmVaraukset.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmAlkunaytto.resx">
+      <DependentUpon>frmAlkunaytto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

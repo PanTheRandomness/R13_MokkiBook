@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace R13_MokkiBook
 {
-    public partial class Form1 : Form
+    public partial class frmAlueet : Form
     {
-        public Form1()
+        public frmAlueet()
         {
             InitializeComponent();
         }
