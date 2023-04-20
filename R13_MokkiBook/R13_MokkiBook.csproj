@@ -93,6 +93,12 @@
     <EmbeddedResource Include="frmAlkunaytto.resx">
       <DependentUpon>frmAlkunaytto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAsiakkaat.resx">
+      <DependentUpon>frmAsiakkaat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMokit.resx">
+      <DependentUpon>frmMokit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
