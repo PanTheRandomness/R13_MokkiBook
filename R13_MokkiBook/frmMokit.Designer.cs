@@ -100,14 +100,6 @@
             this.lbPuhelinnumero.TabIndex = 7;
             this.lbPuhelinnumero.Text = "Puhelinnumero";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(48, 92);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 22);
-            this.textBox1.TabIndex = 1;
-            // 
-            // frmMokit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
