@@ -96,6 +96,9 @@
     <EmbeddedResource Include="frmMokit.resx">
       <DependentUpon>frmMokit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPalvelut.resx">
+      <DependentUpon>frmPalvelut.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
