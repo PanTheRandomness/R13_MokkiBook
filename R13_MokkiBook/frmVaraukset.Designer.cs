@@ -32,9 +32,8 @@
             this.pnlAlapaneeli = new System.Windows.Forms.Panel();
             this.dgvVaraukset = new System.Windows.Forms.DataGridView();
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataVaraukset = new R13_MokkiBook.VarauksetData();
+            this.varauksetData = new R13_MokkiBook.VarauksetData();
             this.tamTauluAdapteriManageri = new R13_MokkiBook.VarauksetDataTableAdapters.TableAdapterManager();
-            this.taVarauksenPalvelut = new R13_MokkiBook.VarauksetDataTableAdapters.varauksen_palvelutTableAdapter();
             this.taVaraus = new R13_MokkiBook.VarauksetDataTableAdapters.varausTableAdapter();
             this.varausidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asiakasidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,7 +44,7 @@
             this.varattuloppupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataVaraukset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAlapaneeli
@@ -83,23 +82,18 @@
             // varausBindingSource
             // 
             this.varausBindingSource.DataMember = "varaus";
-            this.varausBindingSource.DataSource = this.dataVaraukset;
+            this.varausBindingSource.DataSource = this.varauksetData;
             // 
-            // dataVaraukset
+            // varauksetData
             // 
-            this.dataVaraukset.DataSetName = "VarauksetData";
-            this.dataVaraukset.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.varauksetData.DataSetName = "VarauksetData";
+            this.varauksetData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tamTauluAdapteriManageri
             // 
             this.tamTauluAdapteriManageri.BackupDataSetBeforeUpdate = true;
             this.tamTauluAdapteriManageri.UpdateOrder = R13_MokkiBook.VarauksetDataTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tamTauluAdapteriManageri.varauksen_palvelutTableAdapter = this.taVarauksenPalvelut;
             this.tamTauluAdapteriManageri.varausTableAdapter = this.taVaraus;
-            // 
-            // taVarauksenPalvelut
-            // 
-            this.taVarauksenPalvelut.ClearBeforeFill = true;
             // 
             // taVaraus
             // 
@@ -158,9 +152,10 @@
             this.Controls.Add(this.pnlAlapaneeli);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
+            this.Load += new System.EventHandler(this.frmVaraukset_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataVaraukset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -169,9 +164,8 @@
 
         private System.Windows.Forms.Panel pnlAlapaneeli;
         private System.Windows.Forms.DataGridView dgvVaraukset;
-        private VarauksetData dataVaraukset;
+        private VarauksetData varauksetData;
         private VarauksetDataTableAdapters.TableAdapterManager tamTauluAdapteriManageri;
-        private VarauksetDataTableAdapters.varauksen_palvelutTableAdapter taVarauksenPalvelut;
         private VarauksetDataTableAdapters.varausTableAdapter taVaraus;
         private System.Windows.Forms.BindingSource varausBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn varausidDataGridViewTextBoxColumn;

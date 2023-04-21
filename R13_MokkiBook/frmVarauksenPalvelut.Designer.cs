@@ -66,6 +66,7 @@
             this.dgvVarauksenPalvelut.Name = "dgvVarauksenPalvelut";
             this.dgvVarauksenPalvelut.Size = new System.Drawing.Size(478, 231);
             this.dgvVarauksenPalvelut.TabIndex = 1;
+            this.dgvVarauksenPalvelut.SelectionChanged += new System.EventHandler(this.dgvVarauksenPalvelut_SelectionChanged);
             // 
             // varauksenpalvelutBindingSource
             // 

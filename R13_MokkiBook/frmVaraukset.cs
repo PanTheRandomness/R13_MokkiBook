@@ -22,5 +22,11 @@ namespace R13_MokkiBook
         {
             valitturivi = dgvVaraukset.CurrentRow.Index;
         }
+
+        private void frmVaraukset_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'varauksetData.varauksen_palvelut' table. You can move, or remove it, as needed.
+            this.taVaraus.Fill(this.varauksetData.varaus);
+        }
     }
 }
