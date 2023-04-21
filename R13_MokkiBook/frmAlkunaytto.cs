@@ -22,8 +22,8 @@ namespace R13_MokkiBook
         {
             string connetionString;
             SqlConnection cnn;
-            connetionString = @"Data Source=Village Newbies;uid=root";
-            //connetionString = @"Data Source=WIN-50GP30FGO75(?);Initial Catalog=Village Newbies;User ID=root;Password=Ruutti";
+            connetionString = @"Data Source=ODBC.localhost.vn;uid=root;pwd=Ruutti";
+            //connetionString = @"Data Source=WIN-50GP30FGO75;Initial Catalog=Village Newbies;User ID=root;Password=Ruutti";
             cnn = new SqlConnection(connetionString);
             cnn.Open();
             MessageBox.Show("Connection Open  !");
