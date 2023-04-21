@@ -20,14 +20,44 @@ namespace R13_MokkiBook
 
         private void frmAlkunaytto_Load(object sender, EventArgs e)
         {
-            string connetionString;
+            /*string connetionString;
             SqlConnection cnn;
             connetionString = @"Data Source=ODBC.localhost.vn;uid=root;pwd=Ruutti";
             //connetionString = @"Data Source=WIN-50GP30FGO75;Initial Catalog=Village Newbies;User ID=root;Password=Ruutti";
             cnn = new SqlConnection(connetionString);
             cnn.Open();
             MessageBox.Show("Connection Open  !");
-            cnn.Close();
+            cnn.Close();*/
+        }
+
+        private void btnVaraukset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMokit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAlueet_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAsiakkaat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPalvelut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLaskut_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
