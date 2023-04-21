@@ -28,5 +28,16 @@ namespace R13_MokkiBook
             // TODO: This line of code loads data into the 'varauksetData.varauksen_palvelut' table. You can move, or remove it, as needed.
             this.taVaraus.Fill(this.varauksetData.varaus);
         }
+
+        private void VarauksenPalvelutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVarauksenPalvelut palvelut = new frmVarauksenPalvelut();
+            palvelut.ShowDialog();
+        }
+
+        private void tsmiPoista_Click(object sender, EventArgs e)
+        {
+            //VALIDOI!!!
+        }
     }
 }

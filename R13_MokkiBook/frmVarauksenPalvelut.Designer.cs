@@ -37,9 +37,11 @@
             this.varausidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lkmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.epVarauksenPalvelut = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlToiminnot
@@ -100,6 +102,10 @@
             this.lkmDataGridViewTextBoxColumn.HeaderText = "lkm";
             this.lkmDataGridViewTextBoxColumn.Name = "lkmDataGridViewTextBoxColumn";
             // 
+            // epVarauksenPalvelut
+            // 
+            this.epVarauksenPalvelut.ContainerControl = this;
+            // 
             // frmVarauksenPalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -127,5 +134,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn varausidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn palveluidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lkmDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ErrorProvider epVarauksenPalvelut;
     }
 }

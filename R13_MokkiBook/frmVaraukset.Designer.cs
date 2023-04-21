@@ -42,18 +42,31 @@
             this.vahvistuspvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattualkupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattuloppupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnUusiVaraus = new System.Windows.Forms.Button();
+            this.btnTulostaVarausRaportti = new System.Windows.Forms.Button();
+            this.btnHae = new System.Windows.Forms.Button();
+            this.cmsVarauksenMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiVarauksenPalvelut = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPoista = new System.Windows.Forms.ToolStripMenuItem();
+            this.epVaraukset = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pnlAlapaneeli.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).BeginInit();
+            this.cmsVarauksenMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAlapaneeli
             // 
             this.pnlAlapaneeli.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlAlapaneeli.Location = new System.Drawing.Point(0, 620);
+            this.pnlAlapaneeli.Controls.Add(this.btnHae);
+            this.pnlAlapaneeli.Controls.Add(this.btnTulostaVarausRaportti);
+            this.pnlAlapaneeli.Controls.Add(this.btnUusiVaraus);
+            this.pnlAlapaneeli.Location = new System.Drawing.Point(0, 613);
             this.pnlAlapaneeli.Name = "pnlAlapaneeli";
-            this.pnlAlapaneeli.Size = new System.Drawing.Size(1274, 42);
+            this.pnlAlapaneeli.Size = new System.Drawing.Size(1274, 49);
             this.pnlAlapaneeli.TabIndex = 0;
             // 
             // dgvVaraukset
@@ -75,7 +88,7 @@
             this.dgvVaraukset.DataSource = this.varausBindingSource;
             this.dgvVaraukset.Location = new System.Drawing.Point(0, 1);
             this.dgvVaraukset.Name = "dgvVaraukset";
-            this.dgvVaraukset.Size = new System.Drawing.Size(1273, 619);
+            this.dgvVaraukset.Size = new System.Drawing.Size(1273, 613);
             this.dgvVaraukset.TabIndex = 1;
             this.dgvVaraukset.SelectionChanged += new System.EventHandler(this.dgvVaraukset_SelectionChanged);
             // 
@@ -143,6 +156,61 @@
             this.varattuloppupvmDataGridViewTextBoxColumn.HeaderText = "Varauksen päättymispäivä";
             this.varattuloppupvmDataGridViewTextBoxColumn.Name = "varattuloppupvmDataGridViewTextBoxColumn";
             // 
+            // btnUusiVaraus
+            // 
+            this.btnUusiVaraus.Location = new System.Drawing.Point(1183, 14);
+            this.btnUusiVaraus.Name = "btnUusiVaraus";
+            this.btnUusiVaraus.Size = new System.Drawing.Size(79, 23);
+            this.btnUusiVaraus.TabIndex = 0;
+            this.btnUusiVaraus.Text = "Luo uusi";
+            this.btnUusiVaraus.UseVisualStyleBackColor = true;
+            // 
+            // btnTulostaVarausRaportti
+            // 
+            this.btnTulostaVarausRaportti.Location = new System.Drawing.Point(1074, 14);
+            this.btnTulostaVarausRaportti.Name = "btnTulostaVarausRaportti";
+            this.btnTulostaVarausRaportti.Size = new System.Drawing.Size(103, 23);
+            this.btnTulostaVarausRaportti.TabIndex = 1;
+            this.btnTulostaVarausRaportti.Text = "Tulosta raportti";
+            this.btnTulostaVarausRaportti.UseVisualStyleBackColor = true;
+            // 
+            // btnHae
+            // 
+            this.btnHae.Location = new System.Drawing.Point(789, 14);
+            this.btnHae.Name = "btnHae";
+            this.btnHae.Size = new System.Drawing.Size(51, 23);
+            this.btnHae.TabIndex = 2;
+            this.btnHae.Text = "Hae";
+            this.btnHae.UseVisualStyleBackColor = true;
+            // 
+            // cmsVarauksenMenuStrip
+            // 
+            this.cmsVarauksenMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiVarauksenPalvelut,
+            this.tsmiPoista});
+            this.cmsVarauksenMenuStrip.Name = "cmsVarauksenMenuStrip";
+            this.cmsVarauksenMenuStrip.Size = new System.Drawing.Size(207, 48);
+            // 
+            // tsmiVarauksenPalvelut
+            // 
+            this.tsmiVarauksenPalvelut.Name = "tsmiVarauksenPalvelut";
+            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(206, 22);
+            this.tsmiVarauksenPalvelut.Text = "Näytä varauksen palvelut";
+            this.tsmiVarauksenPalvelut.ToolTipText = "Avaa toiseen ikkunaan listan varauksen sisältämistä palveluista";
+            this.tsmiVarauksenPalvelut.Click += new System.EventHandler(this.VarauksenPalvelutToolStripMenuItem_Click);
+            // 
+            // tsmiPoista
+            // 
+            this.tsmiPoista.Name = "tsmiPoista";
+            this.tsmiPoista.Size = new System.Drawing.Size(206, 22);
+            this.tsmiPoista.Text = "Poista";
+            this.tsmiPoista.ToolTipText = "Poistaa varauksen";
+            this.tsmiPoista.Click += new System.EventHandler(this.tsmiPoista_Click);
+            // 
+            // epVaraukset
+            // 
+            this.epVaraukset.ContainerControl = this;
+            // 
             // frmVaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,9 +221,12 @@
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
             this.Load += new System.EventHandler(this.frmVaraukset_Load);
+            this.pnlAlapaneeli.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).EndInit();
+            this.cmsVarauksenMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,5 +246,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn vahvistuspvmDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn varattualkupvmDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn varattuloppupvmDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btnHae;
+        private System.Windows.Forms.Button btnTulostaVarausRaportti;
+        private System.Windows.Forms.Button btnUusiVaraus;
+        private System.Windows.Forms.ContextMenuStrip cmsVarauksenMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem tsmiVarauksenPalvelut;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPoista;
+        private System.Windows.Forms.ErrorProvider epVaraukset;
     }
 }
