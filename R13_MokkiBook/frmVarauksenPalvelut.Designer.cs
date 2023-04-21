@@ -31,47 +31,51 @@
             this.components = new System.ComponentModel.Container();
             this.pnlToiminnot = new System.Windows.Forms.Panel();
             this.dgvVarauksenPalvelut = new System.Windows.Forms.DataGridView();
-            this.varauksetData = new R13_MokkiBook.VarauksetData();
             this.varauksenpalvelutBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.varauksetData = new R13_MokkiBook.VarauksetData();
             this.varauksen_palvelutTableAdapter = new R13_MokkiBook.VarauksetDataTableAdapters.varauksen_palvelutTableAdapter();
             this.varausidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lkmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlToiminnot
             // 
+            this.pnlToiminnot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlToiminnot.Location = new System.Drawing.Point(1, 409);
             this.pnlToiminnot.Name = "pnlToiminnot";
-            this.pnlToiminnot.Size = new System.Drawing.Size(799, 40);
+            this.pnlToiminnot.Size = new System.Drawing.Size(478, 0);
             this.pnlToiminnot.TabIndex = 0;
             // 
             // dgvVarauksenPalvelut
             // 
             this.dgvVarauksenPalvelut.AutoGenerateColumns = false;
+            this.dgvVarauksenPalvelut.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVarauksenPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVarauksenPalvelut.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.varausidDataGridViewTextBoxColumn,
             this.palveluidDataGridViewTextBoxColumn,
             this.lkmDataGridViewTextBoxColumn});
             this.dgvVarauksenPalvelut.DataSource = this.varauksenpalvelutBindingSource;
-            this.dgvVarauksenPalvelut.Location = new System.Drawing.Point(2, 1);
+            this.dgvVarauksenPalvelut.Location = new System.Drawing.Point(0, 1);
             this.dgvVarauksenPalvelut.Name = "dgvVarauksenPalvelut";
-            this.dgvVarauksenPalvelut.Size = new System.Drawing.Size(797, 408);
+            this.dgvVarauksenPalvelut.Size = new System.Drawing.Size(478, 231);
             this.dgvVarauksenPalvelut.TabIndex = 1;
-            // 
-            // varauksetData
-            // 
-            this.varauksetData.DataSetName = "VarauksetData";
-            this.varauksetData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // varauksenpalvelutBindingSource
             // 
             this.varauksenpalvelutBindingSource.DataMember = "varauksen_palvelut";
             this.varauksenpalvelutBindingSource.DataSource = this.varauksetData;
+            // 
+            // varauksetData
+            // 
+            this.varauksetData.DataSetName = "VarauksetData";
+            this.varauksetData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // varauksen_palvelutTableAdapter
             // 
@@ -80,13 +84,13 @@
             // varausidDataGridViewTextBoxColumn
             // 
             this.varausidDataGridViewTextBoxColumn.DataPropertyName = "varaus_id";
-            this.varausidDataGridViewTextBoxColumn.HeaderText = "varaus_id";
+            this.varausidDataGridViewTextBoxColumn.HeaderText = "VarausID";
             this.varausidDataGridViewTextBoxColumn.Name = "varausidDataGridViewTextBoxColumn";
             // 
             // palveluidDataGridViewTextBoxColumn
             // 
             this.palveluidDataGridViewTextBoxColumn.DataPropertyName = "palvelu_id";
-            this.palveluidDataGridViewTextBoxColumn.HeaderText = "palvelu_id";
+            this.palveluidDataGridViewTextBoxColumn.HeaderText = "PalveluID";
             this.palveluidDataGridViewTextBoxColumn.Name = "palveluidDataGridViewTextBoxColumn";
             // 
             // lkmDataGridViewTextBoxColumn
@@ -99,15 +103,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(479, 269);
             this.Controls.Add(this.dgvVarauksenPalvelut);
             this.Controls.Add(this.pnlToiminnot);
             this.Name = "frmVarauksenPalvelut";
             this.Text = "Varauksen palvelut";
             this.Load += new System.EventHandler(this.frmVarauksenPalvelut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).EndInit();
             this.ResumeLayout(false);
 
         }
