@@ -96,6 +96,9 @@
     <EmbeddedResource Include="frmAsiakkaat.resx">
       <DependentUpon>frmAsiakkaat.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLaskut.resx">
+      <DependentUpon>frmLaskut.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMokit.resx">
       <DependentUpon>frmMokit.cs</DependentUpon>
     </EmbeddedResource>
