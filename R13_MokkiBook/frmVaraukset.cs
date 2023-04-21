@@ -37,7 +37,18 @@ namespace R13_MokkiBook
 
         private void tsmiPoista_Click(object sender, EventArgs e)
         {
-            //VALIDOI!!!
+            //VALIDOI: HALUATKO POISTAA?
+            //Poistaako muuta kuin palvelun?
+        }
+
+        private void frmVaraukset_Leave(object sender, EventArgs e)
+        {
+            //VALIDOI: TALLENNETAANKO MUUTOKSET
+        }
+
+        private void cbAsiakas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
