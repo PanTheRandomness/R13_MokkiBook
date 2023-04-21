@@ -32,32 +32,38 @@ namespace R13_MokkiBook
 
         private void btnVaraukset_Click(object sender, EventArgs e)
         {
-
+            frmVaraukset va = new frmVaraukset();
+            va.ShowDialog();
         }
 
         private void btnMokit_Click(object sender, EventArgs e)
         {
-
+            frmMokit mo = new frmMokit();
+            mo.ShowDialog();
         }
 
         private void btnAlueet_Click(object sender, EventArgs e)
         {
-
+            frmAlueet al = new frmAlueet();
+            al.ShowDialog();
         }
 
         private void btnAsiakkaat_Click(object sender, EventArgs e)
         {
-
+            frmAsiakkaat asi = new frmAsiakkaat();
+            asi.ShowDialog();
         }
 
         private void btnPalvelut_Click(object sender, EventArgs e)
         {
-
+            frmPalvelut pa = new frmPalvelut();
+            pa.ShowDialog();
         }
 
         private void btnLaskut_Click(object sender, EventArgs e)
         {
-
+            frmLaskut la = new frmLaskut();
+            la.ShowDialog();
         }
     }
 }
