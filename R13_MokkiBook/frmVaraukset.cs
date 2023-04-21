@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace R13_MokkiBook
 {
-    public partial class Varaukset : Form
+    public partial class frmVaraukset : Form
     {
-        public Varaukset()
+        public frmVaraukset()
         {
             InitializeComponent();
         }
