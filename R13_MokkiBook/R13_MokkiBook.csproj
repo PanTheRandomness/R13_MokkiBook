@@ -82,6 +82,12 @@
     <Compile Include="frmPalvelut.Designer.cs">
       <DependentUpon>frmPalvelut.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmVarauksenPalvelut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVarauksenPalvelut.Designer.cs">
+      <DependentUpon>frmVarauksenPalvelut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frmVaraukset.cs">
@@ -109,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPalvelut.resx">
       <DependentUpon>frmPalvelut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVarauksenPalvelut.resx">
+      <DependentUpon>frmVarauksenPalvelut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVaraukset.resx">
       <DependentUpon>frmVaraukset.cs</DependentUpon>
