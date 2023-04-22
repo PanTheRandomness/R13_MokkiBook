@@ -56,11 +56,16 @@
             this.cbMokki = new System.Windows.Forms.ComboBox();
             this.Asiakas = new System.Windows.Forms.Label();
             this.cbAsiakas = new System.Windows.Forms.ComboBox();
+            this.btnHae = new System.Windows.Forms.Button();
+            this.btnRaportti = new System.Windows.Forms.Button();
+            this.btnUusi = new System.Windows.Forms.Button();
+            this.epVaraukset = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
             this.cmsVaraustaulunMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvVaraukset
@@ -113,25 +118,28 @@
             this.tsmiVarauksenPalvelut,
             this.tsmiPoista});
             this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
-            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 70);
+            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 92);
             // 
             // tsmiMuokkaa
             // 
             this.tsmiMuokkaa.Name = "tsmiMuokkaa";
             this.tsmiMuokkaa.Size = new System.Drawing.Size(206, 22);
             this.tsmiMuokkaa.Text = "Muokkaa varausta";
+            this.tsmiMuokkaa.Click += new System.EventHandler(this.tsmiMuokkaa_Click);
             // 
             // tsmiVarauksenPalvelut
             // 
             this.tsmiVarauksenPalvelut.Name = "tsmiVarauksenPalvelut";
             this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(206, 22);
             this.tsmiVarauksenPalvelut.Text = "Näytä varauksen palvelut";
+            this.tsmiVarauksenPalvelut.Click += new System.EventHandler(this.tsmiVarauksenPalvelut_Click);
             // 
             // tsmiPoista
             // 
             this.tsmiPoista.Name = "tsmiPoista";
             this.tsmiPoista.Size = new System.Drawing.Size(206, 22);
             this.tsmiPoista.Text = "Poista varaus";
+            this.tsmiPoista.Click += new System.EventHandler(this.tsmiPoista_Click);
             // 
             // varausidDataGridViewTextBoxColumn
             // 
@@ -200,6 +208,7 @@
             this.dtpAlku.Name = "dtpAlku";
             this.dtpAlku.Size = new System.Drawing.Size(200, 20);
             this.dtpAlku.TabIndex = 4;
+            this.dtpAlku.ValueChanged += new System.EventHandler(this.dtpAlku_ValueChanged);
             // 
             // lblViiva
             // 
@@ -216,6 +225,7 @@
             this.dtpLoppu.Name = "dtpLoppu";
             this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
             this.dtpLoppu.TabIndex = 6;
+            this.dtpLoppu.ValueChanged += new System.EventHandler(this.dtpLoppu_ValueChanged);
             // 
             // lblAlue
             // 
@@ -234,6 +244,7 @@
             this.cbAlue.Name = "cbAlue";
             this.cbAlue.Size = new System.Drawing.Size(86, 21);
             this.cbAlue.TabIndex = 8;
+            this.cbAlue.SelectedIndexChanged += new System.EventHandler(this.cbAlue_SelectedIndexChanged);
             // 
             // lblMokki
             // 
@@ -252,6 +263,7 @@
             this.cbMokki.Name = "cbMokki";
             this.cbMokki.Size = new System.Drawing.Size(86, 21);
             this.cbMokki.TabIndex = 10;
+            this.cbMokki.SelectedIndexChanged += new System.EventHandler(this.cbMokki_SelectedIndexChanged);
             // 
             // Asiakas
             // 
@@ -270,12 +282,50 @@
             this.cbAsiakas.Name = "cbAsiakas";
             this.cbAsiakas.Size = new System.Drawing.Size(86, 21);
             this.cbAsiakas.TabIndex = 12;
+            this.cbAsiakas.SelectedIndexChanged += new System.EventHandler(this.cbAsiakas_SelectedIndexChanged);
+            // 
+            // btnHae
+            // 
+            this.btnHae.Location = new System.Drawing.Point(889, 590);
+            this.btnHae.Name = "btnHae";
+            this.btnHae.Size = new System.Drawing.Size(50, 23);
+            this.btnHae.TabIndex = 13;
+            this.btnHae.Text = "Hae";
+            this.btnHae.UseVisualStyleBackColor = true;
+            this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
+            // 
+            // btnRaportti
+            // 
+            this.btnRaportti.Location = new System.Drawing.Point(945, 590);
+            this.btnRaportti.Name = "btnRaportti";
+            this.btnRaportti.Size = new System.Drawing.Size(64, 23);
+            this.btnRaportti.TabIndex = 14;
+            this.btnRaportti.Text = "Raportti";
+            this.btnRaportti.UseVisualStyleBackColor = true;
+            this.btnRaportti.Click += new System.EventHandler(this.btnRaportti_Click);
+            // 
+            // btnUusi
+            // 
+            this.btnUusi.Location = new System.Drawing.Point(1187, 591);
+            this.btnUusi.Name = "btnUusi";
+            this.btnUusi.Size = new System.Drawing.Size(75, 23);
+            this.btnUusi.TabIndex = 15;
+            this.btnUusi.Text = "Uusi varaus";
+            this.btnUusi.UseVisualStyleBackColor = true;
+            this.btnUusi.Click += new System.EventHandler(this.btnUusi_Click);
+            // 
+            // epVaraukset
+            // 
+            this.epVaraukset.ContainerControl = this;
             // 
             // frmVaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1274, 620);
+            this.Controls.Add(this.btnUusi);
+            this.Controls.Add(this.btnRaportti);
+            this.Controls.Add(this.btnHae);
             this.Controls.Add(this.cbAsiakas);
             this.Controls.Add(this.Asiakas);
             this.Controls.Add(this.cbMokki);
@@ -296,6 +346,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
             this.cmsVaraustaulunMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,5 +381,9 @@
         private System.Windows.Forms.ComboBox cbMokki;
         private System.Windows.Forms.Label Asiakas;
         private System.Windows.Forms.ComboBox cbAsiakas;
+        private System.Windows.Forms.Button btnHae;
+        private System.Windows.Forms.Button btnRaportti;
+        private System.Windows.Forms.Button btnUusi;
+        private System.Windows.Forms.ErrorProvider epVaraukset;
     }
 }

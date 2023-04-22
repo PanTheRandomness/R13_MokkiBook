@@ -29,5 +29,61 @@ namespace R13_MokkiBook
         {
             valitturivi = dgvVaraukset.CurrentRow.Index;
         }
+
+        private void dtpAlku_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpLoppu_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbMokki_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbAsiakas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRaportti_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUusi_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsmiMuokkaa_Click(object sender, EventArgs e)
+        {
+            //VALIDOI
+        }
+
+        private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
+        {
+            frmVarauksenPalvelut vp = new frmVarauksenPalvelut();
+            vp.ShowDialog();
+        }
+
+        private void tsmiPoista_Click(object sender, EventArgs e)
+        {
+            //VALIDOI
+        }
     }
 }

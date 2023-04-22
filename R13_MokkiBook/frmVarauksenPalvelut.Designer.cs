@@ -37,9 +37,11 @@
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lkmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlToiminnot = new System.Windows.Forms.Panel();
+            this.epVarauksenPalvelut = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvVarauksenPalvelut
@@ -103,6 +105,10 @@
             this.pnlToiminnot.Size = new System.Drawing.Size(526, 40);
             this.pnlToiminnot.TabIndex = 1;
             // 
+            // epVarauksenPalvelut
+            // 
+            this.epVarauksenPalvelut.ContainerControl = this;
+            // 
             // frmVarauksenPalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,6 +126,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -134,5 +141,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn palveluidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lkmDataGridViewTextBoxColumn;
         private System.Windows.Forms.Panel pnlToiminnot;
+        private System.Windows.Forms.ErrorProvider epVarauksenPalvelut;
     }
 }
