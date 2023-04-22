@@ -89,14 +89,14 @@
     <Compile Include="frmVarauksenPalvelut.Designer.cs">
       <DependentUpon>frmVarauksenPalvelut.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frmVaraukset.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmVaraukset.Designer.cs">
       <DependentUpon>frmVaraukset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VarauksetData.cs">
       <DependentUpon>VarauksetData.xsd</DependentUpon>
     </Compile>
