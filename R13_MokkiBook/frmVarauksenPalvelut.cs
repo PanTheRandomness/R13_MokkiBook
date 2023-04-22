@@ -12,6 +12,7 @@ namespace R13_MokkiBook
 {
     public partial class frmVarauksenPalvelut : Form
     {
+        public int valitturivi = -1;
         public frmVarauksenPalvelut()
         {
             InitializeComponent();

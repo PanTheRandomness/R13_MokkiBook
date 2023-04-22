@@ -28,10 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // frmVarauksenPalvelut
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "frmVarauksenPalvelut";
+            this.ClientSize = new System.Drawing.Size(530, 310);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(546, 349);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(546, 349);
+            this.Name = "frmVarauksenPalvelut";
+            this.Text = "Varauksen palvelut";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -62,6 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSetMokkiBook.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetMokkiBook.xsd</DependentUpon>
+    </Compile>
     <Compile Include="frmAlkunaytto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +147,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="DataSetMokkiBook.xsc">
+      <DependentUpon>DataSetMokkiBook.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetMokkiBook.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetMokkiBook.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSetMokkiBook.xss">
+      <DependentUpon>DataSetMokkiBook.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
