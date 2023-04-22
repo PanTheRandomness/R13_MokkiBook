@@ -103,6 +103,12 @@
     <Compile Include="frmPalvelut.Designer.cs">
       <DependentUpon>frmPalvelut.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUusiVaraus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUusiVaraus.Designer.cs">
+      <DependentUpon>frmUusiVaraus.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVarauksenPalvelut.cs">
       <SubType>Form</SubType>
     </Compile>

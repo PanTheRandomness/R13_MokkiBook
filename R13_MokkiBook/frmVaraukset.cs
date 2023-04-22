@@ -67,7 +67,8 @@ namespace R13_MokkiBook
 
         private void btnUusi_Click(object sender, EventArgs e)
         {
-
+            frmUusiVaraus uv = new frmUusiVaraus();
+            uv.ShowDialog();
         }
 
         private void tsmiMuokkaa_Click(object sender, EventArgs e)
@@ -82,6 +83,11 @@ namespace R13_MokkiBook
         }
 
         private void tsmiPoista_Click(object sender, EventArgs e)
+        {
+            //VALIDOI
+        }
+
+        private void frmVaraukset_Leave(object sender, EventArgs e)
         {
             //VALIDOI
         }

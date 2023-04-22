@@ -118,7 +118,7 @@
             this.tsmiVarauksenPalvelut,
             this.tsmiPoista});
             this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
-            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 92);
+            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 70);
             // 
             // tsmiMuokkaa
             // 
@@ -341,6 +341,7 @@
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
             this.Load += new System.EventHandler(this.frmVaraukset_Load);
+            this.Leave += new System.EventHandler(this.frmVaraukset_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
