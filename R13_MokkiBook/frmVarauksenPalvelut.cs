@@ -17,5 +17,17 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
         }
+
+        private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dataSet1.varauksen_palvelut' table. You can move, or remove it, as needed.
+            this.varauksen_palvelutTableAdapter.Fill(this.dataSet1.varauksen_palvelut);
+
+        }
+
+        private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
+        {
+            valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
+        }
     }
 }

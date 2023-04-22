@@ -24,5 +24,10 @@ namespace R13_MokkiBook
             this.varausTableAdapter.Fill(this.dataSet1.varaus);
 
         }
+
+        private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
+        {
+            valitturivi = dgvVaraukset.CurrentRow.Index;
+        }
     }
 }

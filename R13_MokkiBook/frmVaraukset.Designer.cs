@@ -45,6 +45,17 @@
             this.vahvistuspvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattualkupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattuloppupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlToiminnot = new System.Windows.Forms.Panel();
+            this.lblPaivat = new System.Windows.Forms.Label();
+            this.dtpAlku = new System.Windows.Forms.DateTimePicker();
+            this.lblViiva = new System.Windows.Forms.Label();
+            this.dtpLoppu = new System.Windows.Forms.DateTimePicker();
+            this.lblAlue = new System.Windows.Forms.Label();
+            this.cbAlue = new System.Windows.Forms.ComboBox();
+            this.lblMokki = new System.Windows.Forms.Label();
+            this.cbMokki = new System.Windows.Forms.ComboBox();
+            this.Asiakas = new System.Windows.Forms.Label();
+            this.cbAsiakas = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -72,8 +83,9 @@
             this.dgvVaraukset.DataSource = this.varausBindingSource;
             this.dgvVaraukset.Location = new System.Drawing.Point(2, 3);
             this.dgvVaraukset.Name = "dgvVaraukset";
-            this.dgvVaraukset.Size = new System.Drawing.Size(1282, 636);
+            this.dgvVaraukset.Size = new System.Drawing.Size(1269, 578);
             this.dgvVaraukset.TabIndex = 0;
+            this.dgvVaraukset.SelectionChanged += new System.EventHandler(this.dgvVaraukset_SelectionChanged);
             // 
             // dataSet1
             // 
@@ -163,11 +175,118 @@
             this.varattuloppupvmDataGridViewTextBoxColumn.HeaderText = "Varauksen päättymispäivä";
             this.varattuloppupvmDataGridViewTextBoxColumn.Name = "varattuloppupvmDataGridViewTextBoxColumn";
             // 
+            // pnlToiminnot
+            // 
+            this.pnlToiminnot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlToiminnot.Location = new System.Drawing.Point(3, 638);
+            this.pnlToiminnot.Name = "pnlToiminnot";
+            this.pnlToiminnot.Size = new System.Drawing.Size(1267, 0);
+            this.pnlToiminnot.TabIndex = 2;
+            // 
+            // lblPaivat
+            // 
+            this.lblPaivat.AutoSize = true;
+            this.lblPaivat.Location = new System.Drawing.Point(12, 594);
+            this.lblPaivat.Name = "lblPaivat";
+            this.lblPaivat.Size = new System.Drawing.Size(41, 13);
+            this.lblPaivat.TabIndex = 3;
+            this.lblPaivat.Text = "Päiviltä";
+            // 
+            // dtpAlku
+            // 
+            this.dtpAlku.Location = new System.Drawing.Point(59, 592);
+            this.dtpAlku.Name = "dtpAlku";
+            this.dtpAlku.Size = new System.Drawing.Size(200, 20);
+            this.dtpAlku.TabIndex = 4;
+            // 
+            // lblViiva
+            // 
+            this.lblViiva.AutoSize = true;
+            this.lblViiva.Location = new System.Drawing.Point(265, 594);
+            this.lblViiva.Name = "lblViiva";
+            this.lblViiva.Size = new System.Drawing.Size(10, 13);
+            this.lblViiva.TabIndex = 5;
+            this.lblViiva.Text = "-";
+            // 
+            // dtpLoppu
+            // 
+            this.dtpLoppu.Location = new System.Drawing.Point(281, 592);
+            this.dtpLoppu.Name = "dtpLoppu";
+            this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
+            this.dtpLoppu.TabIndex = 6;
+            // 
+            // lblAlue
+            // 
+            this.lblAlue.AutoSize = true;
+            this.lblAlue.Location = new System.Drawing.Point(487, 594);
+            this.lblAlue.Name = "lblAlue";
+            this.lblAlue.Size = new System.Drawing.Size(28, 13);
+            this.lblAlue.TabIndex = 7;
+            this.lblAlue.Text = "Alue";
+            // 
+            // cbAlue
+            // 
+            this.cbAlue.Enabled = false;
+            this.cbAlue.FormattingEnabled = true;
+            this.cbAlue.Location = new System.Drawing.Point(521, 590);
+            this.cbAlue.Name = "cbAlue";
+            this.cbAlue.Size = new System.Drawing.Size(86, 21);
+            this.cbAlue.TabIndex = 8;
+            // 
+            // lblMokki
+            // 
+            this.lblMokki.AutoSize = true;
+            this.lblMokki.Location = new System.Drawing.Point(613, 594);
+            this.lblMokki.Name = "lblMokki";
+            this.lblMokki.Size = new System.Drawing.Size(36, 13);
+            this.lblMokki.TabIndex = 9;
+            this.lblMokki.Text = "Mökki";
+            // 
+            // cbMokki
+            // 
+            this.cbMokki.Enabled = false;
+            this.cbMokki.FormattingEnabled = true;
+            this.cbMokki.Location = new System.Drawing.Point(655, 590);
+            this.cbMokki.Name = "cbMokki";
+            this.cbMokki.Size = new System.Drawing.Size(86, 21);
+            this.cbMokki.TabIndex = 10;
+            // 
+            // Asiakas
+            // 
+            this.Asiakas.AutoSize = true;
+            this.Asiakas.Location = new System.Drawing.Point(747, 594);
+            this.Asiakas.Name = "Asiakas";
+            this.Asiakas.Size = new System.Drawing.Size(44, 13);
+            this.Asiakas.TabIndex = 11;
+            this.Asiakas.Text = "Asiakas";
+            // 
+            // cbAsiakas
+            // 
+            this.cbAsiakas.Enabled = false;
+            this.cbAsiakas.FormattingEnabled = true;
+            this.cbAsiakas.Location = new System.Drawing.Point(797, 591);
+            this.cbAsiakas.Name = "cbAsiakas";
+            this.cbAsiakas.Size = new System.Drawing.Size(86, 21);
+            this.cbAsiakas.TabIndex = 12;
+            // 
             // frmVaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1287, 678);
+            this.ClientSize = new System.Drawing.Size(1274, 620);
+            this.Controls.Add(this.cbAsiakas);
+            this.Controls.Add(this.Asiakas);
+            this.Controls.Add(this.cbMokki);
+            this.Controls.Add(this.lblMokki);
+            this.Controls.Add(this.cbAlue);
+            this.Controls.Add(this.lblAlue);
+            this.Controls.Add(this.dtpLoppu);
+            this.Controls.Add(this.lblViiva);
+            this.Controls.Add(this.dtpAlku);
+            this.Controls.Add(this.lblPaivat);
+            this.Controls.Add(this.pnlToiminnot);
             this.Controls.Add(this.dgvVaraukset);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
@@ -178,6 +297,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
             this.cmsVaraustaulunMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -199,5 +319,16 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiMuokkaa;
         private System.Windows.Forms.ToolStripMenuItem tsmiVarauksenPalvelut;
         private System.Windows.Forms.ToolStripMenuItem tsmiPoista;
+        private System.Windows.Forms.Panel pnlToiminnot;
+        private System.Windows.Forms.Label lblPaivat;
+        private System.Windows.Forms.DateTimePicker dtpAlku;
+        private System.Windows.Forms.Label lblViiva;
+        private System.Windows.Forms.DateTimePicker dtpLoppu;
+        private System.Windows.Forms.Label lblAlue;
+        private System.Windows.Forms.ComboBox cbAlue;
+        private System.Windows.Forms.Label lblMokki;
+        private System.Windows.Forms.ComboBox cbMokki;
+        private System.Windows.Forms.Label Asiakas;
+        private System.Windows.Forms.ComboBox cbAsiakas;
     }
 }
