@@ -97,6 +97,9 @@
     <Compile Include="frmVaraukset.Designer.cs">
       <DependentUpon>frmVaraukset.cs</DependentUpon>
     </Compile>
+    <Compile Include="VarauksetData.cs">
+      <DependentUpon>VarauksetData.xsd</DependentUpon>
+    </Compile>
     <Compile Include="VarauksetData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

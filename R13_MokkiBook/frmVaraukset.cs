@@ -50,5 +50,40 @@ namespace R13_MokkiBook
         {
 
         }
+
+        private void cbMokki_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //EI ALUETTA KOKO DATASETISSÄ??
+        }
+
+        private void dtpLoppu_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpAlku_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTulostaVarausRaportti_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUusiVaraus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

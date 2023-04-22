@@ -137,6 +137,25 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Mokin_AlueTableAdapter" GeneratorDataComponentClassName="Mokin_AlueTableAdapter" Name="Mokin_Alue" UserDataComponentName="Mokin_AlueTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT                       mokki.alue_id, alue.nimi
+FROM                         mokki, alue
+WHERE                       mokki.alue_id = alue.alue_id</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="alue_id" DataSetColumn="alue_id" />
+              <Mapping SourceColumn="nimi" DataSetColumn="nimi" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -145,38 +164,56 @@
   <xs:element name="VarauksetData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="VarauksetData" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="VarauksetData">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="varaus" msprop:Generator_RowClassName="varausRow" msprop:Generator_RowEvHandlerName="varausRowChangeEventHandler" msprop:Generator_RowDeletedName="varausRowDeleted" msprop:Generator_RowDeletingName="varausRowDeleting" msprop:Generator_RowEvArgName="varausRowChangeEvent" msprop:Generator_TablePropName="varaus" msprop:Generator_RowChangedName="varausRowChanged" msprop:Generator_UserTableName="varaus" msprop:Generator_RowChangingName="varausRowChanging" msprop:Generator_TableClassName="varausDataTable" msprop:Generator_TableVarName="tablevaraus">
+        <xs:element name="varauksen_palvelut" msprop:Generator_RowEvHandlerName="varauksen_palvelutRowChangeEventHandler" msprop:Generator_RowDeletedName="varauksen_palvelutRowDeleted" msprop:Generator_RowDeletingName="varauksen_palvelutRowDeleting" msprop:Generator_RowEvArgName="varauksen_palvelutRowChangeEvent" msprop:Generator_TablePropName="varauksen_palvelut" msprop:Generator_RowChangedName="varauksen_palvelutRowChanged" msprop:Generator_UserTableName="varauksen_palvelut" msprop:Generator_RowChangingName="varauksen_palvelutRowChanging" msprop:Generator_RowClassName="varauksen_palvelutRow" msprop:Generator_TableClassName="varauksen_palvelutDataTable" msprop:Generator_TableVarName="tablevarauksen_palvelut">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="varaus_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="varaus_id" msprop:Generator_ColumnPropNameInTable="varaus_idColumn" msprop:Generator_ColumnPropNameInRow="varaus_id" msprop:Generator_ColumnVarNameInTable="columnvaraus_id" type="xs:long" minOccurs="0" />
-              <xs:element name="asiakas_id" msprop:Generator_UserColumnName="asiakas_id" msprop:Generator_ColumnPropNameInTable="asiakas_idColumn" msprop:Generator_ColumnPropNameInRow="asiakas_id" msprop:Generator_ColumnVarNameInTable="columnasiakas_id" type="xs:long" />
-              <xs:element name="mokki_mokki_id" msprop:Generator_UserColumnName="mokki_mokki_id" msprop:Generator_ColumnPropNameInTable="mokki_mokki_idColumn" msprop:Generator_ColumnPropNameInRow="mokki_mokki_id" msprop:Generator_ColumnVarNameInTable="columnmokki_mokki_id" type="xs:long" />
-              <xs:element name="varattu_pvm" msprop:Generator_UserColumnName="varattu_pvm" msprop:Generator_ColumnPropNameInTable="varattu_pvmColumn" msprop:Generator_ColumnPropNameInRow="varattu_pvm" msprop:Generator_ColumnVarNameInTable="columnvarattu_pvm" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="vahvistus_pvm" msprop:Generator_UserColumnName="vahvistus_pvm" msprop:Generator_ColumnPropNameInTable="vahvistus_pvmColumn" msprop:Generator_ColumnPropNameInRow="vahvistus_pvm" msprop:Generator_ColumnVarNameInTable="columnvahvistus_pvm" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="varattu_alkupvm" msprop:Generator_UserColumnName="varattu_alkupvm" msprop:Generator_ColumnPropNameInTable="varattu_alkupvmColumn" msprop:Generator_ColumnPropNameInRow="varattu_alkupvm" msprop:Generator_ColumnVarNameInTable="columnvarattu_alkupvm" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="varattu_loppupvm" msprop:Generator_UserColumnName="varattu_loppupvm" msprop:Generator_ColumnPropNameInTable="varattu_loppupvmColumn" msprop:Generator_ColumnPropNameInRow="varattu_loppupvm" msprop:Generator_ColumnVarNameInTable="columnvarattu_loppupvm" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="varaus_id" msprop:Generator_ColumnPropNameInTable="varaus_idColumn" msprop:Generator_ColumnPropNameInRow="varaus_id" msprop:Generator_UserColumnName="varaus_id" msprop:Generator_ColumnVarNameInTable="columnvaraus_id" type="xs:long" />
+              <xs:element name="palvelu_id" msprop:Generator_ColumnPropNameInTable="palvelu_idColumn" msprop:Generator_ColumnPropNameInRow="palvelu_id" msprop:Generator_UserColumnName="palvelu_id" msprop:Generator_ColumnVarNameInTable="columnpalvelu_id" type="xs:long" />
+              <xs:element name="lkm" msprop:Generator_ColumnPropNameInTable="lkmColumn" msprop:Generator_ColumnPropNameInRow="lkm" msprop:Generator_UserColumnName="lkm" msprop:Generator_ColumnVarNameInTable="columnlkm" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="varauksen_palvelut" msprop:Generator_RowClassName="varauksen_palvelutRow" msprop:Generator_RowEvHandlerName="varauksen_palvelutRowChangeEventHandler" msprop:Generator_RowDeletedName="varauksen_palvelutRowDeleted" msprop:Generator_RowDeletingName="varauksen_palvelutRowDeleting" msprop:Generator_RowEvArgName="varauksen_palvelutRowChangeEvent" msprop:Generator_TablePropName="varauksen_palvelut" msprop:Generator_RowChangedName="varauksen_palvelutRowChanged" msprop:Generator_UserTableName="varauksen_palvelut" msprop:Generator_RowChangingName="varauksen_palvelutRowChanging" msprop:Generator_TableClassName="varauksen_palvelutDataTable" msprop:Generator_TableVarName="tablevarauksen_palvelut">
+        <xs:element name="varaus" msprop:Generator_RowEvHandlerName="varausRowChangeEventHandler" msprop:Generator_RowDeletedName="varausRowDeleted" msprop:Generator_RowDeletingName="varausRowDeleting" msprop:Generator_RowEvArgName="varausRowChangeEvent" msprop:Generator_TablePropName="varaus" msprop:Generator_RowChangedName="varausRowChanged" msprop:Generator_UserTableName="varaus" msprop:Generator_RowChangingName="varausRowChanging" msprop:Generator_RowClassName="varausRow" msprop:Generator_TableClassName="varausDataTable" msprop:Generator_TableVarName="tablevaraus">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="varaus_id" msprop:Generator_UserColumnName="varaus_id" msprop:Generator_ColumnPropNameInTable="varaus_idColumn" msprop:Generator_ColumnPropNameInRow="varaus_id" msprop:Generator_ColumnVarNameInTable="columnvaraus_id" type="xs:long" />
-              <xs:element name="palvelu_id" msprop:Generator_UserColumnName="palvelu_id" msprop:Generator_ColumnPropNameInTable="palvelu_idColumn" msprop:Generator_ColumnPropNameInRow="palvelu_id" msprop:Generator_ColumnVarNameInTable="columnpalvelu_id" type="xs:long" />
-              <xs:element name="lkm" msprop:Generator_UserColumnName="lkm" msprop:Generator_ColumnPropNameInTable="lkmColumn" msprop:Generator_ColumnPropNameInRow="lkm" msprop:Generator_ColumnVarNameInTable="columnlkm" type="xs:int" />
+              <xs:element name="varaus_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="varaus_idColumn" msprop:Generator_ColumnPropNameInRow="varaus_id" msprop:Generator_UserColumnName="varaus_id" msprop:Generator_ColumnVarNameInTable="columnvaraus_id" type="xs:long" minOccurs="0" />
+              <xs:element name="asiakas_id" msprop:Generator_ColumnPropNameInTable="asiakas_idColumn" msprop:Generator_ColumnPropNameInRow="asiakas_id" msprop:Generator_UserColumnName="asiakas_id" msprop:Generator_ColumnVarNameInTable="columnasiakas_id" type="xs:long" />
+              <xs:element name="mokki_mokki_id" msprop:Generator_ColumnPropNameInTable="mokki_mokki_idColumn" msprop:Generator_ColumnPropNameInRow="mokki_mokki_id" msprop:Generator_UserColumnName="mokki_mokki_id" msprop:Generator_ColumnVarNameInTable="columnmokki_mokki_id" type="xs:long" />
+              <xs:element name="varattu_pvm" msprop:Generator_ColumnPropNameInTable="varattu_pvmColumn" msprop:Generator_ColumnPropNameInRow="varattu_pvm" msprop:Generator_UserColumnName="varattu_pvm" msprop:Generator_ColumnVarNameInTable="columnvarattu_pvm" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="vahvistus_pvm" msprop:Generator_ColumnPropNameInTable="vahvistus_pvmColumn" msprop:Generator_ColumnPropNameInRow="vahvistus_pvm" msprop:Generator_UserColumnName="vahvistus_pvm" msprop:Generator_ColumnVarNameInTable="columnvahvistus_pvm" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="varattu_alkupvm" msprop:Generator_ColumnPropNameInTable="varattu_alkupvmColumn" msprop:Generator_ColumnPropNameInRow="varattu_alkupvm" msprop:Generator_UserColumnName="varattu_alkupvm" msprop:Generator_ColumnVarNameInTable="columnvarattu_alkupvm" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="varattu_loppupvm" msprop:Generator_ColumnPropNameInTable="varattu_loppupvmColumn" msprop:Generator_ColumnPropNameInRow="varattu_loppupvm" msprop:Generator_UserColumnName="varattu_loppupvm" msprop:Generator_ColumnVarNameInTable="columnvarattu_loppupvm" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Mokin_Alue" msprop:Generator_RowEvHandlerName="Mokin_AlueRowChangeEventHandler" msprop:Generator_RowDeletedName="Mokin_AlueRowDeleted" msprop:Generator_RowDeletingName="Mokin_AlueRowDeleting" msprop:Generator_RowEvArgName="Mokin_AlueRowChangeEvent" msprop:Generator_TablePropName="Mokin_Alue" msprop:Generator_RowChangedName="Mokin_AlueRowChanged" msprop:Generator_RowChangingName="Mokin_AlueRowChanging" msprop:Generator_TableClassName="Mokin_AlueDataTable" msprop:Generator_RowClassName="Mokin_AlueRow" msprop:Generator_TableVarName="tableMokin_Alue" msprop:Generator_UserTableName="Mokin_Alue">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="alue_id" msprop:Generator_ColumnPropNameInRow="alue_id" msprop:Generator_ColumnPropNameInTable="alue_idColumn" msprop:Generator_ColumnVarNameInTable="columnalue_id" msprop:Generator_UserColumnName="alue_id" type="xs:long" />
+              <xs:element name="nimi" msprop:Generator_ColumnPropNameInRow="nimi" msprop:Generator_ColumnPropNameInTable="nimiColumn" msprop:Generator_ColumnVarNameInTable="columnnimi" msprop:Generator_UserColumnName="nimi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="160" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1">
-      <xs:selector xpath=".//mstns:varaus" />
-      <xs:field xpath="mstns:varaus_id" />
-    </xs:unique>
-    <xs:unique name="varauksen_palvelut_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:varauksen_palvelut" />
       <xs:field xpath="mstns:varaus_id" />
       <xs:field xpath="mstns:palvelu_id" />
+    </xs:unique>
+    <xs:unique name="varaus_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:varaus" />
+      <xs:field xpath="mstns:varaus_id" />
+    </xs:unique>
+    <xs:unique name="Mokin_Alue_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Mokin_Alue" />
+      <xs:field xpath="mstns:alue_id" />
     </xs:unique>
   </xs:element>
 </xs:schema>
