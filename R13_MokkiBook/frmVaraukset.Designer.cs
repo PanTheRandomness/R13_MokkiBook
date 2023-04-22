@@ -63,6 +63,8 @@
             this.epVaraukset = new System.Windows.Forms.ErrorProvider(this.components);
             this.varauksetData1 = new R13_MokkiBook.VarauksetData();
             this.varauksetData1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.mokinAlueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.mokin_AlueTableAdapter = new R13_MokkiBook.VarauksetDataTableAdapters.Mokin_AlueTableAdapter();
             this.pnlAlapaneeli.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData)).BeginInit();
@@ -72,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mokinAlueBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAlapaneeli
@@ -157,7 +160,7 @@
             // 
             // cbAlue
             // 
-            this.cbAlue.DataSource = this.alueBindingSource;
+            this.cbAlue.DataSource = this.mokinAlueBindingSource;
             this.cbAlue.FormattingEnabled = true;
             this.cbAlue.Location = new System.Drawing.Point(581, 16);
             this.cbAlue.Name = "cbAlue";
@@ -351,6 +354,15 @@
             this.varauksetData1BindingSource.DataSource = this.varauksetData1;
             this.varauksetData1BindingSource.Position = 0;
             // 
+            // mokinAlueBindingSource
+            // 
+            this.mokinAlueBindingSource.DataMember = "Mokin_Alue";
+            this.mokinAlueBindingSource.DataSource = this.varauksetData;
+            // 
+            // mokin_AlueTableAdapter
+            // 
+            this.mokin_AlueTableAdapter.ClearBeforeFill = true;
+            // 
             // frmVaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,6 +384,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksetData1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mokinAlueBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -412,5 +425,7 @@
         private VarauksetData varauksetData1;
         private System.Windows.Forms.BindingSource varauksetData1BindingSource;
         private System.Windows.Forms.BindingSource alueBindingSource;
+        private System.Windows.Forms.BindingSource mokinAlueBindingSource;
+        private VarauksetDataTableAdapters.Mokin_AlueTableAdapter mokin_AlueTableAdapter;
     }
 }

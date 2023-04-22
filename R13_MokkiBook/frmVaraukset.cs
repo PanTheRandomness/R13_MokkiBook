@@ -25,6 +25,8 @@ namespace R13_MokkiBook
 
         private void frmVaraukset_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'varauksetData.Mokin_Alue' table. You can move, or remove it, as needed.
+            this.mokin_AlueTableAdapter.Fill(this.varauksetData.Mokin_Alue);
             // TODO: This line of code loads data into the 'varauksetData.varauksen_palvelut' table. You can move, or remove it, as needed.
             this.taVaraus.Fill(this.varauksetData.varaus);
         }
@@ -58,7 +60,7 @@ namespace R13_MokkiBook
 
         private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //EI ALUETTA KOKO DATASETISSÄ??
+            //TÄMÄ PITÄÄ SELVITTÄÄ==>> QUERY?? MUTTA EI PRIORITEETTI
         }
 
         private void dtpLoppu_ValueChanged(object sender, EventArgs e)
