@@ -46,6 +46,11 @@
             this.tbMokinnimi = new System.Windows.Forms.TextBox();
             this.tbPostinumero = new System.Windows.Forms.TextBox();
             this.tbAlueId = new System.Windows.Forms.TextBox();
+            this.dgvMokit = new System.Windows.Forms.DataGridView();
+            this.btnLisaa = new System.Windows.Forms.Button();
+            this.btnMuokkaa = new System.Windows.Forms.Button();
+            this.btnPoista = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMokit)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMokkiId
@@ -192,11 +197,52 @@
             this.tbAlueId.Size = new System.Drawing.Size(168, 22);
             this.tbAlueId.TabIndex = 21;
             // 
+            // dgvMokit
+            // 
+            this.dgvMokit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMokit.Location = new System.Drawing.Point(31, 259);
+            this.dgvMokit.Name = "dgvMokit";
+            this.dgvMokit.RowHeadersWidth = 51;
+            this.dgvMokit.RowTemplate.Height = 24;
+            this.dgvMokit.Size = new System.Drawing.Size(719, 170);
+            this.dgvMokit.TabIndex = 22;
+            // 
+            // btnLisaa
+            // 
+            this.btnLisaa.Location = new System.Drawing.Point(31, 214);
+            this.btnLisaa.Name = "btnLisaa";
+            this.btnLisaa.Size = new System.Drawing.Size(161, 39);
+            this.btnLisaa.TabIndex = 23;
+            this.btnLisaa.Text = "Lisää mökki";
+            this.btnLisaa.UseVisualStyleBackColor = true;
+            // 
+            // btnMuokkaa
+            // 
+            this.btnMuokkaa.Location = new System.Drawing.Point(216, 214);
+            this.btnMuokkaa.Name = "btnMuokkaa";
+            this.btnMuokkaa.Size = new System.Drawing.Size(161, 39);
+            this.btnMuokkaa.TabIndex = 24;
+            this.btnMuokkaa.Text = "Muokkaa";
+            this.btnMuokkaa.UseVisualStyleBackColor = true;
+            // 
+            // btnPoista
+            // 
+            this.btnPoista.Location = new System.Drawing.Point(392, 214);
+            this.btnPoista.Name = "btnPoista";
+            this.btnPoista.Size = new System.Drawing.Size(161, 39);
+            this.btnPoista.TabIndex = 25;
+            this.btnPoista.Text = "Poista";
+            this.btnPoista.UseVisualStyleBackColor = true;
+            // 
             // frmMokit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnPoista);
+            this.Controls.Add(this.btnMuokkaa);
+            this.Controls.Add(this.btnLisaa);
+            this.Controls.Add(this.dgvMokit);
             this.Controls.Add(this.tbAlueId);
             this.Controls.Add(this.tbPostinumero);
             this.Controls.Add(this.tbMokinnimi);
@@ -217,6 +263,7 @@
             this.Controls.Add(this.lbMokkiId);
             this.Name = "frmMokit";
             this.Text = "Mokit";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMokit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +289,9 @@
         private System.Windows.Forms.TextBox tbMokinnimi;
         private System.Windows.Forms.TextBox tbPostinumero;
         private System.Windows.Forms.TextBox tbAlueId;
+        private System.Windows.Forms.DataGridView dgvMokit;
+        private System.Windows.Forms.Button btnLisaa;
+        private System.Windows.Forms.Button btnMuokkaa;
+        private System.Windows.Forms.Button btnPoista;
     }
 }
