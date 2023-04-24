@@ -37,6 +37,15 @@
             this.lbHenkilomaara = new System.Windows.Forms.Label();
             this.lbAlueId = new System.Windows.Forms.Label();
             this.lbVarustelu = new System.Windows.Forms.Label();
+            this.tbMokkiId = new System.Windows.Forms.TextBox();
+            this.tbAlue = new System.Windows.Forms.TextBox();
+            this.tbVarustelu = new System.Windows.Forms.TextBox();
+            this.tbHenkilomaara = new System.Windows.Forms.TextBox();
+            this.tbKuvaus = new System.Windows.Forms.TextBox();
+            this.tbHinta = new System.Windows.Forms.TextBox();
+            this.tbMokinnimi = new System.Windows.Forms.TextBox();
+            this.tbPostinumero = new System.Windows.Forms.TextBox();
+            this.tbAlueId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lbMokkiId
@@ -120,11 +129,83 @@
             this.lbVarustelu.TabIndex = 9;
             this.lbVarustelu.Text = "Varustelu";
             // 
+            // tbMokkiId
+            // 
+            this.tbMokkiId.Location = new System.Drawing.Point(122, 31);
+            this.tbMokkiId.Name = "tbMokkiId";
+            this.tbMokkiId.Size = new System.Drawing.Size(168, 22);
+            this.tbMokkiId.TabIndex = 10;
+            // 
+            // tbAlue
+            // 
+            this.tbAlue.Location = new System.Drawing.Point(122, 174);
+            this.tbAlue.Name = "tbAlue";
+            this.tbAlue.Size = new System.Drawing.Size(168, 22);
+            this.tbAlue.TabIndex = 11;
+            // 
+            // tbVarustelu
+            // 
+            this.tbVarustelu.Location = new System.Drawing.Point(464, 136);
+            this.tbVarustelu.Name = "tbVarustelu";
+            this.tbVarustelu.Size = new System.Drawing.Size(168, 22);
+            this.tbVarustelu.TabIndex = 15;
+            // 
+            // tbHenkilomaara
+            // 
+            this.tbHenkilomaara.Location = new System.Drawing.Point(464, 102);
+            this.tbHenkilomaara.Name = "tbHenkilomaara";
+            this.tbHenkilomaara.Size = new System.Drawing.Size(168, 22);
+            this.tbHenkilomaara.TabIndex = 16;
+            // 
+            // tbKuvaus
+            // 
+            this.tbKuvaus.Location = new System.Drawing.Point(464, 64);
+            this.tbKuvaus.Name = "tbKuvaus";
+            this.tbKuvaus.Size = new System.Drawing.Size(168, 22);
+            this.tbKuvaus.TabIndex = 17;
+            // 
+            // tbHinta
+            // 
+            this.tbHinta.Location = new System.Drawing.Point(464, 31);
+            this.tbHinta.Name = "tbHinta";
+            this.tbHinta.Size = new System.Drawing.Size(168, 22);
+            this.tbHinta.TabIndex = 18;
+            // 
+            // tbMokinnimi
+            // 
+            this.tbMokinnimi.Location = new System.Drawing.Point(122, 133);
+            this.tbMokinnimi.Name = "tbMokinnimi";
+            this.tbMokinnimi.Size = new System.Drawing.Size(168, 22);
+            this.tbMokinnimi.TabIndex = 19;
+            // 
+            // tbPostinumero
+            // 
+            this.tbPostinumero.Location = new System.Drawing.Point(122, 102);
+            this.tbPostinumero.Name = "tbPostinumero";
+            this.tbPostinumero.Size = new System.Drawing.Size(168, 22);
+            this.tbPostinumero.TabIndex = 20;
+            // 
+            // tbAlueId
+            // 
+            this.tbAlueId.Location = new System.Drawing.Point(122, 64);
+            this.tbAlueId.Name = "tbAlueId";
+            this.tbAlueId.Size = new System.Drawing.Size(168, 22);
+            this.tbAlueId.TabIndex = 21;
+            // 
             // frmMokit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbAlueId);
+            this.Controls.Add(this.tbPostinumero);
+            this.Controls.Add(this.tbMokinnimi);
+            this.Controls.Add(this.tbHinta);
+            this.Controls.Add(this.tbKuvaus);
+            this.Controls.Add(this.tbHenkilomaara);
+            this.Controls.Add(this.tbVarustelu);
+            this.Controls.Add(this.tbAlue);
+            this.Controls.Add(this.tbMokkiId);
             this.Controls.Add(this.lbVarustelu);
             this.Controls.Add(this.lbAlueId);
             this.Controls.Add(this.lbHenkilomaara);
@@ -152,5 +233,14 @@
         private System.Windows.Forms.Label lbHenkilomaara;
         private System.Windows.Forms.Label lbAlueId;
         private System.Windows.Forms.Label lbVarustelu;
+        private System.Windows.Forms.TextBox tbMokkiId;
+        private System.Windows.Forms.TextBox tbAlue;
+        private System.Windows.Forms.TextBox tbVarustelu;
+        private System.Windows.Forms.TextBox tbHenkilomaara;
+        private System.Windows.Forms.TextBox tbKuvaus;
+        private System.Windows.Forms.TextBox tbHinta;
+        private System.Windows.Forms.TextBox tbMokinnimi;
+        private System.Windows.Forms.TextBox tbPostinumero;
+        private System.Windows.Forms.TextBox tbAlueId;
     }
 }
