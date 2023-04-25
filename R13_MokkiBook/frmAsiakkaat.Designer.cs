@@ -164,36 +164,36 @@
             // dgvAsiakkaat
             // 
             this.dgvAsiakkaat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAsiakkaat.Location = new System.Drawing.Point(29, 251);
+            this.dgvAsiakkaat.Location = new System.Drawing.Point(29, 262);
             this.dgvAsiakkaat.Name = "dgvAsiakkaat";
             this.dgvAsiakkaat.RowHeadersWidth = 51;
             this.dgvAsiakkaat.RowTemplate.Height = 24;
-            this.dgvAsiakkaat.Size = new System.Drawing.Size(729, 187);
+            this.dgvAsiakkaat.Size = new System.Drawing.Size(729, 176);
             this.dgvAsiakkaat.TabIndex = 14;
             // 
             // btnLisaa
             // 
-            this.btnLisaa.Location = new System.Drawing.Point(144, 200);
+            this.btnLisaa.Location = new System.Drawing.Point(29, 200);
             this.btnLisaa.Name = "btnLisaa";
-            this.btnLisaa.Size = new System.Drawing.Size(118, 39);
+            this.btnLisaa.Size = new System.Drawing.Size(176, 45);
             this.btnLisaa.TabIndex = 15;
-            this.btnLisaa.Text = "Lisää";
+            this.btnLisaa.Text = "Lisää Asiakas";
             this.btnLisaa.UseVisualStyleBackColor = true;
             // 
             // btnMuokkaa
             // 
-            this.btnMuokkaa.Location = new System.Drawing.Point(307, 200);
+            this.btnMuokkaa.Location = new System.Drawing.Point(211, 200);
             this.btnMuokkaa.Name = "btnMuokkaa";
-            this.btnMuokkaa.Size = new System.Drawing.Size(110, 38);
+            this.btnMuokkaa.Size = new System.Drawing.Size(163, 45);
             this.btnMuokkaa.TabIndex = 16;
             this.btnMuokkaa.Text = "Muokkaa";
             this.btnMuokkaa.UseVisualStyleBackColor = true;
             // 
             // btnPoista
             // 
-            this.btnPoista.Location = new System.Drawing.Point(469, 200);
+            this.btnPoista.Location = new System.Drawing.Point(380, 200);
             this.btnPoista.Name = "btnPoista";
-            this.btnPoista.Size = new System.Drawing.Size(120, 38);
+            this.btnPoista.Size = new System.Drawing.Size(173, 45);
             this.btnPoista.TabIndex = 17;
             this.btnPoista.Text = "Poista";
             this.btnPoista.UseVisualStyleBackColor = true;
