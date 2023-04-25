@@ -103,6 +103,12 @@
     <Compile Include="frmPalvelut.Designer.cs">
       <DependentUpon>frmPalvelut.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUusiPalvelu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUusiPalvelu.Designer.cs">
+      <DependentUpon>frmUusiPalvelu.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUusiVaraus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPalvelut.resx">
       <DependentUpon>frmPalvelut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUusiPalvelu.resx">
+      <DependentUpon>frmUusiPalvelu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVarauksenPalvelut.resx">
       <DependentUpon>frmVarauksenPalvelut.cs</DependentUpon>
