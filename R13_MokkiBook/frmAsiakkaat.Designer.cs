@@ -35,6 +35,13 @@
             this.lbEtunimi = new System.Windows.Forms.Label();
             this.lb = new System.Windows.Forms.Label();
             this.lbPuhelinnumero = new System.Windows.Forms.Label();
+            this.tbAsiakasid = new System.Windows.Forms.TextBox();
+            this.tbPuhNro = new System.Windows.Forms.TextBox();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.tbLahiosoite = new System.Windows.Forms.TextBox();
+            this.tbSukunimi = new System.Windows.Forms.TextBox();
+            this.tbEtunimi = new System.Windows.Forms.TextBox();
+            this.tbPostiNro = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lbAsiakasid
@@ -100,11 +107,67 @@
             this.lbPuhelinnumero.TabIndex = 6;
             this.lbPuhelinnumero.Text = "Puhelinnumero";
             // 
+            // tbAsiakasid
+            // 
+            this.tbAsiakasid.Location = new System.Drawing.Point(176, 49);
+            this.tbAsiakasid.Name = "tbAsiakasid";
+            this.tbAsiakasid.Size = new System.Drawing.Size(159, 22);
+            this.tbAsiakasid.TabIndex = 7;
+            // 
+            // tbPuhNro
+            // 
+            this.tbPuhNro.Location = new System.Drawing.Point(176, 316);
+            this.tbPuhNro.Name = "tbPuhNro";
+            this.tbPuhNro.Size = new System.Drawing.Size(159, 22);
+            this.tbPuhNro.TabIndex = 8;
+            // 
+            // tbEmail
+            // 
+            this.tbEmail.Location = new System.Drawing.Point(176, 271);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(159, 22);
+            this.tbEmail.TabIndex = 9;
+            // 
+            // tbLahiosoite
+            // 
+            this.tbLahiosoite.Location = new System.Drawing.Point(176, 227);
+            this.tbLahiosoite.Name = "tbLahiosoite";
+            this.tbLahiosoite.Size = new System.Drawing.Size(159, 22);
+            this.tbLahiosoite.TabIndex = 10;
+            // 
+            // tbSukunimi
+            // 
+            this.tbSukunimi.Location = new System.Drawing.Point(176, 186);
+            this.tbSukunimi.Name = "tbSukunimi";
+            this.tbSukunimi.Size = new System.Drawing.Size(159, 22);
+            this.tbSukunimi.TabIndex = 11;
+            // 
+            // tbEtunimi
+            // 
+            this.tbEtunimi.Location = new System.Drawing.Point(176, 139);
+            this.tbEtunimi.Name = "tbEtunimi";
+            this.tbEtunimi.Size = new System.Drawing.Size(159, 22);
+            this.tbEtunimi.TabIndex = 12;
+            // 
+            // tbPostiNro
+            // 
+            this.tbPostiNro.Location = new System.Drawing.Point(176, 91);
+            this.tbPostiNro.Name = "tbPostiNro";
+            this.tbPostiNro.Size = new System.Drawing.Size(159, 22);
+            this.tbPostiNro.TabIndex = 13;
+            // 
             // frmAsiakkaat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbPostiNro);
+            this.Controls.Add(this.tbEtunimi);
+            this.Controls.Add(this.tbSukunimi);
+            this.Controls.Add(this.tbLahiosoite);
+            this.Controls.Add(this.tbEmail);
+            this.Controls.Add(this.tbPuhNro);
+            this.Controls.Add(this.tbAsiakasid);
             this.Controls.Add(this.lbPuhelinnumero);
             this.Controls.Add(this.lb);
             this.Controls.Add(this.lbEtunimi);
@@ -128,5 +191,12 @@
         private System.Windows.Forms.Label lbEtunimi;
         private System.Windows.Forms.Label lb;
         private System.Windows.Forms.Label lbPuhelinnumero;
+        private System.Windows.Forms.TextBox tbAsiakasid;
+        private System.Windows.Forms.TextBox tbPuhNro;
+        private System.Windows.Forms.TextBox tbEmail;
+        private System.Windows.Forms.TextBox tbLahiosoite;
+        private System.Windows.Forms.TextBox tbSukunimi;
+        private System.Windows.Forms.TextBox tbEtunimi;
+        private System.Windows.Forms.TextBox tbPostiNro;
     }
 }
