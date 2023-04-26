@@ -13,6 +13,7 @@ namespace R13_MokkiBook
     public partial class frmVarauksenPalvelut : Form
     {
         public int valitturivi = -1;
+        public int valittupalvelu = -1;
         public frmVarauksenPalvelut()
         {
             InitializeComponent();
@@ -28,6 +29,31 @@ namespace R13_MokkiBook
         private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
+        }
+
+        private void btnLisaa_Click(object sender, EventArgs e)
+        {
+            /*frmUusiPalvelu up = new frmUusiPalvelu(); VAATII DGV-PARAMETRIN??
+            up.ShowDialog();*/
+        }
+
+        private void btnPoista_Click(object sender, EventArgs e)
+        {
+            //if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            //{
+
+            //}
+            //VALIDOI
+        }
+
+        private void btnLisaaValittu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbPalvelu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            valittupalvelu = cbPalvelu.SelectedIndex;
         }
     }
 }
