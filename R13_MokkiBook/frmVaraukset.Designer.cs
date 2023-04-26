@@ -60,12 +60,22 @@
             this.btnRaportti = new System.Windows.Forms.Button();
             this.btnUusi = new System.Windows.Forms.Button();
             this.epVaraukset = new System.Windows.Forms.ErrorProvider(this.components);
+            this.mokkiBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
+            this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
+            this.cmsTyhjenna = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tyhjennaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pdRaportti = new System.Windows.Forms.PrintDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             this.cmsVaraustaulunMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
+            this.cmsTyhjenna.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvVaraukset
@@ -207,6 +217,7 @@
             // dtpAlku
             // 
             this.dtpAlku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpAlku.ContextMenuStrip = this.cmsTyhjenna;
             this.dtpAlku.Location = new System.Drawing.Point(59, 592);
             this.dtpAlku.Name = "dtpAlku";
             this.dtpAlku.Size = new System.Drawing.Size(200, 20);
@@ -226,6 +237,7 @@
             // dtpLoppu
             // 
             this.dtpLoppu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpLoppu.ContextMenuStrip = this.cmsTyhjenna;
             this.dtpLoppu.Location = new System.Drawing.Point(281, 592);
             this.dtpLoppu.Name = "dtpLoppu";
             this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
@@ -245,6 +257,7 @@
             // cbAlue
             // 
             this.cbAlue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbAlue.ContextMenuStrip = this.cmsTyhjenna;
             this.cbAlue.Enabled = false;
             this.cbAlue.FormattingEnabled = true;
             this.cbAlue.Location = new System.Drawing.Point(521, 590);
@@ -266,7 +279,9 @@
             // cbMokki
             // 
             this.cbMokki.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbMokki.Enabled = false;
+            this.cbMokki.ContextMenuStrip = this.cmsTyhjenna;
+            this.cbMokki.DataSource = this.mokkiBindingSource;
+            this.cbMokki.DisplayMember = "mokki_id";
             this.cbMokki.FormattingEnabled = true;
             this.cbMokki.Location = new System.Drawing.Point(655, 590);
             this.cbMokki.Name = "cbMokki";
@@ -287,7 +302,9 @@
             // cbAsiakas
             // 
             this.cbAsiakas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbAsiakas.Enabled = false;
+            this.cbAsiakas.ContextMenuStrip = this.cmsTyhjenna;
+            this.cbAsiakas.DataSource = this.alueBindingSource;
+            this.cbAsiakas.DisplayMember = "nimi";
             this.cbAsiakas.FormattingEnabled = true;
             this.cbAsiakas.Location = new System.Drawing.Point(797, 591);
             this.cbAsiakas.Name = "cbAsiakas";
@@ -309,7 +326,7 @@
             // btnRaportti
             // 
             this.btnRaportti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRaportti.Location = new System.Drawing.Point(945, 590);
+            this.btnRaportti.Location = new System.Drawing.Point(945, 591);
             this.btnRaportti.Name = "btnRaportti";
             this.btnRaportti.Size = new System.Drawing.Size(64, 23);
             this.btnRaportti.TabIndex = 7;
@@ -331,6 +348,44 @@
             // epVaraukset
             // 
             this.epVaraukset.ContainerControl = this;
+            // 
+            // mokkiBindingSource
+            // 
+            this.mokkiBindingSource.DataMember = "mokki";
+            this.mokkiBindingSource.DataSource = this.dataSet1BindingSource;
+            // 
+            // mokkiTableAdapter
+            // 
+            this.mokkiTableAdapter.ClearBeforeFill = true;
+            // 
+            // alueBindingSource
+            // 
+            this.alueBindingSource.DataMember = "alue";
+            this.alueBindingSource.DataSource = this.dataSet1;
+            // 
+            // alueTableAdapter
+            // 
+            this.alueTableAdapter.ClearBeforeFill = true;
+            // 
+            // cmsTyhjenna
+            // 
+            this.cmsTyhjenna.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tyhjennaToolStripMenuItem});
+            this.cmsTyhjenna.Name = "cmsTyhjenna";
+            this.cmsTyhjenna.Size = new System.Drawing.Size(122, 26);
+            // 
+            // tyhjennaToolStripMenuItem
+            // 
+            this.tyhjennaToolStripMenuItem.Name = "tyhjennaToolStripMenuItem";
+            this.tyhjennaToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.tyhjennaToolStripMenuItem.Text = "Tyhjennä";
+            this.tyhjennaToolStripMenuItem.Click += new System.EventHandler(this.tyhjennaToolStripMenuItem_Click);
+            // 
+            // pdRaportti
+            // 
+            this.pdRaportti.PrintToFile = true;
+            this.pdRaportti.ShowHelp = true;
+            this.pdRaportti.UseEXDialog = true;
             // 
             // frmVaraukset
             // 
@@ -363,6 +418,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
+            this.cmsTyhjenna.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,5 +459,12 @@
         private System.Windows.Forms.Button btnRaportti;
         private System.Windows.Forms.Button btnUusi;
         private System.Windows.Forms.ErrorProvider epVaraukset;
+        private System.Windows.Forms.BindingSource mokkiBindingSource;
+        private DataSet1TableAdapters.mokkiTableAdapter mokkiTableAdapter;
+        private System.Windows.Forms.BindingSource alueBindingSource;
+        private DataSet1TableAdapters.alueTableAdapter alueTableAdapter;
+        private System.Windows.Forms.ContextMenuStrip cmsTyhjenna;
+        private System.Windows.Forms.ToolStripMenuItem tyhjennaToolStripMenuItem;
+        private System.Windows.Forms.PrintDialog pdRaportti;
     }
 }

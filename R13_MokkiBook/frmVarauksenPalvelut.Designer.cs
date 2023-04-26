@@ -40,13 +40,21 @@
             this.epVarauksenPalvelut = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnLisaaUusi = new System.Windows.Forms.Button();
             this.btnPoista = new System.Windows.Forms.Button();
-            this.cbPalvelu = new System.Windows.Forms.ComboBox();
             this.btnLisaaValittu = new System.Windows.Forms.Button();
+            this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
+            this.cbPalvelu = new System.Windows.Forms.ComboBox();
+            this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
+            this.varauksenpalvelutBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.varauksen_palvelutTableAdapter1 = new R13_MokkiBook.VarauksenPAlvelutDataSetTableAdapters.varauksen_palvelutTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.pnlToiminnot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvVarauksenPalvelut
@@ -61,7 +69,7 @@
             this.varausidDataGridViewTextBoxColumn,
             this.palveluidDataGridViewTextBoxColumn,
             this.lkmDataGridViewTextBoxColumn});
-            this.dgvVarauksenPalvelut.DataSource = this.varauksenpalvelutBindingSource;
+            this.dgvVarauksenPalvelut.DataSource = this.varauksenpalvelutBindingSource1;
             this.dgvVarauksenPalvelut.Location = new System.Drawing.Point(2, 1);
             this.dgvVarauksenPalvelut.Name = "dgvVarauksenPalvelut";
             this.dgvVarauksenPalvelut.Size = new System.Drawing.Size(527, 269);
@@ -138,15 +146,6 @@
             this.btnPoista.UseVisualStyleBackColor = true;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
-            // cbPalvelu
-            // 
-            this.cbPalvelu.FormattingEnabled = true;
-            this.cbPalvelu.Location = new System.Drawing.Point(188, 9);
-            this.cbPalvelu.Name = "cbPalvelu";
-            this.cbPalvelu.Size = new System.Drawing.Size(121, 21);
-            this.cbPalvelu.TabIndex = 2;
-            this.cbPalvelu.SelectedIndexChanged += new System.EventHandler(this.cbPalvelu_SelectedIndexChanged);
-            // 
             // btnLisaaValittu
             // 
             this.btnLisaaValittu.Location = new System.Drawing.Point(315, 7);
@@ -156,6 +155,40 @@
             this.btnLisaaValittu.Text = "Lisää valittu";
             this.btnLisaaValittu.UseVisualStyleBackColor = true;
             this.btnLisaaValittu.Click += new System.EventHandler(this.btnLisaaValittu_Click);
+            // 
+            // palveluBindingSource
+            // 
+            this.palveluBindingSource.DataMember = "palvelu";
+            this.palveluBindingSource.DataSource = this.dataSet1;
+            // 
+            // palveluTableAdapter
+            // 
+            this.palveluTableAdapter.ClearBeforeFill = true;
+            // 
+            // cbPalvelu
+            // 
+            this.cbPalvelu.DataSource = this.palveluBindingSource;
+            this.cbPalvelu.DisplayMember = "nimi";
+            this.cbPalvelu.FormattingEnabled = true;
+            this.cbPalvelu.Location = new System.Drawing.Point(188, 9);
+            this.cbPalvelu.Name = "cbPalvelu";
+            this.cbPalvelu.Size = new System.Drawing.Size(121, 21);
+            this.cbPalvelu.TabIndex = 2;
+            this.cbPalvelu.SelectedIndexChanged += new System.EventHandler(this.cbPalvelu_SelectedIndexChanged);
+            // 
+            // varauksenPAlvelutDataSet
+            // 
+            this.varauksenPAlvelutDataSet.DataSetName = "VarauksenPAlvelutDataSet";
+            this.varauksenPAlvelutDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // varauksenpalvelutBindingSource1
+            // 
+            this.varauksenpalvelutBindingSource1.DataMember = "varauksen_palvelut";
+            this.varauksenpalvelutBindingSource1.DataSource = this.varauksenPAlvelutDataSet;
+            // 
+            // varauksen_palvelutTableAdapter1
+            // 
+            this.varauksen_palvelutTableAdapter1.ClearBeforeFill = true;
             // 
             // frmVarauksenPalvelut
             // 
@@ -176,6 +209,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.pnlToiminnot.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -193,7 +229,12 @@
         private System.Windows.Forms.ErrorProvider epVarauksenPalvelut;
         private System.Windows.Forms.Button btnPoista;
         private System.Windows.Forms.Button btnLisaaUusi;
-        private System.Windows.Forms.ComboBox cbPalvelu;
         private System.Windows.Forms.Button btnLisaaValittu;
+        private System.Windows.Forms.BindingSource palveluBindingSource;
+        private DataSet1TableAdapters.palveluTableAdapter palveluTableAdapter;
+        private System.Windows.Forms.ComboBox cbPalvelu;
+        private VarauksenPAlvelutDataSet varauksenPAlvelutDataSet;
+        private System.Windows.Forms.BindingSource varauksenpalvelutBindingSource1;
+        private VarauksenPAlvelutDataSetTableAdapters.varauksen_palvelutTableAdapter varauksen_palvelutTableAdapter1;
     }
 }

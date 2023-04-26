@@ -47,7 +47,7 @@ namespace R13_MokkiBook
 
         private void dtpAlkupvm_ValueChanged(object sender, EventArgs e)
         {
-
+            //ei voi olla aiemmin kuin nyt
         }
 
         private void dgvMokitUusiVaraus_CellContentClick(object sender, DataGridViewCellEventArgs e)

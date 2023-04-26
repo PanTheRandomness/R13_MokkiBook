@@ -14,13 +14,21 @@ namespace R13_MokkiBook
     {
         public int valitturivi = -1;
         public int valittupalvelu = -1;
-        public frmVarauksenPalvelut()
+        public frmVarauksenPalvelut(int tuotuvaraustunnus)
         {
             InitializeComponent();
+            int varaustunnus = tuotuvaraustunnus;
         }
 
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'varauksenPAlvelutDataSet.varauksen_palvelut' table. You can move, or remove it, as needed.
+            this.varauksen_palvelutTableAdapter1.Fill(this.varauksenPAlvelutDataSet.varauksen_palvelut);
+
+            //TUOHON FILLIIN JOTAIN QUERYHOMMIA
+
+            // TODO: This line of code loads data into the 'dataSet1.palvelu' table. You can move, or remove it, as needed.
+            this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
             // TODO: This line of code loads data into the 'dataSet1.varauksen_palvelut' table. You can move, or remove it, as needed.
             this.varauksen_palvelutTableAdapter.Fill(this.dataSet1.varauksen_palvelut);
 
