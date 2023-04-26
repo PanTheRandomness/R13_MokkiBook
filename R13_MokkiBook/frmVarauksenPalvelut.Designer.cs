@@ -123,7 +123,7 @@
             this.btnLisaaUusi.Location = new System.Drawing.Point(441, 7);
             this.btnLisaaUusi.Name = "btnLisaaUusi";
             this.btnLisaaUusi.Size = new System.Drawing.Size(75, 23);
-            this.btnLisaaUusi.TabIndex = 0;
+            this.btnLisaaUusi.TabIndex = 4;
             this.btnLisaaUusi.Text = "Lisää uusi";
             this.btnLisaaUusi.UseVisualStyleBackColor = true;
             this.btnLisaaUusi.Click += new System.EventHandler(this.btnLisaa_Click);
