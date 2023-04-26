@@ -150,6 +150,9 @@
     <EmbeddedResource Include="frmUusiPalvelu.resx">
       <DependentUpon>frmUusiPalvelu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmUusiVaraus.resx">
+      <DependentUpon>frmUusiVaraus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVarauksenPalvelut.resx">
       <DependentUpon>frmVarauksenPalvelut.cs</DependentUpon>
     </EmbeddedResource>

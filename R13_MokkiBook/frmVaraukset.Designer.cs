@@ -141,7 +141,7 @@
             this.tsmiVarauksenPalvelut,
             this.tsmiPoista});
             this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
-            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 92);
+            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 70);
             this.cmsVaraustaulunMenu.Opening += new System.ComponentModel.CancelEventHandler(this.cmsVaraustaulunMenu_Opening);
             // 
             // tsmiMuokkaa
