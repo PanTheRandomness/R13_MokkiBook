@@ -51,7 +51,7 @@
             // btnVaraukset
             // 
             this.btnVaraukset.Location = new System.Drawing.Point(28, 24);
-            this.btnVaraukset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnVaraukset.Margin = new System.Windows.Forms.Padding(2);
             this.btnVaraukset.Name = "btnVaraukset";
             this.btnVaraukset.Size = new System.Drawing.Size(100, 27);
             this.btnVaraukset.TabIndex = 0;
@@ -62,7 +62,7 @@
             // btnMokit
             // 
             this.btnMokit.Location = new System.Drawing.Point(28, 22);
-            this.btnMokit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMokit.Margin = new System.Windows.Forms.Padding(2);
             this.btnMokit.Name = "btnMokit";
             this.btnMokit.Size = new System.Drawing.Size(100, 27);
             this.btnMokit.TabIndex = 1;
@@ -73,7 +73,7 @@
             // btnAlueet
             // 
             this.btnAlueet.Location = new System.Drawing.Point(28, 25);
-            this.btnAlueet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAlueet.Margin = new System.Windows.Forms.Padding(2);
             this.btnAlueet.Name = "btnAlueet";
             this.btnAlueet.Size = new System.Drawing.Size(100, 27);
             this.btnAlueet.TabIndex = 2;
@@ -84,7 +84,7 @@
             // btnAsiakkaat
             // 
             this.btnAsiakkaat.Location = new System.Drawing.Point(28, 23);
-            this.btnAsiakkaat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAsiakkaat.Margin = new System.Windows.Forms.Padding(2);
             this.btnAsiakkaat.Name = "btnAsiakkaat";
             this.btnAsiakkaat.Size = new System.Drawing.Size(100, 27);
             this.btnAsiakkaat.TabIndex = 3;
@@ -95,7 +95,7 @@
             // btnPalvelut
             // 
             this.btnPalvelut.Location = new System.Drawing.Point(40, 24);
-            this.btnPalvelut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPalvelut.Margin = new System.Windows.Forms.Padding(2);
             this.btnPalvelut.Name = "btnPalvelut";
             this.btnPalvelut.Size = new System.Drawing.Size(100, 27);
             this.btnPalvelut.TabIndex = 4;
@@ -106,7 +106,7 @@
             // btnLaskut
             // 
             this.btnLaskut.Location = new System.Drawing.Point(40, 22);
-            this.btnLaskut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLaskut.Margin = new System.Windows.Forms.Padding(2);
             this.btnLaskut.Name = "btnLaskut";
             this.btnLaskut.Size = new System.Drawing.Size(100, 27);
             this.btnLaskut.TabIndex = 5;
@@ -173,7 +173,7 @@
             this.Controls.Add(this.pnlMokit);
             this.Controls.Add(this.prnAlueet);
             this.Controls.Add(this.pnlAsiakkaat);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(648, 414);
             this.MinimizeBox = false;

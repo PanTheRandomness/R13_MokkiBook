@@ -48,7 +48,7 @@ namespace R13_MokkiBook
 
         private void btnLisaaValittu_Click(object sender, EventArgs e)
         {
-
+            //Lisää varaukseen
         }
 
         private void cbPalvelu_SelectedIndexChanged(object sender, EventArgs e)

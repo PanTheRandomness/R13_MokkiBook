@@ -13,9 +13,11 @@ namespace R13_MokkiBook
     public partial class frmVaraukset : Form
     {
         public int valitturivi = -1;
+        public int valitunvarauksentunnus = -1;
         public frmVaraukset()
         {
             InitializeComponent();
+            
         }
 
         private void frmVaraukset_Load(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace R13_MokkiBook
 
         private void dtpLoppu_ValueChanged(object sender, EventArgs e)
         {
-
+            //EI voi olla pienempi kuin alku
         }
 
         private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)
