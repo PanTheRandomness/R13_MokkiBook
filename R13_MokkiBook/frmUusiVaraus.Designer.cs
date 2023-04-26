@@ -53,6 +53,12 @@
             this.tbPostino = new System.Windows.Forms.TextBox();
             this.lblLahiosoite = new System.Windows.Forms.Label();
             this.tbLahiosoite = new System.Windows.Forms.TextBox();
+            this.lblPuhno = new System.Windows.Forms.Label();
+            this.mtbPuhno = new System.Windows.Forms.MaskedTextBox();
+            this.mtbSp = new System.Windows.Forms.MaskedTextBox();
+            this.lblSp = new System.Windows.Forms.Label();
+            this.btnLisaa = new System.Windows.Forms.Button();
+            this.btnHae = new System.Windows.Forms.Button();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -65,6 +71,12 @@
             this.pnlAsiakastiedot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAsiakastiedot.Controls.Add(this.btnHae);
+            this.pnlAsiakastiedot.Controls.Add(this.btnLisaa);
+            this.pnlAsiakastiedot.Controls.Add(this.mtbSp);
+            this.pnlAsiakastiedot.Controls.Add(this.lblSp);
+            this.pnlAsiakastiedot.Controls.Add(this.mtbPuhno);
+            this.pnlAsiakastiedot.Controls.Add(this.lblPuhno);
             this.pnlAsiakastiedot.Controls.Add(this.tbLahiosoite);
             this.pnlAsiakastiedot.Controls.Add(this.lblLahiosoite);
             this.pnlAsiakastiedot.Controls.Add(this.tbPostino);
@@ -78,7 +90,7 @@
             this.pnlAsiakastiedot.Controls.Add(this.tbAsiakastunnus);
             this.pnlAsiakastiedot.Location = new System.Drawing.Point(2, 2);
             this.pnlAsiakastiedot.Name = "pnlAsiakastiedot";
-            this.pnlAsiakastiedot.Size = new System.Drawing.Size(995, 242);
+            this.pnlAsiakastiedot.Size = new System.Drawing.Size(995, 230);
             this.pnlAsiakastiedot.TabIndex = 0;
             // 
             // pnlVaraustiedot
@@ -86,9 +98,9 @@
             this.pnlVaraustiedot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlVaraustiedot.Location = new System.Drawing.Point(2, 250);
+            this.pnlVaraustiedot.Location = new System.Drawing.Point(2, 233);
             this.pnlVaraustiedot.Name = "pnlVaraustiedot";
-            this.pnlVaraustiedot.Size = new System.Drawing.Size(995, 294);
+            this.pnlVaraustiedot.Size = new System.Drawing.Size(995, 311);
             this.pnlVaraustiedot.TabIndex = 1;
             // 
             // errorProvider1
@@ -113,7 +125,7 @@
             // 
             this.tbAsiakastunnus.Location = new System.Drawing.Point(92, 205);
             this.tbAsiakastunnus.Name = "tbAsiakastunnus";
-            this.tbAsiakastunnus.Size = new System.Drawing.Size(90, 20);
+            this.tbAsiakastunnus.Size = new System.Drawing.Size(151, 20);
             this.tbAsiakastunnus.TabIndex = 0;
             // 
             // dgvAsiakkaat
@@ -250,6 +262,59 @@
             this.tbLahiosoite.Size = new System.Drawing.Size(185, 20);
             this.tbLahiosoite.TabIndex = 10;
             // 
+            // lblPuhno
+            // 
+            this.lblPuhno.AutoSize = true;
+            this.lblPuhno.Location = new System.Drawing.Point(10, 100);
+            this.lblPuhno.Name = "lblPuhno";
+            this.lblPuhno.Size = new System.Drawing.Size(77, 13);
+            this.lblPuhno.TabIndex = 11;
+            this.lblPuhno.Text = "Puhelinnumero";
+            // 
+            // mtbPuhno
+            // 
+            this.mtbPuhno.Location = new System.Drawing.Point(93, 97);
+            this.mtbPuhno.Mask = "(999) 000-0000";
+            this.mtbPuhno.Name = "mtbPuhno";
+            this.mtbPuhno.Size = new System.Drawing.Size(150, 20);
+            this.mtbPuhno.TabIndex = 12;
+            // 
+            // mtbSp
+            // 
+            this.mtbSp.Location = new System.Drawing.Point(93, 133);
+            this.mtbSp.Mask = "________@________.__";
+            this.mtbSp.Name = "mtbSp";
+            this.mtbSp.Size = new System.Drawing.Size(150, 20);
+            this.mtbSp.TabIndex = 14;
+            this.mtbSp.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbSp_MaskInputRejected);
+            // 
+            // lblSp
+            // 
+            this.lblSp.AutoSize = true;
+            this.lblSp.Location = new System.Drawing.Point(10, 136);
+            this.lblSp.Name = "lblSp";
+            this.lblSp.Size = new System.Drawing.Size(60, 13);
+            this.lblSp.TabIndex = 13;
+            this.lblSp.Text = "Sähköposti";
+            // 
+            // btnLisaa
+            // 
+            this.btnLisaa.Location = new System.Drawing.Point(343, 202);
+            this.btnLisaa.Name = "btnLisaa";
+            this.btnLisaa.Size = new System.Drawing.Size(91, 23);
+            this.btnLisaa.TabIndex = 15;
+            this.btnLisaa.Text = "Lisää asiakas";
+            this.btnLisaa.UseVisualStyleBackColor = true;
+            // 
+            // btnHae
+            // 
+            this.btnHae.Location = new System.Drawing.Point(262, 202);
+            this.btnHae.Name = "btnHae";
+            this.btnHae.Size = new System.Drawing.Size(44, 23);
+            this.btnHae.TabIndex = 16;
+            this.btnHae.Text = "Hae";
+            this.btnHae.UseVisualStyleBackColor = true;
+            // 
             // frmUusiVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,5 +361,11 @@
         private System.Windows.Forms.TextBox tbLahiosoite;
         private System.Windows.Forms.Label lblLahiosoite;
         private System.Windows.Forms.TextBox tbPostino;
+        private System.Windows.Forms.MaskedTextBox mtbSp;
+        private System.Windows.Forms.Label lblSp;
+        private System.Windows.Forms.MaskedTextBox mtbPuhno;
+        private System.Windows.Forms.Label lblPuhno;
+        private System.Windows.Forms.Button btnHae;
+        private System.Windows.Forms.Button btnLisaa;
     }
 }

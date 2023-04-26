@@ -23,5 +23,10 @@ namespace R13_MokkiBook
             this.asiakasTableAdapter.Fill(this.dataSet1.asiakas);
 
         }
+
+        private void mtbSp_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }
