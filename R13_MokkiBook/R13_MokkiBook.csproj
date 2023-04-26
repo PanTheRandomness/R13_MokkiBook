@@ -62,6 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlueenPAlvelutDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlueenPAlvelutDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetMokkiBook.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,6 +173,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="AlueenPAlvelutDataSet.xsc">
+      <DependentUpon>AlueenPAlvelutDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AlueenPAlvelutDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AlueenPAlvelutDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AlueenPAlvelutDataSet.xss">
+      <DependentUpon>AlueenPAlvelutDataSet.xsd</DependentUpon>
+    </None>
     <None Include="DataSetMokkiBook.xsc">
       <DependentUpon>DataSetMokkiBook.xsd</DependentUpon>
     </None>
