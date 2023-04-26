@@ -196,121 +196,134 @@
             // 
             // lblPaivat
             // 
+            this.lblPaivat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPaivat.AutoSize = true;
             this.lblPaivat.Location = new System.Drawing.Point(12, 594);
             this.lblPaivat.Name = "lblPaivat";
             this.lblPaivat.Size = new System.Drawing.Size(41, 13);
-            this.lblPaivat.TabIndex = 3;
+            this.lblPaivat.TabIndex = 1;
             this.lblPaivat.Text = "Päiviltä";
             // 
             // dtpAlku
             // 
+            this.dtpAlku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpAlku.Location = new System.Drawing.Point(59, 592);
             this.dtpAlku.Name = "dtpAlku";
             this.dtpAlku.Size = new System.Drawing.Size(200, 20);
-            this.dtpAlku.TabIndex = 4;
+            this.dtpAlku.TabIndex = 1;
             this.dtpAlku.ValueChanged += new System.EventHandler(this.dtpAlku_ValueChanged);
             // 
             // lblViiva
             // 
+            this.lblViiva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblViiva.AutoSize = true;
             this.lblViiva.Location = new System.Drawing.Point(265, 594);
             this.lblViiva.Name = "lblViiva";
             this.lblViiva.Size = new System.Drawing.Size(10, 13);
-            this.lblViiva.TabIndex = 5;
+            this.lblViiva.TabIndex = 2;
             this.lblViiva.Text = "-";
             // 
             // dtpLoppu
             // 
+            this.dtpLoppu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpLoppu.Location = new System.Drawing.Point(281, 592);
             this.dtpLoppu.Name = "dtpLoppu";
             this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
-            this.dtpLoppu.TabIndex = 6;
+            this.dtpLoppu.TabIndex = 2;
             this.dtpLoppu.ValueChanged += new System.EventHandler(this.dtpLoppu_ValueChanged);
             // 
             // lblAlue
             // 
+            this.lblAlue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAlue.AutoSize = true;
             this.lblAlue.Location = new System.Drawing.Point(487, 594);
             this.lblAlue.Name = "lblAlue";
             this.lblAlue.Size = new System.Drawing.Size(28, 13);
-            this.lblAlue.TabIndex = 7;
+            this.lblAlue.TabIndex = 3;
             this.lblAlue.Text = "Alue";
             // 
             // cbAlue
             // 
+            this.cbAlue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbAlue.Enabled = false;
             this.cbAlue.FormattingEnabled = true;
             this.cbAlue.Location = new System.Drawing.Point(521, 590);
             this.cbAlue.Name = "cbAlue";
             this.cbAlue.Size = new System.Drawing.Size(86, 21);
-            this.cbAlue.TabIndex = 8;
+            this.cbAlue.TabIndex = 3;
             this.cbAlue.SelectedIndexChanged += new System.EventHandler(this.cbAlue_SelectedIndexChanged);
             // 
             // lblMokki
             // 
+            this.lblMokki.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMokki.AutoSize = true;
             this.lblMokki.Location = new System.Drawing.Point(613, 594);
             this.lblMokki.Name = "lblMokki";
             this.lblMokki.Size = new System.Drawing.Size(36, 13);
-            this.lblMokki.TabIndex = 9;
+            this.lblMokki.TabIndex = 4;
             this.lblMokki.Text = "Mökki";
             // 
             // cbMokki
             // 
+            this.cbMokki.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbMokki.Enabled = false;
             this.cbMokki.FormattingEnabled = true;
             this.cbMokki.Location = new System.Drawing.Point(655, 590);
             this.cbMokki.Name = "cbMokki";
             this.cbMokki.Size = new System.Drawing.Size(86, 21);
-            this.cbMokki.TabIndex = 10;
+            this.cbMokki.TabIndex = 4;
             this.cbMokki.SelectedIndexChanged += new System.EventHandler(this.cbMokki_SelectedIndexChanged);
             // 
             // Asiakas
             // 
+            this.Asiakas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Asiakas.AutoSize = true;
             this.Asiakas.Location = new System.Drawing.Point(747, 594);
             this.Asiakas.Name = "Asiakas";
             this.Asiakas.Size = new System.Drawing.Size(44, 13);
-            this.Asiakas.TabIndex = 11;
+            this.Asiakas.TabIndex = 5;
             this.Asiakas.Text = "Asiakas";
             // 
             // cbAsiakas
             // 
+            this.cbAsiakas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbAsiakas.Enabled = false;
             this.cbAsiakas.FormattingEnabled = true;
             this.cbAsiakas.Location = new System.Drawing.Point(797, 591);
             this.cbAsiakas.Name = "cbAsiakas";
             this.cbAsiakas.Size = new System.Drawing.Size(86, 21);
-            this.cbAsiakas.TabIndex = 12;
+            this.cbAsiakas.TabIndex = 5;
             this.cbAsiakas.SelectedIndexChanged += new System.EventHandler(this.cbAsiakas_SelectedIndexChanged);
             // 
             // btnHae
             // 
+            this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnHae.Location = new System.Drawing.Point(889, 590);
             this.btnHae.Name = "btnHae";
             this.btnHae.Size = new System.Drawing.Size(50, 23);
-            this.btnHae.TabIndex = 13;
+            this.btnHae.TabIndex = 6;
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = true;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
             // btnRaportti
             // 
+            this.btnRaportti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRaportti.Location = new System.Drawing.Point(945, 590);
             this.btnRaportti.Name = "btnRaportti";
             this.btnRaportti.Size = new System.Drawing.Size(64, 23);
-            this.btnRaportti.TabIndex = 14;
+            this.btnRaportti.TabIndex = 7;
             this.btnRaportti.Text = "Raportti";
             this.btnRaportti.UseVisualStyleBackColor = true;
             this.btnRaportti.Click += new System.EventHandler(this.btnRaportti_Click);
             // 
             // btnUusi
             // 
+            this.btnUusi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUusi.Location = new System.Drawing.Point(1187, 591);
             this.btnUusi.Name = "btnUusi";
             this.btnUusi.Size = new System.Drawing.Size(75, 23);
-            this.btnUusi.TabIndex = 15;
+            this.btnUusi.TabIndex = 8;
             this.btnUusi.Text = "Uusi varaus";
             this.btnUusi.UseVisualStyleBackColor = true;
             this.btnUusi.Click += new System.EventHandler(this.btnUusi_Click);
@@ -339,6 +352,7 @@
             this.Controls.Add(this.lblPaivat);
             this.Controls.Add(this.pnlToiminnot);
             this.Controls.Add(this.dgvVaraukset);
+            this.MinimumSize = new System.Drawing.Size(1290, 659);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
             this.Load += new System.EventHandler(this.frmVaraukset_Load);
