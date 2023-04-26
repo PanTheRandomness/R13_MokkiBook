@@ -54,5 +54,10 @@ namespace R13_MokkiBook
         {
 
         }
+
+        private void btnLuoVaraus_Click(object sender, EventArgs e)
+        {
+            //Messagebox validointi
+        }
     }
 }
