@@ -91,5 +91,10 @@ namespace R13_MokkiBook
         {
             //VALIDOI
         }
+
+        private void cmsVaraustaulunMenu_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }

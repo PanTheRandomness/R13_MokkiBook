@@ -30,14 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvVaraukset = new System.Windows.Forms.DataGridView();
-            this.dataSet1 = new R13_MokkiBook.DataSet1();
-            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
-            this.cmsVaraustaulunMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiMuokkaa = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiVarauksenPalvelut = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiPoista = new System.Windows.Forms.ToolStripMenuItem();
             this.varausidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asiakasidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mokkimokkiidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +37,14 @@
             this.vahvistuspvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattualkupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattuloppupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmsVaraustaulunMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiMuokkaa = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiVarauksenPalvelut = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPoista = new System.Windows.Forms.ToolStripMenuItem();
+            this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new R13_MokkiBook.DataSet1();
+            this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
             this.pnlToiminnot = new System.Windows.Forms.Panel();
             this.lblPaivat = new System.Windows.Forms.Label();
             this.dtpAlku = new System.Windows.Forms.DateTimePicker();
@@ -61,10 +61,10 @@
             this.btnUusi = new System.Windows.Forms.Button();
             this.epVaraukset = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
             this.cmsVaraustaulunMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,55 +91,6 @@
             this.dgvVaraukset.Size = new System.Drawing.Size(1269, 578);
             this.dgvVaraukset.TabIndex = 0;
             this.dgvVaraukset.SelectionChanged += new System.EventHandler(this.dgvVaraukset_SelectionChanged);
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
-            // 
-            // varausBindingSource
-            // 
-            this.varausBindingSource.DataMember = "varaus";
-            this.varausBindingSource.DataSource = this.dataSet1BindingSource;
-            // 
-            // varausTableAdapter
-            // 
-            this.varausTableAdapter.ClearBeforeFill = true;
-            // 
-            // cmsVaraustaulunMenu
-            // 
-            this.cmsVaraustaulunMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMuokkaa,
-            this.tsmiVarauksenPalvelut,
-            this.tsmiPoista});
-            this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
-            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 70);
-            // 
-            // tsmiMuokkaa
-            // 
-            this.tsmiMuokkaa.Name = "tsmiMuokkaa";
-            this.tsmiMuokkaa.Size = new System.Drawing.Size(206, 22);
-            this.tsmiMuokkaa.Text = "Muokkaa varausta";
-            this.tsmiMuokkaa.Click += new System.EventHandler(this.tsmiMuokkaa_Click);
-            // 
-            // tsmiVarauksenPalvelut
-            // 
-            this.tsmiVarauksenPalvelut.Name = "tsmiVarauksenPalvelut";
-            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(206, 22);
-            this.tsmiVarauksenPalvelut.Text = "Näytä varauksen palvelut";
-            this.tsmiVarauksenPalvelut.Click += new System.EventHandler(this.tsmiVarauksenPalvelut_Click);
-            // 
-            // tsmiPoista
-            // 
-            this.tsmiPoista.Name = "tsmiPoista";
-            this.tsmiPoista.Size = new System.Drawing.Size(206, 22);
-            this.tsmiPoista.Text = "Poista varaus";
-            this.tsmiPoista.Click += new System.EventHandler(this.tsmiPoista_Click);
             // 
             // varausidDataGridViewTextBoxColumn
             // 
@@ -182,6 +133,56 @@
             this.varattuloppupvmDataGridViewTextBoxColumn.DataPropertyName = "varattu_loppupvm";
             this.varattuloppupvmDataGridViewTextBoxColumn.HeaderText = "Varauksen päättymispäivä";
             this.varattuloppupvmDataGridViewTextBoxColumn.Name = "varattuloppupvmDataGridViewTextBoxColumn";
+            // 
+            // cmsVaraustaulunMenu
+            // 
+            this.cmsVaraustaulunMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMuokkaa,
+            this.tsmiVarauksenPalvelut,
+            this.tsmiPoista});
+            this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
+            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 92);
+            this.cmsVaraustaulunMenu.Opening += new System.ComponentModel.CancelEventHandler(this.cmsVaraustaulunMenu_Opening);
+            // 
+            // tsmiMuokkaa
+            // 
+            this.tsmiMuokkaa.Name = "tsmiMuokkaa";
+            this.tsmiMuokkaa.Size = new System.Drawing.Size(206, 22);
+            this.tsmiMuokkaa.Text = "Muokkaa varausta";
+            this.tsmiMuokkaa.Click += new System.EventHandler(this.tsmiMuokkaa_Click);
+            // 
+            // tsmiVarauksenPalvelut
+            // 
+            this.tsmiVarauksenPalvelut.Name = "tsmiVarauksenPalvelut";
+            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(206, 22);
+            this.tsmiVarauksenPalvelut.Text = "Näytä varauksen palvelut";
+            this.tsmiVarauksenPalvelut.Click += new System.EventHandler(this.tsmiVarauksenPalvelut_Click);
+            // 
+            // tsmiPoista
+            // 
+            this.tsmiPoista.Name = "tsmiPoista";
+            this.tsmiPoista.Size = new System.Drawing.Size(206, 22);
+            this.tsmiPoista.Text = "Poista varaus";
+            this.tsmiPoista.Click += new System.EventHandler(this.tsmiPoista_Click);
+            // 
+            // varausBindingSource
+            // 
+            this.varausBindingSource.DataMember = "varaus";
+            this.varausBindingSource.DataSource = this.dataSet1BindingSource;
+            // 
+            // dataSet1BindingSource
+            // 
+            this.dataSet1BindingSource.DataSource = this.dataSet1;
+            this.dataSet1BindingSource.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // varausTableAdapter
+            // 
+            this.varausTableAdapter.ClearBeforeFill = true;
             // 
             // pnlToiminnot
             // 
@@ -343,10 +344,10 @@
             this.Load += new System.EventHandler(this.frmVaraukset_Load);
             this.Leave += new System.EventHandler(this.frmVaraukset_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
             this.cmsVaraustaulunMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
