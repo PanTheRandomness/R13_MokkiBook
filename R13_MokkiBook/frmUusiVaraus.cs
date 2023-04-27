@@ -59,5 +59,30 @@ namespace R13_MokkiBook
         {
             //Messagebox validointi
         }
+
+        private void tbEnimi_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSnimi_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbPostinoAsiakas_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mtbPuhno_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }
