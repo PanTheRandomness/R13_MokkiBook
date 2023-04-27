@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbAlueID = new System.Windows.Forms.Label();
             this.lbNimi = new System.Windows.Forms.Label();
             this.tbAlueID = new System.Windows.Forms.TextBox();
@@ -41,7 +42,13 @@
             this.dtpAlku = new System.Windows.Forms.DateTimePicker();
             this.lblPaivat = new System.Windows.Forms.Label();
             this.btnHae = new System.Windows.Forms.Button();
+            this.dataSet1 = new R13_MokkiBook.DataSet1();
+            this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nimiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgwAlue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lbAlueID
@@ -78,7 +85,12 @@
             // 
             // dgwAlue
             // 
+            this.dgwAlue.AutoGenerateColumns = false;
             this.dgwAlue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwAlue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.alueidDataGridViewTextBoxColumn,
+            this.nimiDataGridViewTextBoxColumn});
+            this.dgwAlue.DataSource = this.alueBindingSource;
             this.dgwAlue.Location = new System.Drawing.Point(33, 186);
             this.dgwAlue.Name = "dgwAlue";
             this.dgwAlue.RowHeadersWidth = 51;
@@ -164,6 +176,32 @@
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = true;
             // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // alueBindingSource
+            // 
+            this.alueBindingSource.DataMember = "alue";
+            this.alueBindingSource.DataSource = this.dataSet1;
+            // 
+            // alueidDataGridViewTextBoxColumn
+            // 
+            this.alueidDataGridViewTextBoxColumn.DataPropertyName = "alue_id";
+            this.alueidDataGridViewTextBoxColumn.HeaderText = "alue_id";
+            this.alueidDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.alueidDataGridViewTextBoxColumn.Name = "alueidDataGridViewTextBoxColumn";
+            this.alueidDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // nimiDataGridViewTextBoxColumn
+            // 
+            this.nimiDataGridViewTextBoxColumn.DataPropertyName = "nimi";
+            this.nimiDataGridViewTextBoxColumn.HeaderText = "nimi";
+            this.nimiDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nimiDataGridViewTextBoxColumn.Name = "nimiDataGridViewTextBoxColumn";
+            this.nimiDataGridViewTextBoxColumn.Width = 125;
+            // 
             // frmAlueet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -185,6 +223,8 @@
             this.Name = "frmAlueet";
             this.Text = "Alueet";
             ((System.ComponentModel.ISupportInitialize)(this.dgwAlue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,5 +245,9 @@
         private System.Windows.Forms.DateTimePicker dtpAlku;
         private System.Windows.Forms.Label lblPaivat;
         private System.Windows.Forms.Button btnHae;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alueidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nimiDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource alueBindingSource;
+        private DataSet1 dataSet1;
     }
 }

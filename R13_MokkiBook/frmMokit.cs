@@ -17,6 +17,13 @@ namespace R13_MokkiBook
             InitializeComponent();
         }
 
-     
+        private void frmMokit_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dataSet1.alue' table. You can move, or remove it, as needed.
+            this.alueTableAdapter.Fill(this.dataSet1.alue);
+            // TODO: This line of code loads data into the 'dataSet1.mokki' table. You can move, or remove it, as needed.
+            this.mokkiTableAdapter.Fill(this.dataSet1.mokki);
+
+        }
     }
 }
