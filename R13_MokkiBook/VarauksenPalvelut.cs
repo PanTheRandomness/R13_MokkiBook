@@ -8,8 +8,8 @@ namespace R13_MokkiBook
 {
     public class VarauksenPalvelut
     {
-        public int lkm { get; set; }
         public int varaus_id { get; set; }
         public int palvelu_id { get; set; }
+        public int lkm { get; set; }
     }
 }
