@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Data.Odbc;
 
 namespace R13_MokkiBook
 {
     public partial class frmPalvelut : Form
     {
+        public Palvelu valittupalvelu = new Palvelu();
+        public List<Palvelu> palvelut;
+        public string query;
+
         public frmPalvelut()
         {
             InitializeComponent();
+            palvelut = GetPalvelut();
         }
 
 
@@ -32,49 +39,44 @@ namespace R13_MokkiBook
     
         private void fillByToolStripButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                this.palveluTableAdapter.FillBy(this.dataSet1.palvelu);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
+         
 
         }
 
         private void TsBtnLisaa_Click(object sender, EventArgs e)
         {
-            DataGridViewRow selectedRow = dataGridView1.CurrentRow;
-            if (selectedRow != null)
-            {
-                frmUusiPalvelu editForm = new frmUusiPalvelu(selectedRow);
-                if (editForm.ShowDialog() == DialogResult.OK)
-                {
-                    // update the selected row with the new data
-                  //  selectedRow.Cells["palveluId"].Value = editForm.palveluIdTextBox.Text;
-                    //selectedRow.Cells["palveluNimi"].Value = editForm.palveluNimiTextBox.Text;
-                    // ...update other columns' data...
+           
+        }
+        public List<Palvelu> GetPalvelut()
+        {
+            List<Palvelu> pal = new List<Palvelu>();
+            string connectionString = "Dsn=Village Newbies;uid=root"; 
+            string query = "SELECT * FROM palvelu";
 
-                    // save the changes to the database
-                    try
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
                     {
-                        this.Validate();
-                        this.palveluBindingSource.EndEdit();
-                       // this.palveluTableAdapter.UpdateAll(this.dataSet1);
-                        MessageBox.Show("Changes saved successfully.");
-                    }
-                    catch (System.Exception ex)
-                    {
-                        MessageBox.Show("Error saving changes: " + ex.Message);
+                        while (reader.Read())
+                        {
+                            Palvelu palvelu = new Palvelu();
+                            palvelu.palvelu_id = reader.GetInt32(0);
+                            palvelu.nimi = reader.GetString(1);
+                            palvelu.tyyppi = reader.GetString(1);
+                            palvelu.kuvaus = reader.GetString(1);
+                            palvelu.hinta = reader.GetInt32(0);
+                            palvelu.alv = reader.GetInt32(0);
+
+                            pal.Add(palvelu);
+                        }
                     }
                 }
             }
-            else
-            {
-                // show an error message if no row is selected
-                MessageBox.Show("Please select a row to edit.");
-            }
+
+            return pal;
         }
     }
 }

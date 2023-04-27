@@ -33,13 +33,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.palveluBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
             this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.TsBtnLisaa = new System.Windows.Forms.ToolStripButton();
-            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
+            this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
+            this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nimiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,10 +51,12 @@
             this.alvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).BeginInit();
-            this.fillByToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).BeginInit();
+            this.fillByToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -91,15 +95,25 @@
             this.hintaDataGridViewTextBoxColumn,
             this.alvDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.palveluBindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(94, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(107, 78);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(742, 310);
+            this.dataGridView1.Size = new System.Drawing.Size(744, 454);
             this.dataGridView1.TabIndex = 8;
             // 
             // palveluBindingSource1
             // 
             this.palveluBindingSource1.DataMember = "palvelu";
             this.palveluBindingSource1.DataSource = this.dataSet1BindingSource;
+            // 
+            // dataSet1BindingSource
+            // 
+            this.dataSet1BindingSource.DataSource = this.dataSet1;
+            this.dataSet1BindingSource.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // palveluBindingSource
             // 
@@ -136,19 +150,19 @@
             this.TsBtnLisaa.Text = "Lisää palvelu";
             this.TsBtnLisaa.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // palveluTableAdapter
             // 
             this.palveluTableAdapter.ClearBeforeFill = true;
+            // 
+            // varauksenPAlvelutDataSet
+            // 
+            this.varauksenPAlvelutDataSet.DataSetName = "VarauksenPAlvelutDataSet";
+            this.varauksenPAlvelutDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // varauksenPAlvelutDataSetBindingSource
+            // 
+            this.varauksenPAlvelutDataSetBindingSource.DataSource = this.varauksenPAlvelutDataSet;
+            this.varauksenPAlvelutDataSetBindingSource.Position = 0;
             // 
             // palveluidDataGridViewTextBoxColumn
             // 
@@ -207,11 +221,13 @@
             this.Load += new System.EventHandler(this.frmPalvelut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).EndInit();
             this.fillByToolStrip.ResumeLayout(false);
             this.fillByToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,5 +252,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn kuvausDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hintaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn alvDataGridViewTextBoxColumn;
+        private VarauksenPAlvelutDataSet varauksenPAlvelutDataSet;
+        private System.Windows.Forms.BindingSource varauksenPAlvelutDataSetBindingSource;
     }
 }
