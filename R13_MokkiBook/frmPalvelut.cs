@@ -29,7 +29,7 @@ namespace R13_MokkiBook
         private void frmPalvelut_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dataSet1.palvelu' table. You can move, or remove it, as needed.
-            this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
+           this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
         }
 
         private void label1_Click(object sender, EventArgs e) //otsikko
@@ -43,10 +43,7 @@ namespace R13_MokkiBook
 
         }
 
-        private void TsBtnLisaa_Click(object sender, EventArgs e)
-        {
-           
-        }
+    
         public List<Palvelu> GetPalvelut()
         {
             List<Palvelu> pal = new List<Palvelu>();
@@ -77,6 +74,12 @@ namespace R13_MokkiBook
             }
 
             return pal;
+        }
+
+        private void TsBtnLisaa_Click_1(object sender, EventArgs e)
+        {
+            frmUusiPalvelu up = new frmUusiPalvelu();
+            up.ShowDialog();
         }
     }
 }

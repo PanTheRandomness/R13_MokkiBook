@@ -30,18 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.palveluBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new R13_MokkiBook.DataSet1();
-            this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
-            this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.TsBtnLisaa = new System.Windows.Forms.ToolStripButton();
-            this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
-            this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
-            this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nimiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +38,16 @@
             this.kuvausDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hintaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.palveluBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new R13_MokkiBook.DataSet1();
+            this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
+            this.TsBtnLisaa = new System.Windows.Forms.ToolStripButton();
+            this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
+            this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
+            this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -62,25 +61,14 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label1.Location = new System.Drawing.Point(448, 38);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.label1.Location = new System.Drawing.Point(302, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 20);
+            this.label1.Size = new System.Drawing.Size(140, 29);
             this.label1.TabIndex = 1;
             this.label1.Text = "Lisäpalvelut";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(439, 58);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 17);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Palvelut sis. ALV";
             // 
             // dataGridView1
             // 
@@ -95,74 +83,10 @@
             this.hintaDataGridViewTextBoxColumn,
             this.alvDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.palveluBindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(107, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 83);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(744, 454);
+            this.dataGridView1.Size = new System.Drawing.Size(744, 396);
             this.dataGridView1.TabIndex = 8;
-            // 
-            // palveluBindingSource1
-            // 
-            this.palveluBindingSource1.DataMember = "palvelu";
-            this.palveluBindingSource1.DataSource = this.dataSet1BindingSource;
-            // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // palveluBindingSource
-            // 
-            this.palveluBindingSource.DataMember = "palvelu";
-            this.palveluBindingSource.DataSource = this.dataSet1BindingSource;
-            // 
-            // fillByToolStrip
-            // 
-            this.fillByToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fillByToolStripButton,
-            this.TsBtnLisaa});
-            this.fillByToolStrip.Location = new System.Drawing.Point(0, 535);
-            this.fillByToolStrip.Name = "fillByToolStrip";
-            this.fillByToolStrip.Size = new System.Drawing.Size(959, 25);
-            this.fillByToolStrip.TabIndex = 9;
-            this.fillByToolStrip.Text = "fillByToolStrip";
-            // 
-            // fillByToolStripButton
-            // 
-            this.fillByToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillByToolStripButton.Name = "fillByToolStripButton";
-            this.fillByToolStripButton.Size = new System.Drawing.Size(39, 22);
-            this.fillByToolStripButton.Text = "FillBy";
-            this.fillByToolStripButton.Click += new System.EventHandler(this.fillByToolStripButton_Click);
-            // 
-            // TsBtnLisaa
-            // 
-            this.TsBtnLisaa.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.TsBtnLisaa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.TsBtnLisaa.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsBtnLisaa.Name = "TsBtnLisaa";
-            this.TsBtnLisaa.Size = new System.Drawing.Size(78, 22);
-            this.TsBtnLisaa.Text = "Lisää palvelu";
-            this.TsBtnLisaa.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            // 
-            // palveluTableAdapter
-            // 
-            this.palveluTableAdapter.ClearBeforeFill = true;
-            // 
-            // varauksenPAlvelutDataSet
-            // 
-            this.varauksenPAlvelutDataSet.DataSetName = "VarauksenPAlvelutDataSet";
-            this.varauksenPAlvelutDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // varauksenPAlvelutDataSetBindingSource
-            // 
-            this.varauksenPAlvelutDataSetBindingSource.DataSource = this.varauksenPAlvelutDataSet;
-            this.varauksenPAlvelutDataSetBindingSource.Position = 0;
             // 
             // palveluidDataGridViewTextBoxColumn
             // 
@@ -206,18 +130,84 @@
             this.alvDataGridViewTextBoxColumn.HeaderText = "alv";
             this.alvDataGridViewTextBoxColumn.Name = "alvDataGridViewTextBoxColumn";
             // 
+            // palveluBindingSource1
+            // 
+            this.palveluBindingSource1.DataMember = "palvelu";
+            this.palveluBindingSource1.DataSource = this.dataSet1BindingSource;
+            // 
+            // dataSet1BindingSource
+            // 
+            this.dataSet1BindingSource.DataSource = this.dataSet1;
+            this.dataSet1BindingSource.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // palveluBindingSource
+            // 
+            this.palveluBindingSource.DataMember = "palvelu";
+            this.palveluBindingSource.DataSource = this.dataSet1BindingSource;
+            // 
+            // fillByToolStrip
+            // 
+            this.fillByToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TsBtnLisaa});
+            this.fillByToolStrip.Location = new System.Drawing.Point(0, 484);
+            this.fillByToolStrip.Name = "fillByToolStrip";
+            this.fillByToolStrip.Size = new System.Drawing.Size(758, 25);
+            this.fillByToolStrip.TabIndex = 9;
+            this.fillByToolStrip.Text = "fillByToolStrip";
+            // 
+            // TsBtnLisaa
+            // 
+            this.TsBtnLisaa.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.TsBtnLisaa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.TsBtnLisaa.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsBtnLisaa.Name = "TsBtnLisaa";
+            this.TsBtnLisaa.Size = new System.Drawing.Size(78, 22);
+            this.TsBtnLisaa.Text = "Lisää palvelu";
+            this.TsBtnLisaa.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.TsBtnLisaa.Click += new System.EventHandler(this.TsBtnLisaa_Click_1);
+            // 
+            // palveluTableAdapter
+            // 
+            this.palveluTableAdapter.ClearBeforeFill = true;
+            // 
+            // varauksenPAlvelutDataSet
+            // 
+            this.varauksenPAlvelutDataSet.DataSetName = "VarauksenPAlvelutDataSet";
+            this.varauksenPAlvelutDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // varauksenPAlvelutDataSetBindingSource
+            // 
+            this.varauksenPAlvelutDataSetBindingSource.DataSource = this.varauksenPAlvelutDataSet;
+            this.varauksenPAlvelutDataSetBindingSource.Position = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label2.Location = new System.Drawing.Point(238, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(288, 20);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Tässä voit muokata ja poistaa palveluita";
+            // 
             // frmPalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 560);
+            this.ClientSize = new System.Drawing.Size(758, 509);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmPalvelut";
-            this.Text = "frmPalvelut";
+            this.Text = "Palvelut";
             this.Load += new System.EventHandler(this.frmPalvelut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).EndInit();
@@ -235,7 +225,6 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private DataSet1 dataSet1;
         private System.Windows.Forms.BindingSource dataSet1BindingSource;
@@ -243,7 +232,6 @@
         private DataSet1TableAdapters.palveluTableAdapter palveluTableAdapter;
         private System.Windows.Forms.BindingSource palveluBindingSource1;
         private System.Windows.Forms.ToolStrip fillByToolStrip;
-        private System.Windows.Forms.ToolStripButton fillByToolStripButton;
         private System.Windows.Forms.ToolStripButton TsBtnLisaa;
         private System.Windows.Forms.DataGridViewTextBoxColumn palveluidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn alueidDataGridViewTextBoxColumn;
@@ -254,5 +242,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn alvDataGridViewTextBoxColumn;
         private VarauksenPAlvelutDataSet varauksenPAlvelutDataSet;
         private System.Windows.Forms.BindingSource varauksenPAlvelutDataSetBindingSource;
+        private System.Windows.Forms.Label label2;
     }
 }

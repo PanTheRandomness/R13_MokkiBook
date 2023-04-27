@@ -28,68 +28,123 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLaskut));
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsBtnTulosta = new System.Windows.Forms.ToolStripButton();
+            this.lbOtsikko = new System.Windows.Forms.Label();
+            this.dataSet1 = new R13_MokkiBook.DataSet1();
+            this.laskuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.laskuTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.laskuTableAdapter();
+            this.laskuidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.varausidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.summaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // label3
+            // dataGridView1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(178, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "lasku_id";
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.laskuidDataGridViewTextBoxColumn,
+            this.varausidDataGridViewTextBoxColumn,
+            this.summaDataGridViewTextBoxColumn,
+            this.alvDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.laskuBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(4, 69);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(598, 274);
+            this.dataGridView1.TabIndex = 5;
             // 
-            // label4
+            // toolStrip1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 38);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "varaus_id";
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsBtnTulosta});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 346);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(602, 25);
+            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // label5
+            // tsBtnTulosta
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(289, 38);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "summa";
+            this.tsBtnTulosta.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsBtnTulosta.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnTulosta.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnTulosta.Image")));
+            this.tsBtnTulosta.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnTulosta.Name = "tsBtnTulosta";
+            this.tsBtnTulosta.Size = new System.Drawing.Size(79, 22);
+            this.tsBtnTulosta.Text = "Tulosta lasku";
+            this.tsBtnTulosta.Click += new System.EventHandler(this.tsBtnTulosta_Click);
             // 
-            // label6
+            // lbOtsikko
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(335, 38);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(21, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "alv";
+            this.lbOtsikko.AutoSize = true;
+            this.lbOtsikko.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.lbOtsikko.Location = new System.Drawing.Point(154, 9);
+            this.lbOtsikko.Name = "lbOtsikko";
+            this.lbOtsikko.Size = new System.Drawing.Size(309, 29);
+            this.lbOtsikko.TabIndex = 7;
+            this.lbOtsikko.Text = "Hallitse ja tarkastele laskuja";
             // 
-            // button2
+            // dataSet1
             // 
-            this.button2.Location = new System.Drawing.Point(233, 313);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Tulosta";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // laskuBindingSource
+            // 
+            this.laskuBindingSource.DataMember = "lasku";
+            this.laskuBindingSource.DataSource = this.dataSet1;
+            // 
+            // laskuTableAdapter
+            // 
+            this.laskuTableAdapter.ClearBeforeFill = true;
+            // 
+            // laskuidDataGridViewTextBoxColumn
+            // 
+            this.laskuidDataGridViewTextBoxColumn.DataPropertyName = "lasku_id";
+            this.laskuidDataGridViewTextBoxColumn.HeaderText = "lasku_id";
+            this.laskuidDataGridViewTextBoxColumn.Name = "laskuidDataGridViewTextBoxColumn";
+            // 
+            // varausidDataGridViewTextBoxColumn
+            // 
+            this.varausidDataGridViewTextBoxColumn.DataPropertyName = "varaus_id";
+            this.varausidDataGridViewTextBoxColumn.HeaderText = "varaus_id";
+            this.varausidDataGridViewTextBoxColumn.Name = "varausidDataGridViewTextBoxColumn";
+            // 
+            // summaDataGridViewTextBoxColumn
+            // 
+            this.summaDataGridViewTextBoxColumn.DataPropertyName = "summa";
+            this.summaDataGridViewTextBoxColumn.HeaderText = "summa";
+            this.summaDataGridViewTextBoxColumn.Name = "summaDataGridViewTextBoxColumn";
+            // 
+            // alvDataGridViewTextBoxColumn
+            // 
+            this.alvDataGridViewTextBoxColumn.DataPropertyName = "alv";
+            this.alvDataGridViewTextBoxColumn.HeaderText = "alv";
+            this.alvDataGridViewTextBoxColumn.Name = "alvDataGridViewTextBoxColumn";
             // 
             // frmLaskut
             // 
-            this.ClientSize = new System.Drawing.Size(598, 348);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(602, 371);
+            this.Controls.Add(this.lbOtsikko);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.dataGridView1);
             this.Name = "frmLaskut";
+            this.Load += new System.EventHandler(this.frmLaskut_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,10 +155,16 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tsBtnTulosta;
+        private System.Windows.Forms.Label lbOtsikko;
+        private DataSet1 dataSet1;
+        private System.Windows.Forms.BindingSource laskuBindingSource;
+        private DataSet1TableAdapters.laskuTableAdapter laskuTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn laskuidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn varausidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn summaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alvDataGridViewTextBoxColumn;
     }
 }
