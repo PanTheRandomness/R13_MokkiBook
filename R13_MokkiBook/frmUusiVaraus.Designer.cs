@@ -163,13 +163,13 @@
             this.pnlAsiakastiedot.Controls.Add(this.tbAsiakastunnus);
             this.pnlAsiakastiedot.Location = new System.Drawing.Point(2, 2);
             this.pnlAsiakastiedot.Name = "pnlAsiakastiedot";
-            this.pnlAsiakastiedot.Size = new System.Drawing.Size(1106, 269);
+            this.pnlAsiakastiedot.Size = new System.Drawing.Size(1068, 242);
             this.pnlAsiakastiedot.TabIndex = 0;
             // 
             // btnLisaa
             // 
             this.btnLisaa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLisaa.Location = new System.Drawing.Point(344, 232);
+            this.btnLisaa.Location = new System.Drawing.Point(344, 205);
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(91, 23);
             this.btnLisaa.TabIndex = 7;
@@ -179,7 +179,7 @@
             // mtbSp
             // 
             this.mtbSp.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mtbSp.Location = new System.Drawing.Point(93, 158);
+            this.mtbSp.Location = new System.Drawing.Point(93, 145);
             this.mtbSp.Mask = "________@________.__";
             this.mtbSp.Name = "mtbSp";
             this.mtbSp.Size = new System.Drawing.Size(150, 20);
@@ -190,7 +190,7 @@
             // 
             this.lblSp.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSp.AutoSize = true;
-            this.lblSp.Location = new System.Drawing.Point(10, 161);
+            this.lblSp.Location = new System.Drawing.Point(10, 148);
             this.lblSp.Name = "lblSp";
             this.lblSp.Size = new System.Drawing.Size(60, 13);
             this.lblSp.TabIndex = 5;
@@ -199,7 +199,7 @@
             // mtbPuhno
             // 
             this.mtbPuhno.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mtbPuhno.Location = new System.Drawing.Point(93, 122);
+            this.mtbPuhno.Location = new System.Drawing.Point(93, 109);
             this.mtbPuhno.Mask = "(999) 000-0000";
             this.mtbPuhno.Name = "mtbPuhno";
             this.mtbPuhno.Size = new System.Drawing.Size(150, 20);
@@ -210,7 +210,7 @@
             // 
             this.lblPuhno.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPuhno.AutoSize = true;
-            this.lblPuhno.Location = new System.Drawing.Point(10, 125);
+            this.lblPuhno.Location = new System.Drawing.Point(10, 112);
             this.lblPuhno.Name = "lblPuhno";
             this.lblPuhno.Size = new System.Drawing.Size(77, 13);
             this.lblPuhno.TabIndex = 4;
@@ -288,7 +288,7 @@
             // 
             this.lblAsiakastunnus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAsiakastunnus.AutoSize = true;
-            this.lblAsiakastunnus.Location = new System.Drawing.Point(11, 238);
+            this.lblAsiakastunnus.Location = new System.Drawing.Point(11, 211);
             this.lblAsiakastunnus.Name = "lblAsiakastunnus";
             this.lblAsiakastunnus.Size = new System.Drawing.Size(76, 13);
             this.lblAsiakastunnus.TabIndex = 6;
@@ -314,7 +314,7 @@
             this.dgvAsiakkaat.DataSource = this.asiakasBindingSource;
             this.dgvAsiakkaat.Location = new System.Drawing.Point(455, 0);
             this.dgvAsiakkaat.Name = "dgvAsiakkaat";
-            this.dgvAsiakkaat.Size = new System.Drawing.Size(645, 265);
+            this.dgvAsiakkaat.Size = new System.Drawing.Size(607, 238);
             this.dgvAsiakkaat.TabIndex = 8;
             // 
             // asiakasidDataGridViewTextBoxColumn
@@ -372,7 +372,7 @@
             // tbAsiakastunnus
             // 
             this.tbAsiakastunnus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbAsiakastunnus.Location = new System.Drawing.Point(93, 235);
+            this.tbAsiakastunnus.Location = new System.Drawing.Point(93, 208);
             this.tbAsiakastunnus.Name = "tbAsiakastunnus";
             this.tbAsiakastunnus.Size = new System.Drawing.Size(151, 20);
             this.tbAsiakastunnus.TabIndex = 6;
@@ -410,9 +410,9 @@
             this.pnlVaraustiedot.Controls.Add(this.lbAlueid);
             this.pnlVaraustiedot.Controls.Add(this.lbAlue);
             this.pnlVaraustiedot.Controls.Add(this.tbAlueid);
-            this.pnlVaraustiedot.Location = new System.Drawing.Point(2, 329);
+            this.pnlVaraustiedot.Location = new System.Drawing.Point(2, 249);
             this.pnlVaraustiedot.Name = "pnlVaraustiedot";
-            this.pnlVaraustiedot.Size = new System.Drawing.Size(1106, 437);
+            this.pnlVaraustiedot.Size = new System.Drawing.Size(1068, 437);
             this.pnlVaraustiedot.TabIndex = 9;
             // 
             // cbLukitseMokki
@@ -428,7 +428,7 @@
             // btnLuoVaraus
             // 
             this.btnLuoVaraus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLuoVaraus.Location = new System.Drawing.Point(957, 245);
+            this.btnLuoVaraus.Location = new System.Drawing.Point(919, 245);
             this.btnLuoVaraus.Name = "btnLuoVaraus";
             this.btnLuoVaraus.Size = new System.Drawing.Size(133, 23);
             this.btnLuoVaraus.TabIndex = 30;
@@ -469,7 +469,7 @@
             // 
             this.lblLoppuhinta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLoppuhinta.AutoSize = true;
-            this.lblLoppuhinta.Location = new System.Drawing.Point(770, 250);
+            this.lblLoppuhinta.Location = new System.Drawing.Point(732, 250);
             this.lblLoppuhinta.Name = "lblLoppuhinta";
             this.lblLoppuhinta.Size = new System.Drawing.Size(75, 13);
             this.lblLoppuhinta.TabIndex = 28;
@@ -478,7 +478,7 @@
             // tbLoppuhinta
             // 
             this.tbLoppuhinta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLoppuhinta.Location = new System.Drawing.Point(851, 247);
+            this.tbLoppuhinta.Location = new System.Drawing.Point(813, 247);
             this.tbLoppuhinta.Name = "tbLoppuhinta";
             this.tbLoppuhinta.Size = new System.Drawing.Size(100, 20);
             this.tbLoppuhinta.TabIndex = 29;
@@ -565,7 +565,7 @@
             this.pnlPalvelut.Controls.Add(this.lbVarauksenPalvelut);
             this.pnlPalvelut.Location = new System.Drawing.Point(516, -3);
             this.pnlPalvelut.Name = "pnlPalvelut";
-            this.pnlPalvelut.Size = new System.Drawing.Size(585, 245);
+            this.pnlPalvelut.Size = new System.Drawing.Size(547, 245);
             this.pnlPalvelut.TabIndex = 24;
             // 
             // dgvAlueenPalvelut
@@ -589,7 +589,7 @@
             this.dgvAlueenPalvelut.Location = new System.Drawing.Point(0, 20);
             this.dgvAlueenPalvelut.Name = "dgvAlueenPalvelut";
             this.dgvAlueenPalvelut.ReadOnly = true;
-            this.dgvAlueenPalvelut.Size = new System.Drawing.Size(584, 105);
+            this.dgvAlueenPalvelut.Size = new System.Drawing.Size(546, 105);
             this.dgvAlueenPalvelut.TabIndex = 24;
             // 
             // palveluidDataGridViewTextBoxColumn
@@ -662,7 +662,7 @@
             // 
             this.lblPalvelujenMaara.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPalvelujenMaara.AutoSize = true;
-            this.lblPalvelujenMaara.Location = new System.Drawing.Point(331, 136);
+            this.lblPalvelujenMaara.Location = new System.Drawing.Point(293, 136);
             this.lblPalvelujenMaara.Name = "lblPalvelujenMaara";
             this.lblPalvelujenMaara.Size = new System.Drawing.Size(37, 13);
             this.lblPalvelujenMaara.TabIndex = 25;
@@ -671,7 +671,7 @@
             // nudPalveluLkm
             // 
             this.nudPalveluLkm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudPalveluLkm.Location = new System.Drawing.Point(374, 131);
+            this.nudPalveluLkm.Location = new System.Drawing.Point(336, 131);
             this.nudPalveluLkm.Name = "nudPalveluLkm";
             this.nudPalveluLkm.Size = new System.Drawing.Size(51, 20);
             this.nudPalveluLkm.TabIndex = 25;
@@ -679,7 +679,7 @@
             // btnLisaaPalveluVaraukseen
             // 
             this.btnLisaaPalveluVaraukseen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLisaaPalveluVaraukseen.Location = new System.Drawing.Point(431, 131);
+            this.btnLisaaPalveluVaraukseen.Location = new System.Drawing.Point(393, 131);
             this.btnLisaaPalveluVaraukseen.Name = "btnLisaaPalveluVaraukseen";
             this.btnLisaaPalveluVaraukseen.Size = new System.Drawing.Size(149, 23);
             this.btnLisaaPalveluVaraukseen.TabIndex = 26;
@@ -712,7 +712,7 @@
             this.lbVarauksenPalvelut.FormattingEnabled = true;
             this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
             this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
-            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(584, 82);
+            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 82);
             this.lbVarauksenPalvelut.TabIndex = 27;
             // 
             // dgvMokitUusiVaraus
@@ -738,7 +738,7 @@
             this.dgvMokitUusiVaraus.Location = new System.Drawing.Point(0, 274);
             this.dgvMokitUusiVaraus.Name = "dgvMokitUusiVaraus";
             this.dgvMokitUusiVaraus.ReadOnly = true;
-            this.dgvMokitUusiVaraus.Size = new System.Drawing.Size(1102, 162);
+            this.dgvMokitUusiVaraus.Size = new System.Drawing.Size(1064, 162);
             this.dgvMokitUusiVaraus.TabIndex = 22;
             this.dgvMokitUusiVaraus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMokitUusiVaraus_CellContentClick);
             // 
@@ -979,7 +979,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1110, 768);
+            this.ClientSize = new System.Drawing.Size(1072, 688);
             this.Controls.Add(this.pnlVaraustiedot);
             this.Controls.Add(this.pnlAsiakastiedot);
             this.MinimumSize = new System.Drawing.Size(1088, 727);
