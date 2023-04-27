@@ -36,6 +36,11 @@
             this.btnLisaa = new System.Windows.Forms.Button();
             this.btnMuokkaa = new System.Windows.Forms.Button();
             this.btnPoista = new System.Windows.Forms.Button();
+            this.dtpLoppu = new System.Windows.Forms.DateTimePicker();
+            this.lblViiva = new System.Windows.Forms.Label();
+            this.dtpAlku = new System.Windows.Forms.DateTimePicker();
+            this.lblPaivat = new System.Windows.Forms.Label();
+            this.btnHae = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwAlue)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,11 +113,67 @@
             this.btnPoista.Text = "Poista";
             this.btnPoista.UseVisualStyleBackColor = true;
             // 
+            // dtpLoppu
+            // 
+            this.dtpLoppu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpLoppu.Location = new System.Drawing.Point(393, 448);
+            this.dtpLoppu.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpLoppu.Name = "dtpLoppu";
+            this.dtpLoppu.Size = new System.Drawing.Size(265, 22);
+            this.dtpLoppu.TabIndex = 10;
+            // 
+            // lblViiva
+            // 
+            this.lblViiva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblViiva.AutoSize = true;
+            this.lblViiva.Location = new System.Drawing.Point(371, 450);
+            this.lblViiva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblViiva.Name = "lblViiva";
+            this.lblViiva.Size = new System.Drawing.Size(11, 16);
+            this.lblViiva.TabIndex = 11;
+            this.lblViiva.Text = "-";
+            // 
+            // dtpAlku
+            // 
+            this.dtpAlku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpAlku.Location = new System.Drawing.Point(97, 448);
+            this.dtpAlku.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpAlku.Name = "dtpAlku";
+            this.dtpAlku.Size = new System.Drawing.Size(265, 22);
+            this.dtpAlku.TabIndex = 8;
+            // 
+            // lblPaivat
+            // 
+            this.lblPaivat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPaivat.AutoSize = true;
+            this.lblPaivat.Location = new System.Drawing.Point(34, 450);
+            this.lblPaivat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPaivat.Name = "lblPaivat";
+            this.lblPaivat.Size = new System.Drawing.Size(51, 16);
+            this.lblPaivat.TabIndex = 9;
+            this.lblPaivat.Text = "Päiviltä";
+            // 
+            // btnHae
+            // 
+            this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnHae.Location = new System.Drawing.Point(705, 442);
+            this.btnHae.Margin = new System.Windows.Forms.Padding(4);
+            this.btnHae.Name = "btnHae";
+            this.btnHae.Size = new System.Drawing.Size(67, 28);
+            this.btnHae.TabIndex = 12;
+            this.btnHae.Text = "Hae";
+            this.btnHae.UseVisualStyleBackColor = true;
+            // 
             // frmAlueet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 536);
+            this.Controls.Add(this.btnHae);
+            this.Controls.Add(this.dtpLoppu);
+            this.Controls.Add(this.lblViiva);
+            this.Controls.Add(this.dtpAlku);
+            this.Controls.Add(this.lblPaivat);
             this.Controls.Add(this.btnPoista);
             this.Controls.Add(this.btnMuokkaa);
             this.Controls.Add(this.btnLisaa);
@@ -139,5 +200,10 @@
         private System.Windows.Forms.Button btnLisaa;
         private System.Windows.Forms.Button btnMuokkaa;
         private System.Windows.Forms.Button btnPoista;
+        private System.Windows.Forms.DateTimePicker dtpLoppu;
+        private System.Windows.Forms.Label lblViiva;
+        private System.Windows.Forms.DateTimePicker dtpAlku;
+        private System.Windows.Forms.Label lblPaivat;
+        private System.Windows.Forms.Button btnHae;
     }
 }
