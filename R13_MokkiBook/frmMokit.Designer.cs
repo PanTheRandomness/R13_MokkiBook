@@ -115,7 +115,7 @@
             // lbHenkilomaara
             // 
             this.lbHenkilomaara.AutoSize = true;
-            this.lbHenkilomaara.Location = new System.Drawing.Point(361, 102);
+            this.lbHenkilomaara.Location = new System.Drawing.Point(361, 137);
             this.lbHenkilomaara.Name = "lbHenkilomaara";
             this.lbHenkilomaara.Size = new System.Drawing.Size(92, 16);
             this.lbHenkilomaara.TabIndex = 7;
@@ -133,7 +133,7 @@
             // lbVarustelu
             // 
             this.lbVarustelu.AutoSize = true;
-            this.lbVarustelu.Location = new System.Drawing.Point(361, 139);
+            this.lbVarustelu.Location = new System.Drawing.Point(361, 174);
             this.lbVarustelu.Name = "lbVarustelu";
             this.lbVarustelu.Size = new System.Drawing.Size(63, 16);
             this.lbVarustelu.TabIndex = 9;
@@ -155,14 +155,14 @@
             // 
             // tbVarustelu
             // 
-            this.tbVarustelu.Location = new System.Drawing.Point(464, 136);
+            this.tbVarustelu.Location = new System.Drawing.Point(464, 171);
             this.tbVarustelu.Name = "tbVarustelu";
             this.tbVarustelu.Size = new System.Drawing.Size(168, 22);
             this.tbVarustelu.TabIndex = 15;
             // 
             // tbHenkilomaara
             // 
-            this.tbHenkilomaara.Location = new System.Drawing.Point(464, 102);
+            this.tbHenkilomaara.Location = new System.Drawing.Point(464, 137);
             this.tbHenkilomaara.Name = "tbHenkilomaara";
             this.tbHenkilomaara.Size = new System.Drawing.Size(168, 22);
             this.tbHenkilomaara.TabIndex = 16;
@@ -170,8 +170,9 @@
             // tbKuvaus
             // 
             this.tbKuvaus.Location = new System.Drawing.Point(464, 64);
+            this.tbKuvaus.Multiline = true;
             this.tbKuvaus.Name = "tbKuvaus";
-            this.tbKuvaus.Size = new System.Drawing.Size(168, 22);
+            this.tbKuvaus.Size = new System.Drawing.Size(168, 54);
             this.tbKuvaus.TabIndex = 17;
             // 
             // tbHinta
