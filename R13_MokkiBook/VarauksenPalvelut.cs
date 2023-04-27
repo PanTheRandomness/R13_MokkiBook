@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace R13_MokkiBook
 {
-    internal class VarauksenPalvelut
+    public class VarauksenPalvelut
     {
+        public int lkm { get; set; }
+        public int varaus_id { get; set; }
+        public int palvelu_id { get; set; }
     }
 }
