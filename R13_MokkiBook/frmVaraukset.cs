@@ -91,7 +91,7 @@ namespace R13_MokkiBook
 
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
         {
-            frmVarauksenPalvelut vp = new frmVarauksenPalvelut();
+            frmVarauksenPalvelut vp = new frmVarauksenPalvelut(valitunvarauksentunnus);
             vp.ShowDialog();
         }
 
