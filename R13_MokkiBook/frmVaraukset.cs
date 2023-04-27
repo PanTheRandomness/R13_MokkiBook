@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace R13_MokkiBook
 {
@@ -16,6 +17,8 @@ namespace R13_MokkiBook
         public int valitturivi = -1;
         public Varaus valittuvaraus = new Varaus();
         public List<Varaus> varaukset;
+        public bool muutettu = false;
+        public string query;
 
         public frmVaraukset()
         {
@@ -95,12 +98,12 @@ namespace R13_MokkiBook
 
         private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            query = "SELECT * FROM ";
         }
 
         private void cbMokki_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            query = "SELECT * FROM varaus WHERE mokki_mokki_id = " + cbMokki.SelectedItem.ToString();
         }
 
         private void cbAsiakas_SelectedIndexChanged(object sender, EventArgs e)
@@ -112,6 +115,7 @@ namespace R13_MokkiBook
         {
             //Esittää dgv:ssä vain 
         }
+
 
         private void btnRaportti_Click(object sender, EventArgs e)
         {
@@ -128,11 +132,12 @@ namespace R13_MokkiBook
         private void tsmiMuokkaa_Click(object sender, EventArgs e)
         {
             //VALIDOI
+            
         }
 
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
         {
-            frmVarauksenPalvelut vp = new frmVarauksenPalvelut(valittuvaraus.varaus_id);
+            frmVarauksenPalvelut vp = new frmVarauksenPalvelut(valittuvaraus);
             vp.ShowDialog();
         }
 
@@ -143,7 +148,23 @@ namespace R13_MokkiBook
 
         private void frmVaraukset_Leave(object sender, EventArgs e)
         {
-            //VALIDOI
+            if (muutettu)
+            {
+                Form menu = new Form();
+                if (DialogResult.Yes == MessageBox.Show("Tallennetaanko muutokset?", "Muutoksia ei ole tallennettu", MessageBoxButtons.YesNo))
+                {
+                    Tallenna();
+                    this.Hide();
+                    menu = Application.OpenForms["frmAlkunaytto"];
+                    menu.Show();
+                }
+                else
+                {
+                    this.Hide();
+                    menu = Application.OpenForms["frmAlkunaytto"];
+                    menu.Show();
+                }
+            }
         }
 
         private void cmsVaraustaulunMenu_Opening(object sender, CancelEventArgs e)
@@ -154,6 +175,32 @@ namespace R13_MokkiBook
         private void tyhjennaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //tyhjentää hakukriteerin sender.jotain
+        }
+
+        public void Tallenna() //Tähän vielä vienti
+        {
+            muutettu = false;
+        }
+
+        private void frmVaraukset_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(muutettu)
+            {
+                Form menu = new Form();
+                if (DialogResult.Yes == MessageBox.Show("Tallennetaanko muutokset?", "Muutoksia ei ole tallennettu", MessageBoxButtons.YesNo))
+                {
+                    Tallenna();
+                    this.Hide();
+                    menu = Application.OpenForms["frmAlkunaytto"];
+                    menu.Show();
+                }
+                else
+                {
+                    this.Hide();
+                    menu = Application.OpenForms["frmAlkunaytto"];
+                    menu.Show();
+                }
+            }
         }
     }
 }

@@ -13,11 +13,13 @@ namespace R13_MokkiBook
     public partial class frmVarauksenPalvelut : Form
     {
         public int valitturivi = -1;
-        public int valittupalvelu = -1;
-        public frmVarauksenPalvelut(int tuotuvaraustunnus)
+        public Varaus kasiteltavavaraus = new Varaus();
+        //public List<Palvelu> varauksenpalvelut = new List<Palvelu>();
+        //public Palvelu valittupalvelu = new Palvelu();
+        public frmVarauksenPalvelut(Varaus tuotuvaraus)
         {
             InitializeComponent();
-            int varaustunnus = tuotuvaraustunnus;
+            kasiteltavavaraus = tuotuvaraus;
         }
 
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
@@ -61,7 +63,7 @@ namespace R13_MokkiBook
 
         private void cbPalvelu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            valittupalvelu = cbPalvelu.SelectedIndex;
+            
         }
     }
 }

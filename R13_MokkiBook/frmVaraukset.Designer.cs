@@ -60,7 +60,6 @@
             this.Asiakas = new System.Windows.Forms.Label();
             this.cbAsiakas = new System.Windows.Forms.ComboBox();
             this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnHae = new System.Windows.Forms.Button();
             this.btnRaportti = new System.Windows.Forms.Button();
             this.btnUusi = new System.Windows.Forms.Button();
             this.epVaraukset = new System.Windows.Forms.ErrorProvider(this.components);
@@ -152,7 +151,6 @@
             this.tsmiPoista});
             this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
             this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 70);
-            this.cmsVaraustaulunMenu.Opening += new System.ComponentModel.CancelEventHandler(this.cmsVaraustaulunMenu_Opening);
             // 
             // tsmiMuokkaa
             // 
@@ -336,21 +334,10 @@
             this.alueBindingSource.DataMember = "alue";
             this.alueBindingSource.DataSource = this.dataSet1;
             // 
-            // btnHae
-            // 
-            this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHae.Location = new System.Drawing.Point(889, 590);
-            this.btnHae.Name = "btnHae";
-            this.btnHae.Size = new System.Drawing.Size(50, 23);
-            this.btnHae.TabIndex = 6;
-            this.btnHae.Text = "Hae";
-            this.btnHae.UseVisualStyleBackColor = true;
-            this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
-            // 
             // btnRaportti
             // 
             this.btnRaportti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRaportti.Location = new System.Drawing.Point(945, 591);
+            this.btnRaportti.Location = new System.Drawing.Point(889, 588);
             this.btnRaportti.Name = "btnRaportti";
             this.btnRaportti.Size = new System.Drawing.Size(64, 23);
             this.btnRaportti.TabIndex = 7;
@@ -394,7 +381,6 @@
             this.ClientSize = new System.Drawing.Size(1274, 620);
             this.Controls.Add(this.btnUusi);
             this.Controls.Add(this.btnRaportti);
-            this.Controls.Add(this.btnHae);
             this.Controls.Add(this.cbAsiakas);
             this.Controls.Add(this.Asiakas);
             this.Controls.Add(this.cbMokki);
@@ -410,6 +396,7 @@
             this.MinimumSize = new System.Drawing.Size(1290, 659);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVaraukset_FormClosing);
             this.Load += new System.EventHandler(this.frmVaraukset_Load);
             this.Leave += new System.EventHandler(this.frmVaraukset_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).EndInit();
@@ -455,7 +442,6 @@
         private System.Windows.Forms.ComboBox cbMokki;
         private System.Windows.Forms.Label Asiakas;
         private System.Windows.Forms.ComboBox cbAsiakas;
-        private System.Windows.Forms.Button btnHae;
         private System.Windows.Forms.Button btnRaportti;
         private System.Windows.Forms.Button btnUusi;
         private System.Windows.Forms.ErrorProvider epVaraukset;
