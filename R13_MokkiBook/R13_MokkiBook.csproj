@@ -62,11 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alue.cs" />
     <Compile Include="AlueenPAlvelutDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AlueenPAlvelutDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Asiakas.cs" />
     <Compile Include="DataSetMokkiBook.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,13 +134,19 @@
     <Compile Include="frmVaraukset.Designer.cs">
       <DependentUpon>frmVaraukset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lasku.cs" />
+    <Compile Include="Mokki.cs" />
+    <Compile Include="Palvelu.cs" />
+    <Compile Include="Posti.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VarauksenPalvelut.cs" />
     <Compile Include="VarauksenPAlvelutDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VarauksenPAlvelutDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Varaus.cs" />
     <EmbeddedResource Include="frmAlkunaytto.resx">
       <DependentUpon>frmAlkunaytto.cs</DependentUpon>
     </EmbeddedResource>
