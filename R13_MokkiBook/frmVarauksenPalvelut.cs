@@ -31,20 +31,6 @@ namespace R13_MokkiBook
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
             tauluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + kasiteltavavaraus.varaus_id.ToString();
-            //JOS COMBOBOX LISÄYKSEEN palveluquery = "SELECT palvelu.nimi FROM palvelu WHERE palvelu.alue_id = (SELECT mokki.alue_id FROM mokki WHERE mokki.mokki_id = (SELECT varaus.mokki_mokki_id FROM varaus WHERE varaus.varaus_id = " + kasiteltavavaraus.mokki_id + "));";
-            /*List<String> palvelunimet = new List<string>();
-            using (OdbcCommand command = new OdbcCommand(palveluquery, connection))
-            {
-                using (OdbcDataReader reader = command.ExecuteReader())
-                {
-                    while(reader.Read())
-                    {
-                        string palvelunnimi = reader.GetString(0);
-                        palvelunimet.Add(palvelunnimi);
-                    }
-                }
-            }
-            cbPalvelu.DataSource = palvelunimet;*/
 
             OdbcConnection connection = new OdbcConnection(connectionString);
             connection.Open();
@@ -60,12 +46,11 @@ namespace R13_MokkiBook
         public List<VarauksenPalvelut> GetVarauksenPalvelut()
         {
             List<VarauksenPalvelut> vP = new List<VarauksenPalvelut>();
-            string query = "SELECT * FROM varauksen_palvelut";
 
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
                 connection.Open();
-                using (OdbcCommand command = new OdbcCommand(query, connection))
+                using (OdbcCommand command = new OdbcCommand(tauluquery, connection))
                 {
                     using (OdbcDataReader reader = command.ExecuteReader())
                     {
@@ -96,12 +81,6 @@ namespace R13_MokkiBook
             vp.lkm = varauksenpalvelut[valitturivi].lkm;
             return vp;
         }
-
-        /*private void btnLisaa_Click(object sender, EventArgs e)
-        {
-            frmUusiPalvelu up = new frmUusiPalvelu();
-            up.ShowDialog();
-        }*/
 
         private void btnPoista_Click(object sender, EventArgs e)
         {

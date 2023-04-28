@@ -83,6 +83,10 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
+            if(nudMaara.Value == 0)
+            {
+                //MessageBox ei lisätä- oletko varma?
+            }
             //Palaa edelliseen (VarauksenPalvelut)
         }
     }
