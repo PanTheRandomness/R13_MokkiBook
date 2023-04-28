@@ -15,7 +15,9 @@ namespace R13_MokkiBook
     {
         public Varaus kasiteltavavaraus;
         public Palvelu valittupalvelu;
+        public VarauksenPalvelut palautettava;
         public int valitturivi = -1;
+        public int palvelumaara;
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string query;
         public List<Palvelu> palvelut;
@@ -78,16 +80,25 @@ namespace R13_MokkiBook
 
         private void nudMaara_ValueChanged(object sender, EventArgs e)
         {
-            //EI VOI OLLA 0!!
+            palvelumaara = (int)nudMaara.Value;
         }
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            if(nudMaara.Value == 0)
+            if(nudMaara.Value == 0 || palvelumaara == 0)
             {
                 //MessageBox ei lisätä- oletko varma?
             }
-            //Palaa edelliseen (VarauksenPalvelut)
+            else
+            {
+                palautettava = new VarauksenPalvelut();
+                palautettava.varaus_id = kasiteltavavaraus.varaus_id;
+                palautettava.palvelu_id = valittupalvelu.palvelu_id;
+                palautettava.lkm = palvelumaara;
+                //Lisää palautettava-homman tietokantaan instancena
+            }
+
+            //POISTUU TÄSTÄ FORMISTA
         }
     }
 }

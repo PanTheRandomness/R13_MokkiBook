@@ -50,7 +50,7 @@ namespace R13_MokkiBook
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
                 connection.Open();
-                using (OdbcCommand command = new OdbcCommand(tauluquery, connection))
+                using (OdbcCommand command = new OdbcCommand("SELECT * FROM varauksen_palvelut", connection))
                 {
                     using (OdbcDataReader reader = command.ExecuteReader())
                     {

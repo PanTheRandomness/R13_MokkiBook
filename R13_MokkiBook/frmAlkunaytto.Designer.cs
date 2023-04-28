@@ -40,12 +40,14 @@
             this.pnlVaraukset = new System.Windows.Forms.Panel();
             this.pnlPalvelut = new System.Windows.Forms.Panel();
             this.pnlLaskut = new System.Windows.Forms.Panel();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlAsiakkaat.SuspendLayout();
             this.prnAlueet.SuspendLayout();
             this.pnlMokit.SuspendLayout();
             this.pnlVaraukset.SuspendLayout();
             this.pnlPalvelut.SuspendLayout();
             this.pnlLaskut.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnVaraukset
@@ -162,11 +164,20 @@
             this.pnlLaskut.Size = new System.Drawing.Size(183, 70);
             this.pnlLaskut.TabIndex = 5;
             // 
+            // pbLogo
+            // 
+            this.pbLogo.Location = new System.Drawing.Point(424, 244);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(181, 92);
+            this.pbLogo.TabIndex = 6;
+            this.pbLogo.TabStop = false;
+            // 
             // frmAlkunaytto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 375);
+            this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.pnlLaskut);
             this.Controls.Add(this.pnlPalvelut);
             this.Controls.Add(this.pnlVaraukset);
@@ -187,6 +198,7 @@
             this.pnlVaraukset.ResumeLayout(false);
             this.pnlPalvelut.ResumeLayout(false);
             this.pnlLaskut.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -205,6 +217,7 @@
         private System.Windows.Forms.Panel pnlVaraukset;
         private System.Windows.Forms.Panel pnlPalvelut;
         private System.Windows.Forms.Panel pnlLaskut;
+        private System.Windows.Forms.PictureBox pbLogo;
     }
 }
 

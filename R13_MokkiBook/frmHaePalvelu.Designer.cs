@@ -52,12 +52,12 @@
             this.tbKuvaus.Location = new System.Drawing.Point(0, 153);
             this.tbKuvaus.Multiline = true;
             this.tbKuvaus.Name = "tbKuvaus";
-            this.tbKuvaus.Size = new System.Drawing.Size(175, 88);
+            this.tbKuvaus.Size = new System.Drawing.Size(348, 88);
             this.tbKuvaus.TabIndex = 1;
             // 
             // btnLisaa
             // 
-            this.btnLisaa.Location = new System.Drawing.Point(336, 189);
+            this.btnLisaa.Location = new System.Drawing.Point(423, 189);
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(105, 23);
             this.btnLisaa.TabIndex = 2;
@@ -67,9 +67,9 @@
             // 
             // nudMaara
             // 
-            this.nudMaara.Location = new System.Drawing.Point(225, 192);
+            this.nudMaara.Location = new System.Drawing.Point(354, 192);
             this.nudMaara.Name = "nudMaara";
-            this.nudMaara.Size = new System.Drawing.Size(105, 20);
+            this.nudMaara.Size = new System.Drawing.Size(63, 20);
             this.nudMaara.TabIndex = 3;
             this.nudMaara.ValueChanged += new System.EventHandler(this.nudMaara_ValueChanged);
             // 
