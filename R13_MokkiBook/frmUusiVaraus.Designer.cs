@@ -990,6 +990,7 @@
             // 
             // tbPuhno
             // 
+            this.tbPuhno.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tbPuhno.Location = new System.Drawing.Point(93, 109);
             this.tbPuhno.Name = "tbPuhno";
             this.tbPuhno.Size = new System.Drawing.Size(150, 20);
@@ -997,6 +998,7 @@
             // 
             // tbSahkoposti
             // 
+            this.tbSahkoposti.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tbSahkoposti.Location = new System.Drawing.Point(93, 145);
             this.tbSahkoposti.Name = "tbSahkoposti";
             this.tbSahkoposti.Size = new System.Drawing.Size(150, 20);

@@ -131,6 +131,7 @@ namespace R13_MokkiBook
         private void tsmiMuokkaa_Click(object sender, EventArgs e)
         {
             //VALIDOI
+            //VIE MUOKKAUSSIVULLE?
             
         }
 
