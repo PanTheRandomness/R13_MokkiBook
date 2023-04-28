@@ -31,9 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.pnlAsiakastiedot = new System.Windows.Forms.Panel();
             this.btnLisaa = new System.Windows.Forms.Button();
-            this.mtbSp = new System.Windows.Forms.MaskedTextBox();
             this.lblSp = new System.Windows.Forms.Label();
-            this.mtbPuhno = new System.Windows.Forms.MaskedTextBox();
             this.lblPuhno = new System.Windows.Forms.Label();
             this.tbLahiosoiteAsiakas = new System.Windows.Forms.TextBox();
             this.lblLahiosoiteAsiakas = new System.Windows.Forms.Label();
@@ -121,6 +119,11 @@
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
             this.palveluTableAdapter = new R13_MokkiBook.AlueenPAlvelutDataSetTableAdapters.palveluTableAdapter();
+            this.btnPoistaPalvelu = new System.Windows.Forms.Button();
+            this.cmsTyhjennavalinta = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiTyhjenna = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbPuhno = new System.Windows.Forms.TextBox();
+            this.tbSahkoposti = new System.Windows.Forms.TextBox();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
@@ -138,6 +141,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
+            this.cmsTyhjennavalinta.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlAsiakastiedot
@@ -145,10 +149,10 @@
             this.pnlAsiakastiedot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAsiakastiedot.Controls.Add(this.tbSahkoposti);
+            this.pnlAsiakastiedot.Controls.Add(this.tbPuhno);
             this.pnlAsiakastiedot.Controls.Add(this.btnLisaa);
-            this.pnlAsiakastiedot.Controls.Add(this.mtbSp);
             this.pnlAsiakastiedot.Controls.Add(this.lblSp);
-            this.pnlAsiakastiedot.Controls.Add(this.mtbPuhno);
             this.pnlAsiakastiedot.Controls.Add(this.lblPuhno);
             this.pnlAsiakastiedot.Controls.Add(this.tbLahiosoiteAsiakas);
             this.pnlAsiakastiedot.Controls.Add(this.lblLahiosoiteAsiakas);
@@ -176,16 +180,6 @@
             this.btnLisaa.Text = "Lisää asiakas";
             this.btnLisaa.UseVisualStyleBackColor = true;
             // 
-            // mtbSp
-            // 
-            this.mtbSp.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mtbSp.Location = new System.Drawing.Point(93, 145);
-            this.mtbSp.Mask = "________@________.__";
-            this.mtbSp.Name = "mtbSp";
-            this.mtbSp.Size = new System.Drawing.Size(150, 20);
-            this.mtbSp.TabIndex = 5;
-            this.mtbSp.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbSp_MaskInputRejected);
-            // 
             // lblSp
             // 
             this.lblSp.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -195,16 +189,6 @@
             this.lblSp.Size = new System.Drawing.Size(60, 13);
             this.lblSp.TabIndex = 5;
             this.lblSp.Text = "Sähköposti";
-            // 
-            // mtbPuhno
-            // 
-            this.mtbPuhno.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mtbPuhno.Location = new System.Drawing.Point(93, 109);
-            this.mtbPuhno.Mask = "(999) 000-0000";
-            this.mtbPuhno.Name = "mtbPuhno";
-            this.mtbPuhno.Size = new System.Drawing.Size(150, 20);
-            this.mtbPuhno.TabIndex = 4;
-            this.mtbPuhno.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbPuhno_MaskInputRejected);
             // 
             // lblPuhno
             // 
@@ -472,7 +456,7 @@
             this.lblLoppuhinta.Location = new System.Drawing.Point(732, 250);
             this.lblLoppuhinta.Name = "lblLoppuhinta";
             this.lblLoppuhinta.Size = new System.Drawing.Size(75, 13);
-            this.lblLoppuhinta.TabIndex = 28;
+            this.lblLoppuhinta.TabIndex = 29;
             this.lblLoppuhinta.Text = "Loppuhinta (€)";
             // 
             // tbLoppuhinta
@@ -556,6 +540,7 @@
             this.pnlPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPalvelut.Controls.Add(this.btnPoistaPalvelu);
             this.pnlPalvelut.Controls.Add(this.dgvAlueenPalvelut);
             this.pnlPalvelut.Controls.Add(this.lblPalvelujenMaara);
             this.pnlPalvelut.Controls.Add(this.nudPalveluLkm);
@@ -665,7 +650,7 @@
             this.lblPalvelujenMaara.Location = new System.Drawing.Point(293, 136);
             this.lblPalvelujenMaara.Name = "lblPalvelujenMaara";
             this.lblPalvelujenMaara.Size = new System.Drawing.Size(37, 13);
-            this.lblPalvelujenMaara.TabIndex = 25;
+            this.lblPalvelujenMaara.TabIndex = 26;
             this.lblPalvelujenMaara.Text = "Määrä";
             // 
             // nudPalveluLkm
@@ -674,7 +659,7 @@
             this.nudPalveluLkm.Location = new System.Drawing.Point(336, 131);
             this.nudPalveluLkm.Name = "nudPalveluLkm";
             this.nudPalveluLkm.Size = new System.Drawing.Size(51, 20);
-            this.nudPalveluLkm.TabIndex = 25;
+            this.nudPalveluLkm.TabIndex = 26;
             // 
             // btnLisaaPalveluVaraukseen
             // 
@@ -682,9 +667,10 @@
             this.btnLisaaPalveluVaraukseen.Location = new System.Drawing.Point(393, 131);
             this.btnLisaaPalveluVaraukseen.Name = "btnLisaaPalveluVaraukseen";
             this.btnLisaaPalveluVaraukseen.Size = new System.Drawing.Size(149, 23);
-            this.btnLisaaPalveluVaraukseen.TabIndex = 26;
+            this.btnLisaaPalveluVaraukseen.TabIndex = 27;
             this.btnLisaaPalveluVaraukseen.Text = "Lisää palvelu varaukseen";
             this.btnLisaaPalveluVaraukseen.UseVisualStyleBackColor = true;
+            this.btnLisaaPalveluVaraukseen.Click += new System.EventHandler(this.btnLisaaPalveluVaraukseen_Click);
             // 
             // lblAlueenPalvelut
             // 
@@ -713,7 +699,7 @@
             this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
             this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
             this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 82);
-            this.lbVarauksenPalvelut.TabIndex = 27;
+            this.lbVarauksenPalvelut.TabIndex = 28;
             // 
             // dgvMokitUusiVaraus
             // 
@@ -887,6 +873,7 @@
             // lbPostitoimipaikka
             // 
             this.lbPostitoimipaikka.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbPostitoimipaikka.ContextMenuStrip = this.cmsTyhjennavalinta;
             this.lbPostitoimipaikka.DataSource = this.postiBindingSource;
             this.lbPostitoimipaikka.DisplayMember = "toimipaikka";
             this.lbPostitoimipaikka.FormattingEnabled = true;
@@ -921,6 +908,7 @@
             // lbAlue
             // 
             this.lbAlue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbAlue.ContextMenuStrip = this.cmsTyhjennavalinta;
             this.lbAlue.DataSource = this.alueBindingSource;
             this.lbAlue.DisplayMember = "nimi";
             this.lbAlue.FormattingEnabled = true;
@@ -975,6 +963,47 @@
             // 
             this.palveluTableAdapter.ClearBeforeFill = true;
             // 
+            // btnPoistaPalvelu
+            // 
+            this.btnPoistaPalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPoistaPalvelu.Location = new System.Drawing.Point(202, 131);
+            this.btnPoistaPalvelu.Name = "btnPoistaPalvelu";
+            this.btnPoistaPalvelu.Size = new System.Drawing.Size(92, 23);
+            this.btnPoistaPalvelu.TabIndex = 25;
+            this.btnPoistaPalvelu.Text = "Poista palvelu";
+            this.btnPoistaPalvelu.UseVisualStyleBackColor = true;
+            this.btnPoistaPalvelu.Click += new System.EventHandler(this.btnPoistaPalvelu_Click);
+            // 
+            // cmsTyhjennavalinta
+            // 
+            this.cmsTyhjennavalinta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTyhjenna});
+            this.cmsTyhjennavalinta.Name = "cmsTyhjennavalinta";
+            this.cmsTyhjennavalinta.Size = new System.Drawing.Size(122, 26);
+            // 
+            // tsmiTyhjenna
+            // 
+            this.tsmiTyhjenna.Name = "tsmiTyhjenna";
+            this.tsmiTyhjenna.Size = new System.Drawing.Size(121, 22);
+            this.tsmiTyhjenna.Text = "Tyhjennä";
+            this.tsmiTyhjenna.Click += new System.EventHandler(this.tsmiTyhjenna_Click);
+            // 
+            // tbPuhno
+            // 
+            this.tbPuhno.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tbPuhno.Location = new System.Drawing.Point(93, 109);
+            this.tbPuhno.Name = "tbPuhno";
+            this.tbPuhno.Size = new System.Drawing.Size(150, 20);
+            this.tbPuhno.TabIndex = 4;
+            // 
+            // tbSahkoposti
+            // 
+            this.tbSahkoposti.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tbSahkoposti.Location = new System.Drawing.Point(93, 145);
+            this.tbSahkoposti.Name = "tbSahkoposti";
+            this.tbSahkoposti.Size = new System.Drawing.Size(150, 20);
+            this.tbSahkoposti.TabIndex = 5;
+            // 
             // frmUusiVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -985,6 +1014,7 @@
             this.MinimumSize = new System.Drawing.Size(1088, 727);
             this.Name = "frmUusiVaraus";
             this.Text = "Uusi varaus";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUusiVaraus_FormClosing);
             this.Load += new System.EventHandler(this.frmUusiVaraus_Load);
             this.pnlAsiakastiedot.ResumeLayout(false);
             this.pnlAsiakastiedot.PerformLayout();
@@ -1006,6 +1036,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
+            this.cmsTyhjennavalinta.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1036,9 +1067,7 @@
         private System.Windows.Forms.TextBox tbLahiosoiteAsiakas;
         private System.Windows.Forms.Label lblLahiosoiteAsiakas;
         private System.Windows.Forms.TextBox tbPostinoAsiakas;
-        private System.Windows.Forms.MaskedTextBox mtbSp;
         private System.Windows.Forms.Label lblSp;
-        private System.Windows.Forms.MaskedTextBox mtbPuhno;
         private System.Windows.Forms.Label lblPuhno;
         private System.Windows.Forms.Button btnLisaa;
         private System.Windows.Forms.Label lbAlueid;
@@ -1104,5 +1133,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn kuvausDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn hintaDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn alvDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btnPoistaPalvelu;
+        private System.Windows.Forms.ContextMenuStrip cmsTyhjennavalinta;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTyhjenna;
+        private System.Windows.Forms.TextBox tbSahkoposti;
+        private System.Windows.Forms.TextBox tbPuhno;
     }
 }

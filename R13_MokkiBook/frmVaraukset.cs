@@ -18,7 +18,6 @@ namespace R13_MokkiBook
         public Varaus valittuvaraus = new Varaus();
         public List<Varaus> varaukset;
         public bool muutettu = false;
-        //public string query;
         public string connectionString = "Dsn=Village Newbies;uid=root";
 
         public frmVaraukset()
@@ -132,6 +131,7 @@ namespace R13_MokkiBook
         private void tsmiMuokkaa_Click(object sender, EventArgs e)
         {
             //VALIDOI
+            //VIE MUOKKAUSSIVULLE?
             
         }
 
