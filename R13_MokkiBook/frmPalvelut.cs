@@ -81,5 +81,10 @@ namespace R13_MokkiBook
             frmUusiPalvelu up = new frmUusiPalvelu();
             up.ShowDialog();
         }
+
+        private void tsTallenna_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

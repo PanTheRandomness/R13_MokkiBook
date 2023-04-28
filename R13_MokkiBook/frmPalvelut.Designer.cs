@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPalvelut));
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +49,7 @@
             this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
             this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.tsTallenna = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -154,16 +156,18 @@
             // 
             this.fillByToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsTallenna,
             this.TsBtnLisaa});
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 484);
             this.fillByToolStrip.Name = "fillByToolStrip";
-            this.fillByToolStrip.Size = new System.Drawing.Size(758, 25);
+            this.fillByToolStrip.Size = new System.Drawing.Size(764, 25);
             this.fillByToolStrip.TabIndex = 9;
             this.fillByToolStrip.Text = "fillByToolStrip";
             // 
             // TsBtnLisaa
             // 
             this.TsBtnLisaa.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.TsBtnLisaa.BackColor = System.Drawing.SystemColors.ControlLight;
             this.TsBtnLisaa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.TsBtnLisaa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsBtnLisaa.Name = "TsBtnLisaa";
@@ -196,11 +200,23 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Tässä voit muokata ja poistaa palveluita";
             // 
+            // tsTallenna
+            // 
+            this.tsTallenna.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsTallenna.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tsTallenna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsTallenna.Image = ((System.Drawing.Image)(resources.GetObject("tsTallenna.Image")));
+            this.tsTallenna.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsTallenna.Name = "tsTallenna";
+            this.tsTallenna.Size = new System.Drawing.Size(54, 22);
+            this.tsTallenna.Text = "Tallenna";
+            this.tsTallenna.Click += new System.EventHandler(this.tsTallenna_Click);
+            // 
             // frmPalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 509);
+            this.ClientSize = new System.Drawing.Size(764, 509);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.dataGridView1);
@@ -243,5 +259,6 @@
         private VarauksenPAlvelutDataSet varauksenPAlvelutDataSet;
         private System.Windows.Forms.BindingSource varauksenPAlvelutDataSetBindingSource;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripButton tsTallenna;
     }
 }

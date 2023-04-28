@@ -27,7 +27,33 @@ namespace R13_MokkiBook
 
         public void saveButton_Click(object sender, EventArgs e)
         {
-     
+            string connectionString = "Dsn=Village Newbies;uid=root";
+
+            using (OdbcConnection con = new OdbcConnection(connectionString))
+            {
+                con.Open();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow && row.Cells["palvelu_id"].Value != null)
+                    {
+                        int palvelu_id = (int)row.Cells["palvelu_id"].Value;
+                        string query = "UPDATE palvelu SET nimi=@nimi, tyyppi=@tyyppi, kuvaus=@kuvaus, hinta=@hinta, alv=@alv WHERE palvelu_id=@palvelu_id";
+
+                        using (OdbcCommand cmd = new OdbcCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@nimi", row.Cells["nimi"].Value);
+                            cmd.Parameters.AddWithValue("@tyyppi", row.Cells["tyyppi"].Value);
+                            cmd.Parameters.AddWithValue("@kuvaus", row.Cells["kuvaus"].Value);
+                            cmd.Parameters.AddWithValue("@hinta", row.Cells["hinta"].Value);
+                            cmd.Parameters.AddWithValue("@alv", row.Cells["alv"].Value);
+                            cmd.Parameters.AddWithValue("@palvelu_id", palvelu_id);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                con.Close();
+            }
+            MessageBox.Show("All rows updated");
         }
 
         private void frmUusiPalvelu_Load(object sender, EventArgs e)
