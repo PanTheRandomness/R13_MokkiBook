@@ -56,16 +56,16 @@ namespace R13_MokkiBook
             }
             return var;
         }
-        public Varaus GetValittuVaraus(int rivi)
+        public Varaus GetValittuVaraus()
         {
             Varaus v = new Varaus();
-            v.varaus_id = varaukset[rivi].varaus_id;
-            v.asiakas_id = varaukset[rivi].asiakas_id;
-            v.mokki_id = varaukset[rivi].mokki_id;
-            v.varattu_pvm = varaukset[rivi].varattu_pvm;
-            v.vahvistus_pvm = varaukset[rivi].vahvistus_pvm;
-            v.varattu_alkupvm = varaukset[rivi].varattu_alkupvm;
-            v.varattu_loppupvm = varaukset[rivi].varattu_loppupvm;
+            v.varaus_id = varaukset[valitturivi].varaus_id;
+            v.asiakas_id = varaukset[valitturivi].asiakas_id;
+            v.mokki_id = varaukset[valitturivi].mokki_id;
+            v.varattu_pvm = varaukset[valitturivi].varattu_pvm;
+            v.vahvistus_pvm = varaukset[valitturivi].vahvistus_pvm;
+            v.varattu_alkupvm = varaukset[valitturivi].varattu_alkupvm;
+            v.varattu_loppupvm = varaukset[valitturivi].varattu_loppupvm;
             return v;
         }
 
@@ -83,7 +83,7 @@ namespace R13_MokkiBook
         private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
         {
             valitturivi = dgvVaraukset.CurrentRow.Index;
-            valittuvaraus = GetValittuVaraus(valitturivi);
+            valittuvaraus = GetValittuVaraus();
         }
 
         private void dtpAlku_ValueChanged(object sender, EventArgs e)

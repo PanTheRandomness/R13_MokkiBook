@@ -30,19 +30,8 @@ namespace R13_MokkiBook
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
             tauluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + kasiteltavavaraus.varaus_id.ToString();
-            palveluquery = "SELECT palvelu.nimi FROM palvelu WHERE palvelu.alue_id = (SELECT mokki.alue_id FROM mokki WHERE mokki.mokki_id = (SELECT varaus.mokki_mokki_id FROM varaus WHERE varaus.varaus_id = " + kasiteltavavaraus.mokki_id + "));";
-            OdbcConnection connection = new OdbcConnection(connectionString);
-            connection.Open();
-            //datagridviewin yhdistäminen tiettyyn kyselyyn
-            DataTable dataTable = new DataTable();
-            using (OdbcDataAdapter adapter = new OdbcDataAdapter(tauluquery, connection))
-            {
-                adapter.FillSchema(dataTable, SchemaType.Source);
-                adapter.Fill(dataTable);
-            }
-            dgvVarauksenPalvelut.DataSource = dataTable;
-            //comboboxin yhdistäminen tiettyyn kyselyyn
-            List<String> palvelunimet = new List<string>();
+            //JOS COMBOBOX LISÄYKSEEN palveluquery = "SELECT palvelu.nimi FROM palvelu WHERE palvelu.alue_id = (SELECT mokki.alue_id FROM mokki WHERE mokki.mokki_id = (SELECT varaus.mokki_mokki_id FROM varaus WHERE varaus.varaus_id = " + kasiteltavavaraus.mokki_id + "));";
+            /*List<String> palvelunimet = new List<string>();
             using (OdbcCommand command = new OdbcCommand(palveluquery, connection))
             {
                 using (OdbcDataReader reader = command.ExecuteReader())
@@ -54,7 +43,19 @@ namespace R13_MokkiBook
                     }
                 }
             }
-            cbPalvelu.DataSource = palvelunimet;
+            cbPalvelu.DataSource = palvelunimet;*/
+
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            //datagridviewin yhdistäminen tiettyyn kyselyyn
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(tauluquery, connection))
+            {
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
+            }
+            dgvVarauksenPalvelut.DataSource = dataTable;
+            
         }
 
         private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
@@ -62,11 +63,11 @@ namespace R13_MokkiBook
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
         }
 
-        private void btnLisaa_Click(object sender, EventArgs e)
+        /*private void btnLisaa_Click(object sender, EventArgs e)
         {
             frmUusiPalvelu up = new frmUusiPalvelu();
             up.ShowDialog();
-        }
+        }*/
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
@@ -77,14 +78,9 @@ namespace R13_MokkiBook
             //VALIDOI
         }
 
-        private void btnLisaaValittu_Click(object sender, EventArgs e)
+        private void btnHaePalvelu_Click(object sender, EventArgs e)
         {
-            //Lisää varaukseen
-        }
 
-        private void cbPalvelu_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }
