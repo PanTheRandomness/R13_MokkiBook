@@ -18,7 +18,8 @@ namespace R13_MokkiBook
         public Varaus valittuvaraus = new Varaus();
         public List<Varaus> varaukset;
         public bool muutettu = false;
-        public string query;
+        //public string query;
+        public string connectionString = "Dsn=Village Newbies;uid=root";
 
         public frmVaraukset()
         {
@@ -28,7 +29,6 @@ namespace R13_MokkiBook
         public List<Varaus> GetVaraukset()
         {
             List<Varaus> var = new List<Varaus>();
-            string connectionString = "Dsn=Village Newbies;uid=root";
             string query = "SELECT * FROM varaus";
 
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -98,12 +98,12 @@ namespace R13_MokkiBook
 
         private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM ";
+            //query = "SELECT * FROM ";
         }
 
         private void cbMokki_SelectedIndexChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM varaus WHERE mokki_mokki_id = " + cbMokki.SelectedItem.ToString();
+            //query = "SELECT * FROM varaus WHERE mokki_mokki_id = " + cbMokki.SelectedItem.ToString();
         }
 
         private void cbAsiakas_SelectedIndexChanged(object sender, EventArgs e)
