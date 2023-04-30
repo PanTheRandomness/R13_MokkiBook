@@ -8,5 +8,7 @@ namespace R13_MokkiBook
 {
     internal class Alue
     {
+        public int alue_id { get; set; }
+        public string nimi { get; set; }
     }
 }
