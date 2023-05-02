@@ -135,7 +135,6 @@ namespace R13_MokkiBook
 
             //frmUusiVaraus muokkaus = new frmUusiVaraus();
             //muokkaus.ShowDialog();
-            
         }
 
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)

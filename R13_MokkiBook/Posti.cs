@@ -8,5 +8,7 @@ namespace R13_MokkiBook
 {
     public class Posti
     {
+        public string postinro { get; set; }
+        public string toimipaikka { get; set; }
     }
 }

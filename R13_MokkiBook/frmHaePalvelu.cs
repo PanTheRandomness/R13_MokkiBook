@@ -71,7 +71,7 @@ namespace R13_MokkiBook
                             p.palvelu_id = reader.GetInt32(0);
                             p.alue_id = reader.GetInt32(1);
                             p.nimi = reader.GetString(2);
-                            p.tyyppi = reader.GetString(3);
+                            p.tyyppi = reader.GetInt32(3);
                             p.kuvaus = reader.GetString(4);
                             p.hinta = reader.GetDouble(5);
                             p.alv = reader.GetDouble(6);
