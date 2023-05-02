@@ -247,6 +247,7 @@ namespace R13_MokkiBook
                         {
                             Posti p = new Posti();
                             p.postinro = reader.GetString(0);
+                            p.toimipaikka = reader.GetString(1);
                             po.Add(p);
                         }
                     }
