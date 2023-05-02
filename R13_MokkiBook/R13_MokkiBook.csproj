@@ -110,12 +110,6 @@
     <Compile Include="frmMokit.Designer.cs">
       <DependentUpon>frmMokit.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMuokkaaVarausta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMuokkaaVarausta.Designer.cs">
-      <DependentUpon>frmMuokkaaVarausta.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPalvelut.cs">
       <SubType>Form</SubType>
     </Compile>
