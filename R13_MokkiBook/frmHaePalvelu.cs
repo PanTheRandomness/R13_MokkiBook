@@ -114,6 +114,7 @@ namespace R13_MokkiBook
                 //Lisää palautettava-homman tietokantaan instancena
                 using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
+                    //JOS ON JO PALVELU-->>> Lisää
                     connection.Open();
                     string lisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + lisattava.varaus_id + ", " + lisattava.palvelu_id +", " + lisattava.lkm + ")";
                     using (OdbcCommand cmd= new OdbcCommand(lisaysquery, connection))
@@ -122,6 +123,8 @@ namespace R13_MokkiBook
                     }
 
                     this.Close();
+                    frmVarauksenPalvelut vp = new frmVarauksenPalvelut(kasiteltavavaraus);
+                    vp.ShowDialog();
                 }
             }
         }
