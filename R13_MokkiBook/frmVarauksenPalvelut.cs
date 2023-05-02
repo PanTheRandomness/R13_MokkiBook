@@ -99,6 +99,7 @@ namespace R13_MokkiBook
         {
             frmHaePalvelu hp = new frmHaePalvelu(kasiteltavavaraus);
             hp.ShowDialog();
+            this.Close();
         }
         public void LisaaPalveluVaraukseen()
         {
