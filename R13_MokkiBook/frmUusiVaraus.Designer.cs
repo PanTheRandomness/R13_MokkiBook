@@ -83,7 +83,6 @@ namespace R13_MokkiBook
             this.hintaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.alueenPAlvelutDataSet = new R13_MokkiBook.AlueenPAlvelutDataSet();
             this.lblPalvelujenMaara = new System.Windows.Forms.Label();
             this.nudPalveluLkm = new System.Windows.Forms.NumericUpDown();
             this.btnLisaaPalveluVaraukseen = new System.Windows.Forms.Button();
@@ -125,7 +124,6 @@ namespace R13_MokkiBook
             this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
-            this.palveluTableAdapter = new R13_MokkiBook.AlueenPAlvelutDataSetTableAdapters.palveluTableAdapter();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
@@ -135,7 +133,6 @@ namespace R13_MokkiBook
             this.pnlPalvelut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlueenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.alueenPAlvelutDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPalveluLkm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
@@ -662,16 +659,6 @@ namespace R13_MokkiBook
             this.alvDataGridViewTextBoxColumn.ReadOnly = true;
             this.alvDataGridViewTextBoxColumn.ToolTipText = "Palvelun arvolisävero";
             // 
-            // palveluBindingSource
-            // 
-            this.palveluBindingSource.DataMember = "palvelu";
-            this.palveluBindingSource.DataSource = this.alueenPAlvelutDataSet;
-            // 
-            // alueenPAlvelutDataSet
-            // 
-            this.alueenPAlvelutDataSet.DataSetName = "AlueenPAlvelutDataSet";
-            this.alueenPAlvelutDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // lblPalvelujenMaara
             // 
             this.lblPalvelujenMaara.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1002,10 +989,6 @@ namespace R13_MokkiBook
             // 
             this.varausTableAdapter.ClearBeforeFill = true;
             // 
-            // palveluTableAdapter
-            // 
-            this.palveluTableAdapter.ClearBeforeFill = true;
-            // 
             // frmUusiVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1030,7 +1013,6 @@ namespace R13_MokkiBook
             this.pnlPalvelut.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlueenPalvelut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.alueenPAlvelutDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPalveluLkm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).EndInit();
@@ -1116,9 +1098,7 @@ namespace R13_MokkiBook
         private System.Windows.Forms.Button btnLuoVaraus;
         private System.Windows.Forms.BindingSource varausBindingSource;
         private DataSet1TableAdapters.varausTableAdapter varausTableAdapter;
-        private AlueenPAlvelutDataSet alueenPAlvelutDataSet;
         private System.Windows.Forms.BindingSource palveluBindingSource;
-        private AlueenPAlvelutDataSetTableAdapters.palveluTableAdapter palveluTableAdapter;
         private System.Windows.Forms.Panel pnlPalvelut;
         private System.Windows.Forms.DataGridView dgvAlueenPalvelut;
         private System.Windows.Forms.Label lblPalvelujenMaara;
@@ -1142,28 +1122,4 @@ namespace R13_MokkiBook
         private System.Windows.Forms.TextBox tbPuhno;
     }
 
-    class AlueenPAlvelutDataSet
-    {
-        internal string DataSetName;
-        internal SchemaSerializationMode SchemaSerializationMode;
-    }
-
-    class AlueenPAlvelutDataSetTableAdapters
-    {
-        internal class palveluTableAdapter
-        {
-            internal bool ClearBeforeFill;
-
-            public palveluTableAdapter()
-            {
-            }
-        }
-    }
-}
-
-namespace AlueenPAlvelutDataSetTableAdapters
-{
-    class palveluTableAdapter
-    {
-    }
 }

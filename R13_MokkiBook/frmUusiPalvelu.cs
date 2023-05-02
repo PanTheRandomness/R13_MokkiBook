@@ -162,5 +162,20 @@ namespace R13_MokkiBook
         {
 
         }
+
+        private void lbNimi_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbAlv_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

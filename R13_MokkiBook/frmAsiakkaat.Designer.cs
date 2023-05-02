@@ -37,7 +37,7 @@
             this.lb = new System.Windows.Forms.Label();
             this.lbPuhelinnumero = new System.Windows.Forms.Label();
             this.tbAsiakasid = new System.Windows.Forms.TextBox();
-            this.tbPuhNro = new System.Windows.Forms.TextBox();
+            this.tbPuhelinnro = new System.Windows.Forms.TextBox();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.tbLahiosoite = new System.Windows.Forms.TextBox();
             this.tbSukunimi = new System.Windows.Forms.TextBox();
@@ -137,12 +137,12 @@
             this.tbAsiakasid.Size = new System.Drawing.Size(159, 22);
             this.tbAsiakasid.TabIndex = 7;
             // 
-            // tbPuhNro
+            // tbPuhelinnro
             // 
-            this.tbPuhNro.Location = new System.Drawing.Point(516, 114);
-            this.tbPuhNro.Name = "tbPuhNro";
-            this.tbPuhNro.Size = new System.Drawing.Size(159, 22);
-            this.tbPuhNro.TabIndex = 8;
+            this.tbPuhelinnro.Location = new System.Drawing.Point(516, 114);
+            this.tbPuhelinnro.Name = "tbPuhelinnro";
+            this.tbPuhelinnro.Size = new System.Drawing.Size(159, 22);
+            this.tbPuhelinnro.TabIndex = 8;
             // 
             // tbEmail
             // 
@@ -366,7 +366,7 @@
             this.Controls.Add(this.tbSukunimi);
             this.Controls.Add(this.tbLahiosoite);
             this.Controls.Add(this.tbEmail);
-            this.Controls.Add(this.tbPuhNro);
+            this.Controls.Add(this.tbPuhelinnro);
             this.Controls.Add(this.tbAsiakasid);
             this.Controls.Add(this.lbPuhelinnumero);
             this.Controls.Add(this.lb);
@@ -396,7 +396,7 @@
         private System.Windows.Forms.Label lb;
         private System.Windows.Forms.Label lbPuhelinnumero;
         private System.Windows.Forms.TextBox tbAsiakasid;
-        private System.Windows.Forms.TextBox tbPuhNro;
+        private System.Windows.Forms.TextBox tbPuhelinnro;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.TextBox tbLahiosoite;
         private System.Windows.Forms.TextBox tbSukunimi;
