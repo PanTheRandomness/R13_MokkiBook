@@ -15,7 +15,7 @@ namespace R13_MokkiBook
     {
         public Varaus kasiteltavavaraus;
         public Palvelu valittupalvelu;
-        public VarauksenPalvelut palautettava;
+        public VarauksenPalvelut lisattava;
         public int valitturivi = -1;
         public int palvelumaara;
         public string connectionString = "Dsn=Village Newbies;uid=root";
@@ -105,14 +105,15 @@ namespace R13_MokkiBook
             }
             else
             {
-                palautettava = new VarauksenPalvelut();
-                palautettava.varaus_id = kasiteltavavaraus.varaus_id;
-                palautettava.palvelu_id = valittupalvelu.palvelu_id;
-                palautettava.lkm = palvelumaara;
-                //Lisää palautettava-homman tietokantaan instancena
-            }
+                lisattava = new VarauksenPalvelut();
+                lisattava.varaus_id = kasiteltavavaraus.varaus_id;
+                lisattava.palvelu_id = valittupalvelu.palvelu_id;
+                lisattava.lkm = palvelumaara;
 
-            //POISTUU TÄSTÄ FORMISTA
+                //Lisää palautettava-homman tietokantaan instancena
+
+                //this.Close();
+            }
         }
     }
 }
