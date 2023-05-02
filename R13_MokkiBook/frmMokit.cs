@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace R13_MokkiBook
 {
@@ -31,9 +33,9 @@ namespace R13_MokkiBook
 
         public List<Mokki> GetMokit()
         {
-            List<Mokki> var = new List<Mokki>();
-            string query = "SELECT * FROM mokki";
+            List<Mokki> mok = new List<Mokki>();
             string connectionString = "Dsn=Village Newbies;uid=root";
+            string query = "SELECT * FROM mokki";
 
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
@@ -46,21 +48,21 @@ namespace R13_MokkiBook
                         {
                             Mokki m = new Mokki();
                             m.mokki_id = reader.GetInt32(0);
-                            m.alue_id = reader.GetInt32(2);
-                            m.postinro = reader.GetString(3);
-                            m.mokkinimi = reader.GetString(4);
-                            m.katuosoite = reader.GetString(5);
-                            m.hinta = reader.GetDouble(6);
-                            m.kuvaus = reader.GetString(7);
-                            m.henkilomaara = reader.GetInt32(8);
-                            m.varustelu = reader.GetString(9);
+                            m.alue_id = reader.GetInt32(0);
+                            m.postinro = reader.GetString(1);
+                            m.mokkinimi = reader.GetString(1);
+                            m.katuosoite = reader.GetString(1);
+                            m.hinta = reader.GetDouble(3);
+                            m.kuvaus = reader.GetString(1);
+                            m.henkilomaara = reader.GetInt32(0);
+                            m.varustelu = reader.GetString(1);
 
-                            var.Add(m);
+                            mok.Add(m);
                         }
                     }
                 }
             }
-            return var;
+            return mok;
         }
 
         private void frmMokit_Load(object sender, EventArgs e)
@@ -102,8 +104,8 @@ namespace R13_MokkiBook
             DataRow newRow = dataTable.NewRow();
             newRow["mokki_id"] = tbMokkiId.Text;
             newRow["alue_id"] = tbAlueId.Text;
-            newRow["postinumero"] = tbPostinumero.Text;
-            newRow["nimi"] = tbMokinnimi.Text;
+            newRow["postinro"] = tbPostinumero.Text;
+            newRow["mokkinimi"] = tbMokinnimi.Text;
             newRow["katuosoite"] = tbKatuosoite.Text;
             newRow["hinta"] = tbHinta.Text;
             newRow["kuvaus"] = tbKuvaus.Text;
