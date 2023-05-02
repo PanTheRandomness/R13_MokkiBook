@@ -19,19 +19,19 @@ namespace R13_MokkiBook
         public int valitturivipostitoimipaikka = -1;
         public double arvioituloppuhinta = 0;
 
-        //public Asiakas valittuasiakas;
-        //public Alue valittualue;
-        //public Mokki valittumokki;
+        public Asiakas valittuasiakas;
+        public Alue valittualue;
+        public Mokki valittumokki;
         public Palvelu valittupalvelu;
-        //public Posti valittuposti;
+        public Posti valittuposti;
         public VarauksenPalvelut valittuvarauksenpalvelu;
         public Varaus tamavaraus;
         public List <Palvelu> palvelut;
         public List<VarauksenPalvelut> varauksienpalvelut;
-        //public LinkedList<Asiakas> asiakkaat;
-        //public List<Alue> alueet;
-        //public List<Mokki> mokit;
-        //public List<Posti> postit;
+        public LinkedList<Asiakas> asiakkaat;
+        public List<Alue> alueet;
+        public List<Mokki> mokit;
+        public List<Posti> postit;
 
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string asiakasquery;
