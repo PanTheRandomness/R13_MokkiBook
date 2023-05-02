@@ -81,6 +81,7 @@ namespace R13_MokkiBook
 
         private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
         {
+            //HUUTAA JOS KLIKKAA ULKOPUOLELTA
             valitturivi = dgvVaraukset.CurrentRow.Index;
             valittuvaraus = GetValittuVaraus();
         }
@@ -131,7 +132,9 @@ namespace R13_MokkiBook
         private void tsmiMuokkaa_Click(object sender, EventArgs e)
         {
             //VALIDOI
-            //VIE MUOKKAUSSIVULLE?
+
+            //frmUusiVaraus muokkaus = new frmUusiVaraus();
+            //muokkaus.ShowDialog();
             
         }
 

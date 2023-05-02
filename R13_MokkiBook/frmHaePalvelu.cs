@@ -85,6 +85,7 @@ namespace R13_MokkiBook
 
         private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
+            //HUUTAA JOS KLIKKAA ULKOPUOLELTA
             valitturivi = dgvAlueenPalvelut.CurrentRow.Index;
             valittupalvelu = palvelut[valitturivi];
             tbKuvaus.Text = valittupalvelu.kuvaus;

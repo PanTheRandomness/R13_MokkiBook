@@ -30,22 +30,7 @@ namespace R13_MokkiBook
 
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
-            tauluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + kasiteltavavaraus.varaus_id.ToString();
-
-            OdbcConnection connection = new OdbcConnection(connectionString);
-            connection.Open();
-            //datagridviewin yhdistäminen tiettyyn kyselyyn
-            DataTable dataTable = new DataTable();
-            using (OdbcDataAdapter adapter = new OdbcDataAdapter(tauluquery, connection))
-            {
-                adapter.FillSchema(dataTable, SchemaType.Source);
-                adapter.Fill(dataTable);
-            }
-            dgvVarauksenPalvelut.DataSource = dataTable;
-
-            dgvVarauksenPalvelut.Columns[0].HeaderText = "Varaustunnus";
-            dgvVarauksenPalvelut.Columns[1].HeaderText = "Palvelutunnus";
-            dgvVarauksenPalvelut.Columns[2].HeaderText = "Lkm";
+            PaivitaTaulu();
         }
         public List<VarauksenPalvelut> GetVarauksenPalvelut()
         {
@@ -75,7 +60,8 @@ namespace R13_MokkiBook
         private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
-            valittupalvelu = GetValittuPalvelu();
+            if(valitturivi >= varauksenpalvelut.Count)
+                valittupalvelu = GetValittuPalvelu();
         }
         public VarauksenPalvelut GetValittuPalvelu()
         {
@@ -85,14 +71,48 @@ namespace R13_MokkiBook
             vp.lkm = varauksenpalvelut[valitturivi].lkm;
             return vp;
         }
+        public void PaivitaTaulu()
+        {
+            tauluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + kasiteltavavaraus.varaus_id.ToString();
 
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            //datagridviewin yhdistäminen tiettyyn kyselyyn
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(tauluquery, connection))
+            {
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
+            }
+            dgvVarauksenPalvelut.DataSource = dataTable;
+
+            dgvVarauksenPalvelut.Columns[0].HeaderText = "Varaustunnus";
+            dgvVarauksenPalvelut.Columns[1].HeaderText = "Palvelutunnus";
+            dgvVarauksenPalvelut.Columns[2].HeaderText = "Lkm";
+        }
         private void btnPoista_Click(object sender, EventArgs e)
         {
-            //if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            //{
-
-            //}
-            //VALIDOI
+            if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                PoistaVarauksesta();
+                PaivitaTaulu();
+            }
+            else
+            {
+                MessageBox.Show("Mitään ei poistettu.");
+            }
+        }
+        public void PoistaVarauksesta()
+        {
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string poistoquery = "DELETE FROM varauksen_palvelut WHERE varaus_id = " + valittupalvelu.varaus_id + " AND palvelu_id = " + valittupalvelu.palvelu_id + ";";
+                using (OdbcCommand cmd = new OdbcCommand(poistoquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         private void btnHaePalvelu_Click(object sender, EventArgs e)
@@ -101,9 +121,38 @@ namespace R13_MokkiBook
             hp.ShowDialog();
             this.Hide();
         }
-        public void LisaaPalveluVaraukseen()
-        {
 
+        private void btnPoistaValittuMaara_Click(object sender, EventArgs e)
+        {
+            if(nudPoistettavat.Value > 0)
+            {
+                int uusimaara = valittupalvelu.lkm - (int)nudPoistettavat.Value;
+                if(uusimaara > 0)
+                {
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        connection.Open();
+                        string paivitysquery = "UPDATE varauksen_palvelut SET varaus_id = " + valittupalvelu.varaus_id + ", palvelu_id = " + valittupalvelu.palvelu_id + ", lkm = " + uusimaara + " WHERE varaus_id = " + valittupalvelu.varaus_id + " AND palvelu_id = " + valittupalvelu.palvelu_id + "; ";
+                        using (OdbcCommand cmd = new OdbcCommand(paivitysquery, connection))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                {
+                    if (MessageBox.Show("Valitsemillasi arvoilla koko palvelu poistetaan. Poistetaanko silti?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        PoistaVarauksesta();
+                    else
+                        MessageBox.Show("Mitään ei poistettu. Voit jatkaa muokkausta");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Poistettavien määrän on oltava suurempi kuin 0.");
+            }
+
+            PaivitaTaulu();
         }
     }
 }

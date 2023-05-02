@@ -12,6 +12,5 @@ namespace R13_MokkiBook
         public int varaus_id { get; set; }
         public int summa { get; set; }
         public int alv { get; set; }
-
     }
 }

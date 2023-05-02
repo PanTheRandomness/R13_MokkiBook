@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace R13_MokkiBook
 {
-    internal class Posti
+    public class Posti
     {
     }
 }
