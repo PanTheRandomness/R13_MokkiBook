@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.Odbc;
 using System.Drawing;
 using System.Linq;
@@ -13,10 +14,17 @@ namespace R13_MokkiBook
 {
     public partial class frmAsiakkaat : Form
     {
+        public List<Asiakas> asiakkaat;
+
+        public string query;
+        private OdbcConnection connection;
+        private OdbcDataAdapter dataAdapter;
+        private DataTable dataTable;
         public frmAsiakkaat()
         {
             InitializeComponent();
-           
+            asiakkaat = GetAsiakkaat();
+
         }
         private void frmAsiakkaat_Load(object sender, EventArgs e)
         {
@@ -24,10 +32,10 @@ namespace R13_MokkiBook
             this.asiakasTableAdapter.Fill(this.dataSet1.asiakas);
 
         }
-      
-        public List<Asiakas> asiakkaat = new List<Asiakas>();
-        public void LisaaAsiakas()
+       
+        public List<Asiakas> GetAsiakkaat()
         {
+            List<Asiakas> asi = new List<Asiakas>();
             string connectionString = "Dsn=Village Newbies;uid=root";
             string query = "SELECT * FROM asiakkaat";
 
@@ -52,27 +60,29 @@ namespace R13_MokkiBook
                                 a.email = reader.GetString(1);
                                 a.puhelinnro = reader.GetString(1);
 
-                                asiakkaat.Add(a);
+                                asi.Add(a);
                             }
                         }
                     }
                 }
+                return asi;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred. Please try again later.");
+                return new List<Asiakas>();
             }
         }
 
        private void btnPoista_Click(object sender, EventArgs e)
         {
 
-            int rowindex = dgvAsiakkaat.CurrentRow.Index;
+            // Get the current DataRow from the DataGridView control
+            DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
 
-            asiakkaat.RemoveAt(rowindex);
-
-            dgvAsiakkaat.DataSource = null;
-            dgvAsiakkaat.DataSource = asiakkaat;
+            // Delete the current DataRow from the DataTable and update the database
+            currentRow.Delete();
+            dataAdapter.Update(dataTable);
 
         }
 
