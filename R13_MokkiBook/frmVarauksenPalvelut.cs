@@ -90,12 +90,16 @@ namespace R13_MokkiBook
         {
             if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-
+                PoistaVarauksesta();
             }
             else
             {
                 MessageBox.Show("Mitään ei poistettu.");
             }
+        }
+        public void PoistaVarauksesta()
+        {
+            //Poistaminen
         }
 
         private void btnHaePalvelu_Click(object sender, EventArgs e)
@@ -104,16 +108,31 @@ namespace R13_MokkiBook
             hp.ShowDialog();
             this.Hide();
         }
-        public void LisaaPalveluVaraukseen()
-        {
-
-        }
 
         private void btnPoistaValittuMaara_Click(object sender, EventArgs e)
         {
             if(nudPoistettavat.Value > 0)
             {
-
+                int uusimaara = valittupalvelu.lkm - (int)nudPoistettavat.Value;
+                if(uusimaara > 0)
+                {
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        connection.Open();
+                        string paivitysquery = "UPDATE varauksen_palvelut SET varaus_id = " + valittupalvelu.varaus_id + ", palvelu_id = " + valittupalvelu.palvelu_id + ", lkm = " + uusimaara + " WHERE varaus_id = " + valittupalvelu.varaus_id + " AND palvelu_id = " + valittupalvelu.palvelu_id + "; ";
+                        using (OdbcCommand cmd = new OdbcCommand(paivitysquery, connection))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                {
+                    if (MessageBox.Show("Valitsemillasi arvoilla koko palvelu poistetaan. Poistetaanko silti?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        PoistaVarauksesta();
+                    else
+                        MessageBox.Show("Mitään ei poistettu. Voit jatkaa muokkausta");
+                }
             }
             else
             {
