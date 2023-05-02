@@ -60,7 +60,8 @@ namespace R13_MokkiBook
         private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
-            valittupalvelu = GetValittuPalvelu();
+            if(valitturivi >= varauksenpalvelut.Count)
+                valittupalvelu = GetValittuPalvelu();
         }
         public VarauksenPalvelut GetValittuPalvelu()
         {

@@ -81,6 +81,7 @@ namespace R13_MokkiBook
 
         private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
         {
+            //HUUTAA JOS KLIKKAA ULKOPUOLELTA
             valitturivi = dgvVaraukset.CurrentRow.Index;
             valittuvaraus = GetValittuVaraus();
         }

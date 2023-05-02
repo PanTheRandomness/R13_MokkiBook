@@ -86,8 +86,10 @@ namespace R13_MokkiBook
         private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             valitturivi = dgvAlueenPalvelut.CurrentRow.Index;
+            if (valitturivi <= palvelut.Count)
             valittupalvelu = palvelut[valitturivi];
             tbKuvaus.Text = valittupalvelu.kuvaus;
+            
         }
 
         private void nudMaara_ValueChanged(object sender, EventArgs e)
