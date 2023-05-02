@@ -97,9 +97,9 @@ namespace R13_MokkiBook
 
         private void btnHaePalvelu_Click(object sender, EventArgs e)
         {
-            frmHaePalvelu hp = new frmHaePalvelu(kasiteltavavaraus);
+            frmHaePalvelu hp = new frmHaePalvelu(kasiteltavavaraus, varauksenpalvelut);
             hp.ShowDialog();
-            this.Close();
+            this.Hide();
         }
         public void LisaaPalveluVaraukseen()
         {

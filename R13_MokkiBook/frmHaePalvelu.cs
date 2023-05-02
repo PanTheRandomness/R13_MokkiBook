@@ -17,18 +17,22 @@ namespace R13_MokkiBook
         public Varaus kasiteltavavaraus;
         public Palvelu valittupalvelu;
         public VarauksenPalvelut lisattava;
+        public List<VarauksenPalvelut> varauksenpalvelut;
+        public List<Palvelu> palvelut;
         public int valitturivi = -1;
         public int palvelumaara;
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string query;
-        public List<Palvelu> palvelut;
-        public frmHaePalvelu(Varaus tuotu)
+        public bool varauksessaonjopalvelu = false;
+
+        public frmHaePalvelu(Varaus tuotu, List<VarauksenPalvelut> tuotulista)
         {
             InitializeComponent();
             kasiteltavavaraus = tuotu;
             query = "SELECT * FROM palvelu WHERE palvelu.alue_id = (SELECT mokki.alue_id FROM mokki WHERE mokki.mokki_id = (SELECT varaus.mokki_mokki_id FROM varaus WHERE varaus.varaus_id = " + kasiteltavavaraus.varaus_id + "));";
             TuoData();
             palvelut = GetPalvelut();
+            varauksenpalvelut = tuotulista;
         }
         public void TuoData()
         {
@@ -111,21 +115,41 @@ namespace R13_MokkiBook
                 lisattava.palvelu_id = valittupalvelu.palvelu_id;
                 lisattava.lkm = palvelumaara;
 
-                //Lisää palautettava-homman tietokantaan instancena
-                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                //Tarkistaa onko varauksessa jo valmiiksi ko. palvelu- jos kyllä: päivittää lukumäärän, jos ei: lisää palvelun varaukseen
+                foreach(VarauksenPalvelut vap in varauksenpalvelut)
                 {
-                    //JOS ON JO PALVELU-->>> Lisää
-                    connection.Open();
-                    string lisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + lisattava.varaus_id + ", " + lisattava.palvelu_id +", " + lisattava.lkm + ")";
-                    using (OdbcCommand cmd= new OdbcCommand(lisaysquery, connection))
+                    if((vap.varaus_id == lisattava.varaus_id) && (vap.palvelu_id == lisattava.palvelu_id))
                     {
-                        cmd.ExecuteNonQuery();
+                        varauksessaonjopalvelu = true;
+                        lisattava.lkm = vap.lkm + (int)nudMaara.Value;
                     }
-
-                    this.Close();
-                    frmVarauksenPalvelut vp = new frmVarauksenPalvelut(kasiteltavavaraus);
-                    vp.ShowDialog();
                 }
+
+                if (!varauksessaonjopalvelu)
+                {
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        connection.Open();
+                        string lisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + lisattava.varaus_id + ", " + lisattava.palvelu_id + ", " + lisattava.lkm + ")";
+                        using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                {
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        connection.Open();
+                        string paivitysquery = "UPDATE varauksen_palvelut SET varaus_id = " + lisattava.varaus_id + ", palvelu_id = " + lisattava.palvelu_id + ", lkm = " + lisattava.lkm + " WHERE varaus_id = " + lisattava.varaus_id + " AND palvelu_id = " + lisattava.palvelu_id + "; ";
+                        using (OdbcCommand cmd = new OdbcCommand(paivitysquery, connection))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                this.Close();
             }
         }
     }
