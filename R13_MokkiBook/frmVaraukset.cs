@@ -15,9 +15,12 @@ namespace R13_MokkiBook
     public partial class frmVaraukset : Form
     {
         public int valitturivi = -1;
-        public Varaus valittuvaraus = new Varaus();
+        public DateTime nyt = DateTime.Now;
+        public Varaus valittuvaraus;
+        public Varaus haku = new Varaus();
         public List<Varaus> varaukset;
         public bool muutettu = false;
+       //?? public bool pvmoikein = true;
         public string connectionString = "Dsn=Village Newbies;uid=root";
 
         public frmVaraukset()
@@ -76,7 +79,6 @@ namespace R13_MokkiBook
             this.mokkiTableAdapter.Fill(this.dataSet1.mokki);
             // TODO: This line of code loads data into the 'dataSet1.varaus' table. You can move, or remove it, as needed.
             this.varausTableAdapter.Fill(this.dataSet1.varaus);
-
         }
 
         private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
@@ -88,12 +90,21 @@ namespace R13_MokkiBook
 
         private void dtpAlku_ValueChanged(object sender, EventArgs e)
         {
-
+            if(dtpAlku.Value > haku.varattu_loppupvm)
+            {
+                MessageBox.Show("Alkupäivämäärä ei voi olla loppupäivämäärän jälkeen.");
+                //JATKA TÄSTÄ
+            }
+            else
+                haku.varattu_alkupvm = dtpAlku.Value;
         }
 
         private void dtpLoppu_ValueChanged(object sender, EventArgs e)
         {
-            //EI voi olla pienempi kuin alku
+            if(dtpLoppu.Value < haku.varattu_alkupvm) 
+            { 
+
+            }
         }
 
         private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)

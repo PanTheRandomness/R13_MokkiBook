@@ -304,6 +304,18 @@ namespace R13_MokkiBook
         private void dtpAlkupvm_ValueChanged(object sender, EventArgs e)
         {
             //ei voi olla aiemmin kuin nyt
+            /*if (dtpAlku.Value > haku.varattu_loppupvm)
+            {
+                MessageBox.Show("Alkupäivämäärä ei voi olla loppupäivämäärän jälkeen.");
+                dtpAlku.Value = nyt;
+            }
+            else if (dtpAlku.Value < nyt)
+            {
+                MessageBox.Show("Alkupäivämäärä ei voi olla nykyistä päivämäärää aiemmin.");
+                dtpAlku.Value = nyt;
+            }
+            else
+                haku.varattu_alkupvm = dtpAlku.Value;*/
         }
 
         private void dgvMokitUusiVaraus_CellContentClick(object sender, DataGridViewCellEventArgs e)

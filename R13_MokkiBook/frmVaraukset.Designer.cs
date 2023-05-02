@@ -62,7 +62,6 @@
             this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnRaportti = new System.Windows.Forms.Button();
             this.btnUusi = new System.Windows.Forms.Button();
-            this.epVaraukset = new System.Windows.Forms.ErrorProvider(this.components);
             this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
             this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
             this.pdRaportti = new System.Windows.Forms.PrintDialog();
@@ -74,7 +73,6 @@
             this.cmsTyhjenna.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvVaraukset
@@ -356,10 +354,6 @@
             this.btnUusi.UseVisualStyleBackColor = true;
             this.btnUusi.Click += new System.EventHandler(this.btnUusi_Click);
             // 
-            // epVaraukset
-            // 
-            this.epVaraukset.ContainerControl = this;
-            // 
             // mokkiTableAdapter
             // 
             this.mokkiTableAdapter.ClearBeforeFill = true;
@@ -407,7 +401,6 @@
             this.cmsTyhjenna.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epVaraukset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,7 +437,6 @@
         private System.Windows.Forms.ComboBox cbAsiakas;
         private System.Windows.Forms.Button btnRaportti;
         private System.Windows.Forms.Button btnUusi;
-        private System.Windows.Forms.ErrorProvider epVaraukset;
         private System.Windows.Forms.BindingSource mokkiBindingSource;
         private DataSet1TableAdapters.mokkiTableAdapter mokkiTableAdapter;
         private System.Windows.Forms.BindingSource alueBindingSource;
