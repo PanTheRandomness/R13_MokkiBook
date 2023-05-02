@@ -108,5 +108,17 @@ namespace R13_MokkiBook
         {
 
         }
+
+        private void btnPoistaValittuMaara_Click(object sender, EventArgs e)
+        {
+            if(nudPoistettavat.Value > 0)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Poistettavien määrän on oltava suurempi kuin 0.");
+            }
+        }
     }
 }

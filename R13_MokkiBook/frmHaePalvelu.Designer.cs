@@ -61,7 +61,7 @@
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(105, 23);
             this.btnLisaa.TabIndex = 2;
-            this.btnLisaa.Text = "Päivitä";
+            this.btnLisaa.Text = "Lisää varaukseen";
             this.btnLisaa.UseVisualStyleBackColor = true;
             this.btnLisaa.Click += new System.EventHandler(this.btnLisaa_Click);
             // 
