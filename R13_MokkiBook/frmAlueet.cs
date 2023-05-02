@@ -55,25 +55,15 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            if (tbAlueId.Text == "" || tbNimi.Text ==  "")
-            {
-                MessageBox.Show("Täytä kaikki kentät");
-            }
-            else
-            {
-                Alue a = new Alue();
+            DataRow newRow = dataTable.NewRow();
+            newRow["alue_id"] = tbAlueId.Text;
+            newRow["nimi"] = tbNimi.Text;
 
-                a.alue_id = int.Parse(tbAlueId.Text);
-                a.nimi = tbNimi.Text;
+            dataTable.Rows.Add(newRow);
+            dataAdapter.Update(dataTable);
 
-                alueet.Add(a);
-                dgvAlue.DataSource = null;
-                dgvAlue.DataSource = alueet;
-
-                // Tyhjenna();
-
-            }
-
+            tbAlueId.Text = "";
+            tbNimi.Text = "";
         }
 
         private void frmAlueet_Load(object sender, EventArgs e)

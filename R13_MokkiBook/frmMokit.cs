@@ -114,6 +114,17 @@ namespace R13_MokkiBook
 
             dataTable.Rows.Add(newRow);
             dataAdapter.Update(dataTable);
+
+            tbMokkiId.Text = String.Empty;
+            tbAlueId.Text = String.Empty;
+            tbPostinumero.Text = String Empty;
+            tbMokinnimi.Text = String.Empty;
+            tbKatuosoite.Text = String.Empty;
+            tbHinta.Text = String.Empty;
+            tbKuvaus.Text = String.Empty;
+            tbHenkilomaara.Text = String.Empty;
+            tbVarustelu.Text = String.Empty;
+
         }
 
     }
