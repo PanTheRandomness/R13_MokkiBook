@@ -35,6 +35,7 @@ namespace R13_MokkiBook
             newRow["palvelu_id"] = txtPalveluID.Text;
             newRow["alue_id"] = txtAlueID.Text;
             newRow["nimi"] = txtNimi.Text;
+            newRow["tyyppi"] = txtTyyppi.Text;
             newRow["kuvaus"] = txtKuvaus.Text;
             newRow["hinta"] = txtHinta.Text;
             newRow["alv"] = txtAlv.Text;
@@ -116,6 +117,7 @@ namespace R13_MokkiBook
             currentRow["palvelu_id"] = txtPalveluID.Text;
             currentRow["alue_id"] = txtAlueID.Text;
             currentRow["nimi"] = txtNimi.Text;
+            currentRow["tyyppi"] = txtTyyppi.Text;
             currentRow["kuvaus"] = txtKuvaus.Text;
             currentRow["hinta"] = txtHinta.Text;
             currentRow["alv"] = txtAlv.Text;
@@ -153,6 +155,7 @@ namespace R13_MokkiBook
             {
                 txtAlueID.Text = dataGridView1.CurrentRow.Cells["alue_id"].Value.ToString();
                 txtNimi.Text = dataGridView1.CurrentRow.Cells["nimi"].Value.ToString();
+                txtTyyppi.Text = dataGridView1.CurrentRow.Cells["tyyppi"].Value.ToString();
                 txtKuvaus.Text = dataGridView1.CurrentRow.Cells["kuvaus"].Value.ToString();
                 txtHinta.Text = dataGridView1.CurrentRow.Cells["hinta"].Value.ToString();
                 txtAlv.Text = dataGridView1.CurrentRow.Cells["alv"].Value.ToString();
