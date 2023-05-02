@@ -271,7 +271,7 @@
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(176, 45);
             this.btnLisaa.TabIndex = 15;
-            this.btnLisaa.Text = "Lisää Asiakas";
+            this.btnLisaa.Text = "Lisää asiakas";
             this.btnLisaa.UseVisualStyleBackColor = true;
             // 
             // btnMuokkaa
