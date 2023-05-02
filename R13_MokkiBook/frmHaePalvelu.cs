@@ -41,6 +41,13 @@ namespace R13_MokkiBook
                 adapter.Fill(dataTable);
             }
             dgvAlueenPalvelut.DataSource = dataTable;
+            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus";
+            dgvAlueenPalvelut.Columns[1].HeaderText = "Aluetunnus";
+            dgvAlueenPalvelut.Columns[2].HeaderText = "Nimi";
+            dgvAlueenPalvelut.Columns[3].HeaderText = "Tyyppi";
+            dgvAlueenPalvelut.Columns[4].HeaderText = "Kuvaus";
+            dgvAlueenPalvelut.Columns[5].HeaderText = "Hinta";
+            dgvAlueenPalvelut.Columns[6].HeaderText = "ALV";
         }
         public List<Palvelu> GetPalvelut()
         {
