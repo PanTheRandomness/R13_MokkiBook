@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace R13_MokkiBook
 {
     public partial class frmAsiakkaat : Form
@@ -66,7 +67,6 @@ namespace R13_MokkiBook
                 return asi;
             }
  
-        
 
        private void btnPoista_Click(object sender, EventArgs e)
         {
