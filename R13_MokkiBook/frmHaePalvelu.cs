@@ -94,7 +94,14 @@ namespace R13_MokkiBook
         {
             if(nudMaara.Value == 0 || palvelumaara == 0)
             {
-                //MessageBox ei lisätä- oletko varma?
+                if (MessageBox.Show("Lisättyjen palvelujen määärä on 0, palvelua ei lisätä. Haluatko silti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Palataan hakuun.");
+                }
             }
             else
             {
