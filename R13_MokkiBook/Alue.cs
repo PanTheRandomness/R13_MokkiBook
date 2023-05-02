@@ -8,6 +8,7 @@ namespace R13_MokkiBook
 {
     internal class Alue
     {
+        public List<Alue> alueet = new List<Alue>();
         public int alue_id { get; set; }
         public string nimi { get; set; }
     }
