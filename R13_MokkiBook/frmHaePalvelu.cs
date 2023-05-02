@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace R13_MokkiBook
     {
         public Varaus kasiteltavavaraus;
         public Palvelu valittupalvelu;
-        public VarauksenPalvelut palautettava;
+        public VarauksenPalvelut lisattava;
         public int valitturivi = -1;
         public int palvelumaara;
         public string connectionString = "Dsn=Village Newbies;uid=root";
@@ -92,7 +93,7 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            if(nudMaara.Value == 0 || palvelumaara == 0)
+            if (nudMaara.Value == 0 || palvelumaara == 0)
             {
                 if (MessageBox.Show("Lisättyjen palvelujen määärä on 0, palvelua ei lisätä. Haluatko silti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -105,14 +106,27 @@ namespace R13_MokkiBook
             }
             else
             {
-                palautettava = new VarauksenPalvelut();
-                palautettava.varaus_id = kasiteltavavaraus.varaus_id;
-                palautettava.palvelu_id = valittupalvelu.palvelu_id;
-                palautettava.lkm = palvelumaara;
-                //Lisää palautettava-homman tietokantaan instancena
-            }
+                lisattava = new VarauksenPalvelut();
+                lisattava.varaus_id = kasiteltavavaraus.varaus_id;
+                lisattava.palvelu_id = valittupalvelu.palvelu_id;
+                lisattava.lkm = palvelumaara;
 
-            //POISTUU TÄSTÄ FORMISTA
+                //Lisää palautettava-homman tietokantaan instancena
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    //JOS ON JO PALVELU-->>> Lisää
+                    connection.Open();
+                    string lisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + lisattava.varaus_id + ", " + lisattava.palvelu_id +", " + lisattava.lkm + ")";
+                    using (OdbcCommand cmd= new OdbcCommand(lisaysquery, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    this.Close();
+                    frmVarauksenPalvelut vp = new frmVarauksenPalvelut(kasiteltavavaraus);
+                    vp.ShowDialog();
+                }
+            }
         }
     }
 }
