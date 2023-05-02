@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -92,7 +93,7 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            if(nudMaara.Value == 0 || palvelumaara == 0)
+            if (nudMaara.Value == 0 || palvelumaara == 0)
             {
                 if (MessageBox.Show("Lisättyjen palvelujen määärä on 0, palvelua ei lisätä. Haluatko silti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -111,8 +112,17 @@ namespace R13_MokkiBook
                 lisattava.lkm = palvelumaara;
 
                 //Lisää palautettava-homman tietokantaan instancena
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    connection.Open();
+                    string lisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + lisattava.varaus_id + ", " + lisattava.palvelu_id +", " + lisattava.lkm + ")";
+                    using (OdbcCommand cmd= new OdbcCommand(lisaysquery, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
 
-                //this.Close();
+                    this.Close();
+                }
             }
         }
     }
