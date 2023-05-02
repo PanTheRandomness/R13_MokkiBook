@@ -50,18 +50,7 @@ namespace R13_MokkiBook
 
         private void frmUusiVaraus_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'alueenPAlvelutDataSet.palvelu' table. You can move, or remove it, as needed.
-            // TODO: This line of code loads data into the 'dataSet1.varaus' table. You can move, or remove it, as needed.
-            this.varausTableAdapter.Fill(this.dataSet1.varaus);
-            // TODO: This line of code loads data into the 'dataSet1.mokki' table. You can move, or remove it, as needed.
-            this.mokkiTableAdapter.Fill(this.dataSet1.mokki);
-            // TODO: This line of code loads data into the 'dataSet1.posti' table. You can move, or remove it, as needed.
-            this.postiTableAdapter.Fill(this.dataSet1.posti);
-            // TODO: This line of code loads data into the 'dataSet1.alue' table. You can move, or remove it, as needed.
-            this.alueTableAdapter.Fill(this.dataSet1.alue);
-            // TODO: This line of code loads data into the 'dataSet1.asiakas' table. You can move, or remove it, as needed.
-            this.asiakasTableAdapter.Fill(this.dataSet1.asiakas);
-
+            
         }
         public void PaivitaAsiakastaulu(string asiakasquery)
         {
