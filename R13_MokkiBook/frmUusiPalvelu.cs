@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Data.Odbc;
+using System.Data;
 
 namespace R13_MokkiBook
 {
@@ -16,49 +17,63 @@ namespace R13_MokkiBook
     {
         public Palvelu valittupalvelu = new Palvelu();
         public List<Palvelu> palvelut;
+
         public string query;
+        private OdbcConnection connection;
+        private OdbcDataAdapter dataAdapter;
+        private DataTable dataTable;
         public frmUusiPalvelu()
         {
             InitializeComponent();
             palvelut = GetPalvelut();
         }
 
-
-
         public void saveButton_Click(object sender, EventArgs e)
         {
-            string connectionString = "Dsn=Village Newbies;uid=root";
+            // Create a new DataRow and set its values to the input from the TextBox controls
+            DataRow newRow = dataTable.NewRow();
+            newRow["palvelu_id"] = txtPalveluID.Text;
+            newRow["alue_id"] = txtAlueID.Text;
+            newRow["nimi"] = txtNimi.Text;
+            newRow["kuvaus"] = txtKuvaus.Text;
+            newRow["hinta"] = txtHinta.Text;
+            newRow["alv"] = txtAlv.Text;
 
-            using (OdbcConnection con = new OdbcConnection(connectionString))
-            {
-                con.Open();
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if (!row.IsNewRow && row.Cells["palvelu_id"].Value != null)
-                    {
-                        int palvelu_id = (int)row.Cells["palvelu_id"].Value;
-                        string query = "UPDATE palvelu SET nimi=@nimi, tyyppi=@tyyppi, kuvaus=@kuvaus, hinta=@hinta, alv=@alv WHERE palvelu_id=@palvelu_id";
-
-                        using (OdbcCommand cmd = new OdbcCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@nimi", row.Cells["nimi"].Value);
-                            cmd.Parameters.AddWithValue("@tyyppi", row.Cells["tyyppi"].Value);
-                            cmd.Parameters.AddWithValue("@kuvaus", row.Cells["kuvaus"].Value);
-                            cmd.Parameters.AddWithValue("@hinta", row.Cells["hinta"].Value);
-                            cmd.Parameters.AddWithValue("@alv", row.Cells["alv"].Value);
-                            cmd.Parameters.AddWithValue("@palvelu_id", palvelu_id);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                }
-                con.Close();
-            }
-            MessageBox.Show("All rows updated");
+            // Add the new row to the DataTable and update the database
+            dataTable.Rows.Add(newRow);
+            dataAdapter.Update(dataTable);
         }
 
         private void frmUusiPalvelu_Load(object sender, EventArgs e)
         {
             this.palveluTableAdapter1.Fill(this.dataSet1.palvelu);
+
+            // Create a new ODBC connection and open it
+            connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
+            connection.Open();
+
+            // Create a new ODBC data adapter and select all rows from the table
+            dataAdapter = new OdbcDataAdapter("SELECT * FROM palvelu", connection);
+
+            // Create a new DataTable and fill it with the rows from the table
+            dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+
+            // Set the DataSource property of the DataGridView control to the DataTable
+            dataGridView1.DataSource = dataTable;
+
+            // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
+            OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
+
+            // Set the InsertCommand property of the dataAdapter to the generated insert command
+            dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
+
+            // Create a new DataSet object to hold the data retrieved from the database
+            System.Data.DataSet dataSet = new System.Data.DataSet();
+
+            // Fill the DataSet with data from the database
+            dataAdapter.Fill(dataSet1);
+
         }
         public List<Palvelu> GetPalvelut()
         {
@@ -90,6 +105,62 @@ namespace R13_MokkiBook
             }
 
             return pal;
+        }
+
+        private void btnPaivita_Click(object sender, EventArgs e)
+        {
+            // Get the current DataRow from the DataGridView control
+            DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
+
+            // Update the values of the current DataRow with the input from the TextBox controls
+            currentRow["palvelu_id"] = txtPalveluID.Text;
+            currentRow["alue_id"] = txtAlueID.Text;
+            currentRow["nimi"] = txtNimi.Text;
+            currentRow["kuvaus"] = txtKuvaus.Text;
+            currentRow["hinta"] = txtHinta.Text;
+            currentRow["alv"] = txtAlv.Text;
+
+            // Update the database
+            dataAdapter.Update(dataTable);
+        }
+
+        private void fillBy2ToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.palveluTableAdapter1.FillBy2(this.dataSet1.palvelu);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnPoista_Click(object sender, EventArgs e)
+        {
+            // Get the current DataRow from the DataGridView control
+            DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
+
+            // Delete the current DataRow from the DataTable and update the database
+            currentRow.Delete();
+            dataAdapter.Update(dataTable);
+        }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            // When the selection in the DataGridView control changes, update the TextBox controls with the values of the selected row
+            if (dataGridView1.CurrentRow != null)
+            {
+                txtAlueID.Text = dataGridView1.CurrentRow.Cells["alue_id"].Value.ToString();
+                txtNimi.Text = dataGridView1.CurrentRow.Cells["nimi"].Value.ToString();
+                txtKuvaus.Text = dataGridView1.CurrentRow.Cells["kuvaus"].Value.ToString();
+                txtHinta.Text = dataGridView1.CurrentRow.Cells["hinta"].Value.ToString();
+                txtAlv.Text = dataGridView1.CurrentRow.Cells["alv"].Value.ToString();
+            }
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

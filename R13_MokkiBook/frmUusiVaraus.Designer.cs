@@ -1,4 +1,6 @@
-﻿namespace R13_MokkiBook
+﻿using System.Data;
+
+namespace R13_MokkiBook
 {
     partial class frmUusiVaraus
     {
@@ -1138,5 +1140,30 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiTyhjenna;
         private System.Windows.Forms.TextBox tbSahkoposti;
         private System.Windows.Forms.TextBox tbPuhno;
+    }
+
+    class AlueenPAlvelutDataSet
+    {
+        internal string DataSetName;
+        internal SchemaSerializationMode SchemaSerializationMode;
+    }
+
+    class AlueenPAlvelutDataSetTableAdapters
+    {
+        internal class palveluTableAdapter
+        {
+            internal bool ClearBeforeFill;
+
+            public palveluTableAdapter()
+            {
+            }
+        }
+    }
+}
+
+namespace AlueenPAlvelutDataSetTableAdapters
+{
+    class palveluTableAdapter
+    {
     }
 }
