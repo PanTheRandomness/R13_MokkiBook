@@ -223,6 +223,7 @@
             this.Controls.Add(this.lbAlueID);
             this.Name = "frmAlueet";
             this.Text = "Alueet";
+            this.Load += new System.EventHandler(this.frmAlueet_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
