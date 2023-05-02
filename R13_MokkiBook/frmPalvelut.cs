@@ -76,6 +76,7 @@ namespace R13_MokkiBook
             return pal;
         }
 
+
         private void TsBtnLisaa_Click_1(object sender, EventArgs e)
         {
             frmUusiPalvelu up = new frmUusiPalvelu();
@@ -83,6 +84,16 @@ namespace R13_MokkiBook
         }
 
         private void tsTallenna_Click(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

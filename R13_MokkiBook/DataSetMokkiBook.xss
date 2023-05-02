@@ -10,7 +10,7 @@
     <Shape ID="DesignTable:asiakas" ZOrder="7" X="309" Y="70" Height="210" Width="186" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
     <Shape ID="DesignTable:lasku" ZOrder="6" X="565" Y="70" Height="153" Width="174" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:mokki" ZOrder="5" X="809" Y="70" Height="248" Width="181" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
-    <Shape ID="DesignTable:palvelu" ZOrder="4" X="1060" Y="70" Height="229" Width="187" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
+    <Shape ID="DesignTable:palvelu" ZOrder="4" X="1060" Y="70" Height="286" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
     <Shape ID="DesignTable:posti" ZOrder="3" X="1317" Y="70" Height="115" Width="173" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
     <Shape ID="DesignTable:varauksen_palvelut" ZOrder="2" X="1560" Y="70" Height="134" Width="255" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:varaus" ZOrder="1" X="1885" Y="70" Height="210" Width="182" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />

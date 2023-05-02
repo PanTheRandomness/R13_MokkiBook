@@ -48,7 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
@@ -63,11 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alue.cs" />
-    <Compile Include="AlueenPAlvelutDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AlueenPAlvelutDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Asiakas.cs" />
     <Compile Include="DataSetMokkiBook.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -109,12 +106,6 @@
     </Compile>
     <Compile Include="frmMokit.Designer.cs">
       <DependentUpon>frmMokit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMuokkaaVarausta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMuokkaaVarausta.Designer.cs">
-      <DependentUpon>frmMuokkaaVarausta.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPalvelut.cs">
       <SubType>Form</SubType>
@@ -201,17 +192,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="AlueenPAlvelutDataSet.xsc">
-      <DependentUpon>AlueenPAlvelutDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="AlueenPAlvelutDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>AlueenPAlvelutDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="AlueenPAlvelutDataSet.xss">
-      <DependentUpon>AlueenPAlvelutDataSet.xsd</DependentUpon>
-    </None>
     <None Include="DataSetMokkiBook.xsc">
       <DependentUpon>DataSetMokkiBook.xsd</DependentUpon>
     </None>
