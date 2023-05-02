@@ -88,11 +88,14 @@ namespace R13_MokkiBook
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
-            //if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            //{
+            if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
 
-            //}
-            //VALIDOI
+            }
+            else
+            {
+
+            }
         }
 
         private void btnHaePalvelu_Click(object sender, EventArgs e)
