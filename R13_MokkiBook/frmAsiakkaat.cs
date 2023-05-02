@@ -39,8 +39,6 @@ namespace R13_MokkiBook
             string connectionString = "Dsn=Village Newbies;uid=root";
             string query = "SELECT * FROM asiakkaat";
 
-            try
-            {
 
                 using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
@@ -67,12 +65,8 @@ namespace R13_MokkiBook
                 }
                 return asi;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred. Please try again later.");
-                return new List<Asiakas>();
-            }
-        }
+ 
+        
 
        private void btnPoista_Click(object sender, EventArgs e)
         {
