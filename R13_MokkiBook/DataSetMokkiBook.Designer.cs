@@ -6076,7 +6076,7 @@ namespace R13_MokkiBook.DataSet1TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[4];
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[6];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT `palvelu_id`, `alue_id`, `nimi`, `tyyppi`, `kuvaus`, `hinta`, `alv` FROM `" +
@@ -6093,25 +6093,42 @@ namespace R13_MokkiBook.DataSet1TableAdapters {
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"UPDATE `palvelu` SET `palvelu_id` = ?, `alue_id` = ?, `nimi` = ?, `tyyppi` = ?, `kuvaus` = ?, `hinta` = ?, `alv` = ? WHERE ((`palvelu_id` = ?) AND (`alue_id` = ?) AND ((? = 1 AND `nimi` IS NULL) OR (`nimi` = ?)) AND ((? = 1 AND `tyyppi` IS NULL) OR (`tyyppi` = ?)) AND ((? = 1 AND `kuvaus` IS NULL) OR (`kuvaus` = ?)) AND (`hinta` = ?) AND (`alv` = ?))";
+            this._commandCollection[3].CommandText = "SELECT        palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv\r\nFROM        " +
+                "    palvelu";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("palvelu_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "palvelu_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("alue_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "alue_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("nimi", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nimi", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tyyppi", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tyyppi", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("kuvaus", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "kuvaus", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("hinta", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("alv", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "alv", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_palvelu_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "palvelu_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_alue_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "alue_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta1", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta2", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta3", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_alv", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "alv", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_palvelu_id1", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "palvelu_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_alue_id1", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "alue_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_nimi", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nimi", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[4] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "INSERT INTO `palvelu` (`palvelu_id`, `alue_id`, `nimi`, `tyyppi`, `kuvaus`, `hint" +
+                "a`, `alv`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("palvelu_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "palvelu_id", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("alue_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "alue_id", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("nimi", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nimi", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tyyppi", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tyyppi", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("kuvaus", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "kuvaus", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("hinta", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("alv", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "alv", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = @"UPDATE `palvelu` SET `palvelu_id` = ?, `alue_id` = ?, `nimi` = ?, `tyyppi` = ?, `kuvaus` = ?, `hinta` = ?, `alv` = ? WHERE ((`palvelu_id` = ?) AND (`alue_id` = ?) AND ((? = 1 AND `nimi` IS NULL) OR (`nimi` = ?)) AND ((? = 1 AND `tyyppi` IS NULL) OR (`tyyppi` = ?)) AND ((? = 1 AND `kuvaus` IS NULL) OR (`kuvaus` = ?)) AND (`hinta` = ?) AND (`alv` = ?))";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("palvelu_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "palvelu_id", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("alue_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "alue_id", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("nimi", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nimi", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tyyppi", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tyyppi", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("kuvaus", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "kuvaus", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("hinta", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("alv", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "alv", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_palvelu_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "palvelu_id", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_alue_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "alue_id", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta1", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta2", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_hinta3", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "hinta", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_alv", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(8)), ((byte)(2)), "alv", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_palvelu_id1", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "palvelu_id", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_alue_id1", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "alue_id", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_nimi", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nimi", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6157,6 +6174,19 @@ namespace R13_MokkiBook.DataSet1TableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillBy1(DataSet1.palveluDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy2(DataSet1.palveluDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -6341,6 +6371,51 @@ namespace R13_MokkiBook.DataSet1TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int NewRow(int palvelu_id, int alue_id, string nimi, global::System.Nullable<int> tyyppi, string kuvaus, decimal hinta, decimal alv) {
+            global::System.Data.Odbc.OdbcCommand command = this.CommandCollection[4];
+            command.Parameters[0].Value = ((int)(palvelu_id));
+            command.Parameters[1].Value = ((int)(alue_id));
+            if ((nimi == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(nimi));
+            }
+            if ((tyyppi.HasValue == true)) {
+                command.Parameters[3].Value = ((int)(tyyppi.Value));
+            }
+            else {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((kuvaus == null)) {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[4].Value = ((string)(kuvaus));
+            }
+            command.Parameters[5].Value = ((decimal)(hinta));
+            command.Parameters[6].Value = ((decimal)(alv));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateAll1(
                     int palvelu_id, 
@@ -6360,7 +6435,7 @@ namespace R13_MokkiBook.DataSet1TableAdapters {
                     int Original_palvelu_id1, 
                     int Original_alue_id1, 
                     string Original_nimi) {
-            global::System.Data.Odbc.OdbcCommand command = this.CommandCollection[3];
+            global::System.Data.Odbc.OdbcCommand command = this.CommandCollection[5];
             command.Parameters[0].Value = ((int)(palvelu_id));
             command.Parameters[1].Value = ((int)(alue_id));
             if ((nimi == null)) {

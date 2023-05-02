@@ -42,6 +42,10 @@ namespace R13_MokkiBook
                 adapter.Fill(dataTable);
             }
             dgvVarauksenPalvelut.DataSource = dataTable;
+
+            dgvVarauksenPalvelut.Columns[0].HeaderText = "Varaustunnus";
+            dgvVarauksenPalvelut.Columns[1].HeaderText = "Palvelutunnus";
+            dgvVarauksenPalvelut.Columns[2].HeaderText = "Lkm";
         }
         public List<VarauksenPalvelut> GetVarauksenPalvelut()
         {

@@ -1,4 +1,6 @@
-﻿namespace R13_MokkiBook
+﻿using System.Data;
+
+namespace R13_MokkiBook
 {
     partial class frmUusiVaraus
     {
@@ -30,6 +32,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlAsiakastiedot = new System.Windows.Forms.Panel();
+            this.tbSahkoposti = new System.Windows.Forms.TextBox();
+            this.tbPuhno = new System.Windows.Forms.TextBox();
             this.btnLisaa = new System.Windows.Forms.Button();
             this.lblSp = new System.Windows.Forms.Label();
             this.lblPuhno = new System.Windows.Forms.Label();
@@ -69,6 +73,7 @@
             this.lblHenkilomaara = new System.Windows.Forms.Label();
             this.nudHlomaara = new System.Windows.Forms.NumericUpDown();
             this.pnlPalvelut = new System.Windows.Forms.Panel();
+            this.btnPoistaPalvelu = new System.Windows.Forms.Button();
             this.dgvAlueenPalvelut = new System.Windows.Forms.DataGridView();
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alueidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,6 +110,8 @@
             this.dtpAlkupvm = new System.Windows.Forms.DateTimePicker();
             this.lblPostinroMokki = new System.Windows.Forms.Label();
             this.lbPostitoimipaikka = new System.Windows.Forms.ListBox();
+            this.cmsTyhjennavalinta = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiTyhjenna = new System.Windows.Forms.ToolStripMenuItem();
             this.postiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbPostinroMokki = new System.Windows.Forms.TextBox();
             this.lbAlueid = new System.Windows.Forms.Label();
@@ -119,11 +126,6 @@
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
             this.palveluTableAdapter = new R13_MokkiBook.AlueenPAlvelutDataSetTableAdapters.palveluTableAdapter();
-            this.btnPoistaPalvelu = new System.Windows.Forms.Button();
-            this.cmsTyhjennavalinta = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiTyhjenna = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbPuhno = new System.Windows.Forms.TextBox();
-            this.tbSahkoposti = new System.Windows.Forms.TextBox();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
@@ -137,11 +139,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPalveluLkm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
+            this.cmsTyhjennavalinta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
-            this.cmsTyhjennavalinta.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlAsiakastiedot
@@ -169,6 +171,22 @@
             this.pnlAsiakastiedot.Name = "pnlAsiakastiedot";
             this.pnlAsiakastiedot.Size = new System.Drawing.Size(1068, 242);
             this.pnlAsiakastiedot.TabIndex = 0;
+            // 
+            // tbSahkoposti
+            // 
+            this.tbSahkoposti.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tbSahkoposti.Location = new System.Drawing.Point(93, 145);
+            this.tbSahkoposti.Name = "tbSahkoposti";
+            this.tbSahkoposti.Size = new System.Drawing.Size(150, 20);
+            this.tbSahkoposti.TabIndex = 5;
+            // 
+            // tbPuhno
+            // 
+            this.tbPuhno.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tbPuhno.Location = new System.Drawing.Point(93, 109);
+            this.tbPuhno.Name = "tbPuhno";
+            this.tbPuhno.Size = new System.Drawing.Size(150, 20);
+            this.tbPuhno.TabIndex = 4;
             // 
             // btnLisaa
             // 
@@ -553,6 +571,17 @@
             this.pnlPalvelut.Size = new System.Drawing.Size(547, 245);
             this.pnlPalvelut.TabIndex = 24;
             // 
+            // btnPoistaPalvelu
+            // 
+            this.btnPoistaPalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPoistaPalvelu.Location = new System.Drawing.Point(202, 131);
+            this.btnPoistaPalvelu.Name = "btnPoistaPalvelu";
+            this.btnPoistaPalvelu.Size = new System.Drawing.Size(92, 23);
+            this.btnPoistaPalvelu.TabIndex = 25;
+            this.btnPoistaPalvelu.Text = "Poista palvelu";
+            this.btnPoistaPalvelu.UseVisualStyleBackColor = true;
+            this.btnPoistaPalvelu.Click += new System.EventHandler(this.btnPoistaPalvelu_Click);
+            // 
             // dgvAlueenPalvelut
             // 
             this.dgvAlueenPalvelut.AllowUserToAddRows = false;
@@ -882,6 +911,20 @@
             this.lbPostitoimipaikka.Size = new System.Drawing.Size(162, 56);
             this.lbPostitoimipaikka.TabIndex = 14;
             // 
+            // cmsTyhjennavalinta
+            // 
+            this.cmsTyhjennavalinta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTyhjenna});
+            this.cmsTyhjennavalinta.Name = "cmsTyhjennavalinta";
+            this.cmsTyhjennavalinta.Size = new System.Drawing.Size(122, 26);
+            // 
+            // tsmiTyhjenna
+            // 
+            this.tsmiTyhjenna.Name = "tsmiTyhjenna";
+            this.tsmiTyhjenna.Size = new System.Drawing.Size(121, 22);
+            this.tsmiTyhjenna.Text = "Tyhjennä";
+            this.tsmiTyhjenna.Click += new System.EventHandler(this.tsmiTyhjenna_Click);
+            // 
             // postiBindingSource
             // 
             this.postiBindingSource.DataMember = "posti";
@@ -963,47 +1006,6 @@
             // 
             this.palveluTableAdapter.ClearBeforeFill = true;
             // 
-            // btnPoistaPalvelu
-            // 
-            this.btnPoistaPalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPoistaPalvelu.Location = new System.Drawing.Point(202, 131);
-            this.btnPoistaPalvelu.Name = "btnPoistaPalvelu";
-            this.btnPoistaPalvelu.Size = new System.Drawing.Size(92, 23);
-            this.btnPoistaPalvelu.TabIndex = 25;
-            this.btnPoistaPalvelu.Text = "Poista palvelu";
-            this.btnPoistaPalvelu.UseVisualStyleBackColor = true;
-            this.btnPoistaPalvelu.Click += new System.EventHandler(this.btnPoistaPalvelu_Click);
-            // 
-            // cmsTyhjennavalinta
-            // 
-            this.cmsTyhjennavalinta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiTyhjenna});
-            this.cmsTyhjennavalinta.Name = "cmsTyhjennavalinta";
-            this.cmsTyhjennavalinta.Size = new System.Drawing.Size(122, 26);
-            // 
-            // tsmiTyhjenna
-            // 
-            this.tsmiTyhjenna.Name = "tsmiTyhjenna";
-            this.tsmiTyhjenna.Size = new System.Drawing.Size(121, 22);
-            this.tsmiTyhjenna.Text = "Tyhjennä";
-            this.tsmiTyhjenna.Click += new System.EventHandler(this.tsmiTyhjenna_Click);
-            // 
-            // tbPuhno
-            // 
-            this.tbPuhno.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbPuhno.Location = new System.Drawing.Point(93, 109);
-            this.tbPuhno.Name = "tbPuhno";
-            this.tbPuhno.Size = new System.Drawing.Size(150, 20);
-            this.tbPuhno.TabIndex = 4;
-            // 
-            // tbSahkoposti
-            // 
-            this.tbSahkoposti.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbSahkoposti.Location = new System.Drawing.Point(93, 145);
-            this.tbSahkoposti.Name = "tbSahkoposti";
-            this.tbSahkoposti.Size = new System.Drawing.Size(150, 20);
-            this.tbSahkoposti.TabIndex = 5;
-            // 
             // frmUusiVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1032,11 +1034,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPalveluLkm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).EndInit();
+            this.cmsTyhjennavalinta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
-            this.cmsTyhjennavalinta.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1138,5 +1140,30 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiTyhjenna;
         private System.Windows.Forms.TextBox tbSahkoposti;
         private System.Windows.Forms.TextBox tbPuhno;
+    }
+
+    class AlueenPAlvelutDataSet
+    {
+        internal string DataSetName;
+        internal SchemaSerializationMode SchemaSerializationMode;
+    }
+
+    class AlueenPAlvelutDataSetTableAdapters
+    {
+        internal class palveluTableAdapter
+        {
+            internal bool ClearBeforeFill;
+
+            public palveluTableAdapter()
+            {
+            }
+        }
+    }
+}
+
+namespace AlueenPAlvelutDataSetTableAdapters
+{
+    class palveluTableAdapter
+    {
     }
 }
