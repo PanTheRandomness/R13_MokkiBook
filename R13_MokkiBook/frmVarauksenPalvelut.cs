@@ -94,7 +94,7 @@ namespace R13_MokkiBook
             }
             else
             {
-
+                MessageBox.Show("Mitään ei poistettu.");
             }
         }
 
