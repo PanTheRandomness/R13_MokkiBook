@@ -43,6 +43,14 @@ namespace R13_MokkiBook
             // Add the new row to the DataTable and update the database
             dataTable.Rows.Add(newRow);
             dataAdapter.Update(dataTable);
+
+            txtPalveluID.Text = String.Empty;
+            txtAlueID.Text = String.Empty;
+            txtNimi.Text = String.Empty;
+            txtTyyppi.Text = String.Empty;
+            txtKuvaus.Text = String.Empty;
+            txtHinta.Text = String.Empty;
+            txtAlv.Text = String.Empty;
         }
 
         private void frmUusiPalvelu_Load(object sender, EventArgs e)
@@ -124,6 +132,14 @@ namespace R13_MokkiBook
 
             // Update the database
             dataAdapter.Update(dataTable);
+
+            txtPalveluID.Text = String.Empty;
+            txtAlueID.Text = String.Empty;
+            txtNimi.Text = String.Empty;
+            txtTyyppi.Text = String.Empty;
+            txtKuvaus.Text = String.Empty;
+            txtHinta.Text = String.Empty;
+            txtAlv.Text = String.Empty;
         }
 
         private void fillBy2ToolStripButton_Click(object sender, EventArgs e)
@@ -147,19 +163,13 @@ namespace R13_MokkiBook
             // Delete the current DataRow from the DataTable and update the database
             currentRow.Delete();
             dataAdapter.Update(dataTable);
-        }
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            // When the selection in the DataGridView control changes, update the TextBox controls with the values of the selected row
-            if (dataGridView1.CurrentRow != null)
-            {
-                txtAlueID.Text = dataGridView1.CurrentRow.Cells["alue_id"].Value.ToString();
-                txtNimi.Text = dataGridView1.CurrentRow.Cells["nimi"].Value.ToString();
-                txtTyyppi.Text = dataGridView1.CurrentRow.Cells["tyyppi"].Value.ToString();
-                txtKuvaus.Text = dataGridView1.CurrentRow.Cells["kuvaus"].Value.ToString();
-                txtHinta.Text = dataGridView1.CurrentRow.Cells["hinta"].Value.ToString();
-                txtAlv.Text = dataGridView1.CurrentRow.Cells["alv"].Value.ToString();
-            }
+            txtPalveluID.Text = String.Empty;
+            txtAlueID.Text = String.Empty;
+            txtNimi.Text = String.Empty;
+            txtTyyppi.Text = String.Empty;
+            txtKuvaus.Text = String.Empty;
+            txtHinta.Text = String.Empty;
+            txtAlv.Text = String.Empty;
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -179,6 +189,21 @@ namespace R13_MokkiBook
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_SelectionChanged_1(object sender, EventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (dgv.CurrentRow != null)
+            {
+                txtPalveluID.Text = dgv.CurrentRow.Cells["palvelu_id"].Value.ToString();
+                txtAlueID.Text = dgv.CurrentRow.Cells["alue_id"].Value.ToString();
+                txtNimi.Text = dgv.CurrentRow.Cells["nimi"].Value.ToString();
+                txtTyyppi.Text = dgv.CurrentRow.Cells["tyyppi"].Value.ToString();
+                txtKuvaus.Text = dgv.CurrentRow.Cells["kuvaus"].Value.ToString();
+                txtHinta.Text = dgv.CurrentRow.Cells["hinta"].Value.ToString();
+                txtAlv.Text = dgv.CurrentRow.Cells["alv"].Value.ToString();
+            }
         }
     }
 }
