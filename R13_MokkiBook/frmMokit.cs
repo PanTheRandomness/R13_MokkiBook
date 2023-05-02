@@ -47,19 +47,22 @@ namespace R13_MokkiBook
                 
                 Mokki m = new Mokki();
 
-                m.mokki_id = tbMokkiId.Text;
-                m.alue_id = tbAlueId.Text;
+                m.mokki_id = int.Parse(tbMokkiId.Text);
+                m.alue_id = int .Parse(tbAlueId.Text);
                 m.postinro = tbPostinumero.Text;
                 m.mokkinimi = tbMokinnimi.Text;
                 m.katuosoite = tbKatuosoite.Text;
-                m.hinta = tbHinta.Text;
+                m.hinta = double.Parse(tbHinta.Text);
                 m.kuvaus = tbKuvaus.Text;
-                m.henkilomaara = tbHenkilomaara.Text;
+                m.henkilomaara = int.Parse(tbHenkilomaara.Text);
                 m.varustelu = tbVarustelu.Text;
 
                 mokit.Add(m);
 
-               // Tyhjenna();
+                dgvMokit.DataSource = null;
+                dgvMokit.DataSource = mokit;
+
+                // Tyhjenna();
             }
 
         }

@@ -33,7 +33,7 @@
             this.lbNimi = new System.Windows.Forms.Label();
             this.tbAlueId = new System.Windows.Forms.TextBox();
             this.tbNimi = new System.Windows.Forms.TextBox();
-            this.dgwAlue = new System.Windows.Forms.DataGridView();
+            this.dgvAlue = new System.Windows.Forms.DataGridView();
             this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nimiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -46,7 +46,7 @@
             this.dtpAlku = new System.Windows.Forms.DateTimePicker();
             this.lblPaivat = new System.Windows.Forms.Label();
             this.btnHae = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwAlue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAlue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.SuspendLayout();
@@ -83,20 +83,20 @@
             this.tbNimi.Size = new System.Drawing.Size(131, 22);
             this.tbNimi.TabIndex = 3;
             // 
-            // dgwAlue
+            // dgvAlue
             // 
-            this.dgwAlue.AutoGenerateColumns = false;
-            this.dgwAlue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwAlue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvAlue.AutoGenerateColumns = false;
+            this.dgvAlue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAlue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.alueidDataGridViewTextBoxColumn,
             this.nimiDataGridViewTextBoxColumn});
-            this.dgwAlue.DataSource = this.alueBindingSource;
-            this.dgwAlue.Location = new System.Drawing.Point(33, 186);
-            this.dgwAlue.Name = "dgwAlue";
-            this.dgwAlue.RowHeadersWidth = 51;
-            this.dgwAlue.RowTemplate.Height = 24;
-            this.dgwAlue.Size = new System.Drawing.Size(739, 243);
-            this.dgwAlue.TabIndex = 4;
+            this.dgvAlue.DataSource = this.alueBindingSource;
+            this.dgvAlue.Location = new System.Drawing.Point(33, 186);
+            this.dgvAlue.Name = "dgvAlue";
+            this.dgvAlue.RowHeadersWidth = 51;
+            this.dgvAlue.RowTemplate.Height = 24;
+            this.dgvAlue.Size = new System.Drawing.Size(739, 243);
+            this.dgvAlue.TabIndex = 4;
             // 
             // alueidDataGridViewTextBoxColumn
             // 
@@ -216,14 +216,14 @@
             this.Controls.Add(this.btnPoista);
             this.Controls.Add(this.btnMuokkaa);
             this.Controls.Add(this.btnLisaa);
-            this.Controls.Add(this.dgwAlue);
+            this.Controls.Add(this.dgvAlue);
             this.Controls.Add(this.tbNimi);
             this.Controls.Add(this.tbAlueId);
             this.Controls.Add(this.lbNimi);
             this.Controls.Add(this.lbAlueID);
             this.Name = "frmAlueet";
             this.Text = "Alueet";
-            ((System.ComponentModel.ISupportInitialize)(this.dgwAlue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAlue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.ResumeLayout(false);
@@ -237,7 +237,7 @@
         private System.Windows.Forms.Label lbNimi;
         private System.Windows.Forms.TextBox tbAlueId;
         private System.Windows.Forms.TextBox tbNimi;
-        private System.Windows.Forms.DataGridView dgwAlue;
+        private System.Windows.Forms.DataGridView dgvAlue;
         private System.Windows.Forms.Button btnLisaa;
         private System.Windows.Forms.Button btnMuokkaa;
         private System.Windows.Forms.Button btnPoista;

@@ -27,14 +27,17 @@ namespace R13_MokkiBook
             }
             else
             {
-
                 Alue a = new Alue();
-                a.alue_id = tbAlueId.Text;
+
+                a.alue_id = int.Parse(tbAlueId.Text);
                 a.nimi = tbNimi.Text;
 
                 alueet.Add(a);
+                dgvAlue.DataSource = null;
+                dgvAlue.DataSource = alueet;
 
                 // Tyhjenna();
+
             }
         }
     }
