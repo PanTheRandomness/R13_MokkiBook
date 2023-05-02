@@ -81,9 +81,10 @@ namespace R13_MokkiBook
             // 
             // txtNimi
             // 
-            this.txtNimi.Location = new System.Drawing.Point(235, 87);
+            this.txtNimi.Location = new System.Drawing.Point(235, 71);
+            this.txtNimi.Multiline = true;
             this.txtNimi.Name = "txtNimi";
-            this.txtNimi.Size = new System.Drawing.Size(100, 20);
+            this.txtNimi.Size = new System.Drawing.Size(100, 36);
             this.txtNimi.TabIndex = 3;
             // 
             // saveButton
@@ -135,7 +136,7 @@ namespace R13_MokkiBook
             // lbNimi
             // 
             this.lbNimi.AutoSize = true;
-            this.lbNimi.Location = new System.Drawing.Point(232, 71);
+            this.lbNimi.Location = new System.Drawing.Point(232, 55);
             this.lbNimi.Name = "lbNimi";
             this.lbNimi.Size = new System.Drawing.Size(27, 13);
             this.lbNimi.TabIndex = 4;
@@ -161,7 +162,7 @@ namespace R13_MokkiBook
             // lbHinta
             // 
             this.lbHinta.AutoSize = true;
-            this.lbHinta.Location = new System.Drawing.Point(358, 113);
+            this.lbHinta.Location = new System.Drawing.Point(358, 110);
             this.lbHinta.Name = "lbHinta";
             this.lbHinta.Size = new System.Drawing.Size(32, 13);
             this.lbHinta.TabIndex = 10;
@@ -169,7 +170,7 @@ namespace R13_MokkiBook
             // 
             // txtHinta
             // 
-            this.txtHinta.Location = new System.Drawing.Point(361, 127);
+            this.txtHinta.Location = new System.Drawing.Point(361, 124);
             this.txtHinta.Name = "txtHinta";
             this.txtHinta.Size = new System.Drawing.Size(100, 20);
             this.txtHinta.TabIndex = 6;
@@ -177,7 +178,7 @@ namespace R13_MokkiBook
             // lbKuvaus
             // 
             this.lbKuvaus.AutoSize = true;
-            this.lbKuvaus.Location = new System.Drawing.Point(358, 73);
+            this.lbKuvaus.Location = new System.Drawing.Point(358, 57);
             this.lbKuvaus.Name = "lbKuvaus";
             this.lbKuvaus.Size = new System.Drawing.Size(43, 13);
             this.lbKuvaus.TabIndex = 8;
@@ -185,9 +186,10 @@ namespace R13_MokkiBook
             // 
             // txtKuvaus
             // 
-            this.txtKuvaus.Location = new System.Drawing.Point(361, 87);
+            this.txtKuvaus.Location = new System.Drawing.Point(361, 71);
+            this.txtKuvaus.Multiline = true;
             this.txtKuvaus.Name = "txtKuvaus";
-            this.txtKuvaus.Size = new System.Drawing.Size(100, 20);
+            this.txtKuvaus.Size = new System.Drawing.Size(100, 36);
             this.txtKuvaus.TabIndex = 5;
             // 
             // lbAlv
