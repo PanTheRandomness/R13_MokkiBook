@@ -15,16 +15,18 @@ namespace R13_MokkiBook
     public partial class frmVaraukset : Form
     {
         public string connectionString = "Dsn=Village Newbies;uid=root";
-        public string hakuquery = "SELECT * FROM varaus";
+        public string hakuquery;
         public int valitturivi = -1;
         public DateTime nyt = DateTime.Now;
         public Varaus valittuvaraus;
         public List<Varaus> varaukset;
+        public List<Alue> alueet;
 
         public frmVaraukset()
         {
             InitializeComponent();
             varaukset = GetVaraukset();
+            alueet = GetAlueet();
         }
         public List<Varaus> GetVaraukset()
         {
@@ -55,6 +57,30 @@ namespace R13_MokkiBook
                 }
             }
             return var;
+        }
+        public List<Alue> GetAlueet()
+        {
+            List<Alue> alu = new List<Alue>();
+            string query = "SELECT * FROM alue";
+
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Alue a = new Alue();
+                            a.alue_id = reader.GetInt32(0);
+                            a.nimi = reader.GetString(1);
+                            alu.Add(a);
+                        }
+                    }
+                }
+            }
+            return alu;
         }
         public Varaus GetValittuVaraus()
         {
@@ -121,7 +147,17 @@ namespace R13_MokkiBook
         {
             if (ValidPvm())
             {
-
+                if (tbAlue.Text == null)
+                    MessageBox.Show("Hakua ei voitu suorittaa: Syötä aluetunnus.");
+                else
+                {
+                    if (ValidAluetunnus())
+                    {
+                        hakuquery = "SELECT * FROM varaus WHERE varattu_alkupvm >= " + dtpAlku.Value + " AND varattu_loppupvm <= " + dtpLoppu.Value + " AND mokki_mokki_id IN (SELECT mokki_id FROM mokki WHERE alue_id = " + tbAlue.Text +
+                    }
+                    else
+                        MessageBox.Show("Aluetunnusta ei tunnistettu.");
+                }
             }
             else
                 MessageBox.Show("Hakua ei voitu suorittaa: Varauksen alkupäivämäärän on oltava ennen sen päättymispäivämäärää.");
@@ -135,9 +171,25 @@ namespace R13_MokkiBook
                 return false;
         }
 
+        public bool ValidAluetunnus(int tunnus)
+        {
+            bool tunnus_loytyi = false;
+            int tbTunnus = int.Parse(tbAlue.Text);
+            foreach(Alue a in alueet)
+            {
+                if(a.alue_id == tbTunnus)
+                    tunnus_loytyi = true;
+            }
+            return tunnus_loytyi;
+        }
+
         private void btnTyhjennaHaku_Click(object sender, EventArgs e)
         {
-            hakuquery = "SELECT * FROM  varaus";
+            hakuquery = "SELECT * FROM varaus";
+            tbAlue.Text = String.Empty;
+            dtpAlku.Value = nyt;
+            dtpLoppu.Value = nyt;
+            PaivitaTaulu();
         }
 
         public void PaivitaTaulu()
@@ -159,6 +211,12 @@ namespace R13_MokkiBook
             dgvVaraukset.Columns[4].HeaderText = "Varaus vahvistettu";
             dgvVaraukset.Columns[5].HeaderText = "Varauksen alkupäivä";
             dgvVaraukset.Columns[6].HeaderText = "Varauksen päättymispäivä";
+        }
+
+        private void tbAlue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
+                e.Handled = true;
         }
     }
 }

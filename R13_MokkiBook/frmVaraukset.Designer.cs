@@ -305,6 +305,7 @@
             this.tbAlue.Name = "tbAlue";
             this.tbAlue.Size = new System.Drawing.Size(86, 20);
             this.tbAlue.TabIndex = 3;
+            this.tbAlue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlue_KeyPress);
             // 
             // btnTyhjennaHaku
             // 

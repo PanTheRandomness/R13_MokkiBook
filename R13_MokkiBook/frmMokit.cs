@@ -117,7 +117,7 @@ namespace R13_MokkiBook
 
             tbMokkiId.Text = String.Empty;
             tbAlueId.Text = String.Empty;
-            tbPostinumero.Text = String Empty;
+            tbPostinumero.Text = String.Empty;
             tbMokinnimi.Text = String.Empty;
             tbKatuosoite.Text = String.Empty;
             tbHinta.Text = String.Empty;
