@@ -153,7 +153,9 @@ namespace R13_MokkiBook
                 {
                     if (ValidAluetunnus())
                     {
-                        hakuquery = "SELECT * FROM varaus WHERE varattu_alkupvm >= " + hakualku + " AND varattu_loppupvm <= " + hakuloppu + " AND mokki_mokki_id IN (SELECT mokki_id FROM mokki WHERE alue_id = " + tbAlue.Text + ");";
+                        hakuquery = "SELECT * FROM varaus WHERE varattu_alkupvm >= " + hakualku.ToShortDateString() + " AND varattu_loppupvm <= " + hakuloppu.ToShortDateString() + " AND mokki_mokki_id IN (SELECT mokki_id FROM mokki WHERE alue_id = " + tbAlue.Text + ");";
+                        PaivitaTaulu();
+                        //MIKSEI NÄYTÄ??
                     }
                     else
                         MessageBox.Show("Aluetunnusta ei tunnistettu.");
@@ -221,7 +223,7 @@ namespace R13_MokkiBook
 
         private void tbAlue_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))//TESTAA
+            if((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
         }
 
