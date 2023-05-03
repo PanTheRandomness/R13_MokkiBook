@@ -18,6 +18,8 @@ namespace R13_MokkiBook
         public string hakuquery;
         public int valitturivi = -1;
         public DateTime nyt = DateTime.Now;
+        public DateTime hakualku = DateTime.Now;
+        public DateTime hakuloppu = DateTime.Now;
         public Varaus valittuvaraus;
         public List<Varaus> varaukset;
         public List<Alue> alueet;
@@ -147,17 +149,17 @@ namespace R13_MokkiBook
         {
             if (ValidPvm())
             {
-                if (tbAlue.Text == null)
-                    MessageBox.Show("Hakua ei voitu suorittaa: Syötä aluetunnus.");
-                else
+                if (tbAlue.TextLength > 0)
                 {
                     if (ValidAluetunnus())
                     {
-                        hakuquery = "SELECT * FROM varaus WHERE varattu_alkupvm >= " + dtpAlku.Value + " AND varattu_loppupvm <= " + dtpLoppu.Value + " AND mokki_mokki_id IN (SELECT mokki_id FROM mokki WHERE alue_id = " + tbAlue.Text +
+                        hakuquery = "SELECT * FROM varaus WHERE varattu_alkupvm >= " + hakualku + " AND varattu_loppupvm <= " + hakuloppu + " AND mokki_mokki_id IN (SELECT mokki_id FROM mokki WHERE alue_id = " + tbAlue.Text + ");";
                     }
                     else
                         MessageBox.Show("Aluetunnusta ei tunnistettu.");
                 }
+                else
+                    MessageBox.Show("Hakua ei voitu suorittaa: Syötä aluetunnus.");
             }
             else
                 MessageBox.Show("Hakua ei voitu suorittaa: Varauksen alkupäivämäärän on oltava ennen sen päättymispäivämäärää.");
@@ -165,13 +167,15 @@ namespace R13_MokkiBook
 
         public bool ValidPvm()
         {
-            if(dtpAlku.Value < dtpLoppu.Value)
+            if(hakualku < hakuloppu)
+                return true;
+            else if(hakualku.Equals(hakuloppu))
                 return true;
             else
                 return false;
         }
 
-        public bool ValidAluetunnus(int tunnus)
+        public bool ValidAluetunnus()
         {
             bool tunnus_loytyi = false;
             int tbTunnus = int.Parse(tbAlue.Text);
@@ -189,6 +193,8 @@ namespace R13_MokkiBook
             tbAlue.Text = String.Empty;
             dtpAlku.Value = nyt;
             dtpLoppu.Value = nyt;
+            hakualku = nyt;
+            hakuloppu = nyt;
             PaivitaTaulu();
         }
 
@@ -215,8 +221,18 @@ namespace R13_MokkiBook
 
         private void tbAlue_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
+            if((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))//TESTAA
                 e.Handled = true;
+        }
+
+        private void dtpAlku_ValueChanged(object sender, EventArgs e)
+        {
+            hakualku = dtpAlku.Value;
+        }
+
+        private void dtpLoppu_ValueChanged(object sender, EventArgs e)
+        {
+            hakuloppu = dtpLoppu.Value;
         }
     }
 }

@@ -212,6 +212,7 @@
             this.dtpAlku.Name = "dtpAlku";
             this.dtpAlku.Size = new System.Drawing.Size(200, 20);
             this.dtpAlku.TabIndex = 1;
+            this.dtpAlku.ValueChanged += new System.EventHandler(this.dtpAlku_ValueChanged);
             // 
             // lblViiva
             // 
@@ -230,6 +231,7 @@
             this.dtpLoppu.Name = "dtpLoppu";
             this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
             this.dtpLoppu.TabIndex = 2;
+            this.dtpLoppu.ValueChanged += new System.EventHandler(this.dtpLoppu_ValueChanged);
             // 
             // lblAlue
             // 
