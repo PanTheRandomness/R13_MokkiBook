@@ -48,29 +48,24 @@
             this.pnlToiminnot = new System.Windows.Forms.Panel();
             this.lblPaivat = new System.Windows.Forms.Label();
             this.dtpAlku = new System.Windows.Forms.DateTimePicker();
-            this.cmsTyhjenna = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tyhjennaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblViiva = new System.Windows.Forms.Label();
             this.dtpLoppu = new System.Windows.Forms.DateTimePicker();
             this.lblAlue = new System.Windows.Forms.Label();
-            this.cbAlue = new System.Windows.Forms.ComboBox();
-            this.lblMokki = new System.Windows.Forms.Label();
-            this.cbMokki = new System.Windows.Forms.ComboBox();
             this.mokkiBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.Asiakas = new System.Windows.Forms.Label();
-            this.cbAsiakas = new System.Windows.Forms.ComboBox();
             this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnRaportti = new System.Windows.Forms.Button();
             this.btnUusi = new System.Windows.Forms.Button();
             this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
             this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
             this.pdRaportti = new System.Windows.Forms.PrintDialog();
+            this.btnHae = new System.Windows.Forms.Button();
+            this.tbAlue = new System.Windows.Forms.TextBox();
+            this.btnTyhjennaHaku = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             this.cmsVaraustaulunMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-            this.cmsTyhjenna.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -213,26 +208,10 @@
             // dtpAlku
             // 
             this.dtpAlku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpAlku.ContextMenuStrip = this.cmsTyhjenna;
             this.dtpAlku.Location = new System.Drawing.Point(59, 592);
             this.dtpAlku.Name = "dtpAlku";
             this.dtpAlku.Size = new System.Drawing.Size(200, 20);
             this.dtpAlku.TabIndex = 1;
-            this.dtpAlku.ValueChanged += new System.EventHandler(this.dtpAlku_ValueChanged);
-            // 
-            // cmsTyhjenna
-            // 
-            this.cmsTyhjenna.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tyhjennaToolStripMenuItem});
-            this.cmsTyhjenna.Name = "cmsTyhjenna";
-            this.cmsTyhjenna.Size = new System.Drawing.Size(122, 26);
-            // 
-            // tyhjennaToolStripMenuItem
-            // 
-            this.tyhjennaToolStripMenuItem.Name = "tyhjennaToolStripMenuItem";
-            this.tyhjennaToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.tyhjennaToolStripMenuItem.Text = "Tyhjennä";
-            this.tyhjennaToolStripMenuItem.Click += new System.EventHandler(this.tyhjennaToolStripMenuItem_Click);
             // 
             // lblViiva
             // 
@@ -247,12 +226,10 @@
             // dtpLoppu
             // 
             this.dtpLoppu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpLoppu.ContextMenuStrip = this.cmsTyhjenna;
             this.dtpLoppu.Location = new System.Drawing.Point(281, 592);
             this.dtpLoppu.Name = "dtpLoppu";
             this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
             this.dtpLoppu.TabIndex = 2;
-            this.dtpLoppu.ValueChanged += new System.EventHandler(this.dtpLoppu_ValueChanged);
             // 
             // lblAlue
             // 
@@ -260,72 +237,14 @@
             this.lblAlue.AutoSize = true;
             this.lblAlue.Location = new System.Drawing.Point(487, 594);
             this.lblAlue.Name = "lblAlue";
-            this.lblAlue.Size = new System.Drawing.Size(28, 13);
+            this.lblAlue.Size = new System.Drawing.Size(60, 13);
             this.lblAlue.TabIndex = 3;
-            this.lblAlue.Text = "Alue";
-            // 
-            // cbAlue
-            // 
-            this.cbAlue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbAlue.ContextMenuStrip = this.cmsTyhjenna;
-            this.cbAlue.Enabled = false;
-            this.cbAlue.FormattingEnabled = true;
-            this.cbAlue.Location = new System.Drawing.Point(521, 590);
-            this.cbAlue.Name = "cbAlue";
-            this.cbAlue.Size = new System.Drawing.Size(86, 21);
-            this.cbAlue.TabIndex = 3;
-            this.cbAlue.SelectedIndexChanged += new System.EventHandler(this.cbAlue_SelectedIndexChanged);
-            // 
-            // lblMokki
-            // 
-            this.lblMokki.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblMokki.AutoSize = true;
-            this.lblMokki.Location = new System.Drawing.Point(613, 594);
-            this.lblMokki.Name = "lblMokki";
-            this.lblMokki.Size = new System.Drawing.Size(36, 13);
-            this.lblMokki.TabIndex = 4;
-            this.lblMokki.Text = "Mökki";
-            // 
-            // cbMokki
-            // 
-            this.cbMokki.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbMokki.ContextMenuStrip = this.cmsTyhjenna;
-            this.cbMokki.DataSource = this.mokkiBindingSource;
-            this.cbMokki.DisplayMember = "mokki_id";
-            this.cbMokki.FormattingEnabled = true;
-            this.cbMokki.Location = new System.Drawing.Point(655, 590);
-            this.cbMokki.Name = "cbMokki";
-            this.cbMokki.Size = new System.Drawing.Size(86, 21);
-            this.cbMokki.TabIndex = 4;
-            this.cbMokki.SelectedIndexChanged += new System.EventHandler(this.cbMokki_SelectedIndexChanged);
+            this.lblAlue.Text = "Aluetunnus";
             // 
             // mokkiBindingSource
             // 
             this.mokkiBindingSource.DataMember = "mokki";
             this.mokkiBindingSource.DataSource = this.dataSet1BindingSource;
-            // 
-            // Asiakas
-            // 
-            this.Asiakas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Asiakas.AutoSize = true;
-            this.Asiakas.Location = new System.Drawing.Point(747, 594);
-            this.Asiakas.Name = "Asiakas";
-            this.Asiakas.Size = new System.Drawing.Size(44, 13);
-            this.Asiakas.TabIndex = 5;
-            this.Asiakas.Text = "Asiakas";
-            // 
-            // cbAsiakas
-            // 
-            this.cbAsiakas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbAsiakas.ContextMenuStrip = this.cmsTyhjenna;
-            this.cbAsiakas.DataSource = this.alueBindingSource;
-            this.cbAsiakas.DisplayMember = "nimi";
-            this.cbAsiakas.FormattingEnabled = true;
-            this.cbAsiakas.Location = new System.Drawing.Point(797, 591);
-            this.cbAsiakas.Name = "cbAsiakas";
-            this.cbAsiakas.Size = new System.Drawing.Size(86, 21);
-            this.cbAsiakas.TabIndex = 5;
-            this.cbAsiakas.SelectedIndexChanged += new System.EventHandler(this.cbAsiakas_SelectedIndexChanged);
             // 
             // alueBindingSource
             // 
@@ -335,11 +254,11 @@
             // btnRaportti
             // 
             this.btnRaportti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRaportti.Location = new System.Drawing.Point(889, 588);
+            this.btnRaportti.Location = new System.Drawing.Point(787, 590);
             this.btnRaportti.Name = "btnRaportti";
-            this.btnRaportti.Size = new System.Drawing.Size(64, 23);
-            this.btnRaportti.TabIndex = 7;
-            this.btnRaportti.Text = "Raportti";
+            this.btnRaportti.Size = new System.Drawing.Size(97, 23);
+            this.btnRaportti.TabIndex = 6;
+            this.btnRaportti.Text = "Tulosta raportti";
             this.btnRaportti.UseVisualStyleBackColor = true;
             this.btnRaportti.Click += new System.EventHandler(this.btnRaportti_Click);
             // 
@@ -349,7 +268,7 @@
             this.btnUusi.Location = new System.Drawing.Point(1187, 591);
             this.btnUusi.Name = "btnUusi";
             this.btnUusi.Size = new System.Drawing.Size(75, 23);
-            this.btnUusi.TabIndex = 8;
+            this.btnUusi.TabIndex = 7;
             this.btnUusi.Text = "Uusi varaus";
             this.btnUusi.UseVisualStyleBackColor = true;
             this.btnUusi.Click += new System.EventHandler(this.btnUusi_Click);
@@ -368,18 +287,46 @@
             this.pdRaportti.ShowHelp = true;
             this.pdRaportti.UseEXDialog = true;
             // 
+            // btnHae
+            // 
+            this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnHae.Location = new System.Drawing.Point(643, 590);
+            this.btnHae.Name = "btnHae";
+            this.btnHae.Size = new System.Drawing.Size(39, 23);
+            this.btnHae.TabIndex = 4;
+            this.btnHae.Text = "Hae";
+            this.btnHae.UseVisualStyleBackColor = true;
+            this.btnHae.Click += new System.EventHandler(this.btnHae_Click_1);
+            // 
+            // tbAlue
+            // 
+            this.tbAlue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbAlue.Location = new System.Drawing.Point(551, 592);
+            this.tbAlue.Name = "tbAlue";
+            this.tbAlue.Size = new System.Drawing.Size(86, 20);
+            this.tbAlue.TabIndex = 3;
+            // 
+            // btnTyhjennaHaku
+            // 
+            this.btnTyhjennaHaku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnTyhjennaHaku.Location = new System.Drawing.Point(688, 589);
+            this.btnTyhjennaHaku.Name = "btnTyhjennaHaku";
+            this.btnTyhjennaHaku.Size = new System.Drawing.Size(93, 23);
+            this.btnTyhjennaHaku.TabIndex = 5;
+            this.btnTyhjennaHaku.Text = "Tyhjennä haku";
+            this.btnTyhjennaHaku.UseVisualStyleBackColor = true;
+            this.btnTyhjennaHaku.Click += new System.EventHandler(this.btnTyhjennaHaku_Click);
+            // 
             // frmVaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1274, 620);
+            this.Controls.Add(this.btnTyhjennaHaku);
+            this.Controls.Add(this.tbAlue);
+            this.Controls.Add(this.btnHae);
             this.Controls.Add(this.btnUusi);
             this.Controls.Add(this.btnRaportti);
-            this.Controls.Add(this.cbAsiakas);
-            this.Controls.Add(this.Asiakas);
-            this.Controls.Add(this.cbMokki);
-            this.Controls.Add(this.lblMokki);
-            this.Controls.Add(this.cbAlue);
             this.Controls.Add(this.lblAlue);
             this.Controls.Add(this.dtpLoppu);
             this.Controls.Add(this.lblViiva);
@@ -390,15 +337,12 @@
             this.MinimumSize = new System.Drawing.Size(1290, 659);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVaraukset_FormClosing);
             this.Load += new System.EventHandler(this.frmVaraukset_Load);
-            this.Leave += new System.EventHandler(this.frmVaraukset_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).EndInit();
             this.cmsVaraustaulunMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
-            this.cmsTyhjenna.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -430,19 +374,15 @@
         private System.Windows.Forms.Label lblViiva;
         private System.Windows.Forms.DateTimePicker dtpLoppu;
         private System.Windows.Forms.Label lblAlue;
-        private System.Windows.Forms.ComboBox cbAlue;
-        private System.Windows.Forms.Label lblMokki;
-        private System.Windows.Forms.ComboBox cbMokki;
-        private System.Windows.Forms.Label Asiakas;
-        private System.Windows.Forms.ComboBox cbAsiakas;
         private System.Windows.Forms.Button btnRaportti;
         private System.Windows.Forms.Button btnUusi;
         private System.Windows.Forms.BindingSource mokkiBindingSource;
         private DataSet1TableAdapters.mokkiTableAdapter mokkiTableAdapter;
         private System.Windows.Forms.BindingSource alueBindingSource;
         private DataSet1TableAdapters.alueTableAdapter alueTableAdapter;
-        private System.Windows.Forms.ContextMenuStrip cmsTyhjenna;
-        private System.Windows.Forms.ToolStripMenuItem tyhjennaToolStripMenuItem;
         private System.Windows.Forms.PrintDialog pdRaportti;
+        private System.Windows.Forms.Button btnHae;
+        private System.Windows.Forms.TextBox tbAlue;
+        private System.Windows.Forms.Button btnTyhjennaHaku;
     }
 }

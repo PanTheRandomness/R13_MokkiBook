@@ -14,14 +14,12 @@ namespace R13_MokkiBook
 {
     public partial class frmVaraukset : Form
     {
+        public string connectionString = "Dsn=Village Newbies;uid=root";
+        public string hakuquery = "SELECT * FROM varaus";
         public int valitturivi = -1;
         public DateTime nyt = DateTime.Now;
         public Varaus valittuvaraus;
-        public Varaus haku = new Varaus();
         public List<Varaus> varaukset;
-        public bool muutettu = false;
-       //?? public bool pvmoikein = true;
-        public string connectionString = "Dsn=Village Newbies;uid=root";
 
         public frmVaraukset()
         {
@@ -88,46 +86,6 @@ namespace R13_MokkiBook
             valittuvaraus = GetValittuVaraus();
         }
 
-        private void dtpAlku_ValueChanged(object sender, EventArgs e)
-        {
-            if(dtpAlku.Value > haku.varattu_loppupvm)
-            {
-                MessageBox.Show("Alkupäivämäärä ei voi olla loppupäivämäärän jälkeen.");
-                //JATKA TÄSTÄ
-            }
-            else
-                haku.varattu_alkupvm = dtpAlku.Value;
-        }
-
-        private void dtpLoppu_ValueChanged(object sender, EventArgs e)
-        {
-            if(dtpLoppu.Value < haku.varattu_alkupvm) 
-            { 
-
-            }
-        }
-
-        private void cbAlue_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //query = "SELECT * FROM ";
-        }
-
-        private void cbMokki_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //query = "SELECT * FROM varaus WHERE mokki_mokki_id = " + cbMokki.SelectedItem.ToString();
-        }
-
-        private void cbAsiakas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnHae_Click(object sender, EventArgs e)
-        {
-            //Esittää dgv:ssä vain 
-        }
-
-
         private void btnRaportti_Click(object sender, EventArgs e)
         {
             pdRaportti.ShowDialog();
@@ -159,61 +117,48 @@ namespace R13_MokkiBook
             //VALIDOI
         }
 
-        private void frmVaraukset_Leave(object sender, EventArgs e)
+        private void btnHae_Click_1(object sender, EventArgs e)
         {
-            if (muutettu)
+            if (ValidPvm())
             {
-                Form menu = new Form();
-                if (DialogResult.Yes == MessageBox.Show("Tallennetaanko muutokset?", "Muutoksia ei ole tallennettu", MessageBoxButtons.YesNo))
-                {
-                    Tallenna();
-                    this.Hide();
-                    menu = Application.OpenForms["frmAlkunaytto"];
-                    menu.Show();
-                }
-                else
-                {
-                    this.Hide();
-                    menu = Application.OpenForms["frmAlkunaytto"];
-                    menu.Show();
-                }
+
             }
+            else
+                MessageBox.Show("Hakua ei voitu suorittaa: Varauksen alkupäivämäärän on oltava ennen sen päättymispäivämäärää.");
         }
 
-        private void cmsVaraustaulunMenu_Opening(object sender, CancelEventArgs e)
+        public bool ValidPvm()
         {
-
+            if(dtpAlku.Value < dtpLoppu.Value)
+                return true;
+            else
+                return false;
         }
 
-        private void tyhjennaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnTyhjennaHaku_Click(object sender, EventArgs e)
         {
-            //tyhjentää hakukriteerin sender.jotain
+            hakuquery = "SELECT * FROM  varaus";
         }
 
-        public void Tallenna() //Tähän vielä vienti
+        public void PaivitaTaulu()
         {
-            muutettu = false;
-        }
-
-        private void frmVaraukset_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if(muutettu)
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(hakuquery, connection))
             {
-                Form menu = new Form();
-                if (DialogResult.Yes == MessageBox.Show("Tallennetaanko muutokset?", "Muutoksia ei ole tallennettu", MessageBoxButtons.YesNo))
-                {
-                    Tallenna();
-                    this.Hide();
-                    menu = Application.OpenForms["frmAlkunaytto"];
-                    menu.Show();
-                }
-                else
-                {
-                    this.Hide();
-                    menu = Application.OpenForms["frmAlkunaytto"];
-                    menu.Show();
-                }
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
             }
+            dgvVaraukset.DataSource = dataTable;
+
+            dgvVaraukset.Columns[0].HeaderText = "Varaustunnus";
+            dgvVaraukset.Columns[1].HeaderText = "Asiakastunnus";
+            dgvVaraukset.Columns[2].HeaderText = "Mökki";
+            dgvVaraukset.Columns[3].HeaderText = "Varaus tehty";
+            dgvVaraukset.Columns[4].HeaderText = "Varaus vahvistettu";
+            dgvVaraukset.Columns[5].HeaderText = "Varauksen alkupäivä";
+            dgvVaraukset.Columns[6].HeaderText = "Varauksen päättymispäivä";
         }
     }
 }
