@@ -273,6 +273,7 @@
             this.btnLisaa.TabIndex = 15;
             this.btnLisaa.Text = "Lisää asiakas";
             this.btnLisaa.UseVisualStyleBackColor = true;
+            this.btnLisaa.Click += new System.EventHandler(this.btnLisaa_Click);
             // 
             // btnMuokkaa
             // 
@@ -282,6 +283,7 @@
             this.btnMuokkaa.TabIndex = 16;
             this.btnMuokkaa.Text = "Muokkaa";
             this.btnMuokkaa.UseVisualStyleBackColor = true;
+            this.btnMuokkaa.Click += new System.EventHandler(this.btnMuokkaa_Click);
             // 
             // btnPoista
             // 
@@ -291,6 +293,7 @@
             this.btnPoista.TabIndex = 17;
             this.btnPoista.Text = "Poista";
             this.btnPoista.UseVisualStyleBackColor = true;
+            this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
             // dtpLoppu
             // 
