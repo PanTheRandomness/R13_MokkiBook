@@ -195,6 +195,18 @@ namespace R13_MokkiBook
                 }
             }
         }
+
+        private void tbNimi_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+        }
     }
     
 }

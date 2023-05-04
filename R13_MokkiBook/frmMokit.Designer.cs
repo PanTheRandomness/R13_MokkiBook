@@ -168,6 +168,7 @@
             this.tbKatuosoite.Name = "tbKatuosoite";
             this.tbKatuosoite.Size = new System.Drawing.Size(168, 22);
             this.tbKatuosoite.TabIndex = 3;
+            this.tbKatuosoite.Leave += new System.EventHandler(this.tbKatuosoite_Leave);
             // 
             // tbVarustelu
             // 
@@ -204,6 +205,7 @@
             this.tbMokinnimi.Name = "tbMokinnimi";
             this.tbMokinnimi.Size = new System.Drawing.Size(168, 22);
             this.tbMokinnimi.TabIndex = 2;
+            this.tbMokinnimi.Leave += new System.EventHandler(this.tbMokinnimi_Leave);
             // 
             // tbPostinumero
             // 
@@ -211,6 +213,7 @@
             this.tbPostinumero.Name = "tbPostinumero";
             this.tbPostinumero.Size = new System.Drawing.Size(168, 22);
             this.tbPostinumero.TabIndex = 1;
+            this.tbPostinumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinumero_KeyPress);
             // 
             // tbAlueId
             // 
@@ -234,11 +237,11 @@
             this.henkilomaara,
             this.varustelu});
             this.dgvMokit.DataSource = this.mokkiBindingSource;
-            this.dgvMokit.Location = new System.Drawing.Point(31, 259);
+            this.dgvMokit.Location = new System.Drawing.Point(31, 278);
             this.dgvMokit.Name = "dgvMokit";
             this.dgvMokit.RowHeadersWidth = 51;
             this.dgvMokit.RowTemplate.Height = 24;
-            this.dgvMokit.Size = new System.Drawing.Size(719, 170);
+            this.dgvMokit.Size = new System.Drawing.Size(1470, 399);
             this.dgvMokit.TabIndex = 11;
             this.dgvMokit.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMokit_RowHeaderMouseDoubleClick);
             this.dgvMokit.SelectionChanged += new System.EventHandler(this.dgvMokit_SelectionChanged);
@@ -359,7 +362,7 @@
             // 
             this.lblViiva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblViiva.AutoSize = true;
-            this.lblViiva.Location = new System.Drawing.Point(364, 447);
+            this.lblViiva.Location = new System.Drawing.Point(364, 680);
             this.lblViiva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblViiva.Name = "lblViiva";
             this.lblViiva.Size = new System.Drawing.Size(11, 16);
@@ -386,15 +389,15 @@
             // 
             // tbHae
             // 
-            this.tbHae.Location = new System.Drawing.Point(515, 447);
+            this.tbHae.Location = new System.Drawing.Point(1190, 228);
             this.tbHae.Name = "tbHae";
-            this.tbHae.Size = new System.Drawing.Size(150, 22);
+            this.tbHae.Size = new System.Drawing.Size(237, 22);
             this.tbHae.TabIndex = 12;
             // 
             // btnHae
             // 
             this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHae.Location = new System.Drawing.Point(683, 444);
+            this.btnHae.Location = new System.Drawing.Point(1434, 225);
             this.btnHae.Margin = new System.Windows.Forms.Padding(4);
             this.btnHae.Name = "btnHae";
             this.btnHae.Size = new System.Drawing.Size(67, 28);
@@ -407,7 +410,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 525);
+            this.ClientSize = new System.Drawing.Size(1615, 758);
             this.Controls.Add(this.tbHae);
             this.Controls.Add(this.btnHae);
             this.Controls.Add(this.btnTyhjenna);

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace R13_MokkiBook
 {
@@ -269,6 +269,36 @@ namespace R13_MokkiBook
             }
         }
 
+        private void tbPostinumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
 
+        private void tbMokinnimi_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+        }
+
+        private void tbKatuosoite_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+        }
     }
 }
