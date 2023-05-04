@@ -172,7 +172,7 @@ namespace R13_MokkiBook
                     {
                         foreach (DataGridViewRow row in dgvAlue.Rows)
                         {
-                            if (row.Cells["alue_id"].Value != null && row.Cells["mokki_id"].Value.ToString().Equals(searchValue))
+                            if (row.Cells["alue_id"].Value != null && row.Cells["alue_id"].Value.ToString().Equals(searchValue))
                             {
                                 dgvAlue.CurrentCell = row.Cells["alue_id"];
                                 row.Selected = true;
@@ -196,5 +196,5 @@ namespace R13_MokkiBook
             }
         }
     }
-    }
+    
 }

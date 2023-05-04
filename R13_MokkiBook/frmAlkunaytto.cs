@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace R13_MokkiBook
         public frmAlkunaytto()
         {
             InitializeComponent();
+            lokiinTallentaminen("Ohjelma avattiin käyttäjältä: ");
         }
 
         private void frmAlkunaytto_Load(object sender, EventArgs e)
@@ -57,6 +59,18 @@ namespace R13_MokkiBook
         {
             frmLaskut la = new frmLaskut();
             la.ShowDialog();
+        }
+
+        /* Lokiin tallentaminen */
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
     }
 }
