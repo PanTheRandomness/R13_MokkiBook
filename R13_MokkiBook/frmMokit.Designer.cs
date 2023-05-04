@@ -161,6 +161,7 @@
             this.tbMokkiId.Name = "tbMokkiId";
             this.tbMokkiId.Size = new System.Drawing.Size(168, 22);
             this.tbMokkiId.TabIndex = 10;
+            this.tbMokkiId.TextChanged += new System.EventHandler(this.tbMokkiId_TextChanged);
             // 
             // tbKatuosoite
             // 

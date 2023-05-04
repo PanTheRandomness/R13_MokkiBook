@@ -96,12 +96,28 @@ namespace R13_MokkiBook
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
+            DataRow currentRow = ((DataRowView)dgvAlue.CurrentRow.DataBoundItem).Row;
 
+            currentRow["alue_id"] = tbAlueId.Text;
+            currentRow["nimi"] = tbNimi.Text;
+
+
+            dataAdapter.Update(dataTable);
+
+
+            tbAlueId.Text = String.Empty;
+            tbNimi.Text = String.Empty;
         }
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
+            DataRow currentRow = ((DataRowView)dgvAlue.CurrentRow.DataBoundItem).Row;
 
+            currentRow.Delete();
+            dataAdapter.Update(dataTable);
+
+            tbAlueId.Text = String.Empty;
+            tbNimi.Text = String.Empty;
         }
     }
 }

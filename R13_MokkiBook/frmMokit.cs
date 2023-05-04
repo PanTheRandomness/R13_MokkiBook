@@ -48,14 +48,14 @@ namespace R13_MokkiBook
                         {
                             Mokki m = new Mokki();
                             m.mokki_id = reader.GetInt32(0);
-                            m.alue_id = reader.GetInt32(0);
-                            m.postinro = reader.GetString(1);
-                            m.mokkinimi = reader.GetString(1);
-                            m.katuosoite = reader.GetString(1);
-                            m.hinta = reader.GetDouble(3);
-                            m.kuvaus = reader.GetString(1);
-                            m.henkilomaara = reader.GetInt32(0);
-                            m.varustelu = reader.GetString(1);
+                            m.alue_id = reader.GetInt32(1);
+                            m.postinro = reader.GetString(2);
+                            m.mokkinimi = reader.GetString(3);
+                            m.katuosoite = reader.GetString(4);
+                            m.hinta = reader.GetDouble(5);
+                            m.kuvaus = reader.GetString(6);
+                            m.henkilomaara = reader.GetInt32(7);
+                            m.varustelu = reader.GetString(8);
 
                             mok.Add(m);
                         }
@@ -129,12 +129,55 @@ namespace R13_MokkiBook
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
+            
+            DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
+
+
+            currentRow["mokki_id"] = tbMokkiId.Text;
+            currentRow["alue_id"] = tbAlueId.Text;
+            currentRow["postinro"] = tbPostinumero.Text;
+            currentRow["mokkinimi"] = tbMokinnimi.Text;
+            currentRow["katuosoite"] = tbKatuosoite.Text;
+            currentRow["hinta"] = tbHinta.Text;
+            currentRow["kuvaus"] = tbKuvaus.Text;
+            currentRow["henkilomaara"] = tbHenkilomaara.Text;
+            currentRow["varustelu"] = tbVarustelu.Text;
+
+            dataAdapter.Update(dataTable);
+
+            tbMokkiId.Text = String.Empty;
+            tbAlueId.Text = String.Empty;
+            tbPostinumero.Text = String.Empty;
+            tbMokinnimi.Text = String.Empty;
+            tbKatuosoite.Text = String.Empty;
+            tbHinta.Text = String.Empty;
+            tbKuvaus.Text = String.Empty;
+            tbHenkilomaara.Text = String.Empty;
+            tbVarustelu.Text = String.Empty;
 
         }
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
 
+            DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
+
+            currentRow.Delete();
+            dataAdapter.Update(dataTable);
+            tbMokkiId.Text = String.Empty;
+            tbAlueId.Text = String.Empty;
+            tbPostinumero.Text = String.Empty;
+            tbMokinnimi.Text = String.Empty;
+            tbKatuosoite.Text = String.Empty;
+            tbHinta.Text = String.Empty;
+            tbKuvaus.Text = String.Empty;
+            tbHenkilomaara.Text = String.Empty;
+            tbVarustelu.Text = String.Empty;
+        }
+
+        private void tbMokkiId_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
