@@ -127,5 +127,14 @@ namespace R13_MokkiBook
 
         }
 
+        private void btnMuokkaa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPoista_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

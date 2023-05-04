@@ -93,5 +93,15 @@ namespace R13_MokkiBook
             // Fill the DataSet with data from the database
             dataAdapter.Fill(dataSet1);
         }
+
+        private void btnMuokkaa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPoista_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

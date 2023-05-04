@@ -341,6 +341,7 @@
             this.btnMuokkaa.TabIndex = 24;
             this.btnMuokkaa.Text = "Muokkaa";
             this.btnMuokkaa.UseVisualStyleBackColor = true;
+            this.btnMuokkaa.Click += new System.EventHandler(this.btnMuokkaa_Click);
             // 
             // btnPoista
             // 
@@ -350,6 +351,7 @@
             this.btnPoista.TabIndex = 25;
             this.btnPoista.Text = "Poista";
             this.btnPoista.UseVisualStyleBackColor = true;
+            this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
             // dtpLoppu
             // 
