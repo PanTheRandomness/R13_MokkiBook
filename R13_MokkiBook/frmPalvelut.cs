@@ -62,10 +62,10 @@ namespace R13_MokkiBook
                             Palvelu palvelu = new Palvelu();
                             palvelu.palvelu_id = reader.GetInt32(0);
                             palvelu.nimi = reader.GetString(1);
-                            palvelu.tyyppi = reader.GetInt32(1);
-                            palvelu.kuvaus = reader.GetString(1);
-                            palvelu.hinta = reader.GetInt32(0);
-                            palvelu.alv = reader.GetInt32(0);
+                            palvelu.tyyppi = reader.GetInt32(2);
+                            palvelu.kuvaus = reader.GetString(3);
+                            palvelu.hinta = reader.GetInt32(4);
+                            palvelu.alv = reader.GetInt32(5);
 
                             pal.Add(palvelu);
                         }
