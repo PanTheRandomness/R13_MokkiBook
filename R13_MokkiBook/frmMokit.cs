@@ -182,6 +182,11 @@ namespace R13_MokkiBook
 
         private void dgvMokit_SelectionChanged(object sender, EventArgs e)
         {
+           
+        }
+
+        private void dgvMokit_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
             DataGridView dgv = (DataGridView)sender;
             if (dgv.CurrentRow != null)
             {
@@ -195,6 +200,19 @@ namespace R13_MokkiBook
                 tbHenkilomaara.Text = dgv.CurrentRow.Cells["henkilomaara"].Value.ToString();
                 tbVarustelu.Text = dgv.CurrentRow.Cells["varustelu"].Value.ToString();
             }
+        }
+
+        private void btnTyhjenna_Click(object sender, EventArgs e)
+        {
+            tbMokkiId.Text = String.Empty;
+            tbAlueId.Text = String.Empty;
+            tbPostinumero.Text = String.Empty;
+            tbMokinnimi.Text = String.Empty;
+            tbKatuosoite.Text = String.Empty;
+            tbHinta.Text = String.Empty;
+            tbKuvaus.Text = String.Empty;
+            tbHenkilomaara.Text = String.Empty;
+            tbVarustelu.Text = String.Empty;
         }
     }
 }
