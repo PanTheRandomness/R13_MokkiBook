@@ -11,6 +11,7 @@ using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Data.Odbc;
 using System.Drawing.Printing;
+using System.IO;
 
 namespace R13_MokkiBook
 {
@@ -26,6 +27,7 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             laskut = GetLaskut();
+            lokiinTallentaminen("Mökit-osio avattiin käyttäjältä: ");
         }
 
         private void frmLaskut_Load(object sender, EventArgs e)
@@ -131,6 +133,8 @@ namespace R13_MokkiBook
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+            lokiinTallentaminen("Laskut-osiosta muokattiin laskuja käyttäjältä: ");
         }
 
         private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -151,6 +155,16 @@ namespace R13_MokkiBook
             txtSumma.Text = String.Empty;
             txtVarausID.Text = String.Empty;
             txtAlv.Text = String.Empty;
+        }
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
     }
 }

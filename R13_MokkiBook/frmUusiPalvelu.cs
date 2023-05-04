@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Data.Odbc;
+using System.IO;
 
 namespace R13_MokkiBook
 {
@@ -160,6 +161,8 @@ namespace R13_MokkiBook
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+            lokiinTallentaminen("Uusi palvelu-osiosta muokattiin tietoja käyttäjältä: ");
         } 
         private void fillBy2ToolStripButton_Click(object sender, EventArgs e)
         {
@@ -189,6 +192,8 @@ namespace R13_MokkiBook
             txtKuvaus.Text = String.Empty;
             txtHinta.Text = String.Empty;
             txtAlv.Text = String.Empty;
+
+            lokiinTallentaminen("Uusi palvelu-osiosta poistettiin tietoja käyttäjältä: ");
         }
 
         private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -216,6 +221,16 @@ namespace R13_MokkiBook
                 txtHinta.Text = String.Empty;
                 txtAlv.Text = String.Empty;
 
+        }
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
     }
 }

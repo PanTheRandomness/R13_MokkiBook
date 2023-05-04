@@ -155,7 +155,7 @@ namespace R13_MokkiBook
         {
             string kayttaja = Environment.UserName;
 
-            StreamWriter sw = new StreamWriter("lokitiedot.txt", true);
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
