@@ -401,6 +401,7 @@
             this.btnHae.TabIndex = 13;
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = true;
+            this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
             // frmMokit
             // 

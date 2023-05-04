@@ -69,7 +69,7 @@ namespace R13_MokkiBook
 
         private void frmMokit_Load(object sender, EventArgs e)
         {
-            
+
             // TODO: This line of code loads data into the 'dataSet1.alue' table. You can move, or remove it, as needed.
             this.alueTableAdapter.Fill(this.dataSet1.alue);
             // TODO: This line of code loads data into the 'dataSet1.mokki' table. You can move, or remove it, as needed.
@@ -103,7 +103,7 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-  
+
             DataRow newRow = dataTable.NewRow();
             newRow["mokki_id"] = tbMokkiId.Text;
             newRow["alue_id"] = tbAlueId.Text;
@@ -132,7 +132,7 @@ namespace R13_MokkiBook
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
-            
+
             DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
 
 
@@ -183,12 +183,12 @@ namespace R13_MokkiBook
 
         private void tbMokkiId_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void dgvMokit_SelectionChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void dgvMokit_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -232,5 +232,43 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+            string searchValue = tbHae.Text.Trim();
+            if (dgvMokit != null)
+            {
+                dgvMokit.ClearSelection();
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (int.TryParse(searchValue, out int id))
+                    {
+                        foreach (DataGridViewRow row in dgvMokit.Rows)
+                        {
+                            if (row.Cells["mokki_id"].Value != null && row.Cells["mokki_id"].Value.ToString().Equals(searchValue))
+                            {
+                                dgvMokit.CurrentCell = row.Cells["mokki_id"];
+                                row.Selected = true;
+                                break;
+                            }
+                        }
+                        if (!dgvMokit.SelectedRows.Count.Equals(1))
+                        {
+                            MessageBox.Show("Mökkiä ei löytynyt");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hae Mökki_id numerolla");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Haku ei voi olla tyhjä");
+                }
+            }
+        }
+
+
     }
 }

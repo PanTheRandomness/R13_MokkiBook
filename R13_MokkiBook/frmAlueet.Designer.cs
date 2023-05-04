@@ -164,6 +164,7 @@
             this.btnHae.TabIndex = 8;
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = true;
+            this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
             // btnTyhjenna
             // 

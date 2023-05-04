@@ -159,5 +159,42 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+            string searchValue = tbHae.Text.Trim();
+            if (dgvAlue != null)
+            {
+                dgvAlue.ClearSelection();
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (int.TryParse(searchValue, out int id))
+                    {
+                        foreach (DataGridViewRow row in dgvAlue.Rows)
+                        {
+                            if (row.Cells["alue_id"].Value != null && row.Cells["mokki_id"].Value.ToString().Equals(searchValue))
+                            {
+                                dgvAlue.CurrentCell = row.Cells["alue_id"];
+                                row.Selected = true;
+                                break;
+                            }
+                        }
+                        if (!dgvAlue.SelectedRows.Count.Equals(1))
+                        {
+                            MessageBox.Show("Aluetta ei löytynyt");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hae Alue_id numerolla");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Haku ei voi olla tyhjä");
+                }
+            }
+        }
+    }
     }
 }
