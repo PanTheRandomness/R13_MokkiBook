@@ -91,7 +91,7 @@
             this.dgvVaraukset.Location = new System.Drawing.Point(2, 3);
             this.dgvVaraukset.Name = "dgvVaraukset";
             this.dgvVaraukset.Size = new System.Drawing.Size(1269, 578);
-            this.dgvVaraukset.TabIndex = 0;
+            this.dgvVaraukset.TabIndex = 7;
             this.dgvVaraukset.SelectionChanged += new System.EventHandler(this.dgvVaraukset_SelectionChanged);
             // 
             // varausidDataGridViewTextBoxColumn
@@ -202,7 +202,7 @@
             this.lblPaivat.Location = new System.Drawing.Point(12, 594);
             this.lblPaivat.Name = "lblPaivat";
             this.lblPaivat.Size = new System.Drawing.Size(41, 13);
-            this.lblPaivat.TabIndex = 1;
+            this.lblPaivat.TabIndex = 0;
             this.lblPaivat.Text = "Päiviltä";
             // 
             // dtpAlku
@@ -211,7 +211,7 @@
             this.dtpAlku.Location = new System.Drawing.Point(59, 592);
             this.dtpAlku.Name = "dtpAlku";
             this.dtpAlku.Size = new System.Drawing.Size(200, 20);
-            this.dtpAlku.TabIndex = 1;
+            this.dtpAlku.TabIndex = 0;
             this.dtpAlku.ValueChanged += new System.EventHandler(this.dtpAlku_ValueChanged);
             // 
             // lblViiva
@@ -221,7 +221,7 @@
             this.lblViiva.Location = new System.Drawing.Point(265, 594);
             this.lblViiva.Name = "lblViiva";
             this.lblViiva.Size = new System.Drawing.Size(10, 13);
-            this.lblViiva.TabIndex = 2;
+            this.lblViiva.TabIndex = 1;
             this.lblViiva.Text = "-";
             // 
             // dtpLoppu
@@ -230,7 +230,7 @@
             this.dtpLoppu.Location = new System.Drawing.Point(281, 592);
             this.dtpLoppu.Name = "dtpLoppu";
             this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
-            this.dtpLoppu.TabIndex = 2;
+            this.dtpLoppu.TabIndex = 1;
             this.dtpLoppu.ValueChanged += new System.EventHandler(this.dtpLoppu_ValueChanged);
             // 
             // lblAlue
@@ -240,7 +240,7 @@
             this.lblAlue.Location = new System.Drawing.Point(487, 594);
             this.lblAlue.Name = "lblAlue";
             this.lblAlue.Size = new System.Drawing.Size(60, 13);
-            this.lblAlue.TabIndex = 3;
+            this.lblAlue.TabIndex = 2;
             this.lblAlue.Text = "Aluetunnus";
             // 
             // mokkiBindingSource
@@ -259,7 +259,7 @@
             this.btnRaportti.Location = new System.Drawing.Point(787, 590);
             this.btnRaportti.Name = "btnRaportti";
             this.btnRaportti.Size = new System.Drawing.Size(97, 23);
-            this.btnRaportti.TabIndex = 6;
+            this.btnRaportti.TabIndex = 5;
             this.btnRaportti.Text = "Tulosta raportti";
             this.btnRaportti.UseVisualStyleBackColor = true;
             this.btnRaportti.Click += new System.EventHandler(this.btnRaportti_Click);
@@ -270,7 +270,7 @@
             this.btnUusi.Location = new System.Drawing.Point(1187, 591);
             this.btnUusi.Name = "btnUusi";
             this.btnUusi.Size = new System.Drawing.Size(75, 23);
-            this.btnUusi.TabIndex = 7;
+            this.btnUusi.TabIndex = 6;
             this.btnUusi.Text = "Uusi varaus";
             this.btnUusi.UseVisualStyleBackColor = true;
             this.btnUusi.Click += new System.EventHandler(this.btnUusi_Click);
@@ -295,7 +295,7 @@
             this.btnHae.Location = new System.Drawing.Point(643, 590);
             this.btnHae.Name = "btnHae";
             this.btnHae.Size = new System.Drawing.Size(39, 23);
-            this.btnHae.TabIndex = 4;
+            this.btnHae.TabIndex = 3;
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = true;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click_1);
@@ -306,7 +306,7 @@
             this.tbAlue.Location = new System.Drawing.Point(551, 592);
             this.tbAlue.Name = "tbAlue";
             this.tbAlue.Size = new System.Drawing.Size(86, 20);
-            this.tbAlue.TabIndex = 3;
+            this.tbAlue.TabIndex = 2;
             this.tbAlue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlue_KeyPress);
             // 
             // btnTyhjennaHaku
@@ -315,7 +315,7 @@
             this.btnTyhjennaHaku.Location = new System.Drawing.Point(688, 589);
             this.btnTyhjennaHaku.Name = "btnTyhjennaHaku";
             this.btnTyhjennaHaku.Size = new System.Drawing.Size(93, 23);
-            this.btnTyhjennaHaku.TabIndex = 5;
+            this.btnTyhjennaHaku.TabIndex = 4;
             this.btnTyhjennaHaku.Text = "Tyhjennä haku";
             this.btnTyhjennaHaku.UseVisualStyleBackColor = true;
             this.btnTyhjennaHaku.Click += new System.EventHandler(this.btnTyhjennaHaku_Click);

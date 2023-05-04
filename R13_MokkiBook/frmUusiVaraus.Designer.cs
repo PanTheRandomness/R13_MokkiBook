@@ -75,13 +75,6 @@ namespace R13_MokkiBook
             this.pnlPalvelut = new System.Windows.Forms.Panel();
             this.btnPoistaPalvelu = new System.Windows.Forms.Button();
             this.dgvAlueenPalvelut = new System.Windows.Forms.DataGridView();
-            this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alueidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nimiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tyyppiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kuvausDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hintaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lblPalvelujenMaara = new System.Windows.Forms.Label();
             this.nudPalveluLkm = new System.Windows.Forms.NumericUpDown();
@@ -588,76 +581,12 @@ namespace R13_MokkiBook
             this.dgvAlueenPalvelut.AutoGenerateColumns = false;
             this.dgvAlueenPalvelut.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAlueenPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAlueenPalvelut.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.palveluidDataGridViewTextBoxColumn,
-            this.alueidDataGridViewTextBoxColumn1,
-            this.nimiDataGridViewTextBoxColumn,
-            this.tyyppiDataGridViewTextBoxColumn,
-            this.kuvausDataGridViewTextBoxColumn1,
-            this.hintaDataGridViewTextBoxColumn1,
-            this.alvDataGridViewTextBoxColumn});
             this.dgvAlueenPalvelut.DataSource = this.palveluBindingSource;
             this.dgvAlueenPalvelut.Location = new System.Drawing.Point(0, 20);
             this.dgvAlueenPalvelut.Name = "dgvAlueenPalvelut";
             this.dgvAlueenPalvelut.ReadOnly = true;
             this.dgvAlueenPalvelut.Size = new System.Drawing.Size(546, 105);
             this.dgvAlueenPalvelut.TabIndex = 24;
-            // 
-            // palveluidDataGridViewTextBoxColumn
-            // 
-            this.palveluidDataGridViewTextBoxColumn.DataPropertyName = "palvelu_id";
-            this.palveluidDataGridViewTextBoxColumn.HeaderText = "Tunnus";
-            this.palveluidDataGridViewTextBoxColumn.Name = "palveluidDataGridViewTextBoxColumn";
-            this.palveluidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.palveluidDataGridViewTextBoxColumn.ToolTipText = "Palvelun ID";
-            // 
-            // alueidDataGridViewTextBoxColumn1
-            // 
-            this.alueidDataGridViewTextBoxColumn1.DataPropertyName = "alue_id";
-            this.alueidDataGridViewTextBoxColumn1.HeaderText = "Alue";
-            this.alueidDataGridViewTextBoxColumn1.Name = "alueidDataGridViewTextBoxColumn1";
-            this.alueidDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.alueidDataGridViewTextBoxColumn1.ToolTipText = "Aluetunnus";
-            // 
-            // nimiDataGridViewTextBoxColumn
-            // 
-            this.nimiDataGridViewTextBoxColumn.DataPropertyName = "nimi";
-            this.nimiDataGridViewTextBoxColumn.HeaderText = "Nimi";
-            this.nimiDataGridViewTextBoxColumn.Name = "nimiDataGridViewTextBoxColumn";
-            this.nimiDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nimiDataGridViewTextBoxColumn.ToolTipText = "Palvelun nimi";
-            // 
-            // tyyppiDataGridViewTextBoxColumn
-            // 
-            this.tyyppiDataGridViewTextBoxColumn.DataPropertyName = "tyyppi";
-            this.tyyppiDataGridViewTextBoxColumn.HeaderText = "Tyyppi";
-            this.tyyppiDataGridViewTextBoxColumn.Name = "tyyppiDataGridViewTextBoxColumn";
-            this.tyyppiDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tyyppiDataGridViewTextBoxColumn.ToolTipText = "Palvelun tyyppi";
-            // 
-            // kuvausDataGridViewTextBoxColumn1
-            // 
-            this.kuvausDataGridViewTextBoxColumn1.DataPropertyName = "kuvaus";
-            this.kuvausDataGridViewTextBoxColumn1.HeaderText = "Kuvaus";
-            this.kuvausDataGridViewTextBoxColumn1.Name = "kuvausDataGridViewTextBoxColumn1";
-            this.kuvausDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.kuvausDataGridViewTextBoxColumn1.ToolTipText = "Palvelun kuvaus";
-            // 
-            // hintaDataGridViewTextBoxColumn1
-            // 
-            this.hintaDataGridViewTextBoxColumn1.DataPropertyName = "hinta";
-            this.hintaDataGridViewTextBoxColumn1.HeaderText = "Hinta";
-            this.hintaDataGridViewTextBoxColumn1.Name = "hintaDataGridViewTextBoxColumn1";
-            this.hintaDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.hintaDataGridViewTextBoxColumn1.ToolTipText = "Palvelun hinta";
-            // 
-            // alvDataGridViewTextBoxColumn
-            // 
-            this.alvDataGridViewTextBoxColumn.DataPropertyName = "alv";
-            this.alvDataGridViewTextBoxColumn.HeaderText = "ALV";
-            this.alvDataGridViewTextBoxColumn.Name = "alvDataGridViewTextBoxColumn";
-            this.alvDataGridViewTextBoxColumn.ReadOnly = true;
-            this.alvDataGridViewTextBoxColumn.ToolTipText = "Palvelun arvolisävero";
             // 
             // lblPalvelujenMaara
             // 
