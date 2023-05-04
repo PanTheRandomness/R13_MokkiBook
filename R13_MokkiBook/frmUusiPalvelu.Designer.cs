@@ -33,6 +33,13 @@ namespace R13_MokkiBook
             this.txtNimi = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.palvelu_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alue_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nimi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tyyppi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kuvaus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hinta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.palveluBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.palveluBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -60,13 +67,7 @@ namespace R13_MokkiBook
             this.txtPalveluID = new System.Windows.Forms.TextBox();
             this.palveluBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.palvelu_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alue_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nimi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tyyppi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kuvaus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hinta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnTyhjenna = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -89,7 +90,7 @@ namespace R13_MokkiBook
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(583, 111);
+            this.saveButton.Location = new System.Drawing.Point(583, 114);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(84, 23);
             this.saveButton.TabIndex = 9;
@@ -114,9 +115,57 @@ namespace R13_MokkiBook
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(862, 368);
-            this.dataGridView1.TabIndex = 3;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged_1);
+            this.dataGridView1.TabIndex = 21;
+            this.dataGridView1.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseDoubleClick);
+            // 
+            // palvelu_id
+            // 
+            this.palvelu_id.DataPropertyName = "palvelu_id";
+            this.palvelu_id.HeaderText = "palvelu_id";
+            this.palvelu_id.Name = "palvelu_id";
+            this.palvelu_id.ReadOnly = true;
+            // 
+            // alue_id
+            // 
+            this.alue_id.DataPropertyName = "alue_id";
+            this.alue_id.HeaderText = "alue_id";
+            this.alue_id.Name = "alue_id";
+            this.alue_id.ReadOnly = true;
+            // 
+            // nimi
+            // 
+            this.nimi.DataPropertyName = "nimi";
+            this.nimi.HeaderText = "nimi";
+            this.nimi.Name = "nimi";
+            this.nimi.ReadOnly = true;
+            // 
+            // tyyppi
+            // 
+            this.tyyppi.DataPropertyName = "tyyppi";
+            this.tyyppi.HeaderText = "tyyppi";
+            this.tyyppi.Name = "tyyppi";
+            this.tyyppi.ReadOnly = true;
+            // 
+            // kuvaus
+            // 
+            this.kuvaus.DataPropertyName = "kuvaus";
+            this.kuvaus.HeaderText = "kuvaus";
+            this.kuvaus.Name = "kuvaus";
+            this.kuvaus.ReadOnly = true;
+            // 
+            // hinta
+            // 
+            this.hinta.DataPropertyName = "hinta";
+            this.hinta.HeaderText = "hinta";
+            this.hinta.Name = "hinta";
+            this.hinta.ReadOnly = true;
+            // 
+            // alv
+            // 
+            this.alv.DataPropertyName = "alv";
+            this.alv.HeaderText = "alv";
+            this.alv.Name = "alv";
+            this.alv.ReadOnly = true;
             // 
             // palveluBindingSource3
             // 
@@ -141,7 +190,6 @@ namespace R13_MokkiBook
             this.lbNimi.Size = new System.Drawing.Size(27, 13);
             this.lbNimi.TabIndex = 4;
             this.lbNimi.Text = "Nimi";
-            this.lbNimi.Click += new System.EventHandler(this.lbNimi_Click);
             // 
             // lbTyyppi
             // 
@@ -200,7 +248,6 @@ namespace R13_MokkiBook
             this.lbAlv.Size = new System.Drawing.Size(22, 13);
             this.lbAlv.TabIndex = 12;
             this.lbAlv.Text = "Alv";
-            this.lbAlv.Click += new System.EventHandler(this.lbAlv_Click);
             // 
             // txtAlv
             // 
@@ -218,7 +265,6 @@ namespace R13_MokkiBook
             this.label1.Size = new System.Drawing.Size(218, 29);
             this.label1.TabIndex = 13;
             this.label1.Text = "Muokkaa palveluita";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // lbAlueID
             // 
@@ -238,11 +284,11 @@ namespace R13_MokkiBook
             // 
             // btnPaivita
             // 
-            this.btnPaivita.Location = new System.Drawing.Point(583, 82);
+            this.btnPaivita.Location = new System.Drawing.Point(583, 85);
             this.btnPaivita.Name = "btnPaivita";
             this.btnPaivita.Size = new System.Drawing.Size(84, 23);
             this.btnPaivita.TabIndex = 8;
-            this.btnPaivita.Text = "Päivitä";
+            this.btnPaivita.Text = "Tallenna muutos";
             this.btnPaivita.UseVisualStyleBackColor = true;
             this.btnPaivita.Click += new System.EventHandler(this.btnPaivita_Click);
             // 
@@ -266,7 +312,7 @@ namespace R13_MokkiBook
             // 
             // btnPoista
             // 
-            this.btnPoista.Location = new System.Drawing.Point(583, 140);
+            this.btnPoista.Location = new System.Drawing.Point(673, 85);
             this.btnPoista.Name = "btnPoista";
             this.btnPoista.Size = new System.Drawing.Size(84, 23);
             this.btnPoista.TabIndex = 10;
@@ -299,7 +345,7 @@ namespace R13_MokkiBook
             this.label2.Location = new System.Drawing.Point(100, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 20;
+            this.label2.TabIndex = 1;
             this.label2.Text = "Palvelu_id";
             // 
             // txtPalveluID
@@ -319,60 +365,22 @@ namespace R13_MokkiBook
             this.dataSet1BindingSource.DataSource = this.dataSet1;
             this.dataSet1BindingSource.Position = 0;
             // 
-            // palvelu_id
+            // btnTyhjenna
             // 
-            this.palvelu_id.DataPropertyName = "palvelu_id";
-            this.palvelu_id.HeaderText = "palvelu_id";
-            this.palvelu_id.Name = "palvelu_id";
-            this.palvelu_id.ReadOnly = true;
-            // 
-            // alue_id
-            // 
-            this.alue_id.DataPropertyName = "alue_id";
-            this.alue_id.HeaderText = "alue_id";
-            this.alue_id.Name = "alue_id";
-            this.alue_id.ReadOnly = true;
-            // 
-            // nimi
-            // 
-            this.nimi.DataPropertyName = "nimi";
-            this.nimi.HeaderText = "nimi";
-            this.nimi.Name = "nimi";
-            this.nimi.ReadOnly = true;
-            // 
-            // tyyppi
-            // 
-            this.tyyppi.DataPropertyName = "tyyppi";
-            this.tyyppi.HeaderText = "tyyppi";
-            this.tyyppi.Name = "tyyppi";
-            this.tyyppi.ReadOnly = true;
-            // 
-            // kuvaus
-            // 
-            this.kuvaus.DataPropertyName = "kuvaus";
-            this.kuvaus.HeaderText = "kuvaus";
-            this.kuvaus.Name = "kuvaus";
-            this.kuvaus.ReadOnly = true;
-            // 
-            // hinta
-            // 
-            this.hinta.DataPropertyName = "hinta";
-            this.hinta.HeaderText = "hinta";
-            this.hinta.Name = "hinta";
-            this.hinta.ReadOnly = true;
-            // 
-            // alv
-            // 
-            this.alv.DataPropertyName = "alv";
-            this.alv.HeaderText = "alv";
-            this.alv.Name = "alv";
-            this.alv.ReadOnly = true;
+            this.btnTyhjenna.Location = new System.Drawing.Point(673, 113);
+            this.btnTyhjenna.Name = "btnTyhjenna";
+            this.btnTyhjenna.Size = new System.Drawing.Size(84, 23);
+            this.btnTyhjenna.TabIndex = 11;
+            this.btnTyhjenna.Text = "Tyhjennä rivit";
+            this.btnTyhjenna.UseVisualStyleBackColor = true;
+            this.btnTyhjenna.Click += new System.EventHandler(this.btnTyhjenna_Click);
             // 
             // frmUusiPalvelu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 545);
+            this.Controls.Add(this.btnTyhjenna);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPalveluID);
             this.Controls.Add(this.btnPoista);
@@ -450,5 +458,6 @@ namespace R13_MokkiBook
         private System.Windows.Forms.DataGridViewTextBoxColumn kuvaus;
         private System.Windows.Forms.DataGridViewTextBoxColumn hinta;
         private System.Windows.Forms.DataGridViewTextBoxColumn alv;
+        private System.Windows.Forms.Button btnTyhjenna;
     }
 }
