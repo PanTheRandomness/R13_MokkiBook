@@ -87,7 +87,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(744, 438);
-            this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // palveluidDataGridViewTextBoxColumn
@@ -95,42 +95,49 @@
             this.palveluidDataGridViewTextBoxColumn.DataPropertyName = "palvelu_id";
             this.palveluidDataGridViewTextBoxColumn.HeaderText = "palvelu_id";
             this.palveluidDataGridViewTextBoxColumn.Name = "palveluidDataGridViewTextBoxColumn";
+            this.palveluidDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // alueidDataGridViewTextBoxColumn
             // 
             this.alueidDataGridViewTextBoxColumn.DataPropertyName = "alue_id";
             this.alueidDataGridViewTextBoxColumn.HeaderText = "alue_id";
             this.alueidDataGridViewTextBoxColumn.Name = "alueidDataGridViewTextBoxColumn";
+            this.alueidDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // nimiDataGridViewTextBoxColumn
             // 
             this.nimiDataGridViewTextBoxColumn.DataPropertyName = "nimi";
             this.nimiDataGridViewTextBoxColumn.HeaderText = "nimi";
             this.nimiDataGridViewTextBoxColumn.Name = "nimiDataGridViewTextBoxColumn";
+            this.nimiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // tyyppiDataGridViewTextBoxColumn
             // 
             this.tyyppiDataGridViewTextBoxColumn.DataPropertyName = "tyyppi";
             this.tyyppiDataGridViewTextBoxColumn.HeaderText = "tyyppi";
             this.tyyppiDataGridViewTextBoxColumn.Name = "tyyppiDataGridViewTextBoxColumn";
+            this.tyyppiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // kuvausDataGridViewTextBoxColumn
             // 
             this.kuvausDataGridViewTextBoxColumn.DataPropertyName = "kuvaus";
             this.kuvausDataGridViewTextBoxColumn.HeaderText = "kuvaus";
             this.kuvausDataGridViewTextBoxColumn.Name = "kuvausDataGridViewTextBoxColumn";
+            this.kuvausDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // hintaDataGridViewTextBoxColumn
             // 
             this.hintaDataGridViewTextBoxColumn.DataPropertyName = "hinta";
             this.hintaDataGridViewTextBoxColumn.HeaderText = "hinta";
             this.hintaDataGridViewTextBoxColumn.Name = "hintaDataGridViewTextBoxColumn";
+            this.hintaDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // alvDataGridViewTextBoxColumn
             // 
             this.alvDataGridViewTextBoxColumn.DataPropertyName = "alv";
             this.alvDataGridViewTextBoxColumn.HeaderText = "alv";
             this.alvDataGridViewTextBoxColumn.Name = "alvDataGridViewTextBoxColumn";
+            this.alvDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // palveluBindingSource1
             // 
@@ -160,7 +167,7 @@
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 484);
             this.fillByToolStrip.Name = "fillByToolStrip";
             this.fillByToolStrip.Size = new System.Drawing.Size(764, 25);
-            this.fillByToolStrip.TabIndex = 9;
+            this.fillByToolStrip.TabIndex = 1;
             this.fillByToolStrip.Text = "fillByToolStrip";
             // 
             // TsBtnLisaa
