@@ -32,6 +32,7 @@ namespace R13_MokkiBook
         {
             PaivitaTaulu();
         }
+
         public List<VarauksenPalvelut> GetVarauksenPalvelut()
         {
             List<VarauksenPalvelut> vP = new List<VarauksenPalvelut>();
