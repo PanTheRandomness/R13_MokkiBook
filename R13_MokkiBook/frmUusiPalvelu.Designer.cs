@@ -56,27 +56,21 @@ namespace R13_MokkiBook
             this.lbAlueID = new System.Windows.Forms.Label();
             this.txtAlueID = new System.Windows.Forms.TextBox();
             this.btnPaivita = new System.Windows.Forms.Button();
-            this.fillBy2ToolStrip = new System.Windows.Forms.ToolStrip();
-            this.fillBy2ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.btnPoista = new System.Windows.Forms.Button();
-            this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.palveluTableAdapter1 = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
             this.dataSet11 = new R13_MokkiBook.DataSet1();
             this.AlueenPAlvelutDataSet = new R13_MokkiBook.DataSet1();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPalveluID = new System.Windows.Forms.TextBox();
-            this.palveluBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnTyhjenna = new System.Windows.Forms.Button();
+            this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).BeginInit();
-            this.fillBy2ToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlueenPAlvelutDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,6 +89,7 @@ namespace R13_MokkiBook
             this.saveButton.Size = new System.Drawing.Size(84, 23);
             this.saveButton.TabIndex = 9;
             this.saveButton.Text = "Lisää palvelu";
+            this.ToolTip.SetToolTip(this.saveButton, "Lisää uusi palvelu tietokantaan");
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -289,26 +284,9 @@ namespace R13_MokkiBook
             this.btnPaivita.Size = new System.Drawing.Size(84, 23);
             this.btnPaivita.TabIndex = 8;
             this.btnPaivita.Text = "Tallenna muutos";
+            this.ToolTip.SetToolTip(this.btnPaivita, "Tallenna muutos");
             this.btnPaivita.UseVisualStyleBackColor = true;
             this.btnPaivita.Click += new System.EventHandler(this.btnPaivita_Click);
-            // 
-            // fillBy2ToolStrip
-            // 
-            this.fillBy2ToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fillBy2ToolStripButton});
-            this.fillBy2ToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.fillBy2ToolStrip.Name = "fillBy2ToolStrip";
-            this.fillBy2ToolStrip.Size = new System.Drawing.Size(865, 25);
-            this.fillBy2ToolStrip.TabIndex = 17;
-            this.fillBy2ToolStrip.Text = "fillBy2ToolStrip";
-            // 
-            // fillBy2ToolStripButton
-            // 
-            this.fillBy2ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillBy2ToolStripButton.Name = "fillBy2ToolStripButton";
-            this.fillBy2ToolStripButton.Size = new System.Drawing.Size(46, 22);
-            this.fillBy2ToolStripButton.Text = "Päivitä";
-            this.fillBy2ToolStripButton.Click += new System.EventHandler(this.fillBy2ToolStripButton_Click);
             // 
             // btnPoista
             // 
@@ -317,13 +295,9 @@ namespace R13_MokkiBook
             this.btnPoista.Size = new System.Drawing.Size(84, 23);
             this.btnPoista.TabIndex = 10;
             this.btnPoista.Text = "Poista";
+            this.ToolTip.SetToolTip(this.btnPoista, "Poista tietokannasta");
             this.btnPoista.UseVisualStyleBackColor = true;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
-            // 
-            // palveluBindingSource
-            // 
-            this.palveluBindingSource.DataMember = "palvelu";
-            this.palveluBindingSource.DataSource = this.dataSet1;
             // 
             // palveluTableAdapter1
             // 
@@ -354,11 +328,7 @@ namespace R13_MokkiBook
             this.txtPalveluID.Name = "txtPalveluID";
             this.txtPalveluID.Size = new System.Drawing.Size(100, 20);
             this.txtPalveluID.TabIndex = 1;
-            // 
-            // palveluBindingSource2
-            // 
-            this.palveluBindingSource2.DataMember = "palvelu";
-            this.palveluBindingSource2.DataSource = this.dataSet1;
+            this.ToolTip.SetToolTip(this.txtPalveluID, "Hei!");
             // 
             // dataSet1BindingSource
             // 
@@ -372,8 +342,15 @@ namespace R13_MokkiBook
             this.btnTyhjenna.Size = new System.Drawing.Size(84, 23);
             this.btnTyhjenna.TabIndex = 11;
             this.btnTyhjenna.Text = "Tyhjennä rivit";
+            this.ToolTip.SetToolTip(this.btnTyhjenna, "Tyhjennä muokkaus rivit");
             this.btnTyhjenna.UseVisualStyleBackColor = true;
             this.btnTyhjenna.Click += new System.EventHandler(this.btnTyhjenna_Click);
+            // 
+            // ToolTip
+            // 
+            this.ToolTip.AutoPopDelay = 5000;
+            this.ToolTip.InitialDelay = 500;
+            this.ToolTip.ReshowDelay = 100;
             // 
             // frmUusiPalvelu
             // 
@@ -384,7 +361,6 @@ namespace R13_MokkiBook
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPalveluID);
             this.Controls.Add(this.btnPoista);
-            this.Controls.Add(this.fillBy2ToolStrip);
             this.Controls.Add(this.btnPaivita);
             this.Controls.Add(this.lbAlueID);
             this.Controls.Add(this.txtAlueID);
@@ -408,12 +384,8 @@ namespace R13_MokkiBook
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).EndInit();
-            this.fillBy2ToolStrip.ResumeLayout(false);
-            this.fillBy2ToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlueenPAlvelutDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -425,7 +397,6 @@ namespace R13_MokkiBook
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private DataSet1 dataSet1;
-        private System.Windows.Forms.BindingSource palveluBindingSource;
         private DataSet1TableAdapters.palveluTableAdapter palveluTableAdapter1;
         private System.Windows.Forms.Label lbNimi;
         private System.Windows.Forms.Label lbTyyppi;
@@ -441,14 +412,11 @@ namespace R13_MokkiBook
         private System.Windows.Forms.Label lbAlueID;
         private System.Windows.Forms.TextBox txtAlueID;
         private System.Windows.Forms.Button btnPaivita;
-        private System.Windows.Forms.ToolStrip fillBy2ToolStrip;
-        private System.Windows.Forms.ToolStripButton fillBy2ToolStripButton;
         private System.Windows.Forms.Button btnPoista;
         private DataSet1 dataSet11;
         private DataSet1 AlueenPAlvelutDataSet;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPalveluID;
-        private System.Windows.Forms.BindingSource palveluBindingSource2;
         private System.Windows.Forms.BindingSource dataSet1BindingSource;
         private System.Windows.Forms.BindingSource palveluBindingSource3;
         private System.Windows.Forms.DataGridViewTextBoxColumn palvelu_id;
@@ -459,5 +427,6 @@ namespace R13_MokkiBook
         private System.Windows.Forms.DataGridViewTextBoxColumn hinta;
         private System.Windows.Forms.DataGridViewTextBoxColumn alv;
         private System.Windows.Forms.Button btnTyhjenna;
+        private System.Windows.Forms.ToolTip ToolTip;
     }
 }

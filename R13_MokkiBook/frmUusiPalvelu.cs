@@ -57,7 +57,7 @@ namespace R13_MokkiBook
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-    }
+        }
 
         private void frmUusiPalvelu_Load(object sender, EventArgs e)
         {
@@ -95,7 +95,8 @@ namespace R13_MokkiBook
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-    }
+
+        }
         public List<Palvelu> GetPalvelut()
         {
             List<Palvelu> pal = new List<Palvelu>();
@@ -130,39 +131,45 @@ namespace R13_MokkiBook
 
         private void btnPaivita_Click(object sender, EventArgs e)
         {
-            // Get the current DataRow from the DataGridView control
-            DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
+            try
+            {
+                // Get the current DataRow from the DataGridView control
+                DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
 
-            // Update the values of the current DataRow with the input from the TextBox controls
-            currentRow["palvelu_id"] = txtPalveluID.Text;
-            currentRow["alue_id"] = txtAlueID.Text;
-            currentRow["nimi"] = txtNimi.Text;
-            currentRow["tyyppi"] = txtTyyppi.Text;
-            currentRow["kuvaus"] = txtKuvaus.Text;
-            currentRow["hinta"] = txtHinta.Text;
-            currentRow["alv"] = txtAlv.Text;
+                // Update the values of the current DataRow with the input from the TextBox controls
+                currentRow["palvelu_id"] = txtPalveluID.Text;
+                currentRow["alue_id"] = txtAlueID.Text;
+                currentRow["nimi"] = txtNimi.Text;
+                currentRow["tyyppi"] = txtTyyppi.Text;
+                currentRow["kuvaus"] = txtKuvaus.Text;
+                currentRow["hinta"] = txtHinta.Text;
+                currentRow["alv"] = txtAlv.Text;
 
-            // Update the database
-            dataAdapter.Update(dataTable);
+                // Update the database
+                dataAdapter.Update(dataTable);
 
-            txtPalveluID.Text = String.Empty;
-            txtAlueID.Text = String.Empty;
-            txtNimi.Text = String.Empty;
-            txtTyyppi.Text = String.Empty;
-            txtKuvaus.Text = String.Empty;
-            txtHinta.Text = String.Empty;
-            txtAlv.Text = String.Empty;
-        }
-
+                txtPalveluID.Text = String.Empty;
+                txtAlueID.Text = String.Empty;
+                txtNimi.Text = String.Empty;
+                txtTyyppi.Text = String.Empty;
+                txtKuvaus.Text = String.Empty;
+                txtHinta.Text = String.Empty;
+                txtAlv.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        } 
         private void fillBy2ToolStripButton_Click(object sender, EventArgs e)
         {
             try
             {
                 this.palveluTableAdapter1.FillBy2(this.dataSet1.palvelu);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
 
         }
@@ -201,13 +208,14 @@ namespace R13_MokkiBook
 
         private void btnTyhjenna_Click(object sender, EventArgs e) //tyhjennetään rivit
         {
-            txtPalveluID.Text = String.Empty;
-            txtAlueID.Text = String.Empty;
-            txtNimi.Text = String.Empty;
-            txtTyyppi.Text = String.Empty;
-            txtKuvaus.Text = String.Empty;
-            txtHinta.Text = String.Empty;
-            txtAlv.Text = String.Empty;
+                txtPalveluID.Text = String.Empty;
+                txtAlueID.Text = String.Empty;
+                txtNimi.Text = String.Empty;
+                txtTyyppi.Text = String.Empty;
+                txtKuvaus.Text = String.Empty;
+                txtHinta.Text = String.Empty;
+                txtAlv.Text = String.Empty;
+
         }
     }
 }

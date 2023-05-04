@@ -31,8 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLaskut));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.laskuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lasku_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.varaus_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.summa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.laskuBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new R13_MokkiBook.DataSet1();
+            this.laskuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnTulosta = new System.Windows.Forms.ToolStripButton();
             this.lbOtsikko = new System.Windows.Forms.Label();
@@ -49,18 +54,15 @@
             this.btnLisaa = new System.Windows.Forms.Button();
             this.lbLaskuID = new System.Windows.Forms.Label();
             this.laskuBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.laskuBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet11 = new R13_MokkiBook.DataSet1();
-            this.lasku_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.varaus_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.summa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnTyhjenna = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,16 +82,46 @@
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(945, 274);
             this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseDoubleClick);
             // 
-            // laskuBindingSource
+            // lasku_id
             // 
-            this.laskuBindingSource.DataMember = "lasku";
-            this.laskuBindingSource.DataSource = this.dataSet1;
+            this.lasku_id.DataPropertyName = "lasku_id";
+            this.lasku_id.HeaderText = "lasku_id";
+            this.lasku_id.Name = "lasku_id";
+            // 
+            // varaus_id
+            // 
+            this.varaus_id.DataPropertyName = "varaus_id";
+            this.varaus_id.HeaderText = "varaus_id";
+            this.varaus_id.Name = "varaus_id";
+            // 
+            // summa
+            // 
+            this.summa.DataPropertyName = "summa";
+            this.summa.HeaderText = "summa";
+            this.summa.Name = "summa";
+            // 
+            // alv
+            // 
+            this.alv.DataPropertyName = "alv";
+            this.alv.HeaderText = "alv";
+            this.alv.Name = "alv";
+            // 
+            // laskuBindingSource2
+            // 
+            this.laskuBindingSource2.DataMember = "lasku";
+            this.laskuBindingSource2.DataSource = this.dataSet1;
             // 
             // dataSet1
             // 
             this.dataSet1.DataSetName = "DataSet1";
             this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // laskuBindingSource
+            // 
+            this.laskuBindingSource.DataMember = "lasku";
+            this.laskuBindingSource.DataSource = this.dataSet1;
             // 
             // toolStrip1
             // 
@@ -137,11 +169,12 @@
             // 
             // btnPaivita
             // 
-            this.btnPaivita.Location = new System.Drawing.Point(335, 196);
+            this.btnPaivita.Location = new System.Drawing.Point(292, 188);
             this.btnPaivita.Name = "btnPaivita";
             this.btnPaivita.Size = new System.Drawing.Size(84, 23);
             this.btnPaivita.TabIndex = 25;
-            this.btnPaivita.Text = "Päivitä";
+            this.btnPaivita.Text = "Tallenna";
+            this.toolTip1.SetToolTip(this.btnPaivita, "Tallenna muutos tietokantaan");
             this.btnPaivita.UseVisualStyleBackColor = true;
             this.btnPaivita.Click += new System.EventHandler(this.btnPaivita_Click);
             // 
@@ -203,11 +236,12 @@
             // 
             // btnLisaa
             // 
-            this.btnLisaa.Location = new System.Drawing.Point(432, 196);
+            this.btnLisaa.Location = new System.Drawing.Point(382, 188);
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(84, 23);
             this.btnLisaa.TabIndex = 27;
             this.btnLisaa.Text = "Lisää ";
+            this.toolTip1.SetToolTip(this.btnLisaa, "Lisää uusi lasku tietokantaan");
             this.btnLisaa.UseVisualStyleBackColor = true;
             this.btnLisaa.Click += new System.EventHandler(this.btnLisaa_Click);
             // 
@@ -225,43 +259,26 @@
             this.laskuBindingSource1.DataMember = "lasku";
             this.laskuBindingSource1.DataSource = this.dataSet1;
             // 
-            // laskuBindingSource2
-            // 
-            this.laskuBindingSource2.DataMember = "lasku";
-            this.laskuBindingSource2.DataSource = this.dataSet1;
-            // 
             // dataSet11
             // 
             this.dataSet11.DataSetName = "DataSet1";
             this.dataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // lasku_id
+            // btnTyhjenna
             // 
-            this.lasku_id.DataPropertyName = "lasku_id";
-            this.lasku_id.HeaderText = "lasku_id";
-            this.lasku_id.Name = "lasku_id";
-            // 
-            // varaus_id
-            // 
-            this.varaus_id.DataPropertyName = "varaus_id";
-            this.varaus_id.HeaderText = "varaus_id";
-            this.varaus_id.Name = "varaus_id";
-            // 
-            // summa
-            // 
-            this.summa.DataPropertyName = "summa";
-            this.summa.HeaderText = "summa";
-            this.summa.Name = "summa";
-            // 
-            // alv
-            // 
-            this.alv.DataPropertyName = "alv";
-            this.alv.HeaderText = "alv";
-            this.alv.Name = "alv";
+            this.btnTyhjenna.Location = new System.Drawing.Point(472, 188);
+            this.btnTyhjenna.Name = "btnTyhjenna";
+            this.btnTyhjenna.Size = new System.Drawing.Size(84, 23);
+            this.btnTyhjenna.TabIndex = 33;
+            this.btnTyhjenna.Text = "Tyhjennä";
+            this.toolTip1.SetToolTip(this.btnTyhjenna, "Tyhjennä muokkas rivit");
+            this.btnTyhjenna.UseVisualStyleBackColor = true;
+            this.btnTyhjenna.Click += new System.EventHandler(this.btnTyhjenna_Click);
             // 
             // frmLaskut
             // 
             this.ClientSize = new System.Drawing.Size(945, 560);
+            this.Controls.Add(this.btnTyhjenna);
             this.Controls.Add(this.lbLaskuID);
             this.Controls.Add(this.txtLaskuID);
             this.Controls.Add(this.btnPaivita);
@@ -279,12 +296,12 @@
             this.Name = "frmLaskut";
             this.Load += new System.EventHandler(this.frmLaskut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -321,5 +338,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn varaus_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn summa;
         private System.Windows.Forms.DataGridViewTextBoxColumn alv;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnTyhjenna;
     }
 }
