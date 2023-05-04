@@ -81,6 +81,7 @@
             this.tbNimi.Name = "tbNimi";
             this.tbNimi.Size = new System.Drawing.Size(131, 22);
             this.tbNimi.TabIndex = 1;
+            this.tbNimi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNimi_KeyPress);
             this.tbNimi.Leave += new System.EventHandler(this.tbNimi_Leave);
             // 
             // dgvAlue

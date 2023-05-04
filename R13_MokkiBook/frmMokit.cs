@@ -280,17 +280,17 @@ namespace R13_MokkiBook
             }
         }
 
-        // Postinumeroon voi syöttää vain numeroita.
+        // Postinumeroon voi syöttää vain numeroita sekä max 5 numeroa.
 
         private void tbPostinumero_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 || tbPostinumero.Text.Length >= 5)
             {
                 e.Handled = true;
             }
         }
 
-        // Muuttaa mökin nimen ensimmäisen kirjaimen isoksi.
+        // Muuttaa mökin nimen ensimmäisen kirjaimen isoksi.Nimessä saa olla max 45 kirjainta.
 
         private void tbMokinnimi_Leave(object sender, EventArgs e)
         {
@@ -304,7 +304,12 @@ namespace R13_MokkiBook
             }
         }
 
-        // Muuttaa katuosoitteen ensimmäisen kirjaimen isoksi.
+        private void tbMokinnimi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbMokinnimi.MaxLength = 45;
+        }
+
+        // Muuttaa katuosoitteen ensimmäisen kirjaimen isoksi. Katuosoitteessa saa olla max 45 kirjainta.
 
         private void tbKatuosoite_Leave(object sender, EventArgs e)
         {
@@ -317,6 +322,12 @@ namespace R13_MokkiBook
                 tb.Text = nimi;
             }
         }
+
+        private void tbKatuosoite_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbKatuosoite.MaxLength = 45;
+        }
+
 
         // Mökki idseen voi syöttää vain numeroita.
 
@@ -348,7 +359,7 @@ namespace R13_MokkiBook
             }
         }
 
-        // Tarkistaa, että hinta on double tyyppinen.
+        // Tarkistaa, että hinta on double tyyppinen. Hinnassa saa olla 11 merkkiä (8 + 2, sekä pilkku)
 
         private void tbHinta_Leave(object sender, EventArgs e)
         {
@@ -362,33 +373,24 @@ namespace R13_MokkiBook
 
         }
 
-        // Tarkistaa ettei varustelussa ole yli 100 merkkiä.
-
-        private void tbVarustelu_Leave(object sender, EventArgs e)
+        private void tbHinta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string varustelu = tbVarustelu.Text;
-
-            if (varustelu.Length > 100)
-            {
-                MessageBox.Show("Varustelussa voi olla enintään 100 merkkiä.");
-                return;
-            }
-
-
+            tbHinta.MaxLength = 11;
         }
-        
-        // Tarkistaa ettei kuvauksessa ole yli 150 merkkiä. 
 
-        private void tbKuvaus_Leave(object sender, EventArgs e)
+
+        // Varusteluun ei voi syöttää yli 100 merkkiä.
+
+        private void tbVarustelu_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string kuvaus = tbKuvaus.Text;
+            tbVarustelu.MaxLength = 100;
+        }
 
-            if (kuvaus.Length > 150)
-            {
-                MessageBox.Show("Varustelussa voi olla enintään 150 merkkiä.");
-                return;
-            }
+        // Kuvaukseen ei voi syöttää yli 150 merkkiä.
 
+        private void tbKuvaus_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbKuvaus.MaxLength = 150;
         }
     }
 }

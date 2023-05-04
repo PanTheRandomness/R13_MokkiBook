@@ -208,7 +208,7 @@ namespace R13_MokkiBook
             }
         }
 
-        // Muuttaa nimen ensimmäisen kirjaimen isoksi.
+        // Muuttaa nimen ensimmäisen kirjaimen isoksi. Max 40 merkkiä nimessä.
 
         private void tbNimi_Leave(object sender, EventArgs e)
         {
@@ -222,6 +222,11 @@ namespace R13_MokkiBook
             }
         }
 
+        private void tbNimi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbNimi.MaxLength = 40;
+        }
+
         // Alue idseen voi syöttää vain numeroita.
 
         private void tbAlueId_KeyPress(object sender, KeyPressEventArgs e)
@@ -231,6 +236,7 @@ namespace R13_MokkiBook
                 e.Handled = true;
             }
         }
+
+ 
     }
-    
 }

@@ -169,6 +169,7 @@
             this.tbKatuosoite.Name = "tbKatuosoite";
             this.tbKatuosoite.Size = new System.Drawing.Size(168, 22);
             this.tbKatuosoite.TabIndex = 3;
+            this.tbKatuosoite.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKatuosoite_KeyPress);
             this.tbKatuosoite.Leave += new System.EventHandler(this.tbKatuosoite_Leave);
             // 
             // tbVarustelu
@@ -177,7 +178,7 @@
             this.tbVarustelu.Name = "tbVarustelu";
             this.tbVarustelu.Size = new System.Drawing.Size(168, 22);
             this.tbVarustelu.TabIndex = 6;
-            this.tbVarustelu.Leave += new System.EventHandler(this.tbVarustelu_Leave);
+            this.tbVarustelu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbVarustelu_KeyPress);
             // 
             // tbHenkilomaara
             // 
@@ -194,6 +195,7 @@
             this.tbKuvaus.Name = "tbKuvaus";
             this.tbKuvaus.Size = new System.Drawing.Size(168, 54);
             this.tbKuvaus.TabIndex = 4;
+            this.tbKuvaus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKuvaus_KeyPress);
             this.tbKuvaus.Leave += new System.EventHandler(this.tbKuvaus_Leave);
             // 
             // tbHinta
@@ -202,6 +204,7 @@
             this.tbHinta.Name = "tbHinta";
             this.tbHinta.Size = new System.Drawing.Size(168, 22);
             this.tbHinta.TabIndex = 18;
+            this.tbHinta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbHinta_KeyPress);
             this.tbHinta.Leave += new System.EventHandler(this.tbHinta_Leave);
             // 
             // tbMokinnimi
@@ -210,6 +213,7 @@
             this.tbMokinnimi.Name = "tbMokinnimi";
             this.tbMokinnimi.Size = new System.Drawing.Size(168, 22);
             this.tbMokinnimi.TabIndex = 2;
+            this.tbMokinnimi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMokinnimi_KeyPress);
             this.tbMokinnimi.Leave += new System.EventHandler(this.tbMokinnimi_Leave);
             // 
             // tbPostinumero
