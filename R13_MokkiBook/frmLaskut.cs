@@ -27,7 +27,7 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             laskut = GetLaskut();
-            lokiinTallentaminen("Mökit-osio avattiin käyttäjältä: ");
+            lokiinTallentaminen("Laskut-osio avattiin käyttäjältä: ");
         }
 
         private void frmLaskut_Load(object sender, EventArgs e)

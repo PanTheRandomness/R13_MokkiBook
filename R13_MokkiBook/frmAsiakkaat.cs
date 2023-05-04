@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,11 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             asiakkaat = GetAsiakkaat();
+            lokiinTallentaminen("Asiakkaat-osio avattiin käyttäjältä: ");
+
 
         }
-       
+
         public List<Asiakas> GetAsiakkaat()
         {
             List<Asiakas> asi = new List<Asiakas>();
@@ -143,7 +146,9 @@ namespace R13_MokkiBook
                 tbLahiosoite.Text = String.Empty;
                 tbEmail.Text = String.Empty;
                 tbPuhelinnro.Text = String.Empty;
-            
+
+            lokiinTallentaminen("Asiakkaat-osiosta muokattiin tietoja käyttäjältä: ");
+
         }
 
         private void btnPoista_Click(object sender, EventArgs e)
@@ -163,6 +168,7 @@ namespace R13_MokkiBook
             tbEmail.Text = String.Empty;
             tbPuhelinnro.Text = String.Empty;
 
+            lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
         }
 
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -204,6 +210,16 @@ namespace R13_MokkiBook
                 tb.Text = nimi;
             }
 
+        }
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
 
         //postinumeroksi voi syöttää vain lukuja:
