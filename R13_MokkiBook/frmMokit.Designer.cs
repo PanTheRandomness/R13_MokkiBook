@@ -48,15 +48,6 @@
             this.tbPostinumero = new System.Windows.Forms.TextBox();
             this.tbAlueId = new System.Windows.Forms.TextBox();
             this.dgvMokit = new System.Windows.Forms.DataGridView();
-            this.mokkiidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.postinroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mokkinimiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.katuosoiteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hintaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kuvausDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.henkilomaaraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.varusteluDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mokkiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.btnLisaa = new System.Windows.Forms.Button();
@@ -69,6 +60,15 @@
             this.btnHae = new System.Windows.Forms.Button();
             this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
             this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
+            this.mokki_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alue_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.postinro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mokkinimi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.katuosoite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hinta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kuvaus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.henkilomaara = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.varustelu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -225,15 +225,15 @@
             this.dgvMokit.AutoGenerateColumns = false;
             this.dgvMokit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMokit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.mokkiidDataGridViewTextBoxColumn,
-            this.alueidDataGridViewTextBoxColumn,
-            this.postinroDataGridViewTextBoxColumn,
-            this.mokkinimiDataGridViewTextBoxColumn,
-            this.katuosoiteDataGridViewTextBoxColumn,
-            this.hintaDataGridViewTextBoxColumn,
-            this.kuvausDataGridViewTextBoxColumn,
-            this.henkilomaaraDataGridViewTextBoxColumn,
-            this.varusteluDataGridViewTextBoxColumn});
+            this.mokki_id,
+            this.alue_id,
+            this.postinro,
+            this.mokkinimi,
+            this.katuosoite,
+            this.hinta,
+            this.kuvaus,
+            this.henkilomaara,
+            this.varustelu});
             this.dgvMokit.DataSource = this.mokkiBindingSource;
             this.dgvMokit.Location = new System.Drawing.Point(31, 259);
             this.dgvMokit.Name = "dgvMokit";
@@ -241,78 +241,7 @@
             this.dgvMokit.RowTemplate.Height = 24;
             this.dgvMokit.Size = new System.Drawing.Size(719, 170);
             this.dgvMokit.TabIndex = 22;
-            // 
-            // mokkiidDataGridViewTextBoxColumn
-            // 
-            this.mokkiidDataGridViewTextBoxColumn.DataPropertyName = "mokki_id";
-            this.mokkiidDataGridViewTextBoxColumn.HeaderText = "mokki_id";
-            this.mokkiidDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.mokkiidDataGridViewTextBoxColumn.Name = "mokkiidDataGridViewTextBoxColumn";
-            this.mokkiidDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // alueidDataGridViewTextBoxColumn
-            // 
-            this.alueidDataGridViewTextBoxColumn.DataPropertyName = "alue_id";
-            this.alueidDataGridViewTextBoxColumn.HeaderText = "alue_id";
-            this.alueidDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.alueidDataGridViewTextBoxColumn.Name = "alueidDataGridViewTextBoxColumn";
-            this.alueidDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // postinroDataGridViewTextBoxColumn
-            // 
-            this.postinroDataGridViewTextBoxColumn.DataPropertyName = "postinro";
-            this.postinroDataGridViewTextBoxColumn.HeaderText = "postinro";
-            this.postinroDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.postinroDataGridViewTextBoxColumn.Name = "postinroDataGridViewTextBoxColumn";
-            this.postinroDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // mokkinimiDataGridViewTextBoxColumn
-            // 
-            this.mokkinimiDataGridViewTextBoxColumn.DataPropertyName = "mokkinimi";
-            this.mokkinimiDataGridViewTextBoxColumn.HeaderText = "mokkinimi";
-            this.mokkinimiDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.mokkinimiDataGridViewTextBoxColumn.Name = "mokkinimiDataGridViewTextBoxColumn";
-            this.mokkinimiDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // katuosoiteDataGridViewTextBoxColumn
-            // 
-            this.katuosoiteDataGridViewTextBoxColumn.DataPropertyName = "katuosoite";
-            this.katuosoiteDataGridViewTextBoxColumn.HeaderText = "katuosoite";
-            this.katuosoiteDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.katuosoiteDataGridViewTextBoxColumn.Name = "katuosoiteDataGridViewTextBoxColumn";
-            this.katuosoiteDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // hintaDataGridViewTextBoxColumn
-            // 
-            this.hintaDataGridViewTextBoxColumn.DataPropertyName = "hinta";
-            this.hintaDataGridViewTextBoxColumn.HeaderText = "hinta";
-            this.hintaDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.hintaDataGridViewTextBoxColumn.Name = "hintaDataGridViewTextBoxColumn";
-            this.hintaDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // kuvausDataGridViewTextBoxColumn
-            // 
-            this.kuvausDataGridViewTextBoxColumn.DataPropertyName = "kuvaus";
-            this.kuvausDataGridViewTextBoxColumn.HeaderText = "kuvaus";
-            this.kuvausDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.kuvausDataGridViewTextBoxColumn.Name = "kuvausDataGridViewTextBoxColumn";
-            this.kuvausDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // henkilomaaraDataGridViewTextBoxColumn
-            // 
-            this.henkilomaaraDataGridViewTextBoxColumn.DataPropertyName = "henkilomaara";
-            this.henkilomaaraDataGridViewTextBoxColumn.HeaderText = "henkilomaara";
-            this.henkilomaaraDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.henkilomaaraDataGridViewTextBoxColumn.Name = "henkilomaaraDataGridViewTextBoxColumn";
-            this.henkilomaaraDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // varusteluDataGridViewTextBoxColumn
-            // 
-            this.varusteluDataGridViewTextBoxColumn.DataPropertyName = "varustelu";
-            this.varusteluDataGridViewTextBoxColumn.HeaderText = "varustelu";
-            this.varusteluDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.varusteluDataGridViewTextBoxColumn.Name = "varusteluDataGridViewTextBoxColumn";
-            this.varusteluDataGridViewTextBoxColumn.Width = 125;
+            this.dgvMokit.SelectionChanged += new System.EventHandler(this.dgvMokit_SelectionChanged);
             // 
             // mokkiBindingSource
             // 
@@ -413,6 +342,78 @@
             // 
             this.alueTableAdapter.ClearBeforeFill = true;
             // 
+            // mokki_id
+            // 
+            this.mokki_id.DataPropertyName = "mokki_id";
+            this.mokki_id.HeaderText = "mokki_id";
+            this.mokki_id.MinimumWidth = 6;
+            this.mokki_id.Name = "mokki_id";
+            this.mokki_id.Width = 125;
+            // 
+            // alue_id
+            // 
+            this.alue_id.DataPropertyName = "alue_id";
+            this.alue_id.HeaderText = "alue_id";
+            this.alue_id.MinimumWidth = 6;
+            this.alue_id.Name = "alue_id";
+            this.alue_id.Width = 125;
+            // 
+            // postinro
+            // 
+            this.postinro.DataPropertyName = "postinro";
+            this.postinro.HeaderText = "postinro";
+            this.postinro.MinimumWidth = 6;
+            this.postinro.Name = "postinro";
+            this.postinro.Width = 125;
+            // 
+            // mokkinimi
+            // 
+            this.mokkinimi.DataPropertyName = "mokkinimi";
+            this.mokkinimi.HeaderText = "mokkinimi";
+            this.mokkinimi.MinimumWidth = 6;
+            this.mokkinimi.Name = "mokkinimi";
+            this.mokkinimi.Width = 125;
+            // 
+            // katuosoite
+            // 
+            this.katuosoite.DataPropertyName = "katuosoite";
+            this.katuosoite.HeaderText = "katuosoite";
+            this.katuosoite.MinimumWidth = 6;
+            this.katuosoite.Name = "katuosoite";
+            this.katuosoite.Width = 125;
+            // 
+            // hinta
+            // 
+            this.hinta.DataPropertyName = "hinta";
+            this.hinta.HeaderText = "hinta";
+            this.hinta.MinimumWidth = 6;
+            this.hinta.Name = "hinta";
+            this.hinta.Width = 125;
+            // 
+            // kuvaus
+            // 
+            this.kuvaus.DataPropertyName = "kuvaus";
+            this.kuvaus.HeaderText = "kuvaus";
+            this.kuvaus.MinimumWidth = 6;
+            this.kuvaus.Name = "kuvaus";
+            this.kuvaus.Width = 125;
+            // 
+            // henkilomaara
+            // 
+            this.henkilomaara.DataPropertyName = "henkilomaara";
+            this.henkilomaara.HeaderText = "henkilomaara";
+            this.henkilomaara.MinimumWidth = 6;
+            this.henkilomaara.Name = "henkilomaara";
+            this.henkilomaara.Width = 125;
+            // 
+            // varustelu
+            // 
+            this.varustelu.DataPropertyName = "varustelu";
+            this.varustelu.HeaderText = "varustelu";
+            this.varustelu.MinimumWidth = 6;
+            this.varustelu.Name = "varustelu";
+            this.varustelu.Width = 125;
+            // 
             // frmMokit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -488,15 +489,15 @@
         private DataSet1 dataSet1;
         private System.Windows.Forms.BindingSource mokkiBindingSource;
         private DataSet1TableAdapters.mokkiTableAdapter mokkiTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mokkiidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn alueidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn postinroDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mokkinimiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn katuosoiteDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hintaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kuvausDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn henkilomaaraDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn varusteluDataGridViewTextBoxColumn;
         private DataSet1TableAdapters.alueTableAdapter alueTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mokki_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alue_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn postinro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mokkinimi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn katuosoite;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hinta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kuvaus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn henkilomaara;
+        private System.Windows.Forms.DataGridViewTextBoxColumn varustelu;
     }
 }

@@ -97,6 +97,7 @@
             this.dgvAlue.RowTemplate.Height = 24;
             this.dgvAlue.Size = new System.Drawing.Size(739, 243);
             this.dgvAlue.TabIndex = 4;
+            this.dgvAlue.SelectionChanged += new System.EventHandler(this.dgvAlue_SelectionChanged);
             // 
             // alueidDataGridViewTextBoxColumn
             // 

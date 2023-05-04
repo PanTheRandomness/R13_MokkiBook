@@ -179,5 +179,22 @@ namespace R13_MokkiBook
         {
             
         }
+
+        private void dgvMokit_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (dgv.CurrentRow != null)
+            {
+                tbMokkiId.Text = dgv.CurrentRow.Cells["mokki_id"].Value.ToString();
+                tbAlueId.Text = dgv.CurrentRow.Cells["alue_id"].Value.ToString();
+                tbPostinumero.Text = dgv.CurrentRow.Cells["postinro"].Value.ToString();
+                tbMokinnimi.Text = dgv.CurrentRow.Cells["mokkinimi"].Value.ToString();
+                tbKatuosoite.Text = dgv.CurrentRow.Cells["katuosoite"].Value.ToString();
+                tbHinta.Text = dgv.CurrentRow.Cells["hinta"].Value.ToString();
+                tbKuvaus.Text = dgv.CurrentRow.Cells["kuvaus"].Value.ToString();
+                tbHenkilomaara.Text = dgv.CurrentRow.Cells["henkilomaara"].Value.ToString();
+                tbVarustelu.Text = dgv.CurrentRow.Cells["varustelu"].Value.ToString();
+            }
+        }
     }
 }

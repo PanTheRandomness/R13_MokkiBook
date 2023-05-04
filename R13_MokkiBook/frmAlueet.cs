@@ -119,5 +119,10 @@ namespace R13_MokkiBook
             tbAlueId.Text = String.Empty;
             tbNimi.Text = String.Empty;
         }
+
+        private void dgvAlue_SelectionChanged(object sender, EventArgs e)
+        {
+       
+        }
     }
 }
