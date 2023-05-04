@@ -327,6 +327,7 @@
             this.btnHae.TabIndex = 25;
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = true;
+            this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
             // frmAsiakkaat
             // 
