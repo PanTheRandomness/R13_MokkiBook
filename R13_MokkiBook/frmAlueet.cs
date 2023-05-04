@@ -57,60 +57,60 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            DataRow newRow = dataTable.NewRow();
-            newRow["alue_id"] = tbAlueId.Text;
-            newRow["nimi"] = tbNimi.Text;
+            if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
+            {
+                MessageBox.Show("Täytä kaikki kentät!");
+            }
+            else
+            {
+                DataRow newRow = dataTable.NewRow();
+                newRow["alue_id"] = tbAlueId.Text;
+                newRow["nimi"] = tbNimi.Text;
 
-            dataTable.Rows.Add(newRow);
-            dataAdapter.Update(dataTable);
+                dataTable.Rows.Add(newRow);
+                dataAdapter.Update(dataTable);
 
-            tbAlueId.Text = String.Empty;
-            tbNimi.Text = String.Empty;
+                tbAlueId.Text = String.Empty;
+                tbNimi.Text = String.Empty;
+            }
         }
 
         private void frmAlueet_Load(object sender, EventArgs e)
         {
             connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
             connection.Open();
-
-            // Create a new ODBC data adapter and select all rows from the table
             dataAdapter = new OdbcDataAdapter("SELECT * FROM alue", connection);
-
-            // Create a new DataTable and fill it with the rows from the table
             dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
-
-            // Set the DataSource property of the DataGridView control to the DataTable
             dgvAlue.DataSource = dataTable;
-
-            // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
             OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
-
-            // Set the InsertCommand property of the dataAdapter to the generated insert command
             dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
-
-            // Create a new DataSet object to hold the data retrieved from the database
             System.Data.DataSet dataSet = new System.Data.DataSet();
-
-            // Fill the DataSet with data from the database
             dataAdapter.Fill(dataSet1);
         }
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
-            DataRow currentRow = ((DataRowView)dgvAlue.CurrentRow.DataBoundItem).Row;
+            if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
+            {
+                MessageBox.Show("Täytä kaikki kentät!");
+            }
+            else
+            {
+                DataRow currentRow = ((DataRowView)dgvAlue.CurrentRow.DataBoundItem).Row;
 
-            currentRow["alue_id"] = tbAlueId.Text;
-            currentRow["nimi"] = tbNimi.Text;
+                currentRow["alue_id"] = tbAlueId.Text;
+                currentRow["nimi"] = tbNimi.Text;
 
 
-            dataAdapter.Update(dataTable);
+                dataAdapter.Update(dataTable);
 
 
-            tbAlueId.Text = String.Empty;
-            tbNimi.Text = String.Empty;
+                tbAlueId.Text = String.Empty;
+                tbNimi.Text = String.Empty;
 
-            lokiinTallentaminen("Alueet-osiosta muokattiin tietoja käyttäjältä: ");
+                lokiinTallentaminen("Alueet-osiosta muokattiin tietoja käyttäjältä: ");
+            }
         }
 
         private void btnPoista_Click(object sender, EventArgs e)

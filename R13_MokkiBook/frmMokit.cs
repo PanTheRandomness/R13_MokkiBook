@@ -70,33 +70,18 @@ namespace R13_MokkiBook
         private void frmMokit_Load(object sender, EventArgs e)
         {
 
-            // TODO: This line of code loads data into the 'dataSet1.alue' table. You can move, or remove it, as needed.
+           
             this.alueTableAdapter.Fill(this.dataSet1.alue);
-            // TODO: This line of code loads data into the 'dataSet1.mokki' table. You can move, or remove it, as needed.
             this.mokkiTableAdapter.Fill(this.dataSet1.mokki);
             connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
             connection.Open();
-
-            // Create a new ODBC data adapter and select all rows from the table
             dataAdapter = new OdbcDataAdapter("SELECT * FROM mokki", connection);
-
-            // Create a new DataTable and fill it with the rows from the table
             dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
-
-            // Set the DataSource property of the DataGridView control to the DataTable
             dgvMokit.DataSource = dataTable;
-
-            // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
             OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
-
-            // Set the InsertCommand property of the dataAdapter to the generated insert command
             dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
-
-            // Create a new DataSet object to hold the data retrieved from the database
             System.Data.DataSet dataSet = new System.Data.DataSet();
-
-            // Fill the DataSet with data from the database
             dataAdapter.Fill(dataSet1);
 
         }
@@ -104,29 +89,39 @@ namespace R13_MokkiBook
         private void btnLisaa_Click(object sender, EventArgs e)
         {
 
-            DataRow newRow = dataTable.NewRow();
-            newRow["mokki_id"] = tbMokkiId.Text;
-            newRow["alue_id"] = tbAlueId.Text;
-            newRow["postinro"] = tbPostinumero.Text;
-            newRow["mokkinimi"] = tbMokinnimi.Text;
-            newRow["katuosoite"] = tbKatuosoite.Text;
-            newRow["hinta"] = tbHinta.Text;
-            newRow["kuvaus"] = tbKuvaus.Text;
-            newRow["henkilomaara"] = tbHenkilomaara.Text;
-            newRow["varustelu"] = tbVarustelu.Text;
+            if (tbMokkiId.Text.Trim() == "" || tbAlueId.Text.Trim() == "" || tbPostinumero.Text.Trim() == "" ||
+                 tbMokinnimi.Text.Trim() == "" || tbKatuosoite.Text.Trim() == "" || tbHinta.Text.Trim() == "" ||
+                 tbKuvaus.Text.Trim() == "" || tbHenkilomaara.Text.Trim() == "" || tbVarustelu.Text.Trim() == "")
+            {
+                MessageBox.Show("Täytä kaikki kentät!");
+            }
+            else
+            {
+                DataRow newRow = dataTable.NewRow();
+                newRow["mokki_id"] = tbMokkiId.Text;
+                newRow["alue_id"] = tbAlueId.Text;
+                newRow["postinro"] = tbPostinumero.Text;
+                newRow["mokkinimi"] = tbMokinnimi.Text;
+                newRow["katuosoite"] = tbKatuosoite.Text;
+                newRow["hinta"] = tbHinta.Text;
+                newRow["kuvaus"] = tbKuvaus.Text;
+                newRow["henkilomaara"] = tbHenkilomaara.Text;
+                newRow["varustelu"] = tbVarustelu.Text;
 
-            dataTable.Rows.Add(newRow);
-            dataAdapter.Update(dataTable);
+                dataTable.Rows.Add(newRow);
+                dataAdapter.Update(dataTable);
 
-            tbMokkiId.Text = String.Empty;
-            tbAlueId.Text = String.Empty;
-            tbPostinumero.Text = String.Empty;
-            tbMokinnimi.Text = String.Empty;
-            tbKatuosoite.Text = String.Empty;
-            tbHinta.Text = String.Empty;
-            tbKuvaus.Text = String.Empty;
-            tbHenkilomaara.Text = String.Empty;
-            tbVarustelu.Text = String.Empty;
+                tbMokkiId.Text = String.Empty;
+                tbAlueId.Text = String.Empty;
+                tbPostinumero.Text = String.Empty;
+                tbMokinnimi.Text = String.Empty;
+                tbKatuosoite.Text = String.Empty;
+                tbHinta.Text = String.Empty;
+                tbKuvaus.Text = String.Empty;
+                tbHenkilomaara.Text = String.Empty;
+                tbVarustelu.Text = String.Empty;
+            }
+
 
         }
 
@@ -135,30 +130,36 @@ namespace R13_MokkiBook
 
             DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
 
+            if (string.IsNullOrEmpty(tbMokkiId.Text) || string.IsNullOrEmpty(tbAlueId.Text) || string.IsNullOrEmpty(tbPostinumero.Text) || string.IsNullOrEmpty(tbMokinnimi.Text) || string.IsNullOrEmpty(tbKatuosoite.Text) || string.IsNullOrEmpty(tbHinta.Text) || string.IsNullOrEmpty(tbKuvaus.Text) || string.IsNullOrEmpty(tbHenkilomaara.Text) || string.IsNullOrEmpty(tbVarustelu.Text))
+            {
+                MessageBox.Show("Täytä kaikki kentät ennen päivitystä.");
+            }
+            else
+            {
+                currentRow["mokki_id"] = tbMokkiId.Text;
+                currentRow["alue_id"] = tbAlueId.Text;
+                currentRow["postinro"] = tbPostinumero.Text;
+                currentRow["mokkinimi"] = tbMokinnimi.Text;
+                currentRow["katuosoite"] = tbKatuosoite.Text;
+                currentRow["hinta"] = tbHinta.Text;
+                currentRow["kuvaus"] = tbKuvaus.Text;
+                currentRow["henkilomaara"] = tbHenkilomaara.Text;
+                currentRow["varustelu"] = tbVarustelu.Text;
 
-            currentRow["mokki_id"] = tbMokkiId.Text;
-            currentRow["alue_id"] = tbAlueId.Text;
-            currentRow["postinro"] = tbPostinumero.Text;
-            currentRow["mokkinimi"] = tbMokinnimi.Text;
-            currentRow["katuosoite"] = tbKatuosoite.Text;
-            currentRow["hinta"] = tbHinta.Text;
-            currentRow["kuvaus"] = tbKuvaus.Text;
-            currentRow["henkilomaara"] = tbHenkilomaara.Text;
-            currentRow["varustelu"] = tbVarustelu.Text;
+                dataAdapter.Update(dataTable);
 
-            dataAdapter.Update(dataTable);
+                tbMokkiId.Text = String.Empty;
+                tbAlueId.Text = String.Empty;
+                tbPostinumero.Text = String.Empty;
+                tbMokinnimi.Text = String.Empty;
+                tbKatuosoite.Text = String.Empty;
+                tbHinta.Text = String.Empty;
+                tbKuvaus.Text = String.Empty;
+                tbHenkilomaara.Text = String.Empty;
+                tbVarustelu.Text = String.Empty;
 
-            tbMokkiId.Text = String.Empty;
-            tbAlueId.Text = String.Empty;
-            tbPostinumero.Text = String.Empty;
-            tbMokinnimi.Text = String.Empty;
-            tbKatuosoite.Text = String.Empty;
-            tbHinta.Text = String.Empty;
-            tbKuvaus.Text = String.Empty;
-            tbHenkilomaara.Text = String.Empty;
-            tbVarustelu.Text = String.Empty;
-
-            lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
+                lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
+            }
         }
 
         private void btnPoista_Click(object sender, EventArgs e)
