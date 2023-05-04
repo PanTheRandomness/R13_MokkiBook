@@ -214,6 +214,42 @@ namespace R13_MokkiBook
                 e.Handled = true;
             }
         }
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+            string searchValue = tbHae.Text.Trim();
+            if (dgvAsiakkaat != null)
+            {
+                dgvAsiakkaat.ClearSelection();
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (int.TryParse(searchValue, out int id))
+                    {
+                        foreach (DataGridViewRow row in dgvAsiakkaat.Rows)
+                        {
+                            if (row.Cells["asiakas_id"].Value != null && row.Cells["asiakas_id"].Value.ToString().Equals(searchValue))
+                            {
+                                dgvAsiakkaat.CurrentCell = row.Cells["asiakas_id"];
+                                row.Selected = true;
+                                break;
+                            }
+                        }
+                        if (!dgvAsiakkaat.SelectedRows.Count.Equals(1))
+                        {
+                            MessageBox.Show("Asiakasta ei löytynyt");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hae Asiakas_id numerolla");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Haku ei voi olla tyhjä");
+                }
+            }
+        }
+
 
     }
 }
