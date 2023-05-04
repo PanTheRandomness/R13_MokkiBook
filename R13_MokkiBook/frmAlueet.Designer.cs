@@ -73,6 +73,7 @@
             this.tbAlueId.Name = "tbAlueId";
             this.tbAlueId.Size = new System.Drawing.Size(131, 22);
             this.tbAlueId.TabIndex = 0;
+            this.tbAlueId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlueId_KeyPress);
             // 
             // tbNimi
             // 

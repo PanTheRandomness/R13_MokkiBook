@@ -55,6 +55,8 @@ namespace R13_MokkiBook
             return al;
         }
 
+        //Lisää uusi alue. Tarkistaa että kaikki kentät on täytetty, jos ei ole tulee virheilmoitus.
+
         private void btnLisaa_Click(object sender, EventArgs e)
         {
             if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
@@ -89,6 +91,8 @@ namespace R13_MokkiBook
             dataAdapter.Fill(dataSet1);
         }
 
+        // Muokkaaminen, eli tallentaa muokkauksen.
+
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
             if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
@@ -113,6 +117,8 @@ namespace R13_MokkiBook
             }
         }
 
+        // Poistaminen. Poistaa valitun rivin.
+
         private void btnPoista_Click(object sender, EventArgs e)
         {
             DataRow currentRow = ((DataRowView)dgvAlue.CurrentRow.DataBoundItem).Row;
@@ -131,6 +137,8 @@ namespace R13_MokkiBook
        
         }
 
+        // Avaa rivin tupla clickillä tekstiboxeihin.
+
         private void dgvAlue_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
@@ -142,13 +150,15 @@ namespace R13_MokkiBook
             }
         }
 
+        // Tyhjentää kentät
+
         private void btnTyhjenna_Click(object sender, EventArgs e)
         {
             tbAlueId.Text = String.Empty;
             tbNimi.Text = String.Empty;
         }
 
-        /* Lokiin tallentaminen */
+        // Lokiin tallentaminen
 
         public void lokiinTallentaminen(string teksti)
 
@@ -159,6 +169,8 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        // Haku toiminto, joka hakee alue id mukaan. Jos aluetta ei löydy tekee virheilmoitukset.
 
         private void btnHae_Click(object sender, EventArgs e)
         {
@@ -196,6 +208,8 @@ namespace R13_MokkiBook
             }
         }
 
+        // Muuttaa nimen ensimmäisen kirjaimen isoksi.
+
         private void tbNimi_Leave(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -205,6 +219,16 @@ namespace R13_MokkiBook
             {
                 nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
                 tb.Text = nimi;
+            }
+        }
+
+        // Alue idseen voi syöttää vain numeroita.
+
+        private void tbAlueId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
             }
         }
     }

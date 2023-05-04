@@ -69,8 +69,6 @@ namespace R13_MokkiBook
 
         private void frmMokit_Load(object sender, EventArgs e)
         {
-
-           
             this.alueTableAdapter.Fill(this.dataSet1.alue);
             this.mokkiTableAdapter.Fill(this.dataSet1.mokki);
             connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
@@ -85,6 +83,8 @@ namespace R13_MokkiBook
             dataAdapter.Fill(dataSet1);
 
         }
+
+        //Lisää uusi mökki. Tarkistaa että kaikki kentät on täytetty, jos ei ole tulee virheilmoitus.
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
@@ -125,6 +125,8 @@ namespace R13_MokkiBook
 
         }
 
+        // Muokkaaminen, eli tallentaa muokkauksen.
+
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
 
@@ -162,6 +164,8 @@ namespace R13_MokkiBook
             }
         }
 
+        // Poistaminen. Poistaa valitun rivin.
+
         private void btnPoista_Click(object sender, EventArgs e)
         {
 
@@ -192,6 +196,8 @@ namespace R13_MokkiBook
 
         }
 
+        // Avaa rivin tupla clickillä tekstiboxeihin.
+
         private void dgvMokit_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
@@ -209,6 +215,8 @@ namespace R13_MokkiBook
             }
         }
 
+        // Tyhjentää kentät
+
         private void btnTyhjenna_Click(object sender, EventArgs e)
         {
             tbMokkiId.Text = String.Empty;
@@ -222,7 +230,7 @@ namespace R13_MokkiBook
             tbVarustelu.Text = String.Empty;
         }
 
-        /* Lokiin tallentaminen */
+        // Lokiin tallentaminen
 
         public void lokiinTallentaminen(string teksti)
 
@@ -233,6 +241,8 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        // Haku toiminto, joka hakee mökki id mukaan. Jos mökkiä ei löydy tekee virheilmoitukset.
 
         private void btnHae_Click(object sender, EventArgs e)
         {
@@ -270,6 +280,8 @@ namespace R13_MokkiBook
             }
         }
 
+        // Postinumeroon voi syöttää vain numeroita.
+
         private void tbPostinumero_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
@@ -277,6 +289,8 @@ namespace R13_MokkiBook
                 e.Handled = true;
             }
         }
+
+        // Muuttaa mökin nimen ensimmäisen kirjaimen isoksi.
 
         private void tbMokinnimi_Leave(object sender, EventArgs e)
         {
@@ -290,6 +304,8 @@ namespace R13_MokkiBook
             }
         }
 
+        // Muuttaa katuosoitteen ensimmäisen kirjaimen isoksi.
+
         private void tbKatuosoite_Leave(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -300,6 +316,79 @@ namespace R13_MokkiBook
                 nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
                 tb.Text = nimi;
             }
+        }
+
+        // Mökki idseen voi syöttää vain numeroita.
+
+        private void tbMokkiId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Alue idseen voi syöttää vain numeroita.
+
+        private void tbAlueId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Henkilömäärään voi syöttää vain numeroita.
+
+        private void tbHenkilomaara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Tarkistaa, että hinta on double tyyppinen.
+
+        private void tbHinta_Leave(object sender, EventArgs e)
+        {
+            double hinta;
+
+            if (!double.TryParse(tbHinta.Text, out hinta))
+            {
+                MessageBox.Show("Virheellinen hinta!");
+                return;
+            }
+
+        }
+
+        // Tarkistaa ettei varustelussa ole yli 100 merkkiä.
+
+        private void tbVarustelu_Leave(object sender, EventArgs e)
+        {
+            string varustelu = tbVarustelu.Text;
+
+            if (varustelu.Length > 100)
+            {
+                MessageBox.Show("Varustelussa voi olla enintään 100 merkkiä.");
+                return;
+            }
+
+
+        }
+        
+        // Tarkistaa ettei kuvauksessa ole yli 150 merkkiä. 
+
+        private void tbKuvaus_Leave(object sender, EventArgs e)
+        {
+            string kuvaus = tbKuvaus.Text;
+
+            if (kuvaus.Length > 150)
+            {
+                MessageBox.Show("Varustelussa voi olla enintään 150 merkkiä.");
+                return;
+            }
+
         }
     }
 }

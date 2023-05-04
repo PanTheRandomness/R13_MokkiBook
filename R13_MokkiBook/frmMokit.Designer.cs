@@ -161,6 +161,7 @@
             this.tbMokkiId.Size = new System.Drawing.Size(168, 22);
             this.tbMokkiId.TabIndex = 10;
             this.tbMokkiId.TextChanged += new System.EventHandler(this.tbMokkiId_TextChanged);
+            this.tbMokkiId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMokkiId_KeyPress);
             // 
             // tbKatuosoite
             // 
@@ -176,6 +177,7 @@
             this.tbVarustelu.Name = "tbVarustelu";
             this.tbVarustelu.Size = new System.Drawing.Size(168, 22);
             this.tbVarustelu.TabIndex = 6;
+            this.tbVarustelu.Leave += new System.EventHandler(this.tbVarustelu_Leave);
             // 
             // tbHenkilomaara
             // 
@@ -183,6 +185,7 @@
             this.tbHenkilomaara.Name = "tbHenkilomaara";
             this.tbHenkilomaara.Size = new System.Drawing.Size(168, 22);
             this.tbHenkilomaara.TabIndex = 5;
+            this.tbHenkilomaara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbHenkilomaara_KeyPress);
             // 
             // tbKuvaus
             // 
@@ -191,6 +194,7 @@
             this.tbKuvaus.Name = "tbKuvaus";
             this.tbKuvaus.Size = new System.Drawing.Size(168, 54);
             this.tbKuvaus.TabIndex = 4;
+            this.tbKuvaus.Leave += new System.EventHandler(this.tbKuvaus_Leave);
             // 
             // tbHinta
             // 
@@ -198,6 +202,7 @@
             this.tbHinta.Name = "tbHinta";
             this.tbHinta.Size = new System.Drawing.Size(168, 22);
             this.tbHinta.TabIndex = 18;
+            this.tbHinta.Leave += new System.EventHandler(this.tbHinta_Leave);
             // 
             // tbMokinnimi
             // 
@@ -221,6 +226,7 @@
             this.tbAlueId.Name = "tbAlueId";
             this.tbAlueId.Size = new System.Drawing.Size(168, 22);
             this.tbAlueId.TabIndex = 0;
+            this.tbAlueId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlueId_KeyPress);
             // 
             // dgvMokit
             // 
