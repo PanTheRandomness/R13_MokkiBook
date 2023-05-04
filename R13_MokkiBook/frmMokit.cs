@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             mokit = GetMokit();
+            lokiinTallentaminen("Mökit-osio avattiin käyttäjältä: ");
         }
 
 
@@ -67,6 +69,7 @@ namespace R13_MokkiBook
 
         private void frmMokit_Load(object sender, EventArgs e)
         {
+            
             // TODO: This line of code loads data into the 'dataSet1.alue' table. You can move, or remove it, as needed.
             this.alueTableAdapter.Fill(this.dataSet1.alue);
             // TODO: This line of code loads data into the 'dataSet1.mokki' table. You can move, or remove it, as needed.
@@ -155,6 +158,7 @@ namespace R13_MokkiBook
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
 
+            lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
         }
 
         private void btnPoista_Click(object sender, EventArgs e)
@@ -173,6 +177,8 @@ namespace R13_MokkiBook
             tbKuvaus.Text = String.Empty;
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
+
+            lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
         }
 
         private void tbMokkiId_TextChanged(object sender, EventArgs e)
@@ -213,6 +219,18 @@ namespace R13_MokkiBook
             tbKuvaus.Text = String.Empty;
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
+        }
+
+        /* Lokiin tallentaminen */
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("lokitiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
     }
 }
