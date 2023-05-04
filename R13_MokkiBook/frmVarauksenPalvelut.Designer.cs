@@ -36,6 +36,8 @@
             this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.varauksen_palvelutTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varauksen_palvelutTableAdapter();
             this.pnlToiminnot = new System.Windows.Forms.Panel();
+            this.nudPoistettavat = new System.Windows.Forms.NumericUpDown();
+            this.btnPoistaValittuMaara = new System.Windows.Forms.Button();
             this.btnHaePalvelu = new System.Windows.Forms.Button();
             this.btnPoista = new System.Windows.Forms.Button();
             this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -44,19 +46,17 @@
             this.varauksen_palvelutTableAdapter1 = new R13_MokkiBook.VarauksenPAlvelutDataSetTableAdapters.varauksen_palvelutTableAdapter();
             this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varauksenpalvelutBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnPoistaValittuMaara = new System.Windows.Forms.Button();
-            this.nudPoistettavat = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.pnlToiminnot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoistettavat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPoistettavat)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvVarauksenPalvelut
@@ -110,19 +110,36 @@
             this.pnlToiminnot.Size = new System.Drawing.Size(526, 40);
             this.pnlToiminnot.TabIndex = 1;
             // 
+            // nudPoistettavat
+            // 
+            this.nudPoistettavat.Location = new System.Drawing.Point(128, 9);
+            this.nudPoistettavat.Name = "nudPoistettavat";
+            this.nudPoistettavat.Size = new System.Drawing.Size(43, 20);
+            this.nudPoistettavat.TabIndex = 2;
+            // 
+            // btnPoistaValittuMaara
+            // 
+            this.btnPoistaValittuMaara.Location = new System.Drawing.Point(3, 7);
+            this.btnPoistaValittuMaara.Name = "btnPoistaValittuMaara";
+            this.btnPoistaValittuMaara.Size = new System.Drawing.Size(119, 23);
+            this.btnPoistaValittuMaara.TabIndex = 1;
+            this.btnPoistaValittuMaara.Text = "Poista valittu määrä";
+            this.btnPoistaValittuMaara.UseVisualStyleBackColor = true;
+            this.btnPoistaValittuMaara.Click += new System.EventHandler(this.btnPoistaValittuMaara_Click);
+            // 
             // btnHaePalvelu
             // 
-            this.btnHaePalvelu.Location = new System.Drawing.Point(391, 7);
+            this.btnHaePalvelu.Location = new System.Drawing.Point(372, 7);
             this.btnHaePalvelu.Name = "btnHaePalvelu";
-            this.btnHaePalvelu.Size = new System.Drawing.Size(125, 23);
+            this.btnHaePalvelu.Size = new System.Drawing.Size(144, 23);
             this.btnHaePalvelu.TabIndex = 4;
-            this.btnHaePalvelu.Text = "Hae alueen palvelut";
+            this.btnHaePalvelu.Text = "Lisää palvelu varaukseen";
             this.btnHaePalvelu.UseVisualStyleBackColor = true;
             this.btnHaePalvelu.Click += new System.EventHandler(this.btnHaePalvelu_Click);
             // 
             // btnPoista
             // 
-            this.btnPoista.Location = new System.Drawing.Point(285, 7);
+            this.btnPoista.Location = new System.Drawing.Point(266, 7);
             this.btnPoista.Name = "btnPoista";
             this.btnPoista.Size = new System.Drawing.Size(100, 23);
             this.btnPoista.TabIndex = 3;
@@ -157,23 +174,6 @@
             this.varauksenpalvelutBindingSource2.DataMember = "varauksen_palvelut";
             this.varauksenpalvelutBindingSource2.DataSource = this.varauksenPAlvelutDataSetBindingSource;
             // 
-            // btnPoistaValittuMaara
-            // 
-            this.btnPoistaValittuMaara.Location = new System.Drawing.Point(3, 7);
-            this.btnPoistaValittuMaara.Name = "btnPoistaValittuMaara";
-            this.btnPoistaValittuMaara.Size = new System.Drawing.Size(119, 23);
-            this.btnPoistaValittuMaara.TabIndex = 1;
-            this.btnPoistaValittuMaara.Text = "Poista valittu määrä";
-            this.btnPoistaValittuMaara.UseVisualStyleBackColor = true;
-            this.btnPoistaValittuMaara.Click += new System.EventHandler(this.btnPoistaValittuMaara_Click);
-            // 
-            // nudPoistettavat
-            // 
-            this.nudPoistettavat.Location = new System.Drawing.Point(128, 9);
-            this.nudPoistettavat.Name = "nudPoistettavat";
-            this.nudPoistettavat.Size = new System.Drawing.Size(43, 20);
-            this.nudPoistettavat.TabIndex = 2;
-            // 
             // frmVarauksenPalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,11 +194,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.pnlToiminnot.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoistettavat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epVarauksenPalvelut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPoistettavat)).EndInit();
             this.ResumeLayout(false);
 
         }
