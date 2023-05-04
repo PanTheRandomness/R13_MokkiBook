@@ -140,7 +140,7 @@
             this.btnMuokkaa.Name = "btnMuokkaa";
             this.btnMuokkaa.Size = new System.Drawing.Size(161, 39);
             this.btnMuokkaa.TabIndex = 3;
-            this.btnMuokkaa.Text = "Muokkaa";
+            this.btnMuokkaa.Text = "Tallenna muutos";
             this.btnMuokkaa.UseVisualStyleBackColor = true;
             this.btnMuokkaa.Click += new System.EventHandler(this.btnMuokkaa_Click);
             // 
