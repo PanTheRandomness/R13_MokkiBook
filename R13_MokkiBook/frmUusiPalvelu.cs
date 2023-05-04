@@ -29,58 +29,72 @@ namespace R13_MokkiBook
 
         public void saveButton_Click(object sender, EventArgs e)
         {
-            // Create a new DataRow and set its values to the input from the TextBox controls
-            DataRow newRow = dataTable.NewRow();
-            newRow["palvelu_id"] = txtPalveluID.Text;
-            newRow["alue_id"] = txtAlueID.Text;
-            newRow["nimi"] = txtNimi.Text;
-            newRow["tyyppi"] = txtTyyppi.Text;
-            newRow["kuvaus"] = txtKuvaus.Text;
-            newRow["hinta"] = txtHinta.Text;
-            newRow["alv"] = txtAlv.Text;
+            try
+            {
+                // Create a new DataRow and set its values to the input from the TextBox controls
+                DataRow newRow = dataTable.NewRow();
+                newRow["palvelu_id"] = txtPalveluID.Text;
+                newRow["alue_id"] = txtAlueID.Text;
+                newRow["nimi"] = txtNimi.Text;
+                newRow["tyyppi"] = txtTyyppi.Text;
+                newRow["kuvaus"] = txtKuvaus.Text;
+                newRow["hinta"] = txtHinta.Text;
+                newRow["alv"] = txtAlv.Text;
 
-            // Add the new row to the DataTable and update the database
-            dataTable.Rows.Add(newRow);
-            dataAdapter.Update(dataTable);
+                // Add the new row to the DataTable and update the database
+                dataTable.Rows.Add(newRow);
+                dataAdapter.Update(dataTable);
 
-            txtPalveluID.Text = String.Empty;
-            txtAlueID.Text = String.Empty;
-            txtNimi.Text = String.Empty;
-            txtTyyppi.Text = String.Empty;
-            txtKuvaus.Text = String.Empty;
-            txtHinta.Text = String.Empty;
-            txtAlv.Text = String.Empty;
+                txtPalveluID.Text = String.Empty;
+                txtAlueID.Text = String.Empty;
+                txtNimi.Text = String.Empty;
+                txtTyyppi.Text = String.Empty;
+                txtKuvaus.Text = String.Empty;
+                txtHinta.Text = String.Empty;
+                txtAlv.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void frmUusiPalvelu_Load(object sender, EventArgs e)
         {
-            this.palveluTableAdapter1.Fill(this.dataSet1.palvelu);
+            try
+            {
+                this.palveluTableAdapter1.Fill(this.dataSet1.palvelu);
 
-            // Create a new ODBC connection and open it
-            connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
-            connection.Open();
+                // Create a new ODBC connection and open it
+                connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
+                connection.Open();
 
-            // Create a new ODBC data adapter and select all rows from the table
-            dataAdapter = new OdbcDataAdapter("SELECT * FROM palvelu", connection);
+                // Create a new ODBC data adapter and select all rows from the table
+                dataAdapter = new OdbcDataAdapter("SELECT * FROM palvelu", connection);
 
-            // Create a new DataTable and fill it with the rows from the table
-            dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
+                // Create a new DataTable and fill it with the rows from the table
+                dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
 
-            // Set the DataSource property of the DataGridView control to the DataTable
-            dataGridView1.DataSource = dataTable;
+                // Set the DataSource property of the DataGridView control to the DataTable
+                dataGridView1.DataSource = dataTable;
 
-            // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
-            OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
+                // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
+                OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
 
-            // Set the InsertCommand property of the dataAdapter to the generated insert command
-            dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
+                // Set the InsertCommand property of the dataAdapter to the generated insert command
+                dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
 
-            // Create a new DataSet object to hold the data retrieved from the database
-            System.Data.DataSet dataSet = new System.Data.DataSet();
+                // Create a new DataSet object to hold the data retrieved from the database
+                System.Data.DataSet dataSet = new System.Data.DataSet();
 
-            // Fill the DataSet with data from the database
-            dataAdapter.Fill(dataSet1);
+                // Fill the DataSet with data from the database
+                dataAdapter.Fill(dataSet1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
 
         }
         public List<Palvelu> GetPalvelut()
@@ -101,10 +115,10 @@ namespace R13_MokkiBook
                             Palvelu palvelu = new Palvelu();
                             palvelu.palvelu_id = reader.GetInt32(0);
                             palvelu.nimi = reader.GetString(1);
-                            palvelu.tyyppi = reader.GetInt32(1);
-                            palvelu.kuvaus = reader.GetString(1);
-                            palvelu.hinta = reader.GetInt32(0);
-                            palvelu.alv = reader.GetInt32(0);
+                            palvelu.tyyppi = reader.GetInt32(2);
+                            palvelu.kuvaus = reader.GetString(3);
+                            palvelu.hinta = reader.GetInt32(4);
+                            palvelu.alv = reader.GetInt32(5);
 
                             pal.Add(palvelu);
                         }
@@ -117,39 +131,45 @@ namespace R13_MokkiBook
 
         private void btnPaivita_Click(object sender, EventArgs e)
         {
-            // Get the current DataRow from the DataGridView control
-            DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
+            try
+            {
+                // Get the current DataRow from the DataGridView control
+                DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
 
-            // Update the values of the current DataRow with the input from the TextBox controls
-            currentRow["palvelu_id"] = txtPalveluID.Text;
-            currentRow["alue_id"] = txtAlueID.Text;
-            currentRow["nimi"] = txtNimi.Text;
-            currentRow["tyyppi"] = txtTyyppi.Text;
-            currentRow["kuvaus"] = txtKuvaus.Text;
-            currentRow["hinta"] = txtHinta.Text;
-            currentRow["alv"] = txtAlv.Text;
+                // Update the values of the current DataRow with the input from the TextBox controls
+                currentRow["palvelu_id"] = txtPalveluID.Text;
+                currentRow["alue_id"] = txtAlueID.Text;
+                currentRow["nimi"] = txtNimi.Text;
+                currentRow["tyyppi"] = txtTyyppi.Text;
+                currentRow["kuvaus"] = txtKuvaus.Text;
+                currentRow["hinta"] = txtHinta.Text;
+                currentRow["alv"] = txtAlv.Text;
 
-            // Update the database
-            dataAdapter.Update(dataTable);
+                // Update the database
+                dataAdapter.Update(dataTable);
 
-            txtPalveluID.Text = String.Empty;
-            txtAlueID.Text = String.Empty;
-            txtNimi.Text = String.Empty;
-            txtTyyppi.Text = String.Empty;
-            txtKuvaus.Text = String.Empty;
-            txtHinta.Text = String.Empty;
-            txtAlv.Text = String.Empty;
-        }
-
+                txtPalveluID.Text = String.Empty;
+                txtAlueID.Text = String.Empty;
+                txtNimi.Text = String.Empty;
+                txtTyyppi.Text = String.Empty;
+                txtKuvaus.Text = String.Empty;
+                txtHinta.Text = String.Empty;
+                txtAlv.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        } 
         private void fillBy2ToolStripButton_Click(object sender, EventArgs e)
         {
             try
             {
                 this.palveluTableAdapter1.FillBy2(this.dataSet1.palvelu);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
 
         }
@@ -170,27 +190,8 @@ namespace R13_MokkiBook
             txtHinta.Text = String.Empty;
             txtAlv.Text = String.Empty;
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
-
-        private void lbNimi_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbAlv_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_SelectionChanged_1(object sender, EventArgs e)
+        private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
             if (dgv.CurrentRow != null)
@@ -203,6 +204,18 @@ namespace R13_MokkiBook
                 txtHinta.Text = dgv.CurrentRow.Cells["hinta"].Value.ToString();
                 txtAlv.Text = dgv.CurrentRow.Cells["alv"].Value.ToString();
             }
+        }
+
+        private void btnTyhjenna_Click(object sender, EventArgs e) //tyhjennetään rivit
+        {
+                txtPalveluID.Text = String.Empty;
+                txtAlueID.Text = String.Empty;
+                txtNimi.Text = String.Empty;
+                txtTyyppi.Text = String.Empty;
+                txtKuvaus.Text = String.Empty;
+                txtHinta.Text = String.Empty;
+                txtAlv.Text = String.Empty;
+
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             alueet = GetAlueet();
+            lokiinTallentaminen("Alueet-osio avattiin käyttäjältä: ");
         }
 
         public List<Alue> GetAlueet()
@@ -107,6 +109,8 @@ namespace R13_MokkiBook
 
             tbAlueId.Text = String.Empty;
             tbNimi.Text = String.Empty;
+
+            lokiinTallentaminen("Alueet-osiosta muokattiin tietoja käyttäjältä: ");
         }
 
         private void btnPoista_Click(object sender, EventArgs e)
@@ -118,6 +122,8 @@ namespace R13_MokkiBook
 
             tbAlueId.Text = String.Empty;
             tbNimi.Text = String.Empty;
+
+            lokiinTallentaminen("Alueet-osiosta poistettiin tietoja käyttäjältä: ");
         }
 
         private void dgvAlue_SelectionChanged(object sender, EventArgs e)
@@ -140,6 +146,18 @@ namespace R13_MokkiBook
         {
             tbAlueId.Text = String.Empty;
             tbNimi.Text = String.Empty;
+        }
+
+        /* Lokiin tallentaminen */
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("lokitiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
     }
 }
