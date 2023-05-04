@@ -179,5 +179,40 @@ namespace R13_MokkiBook
         {
             
         }
+
+        private void dgvMokit_SelectionChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void dgvMokit_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (dgv.CurrentRow != null)
+            {
+                tbMokkiId.Text = dgv.CurrentRow.Cells["mokki_id"].Value.ToString();
+                tbAlueId.Text = dgv.CurrentRow.Cells["alue_id"].Value.ToString();
+                tbPostinumero.Text = dgv.CurrentRow.Cells["postinro"].Value.ToString();
+                tbMokinnimi.Text = dgv.CurrentRow.Cells["mokkinimi"].Value.ToString();
+                tbKatuosoite.Text = dgv.CurrentRow.Cells["katuosoite"].Value.ToString();
+                tbHinta.Text = dgv.CurrentRow.Cells["hinta"].Value.ToString();
+                tbKuvaus.Text = dgv.CurrentRow.Cells["kuvaus"].Value.ToString();
+                tbHenkilomaara.Text = dgv.CurrentRow.Cells["henkilomaara"].Value.ToString();
+                tbVarustelu.Text = dgv.CurrentRow.Cells["varustelu"].Value.ToString();
+            }
+        }
+
+        private void btnTyhjenna_Click(object sender, EventArgs e)
+        {
+            tbMokkiId.Text = String.Empty;
+            tbAlueId.Text = String.Empty;
+            tbPostinumero.Text = String.Empty;
+            tbMokinnimi.Text = String.Empty;
+            tbKatuosoite.Text = String.Empty;
+            tbHinta.Text = String.Empty;
+            tbKuvaus.Text = String.Empty;
+            tbHenkilomaara.Text = String.Empty;
+            tbVarustelu.Text = String.Empty;
+        }
     }
 }

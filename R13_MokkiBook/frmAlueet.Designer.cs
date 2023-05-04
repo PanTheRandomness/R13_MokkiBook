@@ -34,8 +34,6 @@
             this.tbAlueId = new System.Windows.Forms.TextBox();
             this.tbNimi = new System.Windows.Forms.TextBox();
             this.dgvAlue = new System.Windows.Forms.DataGridView();
-            this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nimiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.btnLisaa = new System.Windows.Forms.Button();
@@ -46,6 +44,9 @@
             this.dtpAlku = new System.Windows.Forms.DateTimePicker();
             this.lblPaivat = new System.Windows.Forms.Label();
             this.btnHae = new System.Windows.Forms.Button();
+            this.alue_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nimi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnTyhjenna = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -88,8 +89,8 @@
             this.dgvAlue.AutoGenerateColumns = false;
             this.dgvAlue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAlue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.alueidDataGridViewTextBoxColumn,
-            this.nimiDataGridViewTextBoxColumn});
+            this.alue_id,
+            this.nimi});
             this.dgvAlue.DataSource = this.alueBindingSource;
             this.dgvAlue.Location = new System.Drawing.Point(33, 186);
             this.dgvAlue.Name = "dgvAlue";
@@ -97,22 +98,8 @@
             this.dgvAlue.RowTemplate.Height = 24;
             this.dgvAlue.Size = new System.Drawing.Size(739, 243);
             this.dgvAlue.TabIndex = 4;
-            // 
-            // alueidDataGridViewTextBoxColumn
-            // 
-            this.alueidDataGridViewTextBoxColumn.DataPropertyName = "alue_id";
-            this.alueidDataGridViewTextBoxColumn.HeaderText = "alue_id";
-            this.alueidDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.alueidDataGridViewTextBoxColumn.Name = "alueidDataGridViewTextBoxColumn";
-            this.alueidDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // nimiDataGridViewTextBoxColumn
-            // 
-            this.nimiDataGridViewTextBoxColumn.DataPropertyName = "nimi";
-            this.nimiDataGridViewTextBoxColumn.HeaderText = "nimi";
-            this.nimiDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nimiDataGridViewTextBoxColumn.Name = "nimiDataGridViewTextBoxColumn";
-            this.nimiDataGridViewTextBoxColumn.Width = 125;
+            this.dgvAlue.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAlue_RowHeaderMouseDoubleClick);
+            this.dgvAlue.SelectionChanged += new System.EventHandler(this.dgvAlue_SelectionChanged);
             // 
             // alueBindingSource
             // 
@@ -136,7 +123,7 @@
             // 
             // btnMuokkaa
             // 
-            this.btnMuokkaa.Location = new System.Drawing.Point(226, 141);
+            this.btnMuokkaa.Location = new System.Drawing.Point(221, 141);
             this.btnMuokkaa.Name = "btnMuokkaa";
             this.btnMuokkaa.Size = new System.Drawing.Size(161, 39);
             this.btnMuokkaa.TabIndex = 6;
@@ -146,7 +133,7 @@
             // 
             // btnPoista
             // 
-            this.btnPoista.Location = new System.Drawing.Point(426, 141);
+            this.btnPoista.Location = new System.Drawing.Point(417, 141);
             this.btnPoista.Name = "btnPoista";
             this.btnPoista.Size = new System.Drawing.Size(161, 39);
             this.btnPoista.TabIndex = 7;
@@ -205,11 +192,38 @@
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = true;
             // 
+            // alue_id
+            // 
+            this.alue_id.DataPropertyName = "alue_id";
+            this.alue_id.HeaderText = "alue_id";
+            this.alue_id.MinimumWidth = 6;
+            this.alue_id.Name = "alue_id";
+            this.alue_id.Width = 125;
+            // 
+            // nimi
+            // 
+            this.nimi.DataPropertyName = "nimi";
+            this.nimi.HeaderText = "nimi";
+            this.nimi.MinimumWidth = 6;
+            this.nimi.Name = "nimi";
+            this.nimi.Width = 125;
+            // 
+            // btnTyhjenna
+            // 
+            this.btnTyhjenna.Location = new System.Drawing.Point(611, 141);
+            this.btnTyhjenna.Name = "btnTyhjenna";
+            this.btnTyhjenna.Size = new System.Drawing.Size(161, 39);
+            this.btnTyhjenna.TabIndex = 13;
+            this.btnTyhjenna.Text = "Tyhjennä rivit";
+            this.btnTyhjenna.UseVisualStyleBackColor = true;
+            this.btnTyhjenna.Click += new System.EventHandler(this.btnTyhjenna_Click);
+            // 
             // frmAlueet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 536);
+            this.Controls.Add(this.btnTyhjenna);
             this.Controls.Add(this.btnHae);
             this.Controls.Add(this.dtpLoppu);
             this.Controls.Add(this.lblViiva);
@@ -249,9 +263,10 @@
         private System.Windows.Forms.DateTimePicker dtpAlku;
         private System.Windows.Forms.Label lblPaivat;
         private System.Windows.Forms.Button btnHae;
-        private System.Windows.Forms.DataGridViewTextBoxColumn alueidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nimiDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource alueBindingSource;
         private DataSet1 dataSet1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alue_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nimi;
+        private System.Windows.Forms.Button btnTyhjenna;
     }
 }

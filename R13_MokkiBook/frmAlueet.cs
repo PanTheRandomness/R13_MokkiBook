@@ -62,8 +62,8 @@ namespace R13_MokkiBook
             dataTable.Rows.Add(newRow);
             dataAdapter.Update(dataTable);
 
-            tbAlueId.Text = "";
-            tbNimi.Text = "";
+            tbAlueId.Text = String.Empty;
+            tbNimi.Text = String.Empty;
         }
 
         private void frmAlueet_Load(object sender, EventArgs e)
@@ -116,6 +116,28 @@ namespace R13_MokkiBook
             currentRow.Delete();
             dataAdapter.Update(dataTable);
 
+            tbAlueId.Text = String.Empty;
+            tbNimi.Text = String.Empty;
+        }
+
+        private void dgvAlue_SelectionChanged(object sender, EventArgs e)
+        {
+       
+        }
+
+        private void dgvAlue_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (dgv.CurrentRow != null)
+            {
+                tbAlueId.Text = dgv.CurrentRow.Cells["alue_id"].Value.ToString();
+                tbNimi.Text = dgv.CurrentRow.Cells["nimi"].Value.ToString();
+               
+            }
+        }
+
+        private void btnTyhjenna_Click(object sender, EventArgs e)
+        {
             tbAlueId.Text = String.Empty;
             tbNimi.Text = String.Empty;
         }
