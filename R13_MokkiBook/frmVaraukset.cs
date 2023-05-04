@@ -30,7 +30,7 @@ namespace R13_MokkiBook
             InitializeComponent();
             varaukset = GetVaraukset();
             alueet = GetAlueet();
-            lokiinTallentaminen("Palvelut-osio avattiin käyttäjältä: ");
+            lokiinTallentaminen("Varaukset-osio avattiin käyttäjältä: ");
 
         }
         public List<Varaus> GetVaraukset()
