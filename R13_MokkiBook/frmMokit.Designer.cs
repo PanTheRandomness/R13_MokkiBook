@@ -196,7 +196,6 @@
             this.tbKuvaus.Size = new System.Drawing.Size(168, 54);
             this.tbKuvaus.TabIndex = 4;
             this.tbKuvaus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKuvaus_KeyPress);
-            this.tbKuvaus.Leave += new System.EventHandler(this.tbKuvaus_Leave);
             // 
             // tbHinta
             // 
