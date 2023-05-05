@@ -140,7 +140,7 @@ namespace R13_MokkiBook
                     using (OdbcConnection connection = new OdbcConnection(connectionString))
                     {
                         connection.Open();
-                        string lisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + lisattava.varaus_id + ", " + lisattava.palvelu_id + ", " + lisattava.lkm + ")";
+                        string lisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + lisattava.varaus_id + ", " + lisattava.palvelu_id + ", " + lisattava.lkm + ");";
                         using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
                         {
                             cmd.ExecuteNonQuery();

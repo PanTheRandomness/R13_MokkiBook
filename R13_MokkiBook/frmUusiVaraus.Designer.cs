@@ -60,13 +60,10 @@ namespace R13_MokkiBook
             this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.tbAsiakastunnus = new System.Windows.Forms.TextBox();
             this.pnlVaraustiedot = new System.Windows.Forms.Panel();
-            this.cbLukitseMokki = new System.Windows.Forms.CheckBox();
-            this.btnLuoVaraus = new System.Windows.Forms.Button();
+            this.pnlMokki = new System.Windows.Forms.Panel();
             this.lblKuvaus = new System.Windows.Forms.Label();
             this.tbKuvaus = new System.Windows.Forms.TextBox();
             this.lblVarustelu = new System.Windows.Forms.Label();
-            this.lblLoppuhinta = new System.Windows.Forms.Label();
-            this.tbLoppuhinta = new System.Windows.Forms.TextBox();
             this.tbVarustelu = new System.Windows.Forms.TextBox();
             this.lblMaksimihinta = new System.Windows.Forms.Label();
             this.lblMinhinta = new System.Windows.Forms.Label();
@@ -74,6 +71,23 @@ namespace R13_MokkiBook
             this.tbMinhinta = new System.Windows.Forms.TextBox();
             this.lblHenkilomaara = new System.Windows.Forms.Label();
             this.nudHlomaara = new System.Windows.Forms.NumericUpDown();
+            this.tbLahiosoiteMokki = new System.Windows.Forms.TextBox();
+            this.lblLahiosoiteMokki = new System.Windows.Forms.Label();
+            this.tbMokkitunnus = new System.Windows.Forms.TextBox();
+            this.lblMokkitun = new System.Windows.Forms.Label();
+            this.lblAjankohta = new System.Windows.Forms.Label();
+            this.dtmLoppupvm = new System.Windows.Forms.DateTimePicker();
+            this.dtpAlkupvm = new System.Windows.Forms.DateTimePicker();
+            this.lbAlueid = new System.Windows.Forms.Label();
+            this.lbAlue = new System.Windows.Forms.ListBox();
+            this.cmsTyhjennavalinta = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiTyhjenna = new System.Windows.Forms.ToolStripMenuItem();
+            this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbAlueid = new System.Windows.Forms.TextBox();
+            this.cbLukitseMokki = new System.Windows.Forms.CheckBox();
+            this.btnLuoVaraus = new System.Windows.Forms.Button();
+            this.lblLoppuhinta = new System.Windows.Forms.Label();
+            this.tbLoppuhinta = new System.Windows.Forms.TextBox();
             this.pnlPalvelut = new System.Windows.Forms.Panel();
             this.btnPoistaPalvelu = new System.Windows.Forms.Button();
             this.dgvAlueenPalvelut = new System.Windows.Forms.DataGridView();
@@ -95,19 +109,6 @@ namespace R13_MokkiBook
             this.henkilomaaraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varusteluDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mokkiBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbLahiosoiteMokki = new System.Windows.Forms.TextBox();
-            this.lblLahiosoiteMokki = new System.Windows.Forms.Label();
-            this.tbMokkitunnus = new System.Windows.Forms.TextBox();
-            this.lblMokkitun = new System.Windows.Forms.Label();
-            this.lblAjankohta = new System.Windows.Forms.Label();
-            this.dtmLoppupvm = new System.Windows.Forms.DateTimePicker();
-            this.dtpAlkupvm = new System.Windows.Forms.DateTimePicker();
-            this.lbAlueid = new System.Windows.Forms.Label();
-            this.lbAlue = new System.Windows.Forms.ListBox();
-            this.cmsTyhjennavalinta = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiTyhjenna = new System.Windows.Forms.ToolStripMenuItem();
-            this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbAlueid = new System.Windows.Forms.TextBox();
             this.postiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.epUusiVaraus = new System.Windows.Forms.ErrorProvider(this.components);
             this.asiakasTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.asiakasTableAdapter();
@@ -117,25 +118,24 @@ namespace R13_MokkiBook
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
             this.ttUusiVaraus = new System.Windows.Forms.ToolTip(this.components);
-            this.pnlMokki = new System.Windows.Forms.Panel();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.pnlVaraustiedot.SuspendLayout();
+            this.pnlMokki.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHlomaara)).BeginInit();
+            this.cmsTyhjennavalinta.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             this.pnlPalvelut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlueenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPalveluLkm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
-            this.cmsTyhjennavalinta.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
-            this.pnlMokki.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlAsiakastiedot
@@ -176,6 +176,7 @@ namespace R13_MokkiBook
             this.tbPostitoimipaikkaAsiakas.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbPostitoimipaikkaAsiakas, "Syötä asiakkaan postitoimipaikka");
             this.tbPostitoimipaikkaAsiakas.TextChanged += new System.EventHandler(this.tbPostitoimipaikkaAsiakas_TextChanged);
+            this.tbPostitoimipaikkaAsiakas.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 
             // lblPostitoimipaikka
             // 
@@ -354,7 +355,6 @@ namespace R13_MokkiBook
             this.dgvAsiakkaat.TabIndex = 8;
             this.dgvAsiakkaat.TabStop = false;
             this.dgvAsiakkaat.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAsiakkaat_RowHeaderMouseDoubleClick);
-            this.dgvAsiakkaat.SelectionChanged += new System.EventHandler(this.dgvAsiakkaat_SelectionChanged);
             // 
             // asiakasidDataGridViewTextBoxColumn
             // 
@@ -435,29 +435,32 @@ namespace R13_MokkiBook
             this.pnlVaraustiedot.Size = new System.Drawing.Size(1068, 437);
             this.pnlVaraustiedot.TabIndex = 9;
             // 
-            // cbLukitseMokki
+            // pnlMokki
             // 
-            this.cbLukitseMokki.AutoSize = true;
-            this.cbLukitseMokki.Location = new System.Drawing.Point(516, 251);
-            this.cbLukitseMokki.Name = "cbLukitseMokki";
-            this.cbLukitseMokki.Size = new System.Drawing.Size(91, 17);
-            this.cbLukitseMokki.TabIndex = 21;
-            this.cbLukitseMokki.Text = "Lukitse mökki";
-            this.ttUusiVaraus.SetToolTip(this.cbLukitseMokki, "Lukitsee valitun mökin");
-            this.cbLukitseMokki.UseVisualStyleBackColor = true;
-            this.cbLukitseMokki.CheckedChanged += new System.EventHandler(this.cbLukitseMokki_CheckedChanged);
-            // 
-            // btnLuoVaraus
-            // 
-            this.btnLuoVaraus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLuoVaraus.Location = new System.Drawing.Point(919, 245);
-            this.btnLuoVaraus.Name = "btnLuoVaraus";
-            this.btnLuoVaraus.Size = new System.Drawing.Size(133, 23);
-            this.btnLuoVaraus.TabIndex = 29;
-            this.btnLuoVaraus.Text = "Luo varaus";
-            this.ttUusiVaraus.SetToolTip(this.btnLuoVaraus, "Luo varauksen");
-            this.btnLuoVaraus.UseVisualStyleBackColor = true;
-            this.btnLuoVaraus.Click += new System.EventHandler(this.btnLuoVaraus_Click);
+            this.pnlMokki.Controls.Add(this.lblKuvaus);
+            this.pnlMokki.Controls.Add(this.tbKuvaus);
+            this.pnlMokki.Controls.Add(this.lblVarustelu);
+            this.pnlMokki.Controls.Add(this.tbVarustelu);
+            this.pnlMokki.Controls.Add(this.lblMaksimihinta);
+            this.pnlMokki.Controls.Add(this.lblMinhinta);
+            this.pnlMokki.Controls.Add(this.tbMaxhinta);
+            this.pnlMokki.Controls.Add(this.tbMinhinta);
+            this.pnlMokki.Controls.Add(this.lblHenkilomaara);
+            this.pnlMokki.Controls.Add(this.nudHlomaara);
+            this.pnlMokki.Controls.Add(this.tbLahiosoiteMokki);
+            this.pnlMokki.Controls.Add(this.lblLahiosoiteMokki);
+            this.pnlMokki.Controls.Add(this.tbMokkitunnus);
+            this.pnlMokki.Controls.Add(this.lblMokkitun);
+            this.pnlMokki.Controls.Add(this.lblAjankohta);
+            this.pnlMokki.Controls.Add(this.dtmLoppupvm);
+            this.pnlMokki.Controls.Add(this.dtpAlkupvm);
+            this.pnlMokki.Controls.Add(this.lbAlueid);
+            this.pnlMokki.Controls.Add(this.lbAlue);
+            this.pnlMokki.Controls.Add(this.tbAlueid);
+            this.pnlMokki.Location = new System.Drawing.Point(0, 0);
+            this.pnlMokki.Name = "pnlMokki";
+            this.pnlMokki.Size = new System.Drawing.Size(508, 269);
+            this.pnlMokki.TabIndex = 10;
             // 
             // lblKuvaus
             // 
@@ -487,25 +490,6 @@ namespace R13_MokkiBook
             this.lblVarustelu.Size = new System.Drawing.Size(51, 13);
             this.lblVarustelu.TabIndex = 19;
             this.lblVarustelu.Text = "Varustelu";
-            // 
-            // lblLoppuhinta
-            // 
-            this.lblLoppuhinta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLoppuhinta.AutoSize = true;
-            this.lblLoppuhinta.Location = new System.Drawing.Point(732, 250);
-            this.lblLoppuhinta.Name = "lblLoppuhinta";
-            this.lblLoppuhinta.Size = new System.Drawing.Size(75, 13);
-            this.lblLoppuhinta.TabIndex = 28;
-            this.lblLoppuhinta.Text = "Loppuhinta (€)";
-            // 
-            // tbLoppuhinta
-            // 
-            this.tbLoppuhinta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLoppuhinta.Location = new System.Drawing.Point(813, 247);
-            this.tbLoppuhinta.Name = "tbLoppuhinta";
-            this.tbLoppuhinta.Size = new System.Drawing.Size(100, 20);
-            this.tbLoppuhinta.TabIndex = 28;
-            this.ttUusiVaraus.SetToolTip(this.tbLoppuhinta, "Näyttää arvioidun loppuhinnan");
             // 
             // tbVarustelu
             // 
@@ -579,212 +563,6 @@ namespace R13_MokkiBook
             0,
             0});
             this.nudHlomaara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
-            // 
-            // pnlPalvelut
-            // 
-            this.pnlPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPalvelut.Controls.Add(this.btnPoistaPalvelu);
-            this.pnlPalvelut.Controls.Add(this.dgvAlueenPalvelut);
-            this.pnlPalvelut.Controls.Add(this.lblPalvelujenMaara);
-            this.pnlPalvelut.Controls.Add(this.nudPalveluLkm);
-            this.pnlPalvelut.Controls.Add(this.btnLisaaPalveluVaraukseen);
-            this.pnlPalvelut.Controls.Add(this.lblAlueenPalvelut);
-            this.pnlPalvelut.Controls.Add(this.lblVarauksenPalvelut);
-            this.pnlPalvelut.Controls.Add(this.lbVarauksenPalvelut);
-            this.pnlPalvelut.Location = new System.Drawing.Point(516, -3);
-            this.pnlPalvelut.Name = "pnlPalvelut";
-            this.pnlPalvelut.Size = new System.Drawing.Size(547, 245);
-            this.pnlPalvelut.TabIndex = 24;
-            // 
-            // btnPoistaPalvelu
-            // 
-            this.btnPoistaPalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPoistaPalvelu.Location = new System.Drawing.Point(119, 132);
-            this.btnPoistaPalvelu.Name = "btnPoistaPalvelu";
-            this.btnPoistaPalvelu.Size = new System.Drawing.Size(92, 23);
-            this.btnPoistaPalvelu.TabIndex = 26;
-            this.btnPoistaPalvelu.Text = "Poista palvelu";
-            this.ttUusiVaraus.SetToolTip(this.btnPoistaPalvelu, "Poistaa valitun palvelun varauksen palveluista.");
-            this.btnPoistaPalvelu.UseVisualStyleBackColor = true;
-            this.btnPoistaPalvelu.Click += new System.EventHandler(this.btnPoistaPalvelu_Click);
-            // 
-            // dgvAlueenPalvelut
-            // 
-            this.dgvAlueenPalvelut.AllowUserToAddRows = false;
-            this.dgvAlueenPalvelut.AllowUserToDeleteRows = false;
-            this.dgvAlueenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvAlueenPalvelut.AutoGenerateColumns = false;
-            this.dgvAlueenPalvelut.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAlueenPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAlueenPalvelut.DataSource = this.palveluBindingSource;
-            this.dgvAlueenPalvelut.Location = new System.Drawing.Point(0, 20);
-            this.dgvAlueenPalvelut.Name = "dgvAlueenPalvelut";
-            this.dgvAlueenPalvelut.ReadOnly = true;
-            this.dgvAlueenPalvelut.Size = new System.Drawing.Size(546, 105);
-            this.dgvAlueenPalvelut.TabIndex = 23;
-            this.dgvAlueenPalvelut.TabStop = false;
-            this.dgvAlueenPalvelut.SelectionChanged += new System.EventHandler(this.dgvAlueenPalvelut_SelectionChanged);
-            // 
-            // lblPalvelujenMaara
-            // 
-            this.lblPalvelujenMaara.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPalvelujenMaara.AutoSize = true;
-            this.lblPalvelujenMaara.Location = new System.Drawing.Point(293, 136);
-            this.lblPalvelujenMaara.Name = "lblPalvelujenMaara";
-            this.lblPalvelujenMaara.Size = new System.Drawing.Size(37, 13);
-            this.lblPalvelujenMaara.TabIndex = 24;
-            this.lblPalvelujenMaara.Text = "Määrä";
-            // 
-            // nudPalveluLkm
-            // 
-            this.nudPalveluLkm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudPalveluLkm.Location = new System.Drawing.Point(336, 131);
-            this.nudPalveluLkm.Name = "nudPalveluLkm";
-            this.nudPalveluLkm.Size = new System.Drawing.Size(51, 20);
-            this.nudPalveluLkm.TabIndex = 24;
-            this.ttUusiVaraus.SetToolTip(this.nudPalveluLkm, "Valitse lisättävän palvelun lukumäärä");
-            // 
-            // btnLisaaPalveluVaraukseen
-            // 
-            this.btnLisaaPalveluVaraukseen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLisaaPalveluVaraukseen.Location = new System.Drawing.Point(393, 131);
-            this.btnLisaaPalveluVaraukseen.Name = "btnLisaaPalveluVaraukseen";
-            this.btnLisaaPalveluVaraukseen.Size = new System.Drawing.Size(149, 23);
-            this.btnLisaaPalveluVaraukseen.TabIndex = 25;
-            this.btnLisaaPalveluVaraukseen.Text = "Lisää palvelu varaukseen";
-            this.ttUusiVaraus.SetToolTip(this.btnLisaaPalveluVaraukseen, "Lisää valitun palvelun varaukseen");
-            this.btnLisaaPalveluVaraukseen.UseVisualStyleBackColor = true;
-            this.btnLisaaPalveluVaraukseen.Click += new System.EventHandler(this.btnLisaaPalveluVaraukseen_Click);
-            // 
-            // lblAlueenPalvelut
-            // 
-            this.lblAlueenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblAlueenPalvelut.AutoSize = true;
-            this.lblAlueenPalvelut.Location = new System.Drawing.Point(3, 3);
-            this.lblAlueenPalvelut.Name = "lblAlueenPalvelut";
-            this.lblAlueenPalvelut.Size = new System.Drawing.Size(80, 13);
-            this.lblAlueenPalvelut.TabIndex = 23;
-            this.lblAlueenPalvelut.Text = "Alueen palvelut";
-            // 
-            // lblVarauksenPalvelut
-            // 
-            this.lblVarauksenPalvelut.AutoSize = true;
-            this.lblVarauksenPalvelut.Location = new System.Drawing.Point(3, 147);
-            this.lblVarauksenPalvelut.Name = "lblVarauksenPalvelut";
-            this.lblVarauksenPalvelut.Size = new System.Drawing.Size(98, 13);
-            this.lblVarauksenPalvelut.TabIndex = 27;
-            this.lblVarauksenPalvelut.Text = "Varauksen palvelut";
-            // 
-            // lbVarauksenPalvelut
-            // 
-            this.lbVarauksenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbVarauksenPalvelut.FormattingEnabled = true;
-            this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
-            this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
-            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 82);
-            this.lbVarauksenPalvelut.TabIndex = 27;
-            this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Näyttää varaukseen lisätyt palvelut");
-            this.lbVarauksenPalvelut.SelectedIndexChanged += new System.EventHandler(this.lbVarauksenPalvelut_SelectedIndexChanged);
-            // 
-            // dgvMokitUusiVaraus
-            // 
-            this.dgvMokitUusiVaraus.AllowUserToAddRows = false;
-            this.dgvMokitUusiVaraus.AllowUserToDeleteRows = false;
-            this.dgvMokitUusiVaraus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvMokitUusiVaraus.AutoGenerateColumns = false;
-            this.dgvMokitUusiVaraus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMokitUusiVaraus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMokitUusiVaraus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.mokkiidDataGridViewTextBoxColumn,
-            this.alueidDataGridViewTextBoxColumn,
-            this.postinroDataGridViewTextBoxColumn1,
-            this.mokkinimiDataGridViewTextBoxColumn,
-            this.katuosoiteDataGridViewTextBoxColumn,
-            this.hintaDataGridViewTextBoxColumn,
-            this.kuvausDataGridViewTextBoxColumn,
-            this.henkilomaaraDataGridViewTextBoxColumn,
-            this.varusteluDataGridViewTextBoxColumn});
-            this.dgvMokitUusiVaraus.DataSource = this.mokkiBindingSource;
-            this.dgvMokitUusiVaraus.Location = new System.Drawing.Point(0, 274);
-            this.dgvMokitUusiVaraus.Name = "dgvMokitUusiVaraus";
-            this.dgvMokitUusiVaraus.ReadOnly = true;
-            this.dgvMokitUusiVaraus.Size = new System.Drawing.Size(1064, 162);
-            this.dgvMokitUusiVaraus.TabIndex = 22;
-            this.dgvMokitUusiVaraus.TabStop = false;
-            this.dgvMokitUusiVaraus.SelectionChanged += new System.EventHandler(this.dgvMokitUusiVaraus_SelectionChanged);
-            // 
-            // mokkiidDataGridViewTextBoxColumn
-            // 
-            this.mokkiidDataGridViewTextBoxColumn.DataPropertyName = "mokki_id";
-            this.mokkiidDataGridViewTextBoxColumn.HeaderText = "Mökkitunnus";
-            this.mokkiidDataGridViewTextBoxColumn.Name = "mokkiidDataGridViewTextBoxColumn";
-            this.mokkiidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // alueidDataGridViewTextBoxColumn
-            // 
-            this.alueidDataGridViewTextBoxColumn.DataPropertyName = "alue_id";
-            this.alueidDataGridViewTextBoxColumn.HeaderText = "Aluetunnus";
-            this.alueidDataGridViewTextBoxColumn.Name = "alueidDataGridViewTextBoxColumn";
-            this.alueidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // postinroDataGridViewTextBoxColumn1
-            // 
-            this.postinroDataGridViewTextBoxColumn1.DataPropertyName = "postinro";
-            this.postinroDataGridViewTextBoxColumn1.HeaderText = "Postinumero";
-            this.postinroDataGridViewTextBoxColumn1.Name = "postinroDataGridViewTextBoxColumn1";
-            this.postinroDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // mokkinimiDataGridViewTextBoxColumn
-            // 
-            this.mokkinimiDataGridViewTextBoxColumn.DataPropertyName = "mokkinimi";
-            this.mokkinimiDataGridViewTextBoxColumn.HeaderText = "Mökin nimi";
-            this.mokkinimiDataGridViewTextBoxColumn.Name = "mokkinimiDataGridViewTextBoxColumn";
-            this.mokkinimiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // katuosoiteDataGridViewTextBoxColumn
-            // 
-            this.katuosoiteDataGridViewTextBoxColumn.DataPropertyName = "katuosoite";
-            this.katuosoiteDataGridViewTextBoxColumn.HeaderText = "Lähiosoite";
-            this.katuosoiteDataGridViewTextBoxColumn.Name = "katuosoiteDataGridViewTextBoxColumn";
-            this.katuosoiteDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // hintaDataGridViewTextBoxColumn
-            // 
-            this.hintaDataGridViewTextBoxColumn.DataPropertyName = "hinta";
-            this.hintaDataGridViewTextBoxColumn.HeaderText = "Hinta";
-            this.hintaDataGridViewTextBoxColumn.Name = "hintaDataGridViewTextBoxColumn";
-            this.hintaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kuvausDataGridViewTextBoxColumn
-            // 
-            this.kuvausDataGridViewTextBoxColumn.DataPropertyName = "kuvaus";
-            this.kuvausDataGridViewTextBoxColumn.HeaderText = "Kuvaus";
-            this.kuvausDataGridViewTextBoxColumn.Name = "kuvausDataGridViewTextBoxColumn";
-            this.kuvausDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // henkilomaaraDataGridViewTextBoxColumn
-            // 
-            this.henkilomaaraDataGridViewTextBoxColumn.DataPropertyName = "henkilomaara";
-            this.henkilomaaraDataGridViewTextBoxColumn.HeaderText = "Henkilömäärä";
-            this.henkilomaaraDataGridViewTextBoxColumn.Name = "henkilomaaraDataGridViewTextBoxColumn";
-            this.henkilomaaraDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // varusteluDataGridViewTextBoxColumn
-            // 
-            this.varusteluDataGridViewTextBoxColumn.DataPropertyName = "varustelu";
-            this.varusteluDataGridViewTextBoxColumn.HeaderText = "Varustelu";
-            this.varusteluDataGridViewTextBoxColumn.Name = "varusteluDataGridViewTextBoxColumn";
-            this.varusteluDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // mokkiBindingSource
-            // 
-            this.mokkiBindingSource.DataMember = "mokki";
-            this.mokkiBindingSource.DataSource = this.dataSet1;
             // 
             // tbLahiosoiteMokki
             // 
@@ -909,6 +687,255 @@ namespace R13_MokkiBook
             this.tbAlueid.TextChanged += new System.EventHandler(this.tbAlueid_TextChanged);
             this.tbAlueid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
+            // cbLukitseMokki
+            // 
+            this.cbLukitseMokki.AutoSize = true;
+            this.cbLukitseMokki.Location = new System.Drawing.Point(516, 251);
+            this.cbLukitseMokki.Name = "cbLukitseMokki";
+            this.cbLukitseMokki.Size = new System.Drawing.Size(91, 17);
+            this.cbLukitseMokki.TabIndex = 21;
+            this.cbLukitseMokki.Text = "Lukitse mökki";
+            this.ttUusiVaraus.SetToolTip(this.cbLukitseMokki, "Lukitsee valitun mökin");
+            this.cbLukitseMokki.UseVisualStyleBackColor = true;
+            this.cbLukitseMokki.CheckedChanged += new System.EventHandler(this.cbLukitseMokki_CheckedChanged);
+            // 
+            // btnLuoVaraus
+            // 
+            this.btnLuoVaraus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLuoVaraus.Location = new System.Drawing.Point(919, 245);
+            this.btnLuoVaraus.Name = "btnLuoVaraus";
+            this.btnLuoVaraus.Size = new System.Drawing.Size(133, 23);
+            this.btnLuoVaraus.TabIndex = 29;
+            this.btnLuoVaraus.Text = "Luo varaus";
+            this.ttUusiVaraus.SetToolTip(this.btnLuoVaraus, "Luo varauksen");
+            this.btnLuoVaraus.UseVisualStyleBackColor = true;
+            this.btnLuoVaraus.Click += new System.EventHandler(this.btnLuoVaraus_Click);
+            // 
+            // lblLoppuhinta
+            // 
+            this.lblLoppuhinta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLoppuhinta.AutoSize = true;
+            this.lblLoppuhinta.Location = new System.Drawing.Point(732, 250);
+            this.lblLoppuhinta.Name = "lblLoppuhinta";
+            this.lblLoppuhinta.Size = new System.Drawing.Size(75, 13);
+            this.lblLoppuhinta.TabIndex = 28;
+            this.lblLoppuhinta.Text = "Loppuhinta (€)";
+            // 
+            // tbLoppuhinta
+            // 
+            this.tbLoppuhinta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbLoppuhinta.Location = new System.Drawing.Point(813, 247);
+            this.tbLoppuhinta.Name = "tbLoppuhinta";
+            this.tbLoppuhinta.Size = new System.Drawing.Size(100, 20);
+            this.tbLoppuhinta.TabIndex = 28;
+            this.ttUusiVaraus.SetToolTip(this.tbLoppuhinta, "Näyttää arvioidun loppuhinnan");
+            // 
+            // pnlPalvelut
+            // 
+            this.pnlPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPalvelut.Controls.Add(this.btnPoistaPalvelu);
+            this.pnlPalvelut.Controls.Add(this.dgvAlueenPalvelut);
+            this.pnlPalvelut.Controls.Add(this.lblPalvelujenMaara);
+            this.pnlPalvelut.Controls.Add(this.nudPalveluLkm);
+            this.pnlPalvelut.Controls.Add(this.btnLisaaPalveluVaraukseen);
+            this.pnlPalvelut.Controls.Add(this.lblAlueenPalvelut);
+            this.pnlPalvelut.Controls.Add(this.lblVarauksenPalvelut);
+            this.pnlPalvelut.Controls.Add(this.lbVarauksenPalvelut);
+            this.pnlPalvelut.Location = new System.Drawing.Point(516, -3);
+            this.pnlPalvelut.Name = "pnlPalvelut";
+            this.pnlPalvelut.Size = new System.Drawing.Size(547, 245);
+            this.pnlPalvelut.TabIndex = 24;
+            // 
+            // btnPoistaPalvelu
+            // 
+            this.btnPoistaPalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPoistaPalvelu.Location = new System.Drawing.Point(119, 132);
+            this.btnPoistaPalvelu.Name = "btnPoistaPalvelu";
+            this.btnPoistaPalvelu.Size = new System.Drawing.Size(92, 23);
+            this.btnPoistaPalvelu.TabIndex = 26;
+            this.btnPoistaPalvelu.Text = "Poista palvelu";
+            this.ttUusiVaraus.SetToolTip(this.btnPoistaPalvelu, "Poistaa valitun palvelun varauksen palveluista.");
+            this.btnPoistaPalvelu.UseVisualStyleBackColor = true;
+            this.btnPoistaPalvelu.Click += new System.EventHandler(this.btnPoistaPalvelu_Click);
+            // 
+            // dgvAlueenPalvelut
+            // 
+            this.dgvAlueenPalvelut.AllowUserToAddRows = false;
+            this.dgvAlueenPalvelut.AllowUserToDeleteRows = false;
+            this.dgvAlueenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAlueenPalvelut.AutoGenerateColumns = false;
+            this.dgvAlueenPalvelut.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAlueenPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAlueenPalvelut.DataSource = this.palveluBindingSource;
+            this.dgvAlueenPalvelut.Location = new System.Drawing.Point(0, 20);
+            this.dgvAlueenPalvelut.Name = "dgvAlueenPalvelut";
+            this.dgvAlueenPalvelut.ReadOnly = true;
+            this.dgvAlueenPalvelut.Size = new System.Drawing.Size(546, 105);
+            this.dgvAlueenPalvelut.TabIndex = 23;
+            this.dgvAlueenPalvelut.TabStop = false;
+            this.dgvAlueenPalvelut.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAlueenPalvelut_RowHeaderMouseDoubleClick);
+            // 
+            // lblPalvelujenMaara
+            // 
+            this.lblPalvelujenMaara.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPalvelujenMaara.AutoSize = true;
+            this.lblPalvelujenMaara.Location = new System.Drawing.Point(293, 136);
+            this.lblPalvelujenMaara.Name = "lblPalvelujenMaara";
+            this.lblPalvelujenMaara.Size = new System.Drawing.Size(37, 13);
+            this.lblPalvelujenMaara.TabIndex = 24;
+            this.lblPalvelujenMaara.Text = "Määrä";
+            // 
+            // nudPalveluLkm
+            // 
+            this.nudPalveluLkm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudPalveluLkm.Location = new System.Drawing.Point(336, 131);
+            this.nudPalveluLkm.Name = "nudPalveluLkm";
+            this.nudPalveluLkm.Size = new System.Drawing.Size(51, 20);
+            this.nudPalveluLkm.TabIndex = 24;
+            this.ttUusiVaraus.SetToolTip(this.nudPalveluLkm, "Valitse lisättävän palvelun lukumäärä");
+            // 
+            // btnLisaaPalveluVaraukseen
+            // 
+            this.btnLisaaPalveluVaraukseen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLisaaPalveluVaraukseen.Location = new System.Drawing.Point(393, 131);
+            this.btnLisaaPalveluVaraukseen.Name = "btnLisaaPalveluVaraukseen";
+            this.btnLisaaPalveluVaraukseen.Size = new System.Drawing.Size(149, 23);
+            this.btnLisaaPalveluVaraukseen.TabIndex = 25;
+            this.btnLisaaPalveluVaraukseen.Text = "Lisää palvelu varaukseen";
+            this.ttUusiVaraus.SetToolTip(this.btnLisaaPalveluVaraukseen, "Lisää valitun palvelun varaukseen");
+            this.btnLisaaPalveluVaraukseen.UseVisualStyleBackColor = true;
+            this.btnLisaaPalveluVaraukseen.Click += new System.EventHandler(this.btnLisaaPalveluVaraukseen_Click);
+            // 
+            // lblAlueenPalvelut
+            // 
+            this.lblAlueenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblAlueenPalvelut.AutoSize = true;
+            this.lblAlueenPalvelut.Location = new System.Drawing.Point(3, 3);
+            this.lblAlueenPalvelut.Name = "lblAlueenPalvelut";
+            this.lblAlueenPalvelut.Size = new System.Drawing.Size(80, 13);
+            this.lblAlueenPalvelut.TabIndex = 23;
+            this.lblAlueenPalvelut.Text = "Alueen palvelut";
+            // 
+            // lblVarauksenPalvelut
+            // 
+            this.lblVarauksenPalvelut.AutoSize = true;
+            this.lblVarauksenPalvelut.Location = new System.Drawing.Point(3, 147);
+            this.lblVarauksenPalvelut.Name = "lblVarauksenPalvelut";
+            this.lblVarauksenPalvelut.Size = new System.Drawing.Size(98, 13);
+            this.lblVarauksenPalvelut.TabIndex = 27;
+            this.lblVarauksenPalvelut.Text = "Varauksen palvelut";
+            // 
+            // lbVarauksenPalvelut
+            // 
+            this.lbVarauksenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbVarauksenPalvelut.FormattingEnabled = true;
+            this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
+            this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
+            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 82);
+            this.lbVarauksenPalvelut.TabIndex = 27;
+            this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Näyttää varaukseen lisätyt palvelut");
+            this.lbVarauksenPalvelut.SelectedIndexChanged += new System.EventHandler(this.lbVarauksenPalvelut_SelectedIndexChanged);
+            // 
+            // dgvMokitUusiVaraus
+            // 
+            this.dgvMokitUusiVaraus.AllowUserToAddRows = false;
+            this.dgvMokitUusiVaraus.AllowUserToDeleteRows = false;
+            this.dgvMokitUusiVaraus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvMokitUusiVaraus.AutoGenerateColumns = false;
+            this.dgvMokitUusiVaraus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMokitUusiVaraus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMokitUusiVaraus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.mokkiidDataGridViewTextBoxColumn,
+            this.alueidDataGridViewTextBoxColumn,
+            this.postinroDataGridViewTextBoxColumn1,
+            this.mokkinimiDataGridViewTextBoxColumn,
+            this.katuosoiteDataGridViewTextBoxColumn,
+            this.hintaDataGridViewTextBoxColumn,
+            this.kuvausDataGridViewTextBoxColumn,
+            this.henkilomaaraDataGridViewTextBoxColumn,
+            this.varusteluDataGridViewTextBoxColumn});
+            this.dgvMokitUusiVaraus.DataSource = this.mokkiBindingSource;
+            this.dgvMokitUusiVaraus.Location = new System.Drawing.Point(0, 274);
+            this.dgvMokitUusiVaraus.Name = "dgvMokitUusiVaraus";
+            this.dgvMokitUusiVaraus.ReadOnly = true;
+            this.dgvMokitUusiVaraus.Size = new System.Drawing.Size(1064, 162);
+            this.dgvMokitUusiVaraus.TabIndex = 22;
+            this.dgvMokitUusiVaraus.TabStop = false;
+            this.dgvMokitUusiVaraus.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMokitUusiVaraus_RowHeaderMouseDoubleClick);
+            // 
+            // mokkiidDataGridViewTextBoxColumn
+            // 
+            this.mokkiidDataGridViewTextBoxColumn.DataPropertyName = "mokki_id";
+            this.mokkiidDataGridViewTextBoxColumn.HeaderText = "Mökkitunnus";
+            this.mokkiidDataGridViewTextBoxColumn.Name = "mokkiidDataGridViewTextBoxColumn";
+            this.mokkiidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // alueidDataGridViewTextBoxColumn
+            // 
+            this.alueidDataGridViewTextBoxColumn.DataPropertyName = "alue_id";
+            this.alueidDataGridViewTextBoxColumn.HeaderText = "Aluetunnus";
+            this.alueidDataGridViewTextBoxColumn.Name = "alueidDataGridViewTextBoxColumn";
+            this.alueidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // postinroDataGridViewTextBoxColumn1
+            // 
+            this.postinroDataGridViewTextBoxColumn1.DataPropertyName = "postinro";
+            this.postinroDataGridViewTextBoxColumn1.HeaderText = "Postinumero";
+            this.postinroDataGridViewTextBoxColumn1.Name = "postinroDataGridViewTextBoxColumn1";
+            this.postinroDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // mokkinimiDataGridViewTextBoxColumn
+            // 
+            this.mokkinimiDataGridViewTextBoxColumn.DataPropertyName = "mokkinimi";
+            this.mokkinimiDataGridViewTextBoxColumn.HeaderText = "Mökin nimi";
+            this.mokkinimiDataGridViewTextBoxColumn.Name = "mokkinimiDataGridViewTextBoxColumn";
+            this.mokkinimiDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // katuosoiteDataGridViewTextBoxColumn
+            // 
+            this.katuosoiteDataGridViewTextBoxColumn.DataPropertyName = "katuosoite";
+            this.katuosoiteDataGridViewTextBoxColumn.HeaderText = "Lähiosoite";
+            this.katuosoiteDataGridViewTextBoxColumn.Name = "katuosoiteDataGridViewTextBoxColumn";
+            this.katuosoiteDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // hintaDataGridViewTextBoxColumn
+            // 
+            this.hintaDataGridViewTextBoxColumn.DataPropertyName = "hinta";
+            this.hintaDataGridViewTextBoxColumn.HeaderText = "Hinta";
+            this.hintaDataGridViewTextBoxColumn.Name = "hintaDataGridViewTextBoxColumn";
+            this.hintaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // kuvausDataGridViewTextBoxColumn
+            // 
+            this.kuvausDataGridViewTextBoxColumn.DataPropertyName = "kuvaus";
+            this.kuvausDataGridViewTextBoxColumn.HeaderText = "Kuvaus";
+            this.kuvausDataGridViewTextBoxColumn.Name = "kuvausDataGridViewTextBoxColumn";
+            this.kuvausDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // henkilomaaraDataGridViewTextBoxColumn
+            // 
+            this.henkilomaaraDataGridViewTextBoxColumn.DataPropertyName = "henkilomaara";
+            this.henkilomaaraDataGridViewTextBoxColumn.HeaderText = "Henkilömäärä";
+            this.henkilomaaraDataGridViewTextBoxColumn.Name = "henkilomaaraDataGridViewTextBoxColumn";
+            this.henkilomaaraDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // varusteluDataGridViewTextBoxColumn
+            // 
+            this.varusteluDataGridViewTextBoxColumn.DataPropertyName = "varustelu";
+            this.varusteluDataGridViewTextBoxColumn.HeaderText = "Varustelu";
+            this.varusteluDataGridViewTextBoxColumn.Name = "varusteluDataGridViewTextBoxColumn";
+            this.varusteluDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // mokkiBindingSource
+            // 
+            this.mokkiBindingSource.DataMember = "mokki";
+            this.mokkiBindingSource.DataSource = this.dataSet1;
+            // 
             // postiBindingSource
             // 
             this.postiBindingSource.DataMember = "posti";
@@ -943,33 +970,6 @@ namespace R13_MokkiBook
             // 
             this.varausTableAdapter.ClearBeforeFill = true;
             // 
-            // pnlMokki
-            // 
-            this.pnlMokki.Controls.Add(this.lblKuvaus);
-            this.pnlMokki.Controls.Add(this.tbKuvaus);
-            this.pnlMokki.Controls.Add(this.lblVarustelu);
-            this.pnlMokki.Controls.Add(this.tbVarustelu);
-            this.pnlMokki.Controls.Add(this.lblMaksimihinta);
-            this.pnlMokki.Controls.Add(this.lblMinhinta);
-            this.pnlMokki.Controls.Add(this.tbMaxhinta);
-            this.pnlMokki.Controls.Add(this.tbMinhinta);
-            this.pnlMokki.Controls.Add(this.lblHenkilomaara);
-            this.pnlMokki.Controls.Add(this.nudHlomaara);
-            this.pnlMokki.Controls.Add(this.tbLahiosoiteMokki);
-            this.pnlMokki.Controls.Add(this.lblLahiosoiteMokki);
-            this.pnlMokki.Controls.Add(this.tbMokkitunnus);
-            this.pnlMokki.Controls.Add(this.lblMokkitun);
-            this.pnlMokki.Controls.Add(this.lblAjankohta);
-            this.pnlMokki.Controls.Add(this.dtmLoppupvm);
-            this.pnlMokki.Controls.Add(this.dtpAlkupvm);
-            this.pnlMokki.Controls.Add(this.lbAlueid);
-            this.pnlMokki.Controls.Add(this.lbAlue);
-            this.pnlMokki.Controls.Add(this.tbAlueid);
-            this.pnlMokki.Location = new System.Drawing.Point(0, 0);
-            this.pnlMokki.Name = "pnlMokki";
-            this.pnlMokki.Size = new System.Drawing.Size(508, 269);
-            this.pnlMokki.TabIndex = 10;
-            // 
             // frmUusiVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -989,7 +989,11 @@ namespace R13_MokkiBook
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.pnlVaraustiedot.ResumeLayout(false);
             this.pnlVaraustiedot.PerformLayout();
+            this.pnlMokki.ResumeLayout(false);
+            this.pnlMokki.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHlomaara)).EndInit();
+            this.cmsTyhjennavalinta.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             this.pnlPalvelut.ResumeLayout(false);
             this.pnlPalvelut.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlueenPalvelut)).EndInit();
@@ -997,13 +1001,9 @@ namespace R13_MokkiBook
             ((System.ComponentModel.ISupportInitialize)(this.nudPalveluLkm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).EndInit();
-            this.cmsTyhjennavalinta.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
-            this.pnlMokki.ResumeLayout(false);
-            this.pnlMokki.PerformLayout();
             this.ResumeLayout(false);
 
         }

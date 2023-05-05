@@ -44,7 +44,8 @@ namespace R13_MokkiBook
         public string aluequery = "SELECT nimi FROM alue;";
         public string mokkiquery;
         public string palveluquery;
-        public string postiquery;
+        public string postiqueryasiakas;
+        public string postiquerymokki;
         public string varauksenpalveluquery;
         //HAKU TOTEUTUU SEURAAVASTI: JOKAISTA TAULUA KOHDEN OMA QUERYSTRING, JOIHIN JOKAINEN HAKUKRITEERI LISÄTÄÄN XQUERY = OSAQUERY1 + OSAQUERY2 JNE
        
@@ -503,9 +504,47 @@ namespace R13_MokkiBook
             luotuasiakas.email = tbSahkoposti.Text;
             luotuasiakas.puhelinnro = tbPuhno.Text;
 
-            valittuasiakas = luotuasiakas;
+            if (!PostiLoytyi(luotuasiakas.postinro))
+                LuoPosti(luotuasiakas.postinro, tbPostitoimipaikkaAsiakas.Text);
+
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES(" + luotuasiakas.asiakas_id + ", " + luotuasiakas.postinro + ", " + luotuasiakas.etunimi + ", " + luotuasiakas.sukunimi + ", " + luotuasiakas.lahiosoite + ", " + luotuasiakas.email + ", " + luotuasiakas.puhelinnro + ");";
+                using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                LokiinTallentaminen("Luotiin asiakas " + luotuasiakas.asiakas_id + " käyttäjältä: ");
+            }
+            asiakkaat = GetAsiakkaat();
             asiakasquery = "SELECT * FROM asiakas;";
             PaivitaAsiakastaulu(asiakasquery);
+
+            valittuasiakas = luotuasiakas;
+        }
+        public bool PostiLoytyi(string pn)
+        {
+            foreach(Posti p in postit)
+            {
+                if (p.postinro == pn)
+                    return true;
+            }
+            return false;
+        }
+        public void LuoPosti(string pnro, string ptp)
+        {
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string lisaysquery = "INSERT INTO posti(postinro, toimipaikka) VALUES(" + pnro + ", " + ptp + ");";
+                using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                LokiinTallentaminen("Luotiin postinumero " + pnro + " käyttäjältä: ");
+            }
+            postit = GetPostit();
         }
         private void cbLukitseMokki_CheckedChanged(object sender, EventArgs e)
         {
@@ -558,21 +597,6 @@ namespace R13_MokkiBook
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
-        }
-
-        private void dgvAsiakkaat_SelectionChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
-        {
-            valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
-            //valittupalvelu = palvelut[valitturivipalvelu];
-        }
-
-        private void dgvMokitUusiVaraus_SelectionChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void lbAlue_SelectedIndexChanged(object sender, EventArgs e)
@@ -673,17 +697,50 @@ namespace R13_MokkiBook
 
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;//Viittaukseksi ei voi objektiesiintymää??
+            valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;
             valittuasiakas = asiakkaat[valitturiviasiakas];
+            valittuasiakas.etunimi = asiakkaat[valitturiviasiakas].etunimi;
+            valittuasiakas.sukunimi = asiakkaat[valitturiviasiakas].sukunimi;
+            valittuasiakas.asiakas_id = asiakkaat[valitturiviasiakas].asiakas_id;
+            valittuasiakas.postinro = asiakkaat[valitturiviasiakas].postinro;
+            valittuasiakas.lahiosoite = asiakkaat[valitturiviasiakas].lahiosoite;
+            valittuasiakas.puhelinnro = asiakkaat[valitturiviasiakas].puhelinnro;
+            valittuasiakas.email = asiakkaat[valitturiviasiakas].email;
+
             asiakasjuurivalittu = true;
 
             tbEnimi.Text = valittuasiakas.etunimi;
-            tbSnimi.Text = valittuasiakas.sukunimi;
+            tbSnimi.Text = valittuasiakas.sukunimi;//Viittaukseksi ei voi objektiesiintymää??
             tbPostinoAsiakas.Text = valittuasiakas.postinro;
             tbAsiakastunnus.Text = valittuasiakas.asiakas_id.ToString();
             tbLahiosoiteAsiakas.Text = valittuasiakas.lahiosoite;
             tbSahkoposti.Text = valittuasiakas.email;
             tbPuhno.Text = valittuasiakas.puhelinnro;
+            postiqueryasiakas = "SELECT toimipaikka FROM posti WHERE postinro = (SELECT postinro FROM asiakas WHERE asiakas_id = " + valittuasiakas.asiakas_id + ");";
+            HaePostinro(postiqueryasiakas);
+        }
+        public void HaePostinro (string postiqueryasiakas)
+        {
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(postiqueryasiakas, connection))
+            {
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
+            }
+            tbPostitoimipaikkaAsiakas.Text = dataTable.ToString();//TOIMIIKO??
+        }
+        private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
+            //valittupalvelu = palvelut[valitturivipalvelu];
+        }
+
+        private void dgvMokitUusiVaraus_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
         }
     }
 }
