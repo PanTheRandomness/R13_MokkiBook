@@ -48,7 +48,6 @@ namespace R13_MokkiBook
         {
             OdbcConnection connection = new OdbcConnection(connectionString);
             connection.Open();
-            //datagridviewin yhdistäminen tiettyyn kyselyyn
             DataTable dataTable = new DataTable();
             using (OdbcDataAdapter adapter = new OdbcDataAdapter(query, connection))
             {

@@ -32,6 +32,8 @@ namespace R13_MokkiBook
         {
             this.components = new System.ComponentModel.Container();
             this.pnlAsiakastiedot = new System.Windows.Forms.Panel();
+            this.tbPostitoimipaikkaAsiakas = new System.Windows.Forms.TextBox();
+            this.lblPostitoimipaikka = new System.Windows.Forms.Label();
             this.tbSahkoposti = new System.Windows.Forms.TextBox();
             this.tbPuhno = new System.Windows.Forms.TextBox();
             this.btnLisaa = new System.Windows.Forms.Button();
@@ -100,13 +102,13 @@ namespace R13_MokkiBook
             this.lblAjankohta = new System.Windows.Forms.Label();
             this.dtmLoppupvm = new System.Windows.Forms.DateTimePicker();
             this.dtpAlkupvm = new System.Windows.Forms.DateTimePicker();
-            this.cmsTyhjennavalinta = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiTyhjenna = new System.Windows.Forms.ToolStripMenuItem();
-            this.postiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lbAlueid = new System.Windows.Forms.Label();
             this.lbAlue = new System.Windows.Forms.ListBox();
+            this.cmsTyhjennavalinta = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiTyhjenna = new System.Windows.Forms.ToolStripMenuItem();
             this.alueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbAlueid = new System.Windows.Forms.TextBox();
+            this.postiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.epUusiVaraus = new System.Windows.Forms.ErrorProvider(this.components);
             this.asiakasTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.asiakasTableAdapter();
             this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
@@ -115,8 +117,6 @@ namespace R13_MokkiBook
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
             this.ttUusiVaraus = new System.Windows.Forms.ToolTip(this.components);
-            this.lblPostitoimipaikka = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
@@ -130,8 +130,8 @@ namespace R13_MokkiBook
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
             this.cmsTyhjennavalinta.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -141,7 +141,7 @@ namespace R13_MokkiBook
             this.pnlAsiakastiedot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlAsiakastiedot.Controls.Add(this.textBox1);
+            this.pnlAsiakastiedot.Controls.Add(this.tbPostitoimipaikkaAsiakas);
             this.pnlAsiakastiedot.Controls.Add(this.lblPostitoimipaikka);
             this.pnlAsiakastiedot.Controls.Add(this.tbSahkoposti);
             this.pnlAsiakastiedot.Controls.Add(this.tbPuhno);
@@ -164,6 +164,26 @@ namespace R13_MokkiBook
             this.pnlAsiakastiedot.Size = new System.Drawing.Size(1068, 242);
             this.pnlAsiakastiedot.TabIndex = 0;
             // 
+            // tbPostitoimipaikkaAsiakas
+            // 
+            this.tbPostitoimipaikkaAsiakas.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tbPostitoimipaikkaAsiakas.Location = new System.Drawing.Point(100, 87);
+            this.tbPostitoimipaikkaAsiakas.Name = "tbPostitoimipaikkaAsiakas";
+            this.tbPostitoimipaikkaAsiakas.Size = new System.Drawing.Size(144, 20);
+            this.tbPostitoimipaikkaAsiakas.TabIndex = 4;
+            this.tbPostitoimipaikkaAsiakas.Tag = "Postitoimipaikka";
+            this.ttUusiVaraus.SetToolTip(this.tbPostitoimipaikkaAsiakas, "Syötä asiakkaan postitoimipaikka");
+            // 
+            // lblPostitoimipaikka
+            // 
+            this.lblPostitoimipaikka.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPostitoimipaikka.AutoSize = true;
+            this.lblPostitoimipaikka.Location = new System.Drawing.Point(11, 90);
+            this.lblPostitoimipaikka.Name = "lblPostitoimipaikka";
+            this.lblPostitoimipaikka.Size = new System.Drawing.Size(83, 13);
+            this.lblPostitoimipaikka.TabIndex = 4;
+            this.lblPostitoimipaikka.Text = "Postitoimipaikka";
+            // 
             // tbSahkoposti
             // 
             this.tbSahkoposti.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -171,6 +191,7 @@ namespace R13_MokkiBook
             this.tbSahkoposti.Name = "tbSahkoposti";
             this.tbSahkoposti.Size = new System.Drawing.Size(150, 20);
             this.tbSahkoposti.TabIndex = 6;
+            this.tbSahkoposti.Tag = "Sähköpostiosoite";
             this.ttUusiVaraus.SetToolTip(this.tbSahkoposti, "Syötä asiakkaan sähköpostiosoite");
             // 
             // tbPuhno
@@ -180,6 +201,7 @@ namespace R13_MokkiBook
             this.tbPuhno.Name = "tbPuhno";
             this.tbPuhno.Size = new System.Drawing.Size(150, 20);
             this.tbPuhno.TabIndex = 5;
+            this.tbPuhno.Tag = "Puhelinnumero";
             this.ttUusiVaraus.SetToolTip(this.tbPuhno, "Syötä asiakkaan puhelinnumero");
             // 
             // btnLisaa
@@ -220,6 +242,7 @@ namespace R13_MokkiBook
             this.tbLahiosoiteAsiakas.Name = "tbLahiosoiteAsiakas";
             this.tbLahiosoiteAsiakas.Size = new System.Drawing.Size(185, 20);
             this.tbLahiosoiteAsiakas.TabIndex = 3;
+            this.tbLahiosoiteAsiakas.Tag = "Lähiosoite";
             this.ttUusiVaraus.SetToolTip(this.tbLahiosoiteAsiakas, "Syötä asiakkaan lähiosoite");
             // 
             // lblLahiosoiteAsiakas
@@ -237,6 +260,7 @@ namespace R13_MokkiBook
             this.tbPostinoAsiakas.Name = "tbPostinoAsiakas";
             this.tbPostinoAsiakas.Size = new System.Drawing.Size(101, 20);
             this.tbPostinoAsiakas.TabIndex = 2;
+            this.tbPostinoAsiakas.Tag = "Postinumero";
             this.ttUusiVaraus.SetToolTip(this.tbPostinoAsiakas, "Syötä asiakkaan postinumero");
             this.tbPostinoAsiakas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
@@ -264,6 +288,7 @@ namespace R13_MokkiBook
             this.tbSnimi.Name = "tbSnimi";
             this.tbSnimi.Size = new System.Drawing.Size(185, 20);
             this.tbSnimi.TabIndex = 1;
+            this.tbSnimi.Tag = "Sukunimi";
             this.ttUusiVaraus.SetToolTip(this.tbSnimi, "Syötä asiakkaan sukunimi");
             this.tbSnimi.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 
@@ -273,6 +298,7 @@ namespace R13_MokkiBook
             this.tbEnimi.Name = "tbEnimi";
             this.tbEnimi.Size = new System.Drawing.Size(125, 20);
             this.tbEnimi.TabIndex = 0;
+            this.tbEnimi.Tag = "Etunimi";
             this.ttUusiVaraus.SetToolTip(this.tbEnimi, "Syötä asiakkaan etunimi");
             this.tbEnimi.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 
@@ -837,25 +863,6 @@ namespace R13_MokkiBook
             this.ttUusiVaraus.SetToolTip(this.dtpAlkupvm, "Valitse varauksen alkupäivämäärä");
             this.dtpAlkupvm.ValueChanged += new System.EventHandler(this.dtpAlkupvm_ValueChanged);
             // 
-            // cmsTyhjennavalinta
-            // 
-            this.cmsTyhjennavalinta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiTyhjenna});
-            this.cmsTyhjennavalinta.Name = "cmsTyhjennavalinta";
-            this.cmsTyhjennavalinta.Size = new System.Drawing.Size(122, 26);
-            // 
-            // tsmiTyhjenna
-            // 
-            this.tsmiTyhjenna.Name = "tsmiTyhjenna";
-            this.tsmiTyhjenna.Size = new System.Drawing.Size(121, 22);
-            this.tsmiTyhjenna.Text = "Tyhjennä";
-            this.tsmiTyhjenna.Click += new System.EventHandler(this.tsmiTyhjenna_Click);
-            // 
-            // postiBindingSource
-            // 
-            this.postiBindingSource.DataMember = "posti";
-            this.postiBindingSource.DataSource = this.dataSet1;
-            // 
             // lbAlueid
             // 
             this.lbAlueid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -880,6 +887,20 @@ namespace R13_MokkiBook
             this.ttUusiVaraus.SetToolTip(this.lbAlue, "Valitse haluttu alue");
             this.lbAlue.SelectedIndexChanged += new System.EventHandler(this.lbAlue_SelectedIndexChanged);
             // 
+            // cmsTyhjennavalinta
+            // 
+            this.cmsTyhjennavalinta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTyhjenna});
+            this.cmsTyhjennavalinta.Name = "cmsTyhjennavalinta";
+            this.cmsTyhjennavalinta.Size = new System.Drawing.Size(122, 26);
+            // 
+            // tsmiTyhjenna
+            // 
+            this.tsmiTyhjenna.Name = "tsmiTyhjenna";
+            this.tsmiTyhjenna.Size = new System.Drawing.Size(121, 22);
+            this.tsmiTyhjenna.Text = "Tyhjennä";
+            this.tsmiTyhjenna.Click += new System.EventHandler(this.tsmiTyhjenna_Click);
+            // 
             // alueBindingSource
             // 
             this.alueBindingSource.DataMember = "alue";
@@ -895,6 +916,11 @@ namespace R13_MokkiBook
             this.ttUusiVaraus.SetToolTip(this.tbAlueid, "Syötä halutun alueen tunnus");
             this.tbAlueid.TextChanged += new System.EventHandler(this.tbAlueid_TextChanged);
             this.tbAlueid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
+            // 
+            // postiBindingSource
+            // 
+            this.postiBindingSource.DataMember = "posti";
+            this.postiBindingSource.DataSource = this.dataSet1;
             // 
             // epUusiVaraus
             // 
@@ -925,25 +951,6 @@ namespace R13_MokkiBook
             // 
             this.varausTableAdapter.ClearBeforeFill = true;
             // 
-            // lblPostitoimipaikka
-            // 
-            this.lblPostitoimipaikka.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPostitoimipaikka.AutoSize = true;
-            this.lblPostitoimipaikka.Location = new System.Drawing.Point(11, 90);
-            this.lblPostitoimipaikka.Name = "lblPostitoimipaikka";
-            this.lblPostitoimipaikka.Size = new System.Drawing.Size(83, 13);
-            this.lblPostitoimipaikka.TabIndex = 4;
-            this.lblPostitoimipaikka.Text = "Postitoimipaikka";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Location = new System.Drawing.Point(100, 87);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 20);
-            this.textBox1.TabIndex = 4;
-            this.ttUusiVaraus.SetToolTip(this.textBox1, "Syötä asiakkaan postitoimipaikka");
-            // 
             // frmUusiVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -972,8 +979,8 @@ namespace R13_MokkiBook
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokitUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).EndInit();
             this.cmsTyhjennavalinta.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alueBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epUusiVaraus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -1074,7 +1081,7 @@ namespace R13_MokkiBook
         private System.Windows.Forms.TextBox tbPuhno;
         private System.Windows.Forms.ToolTip ttUusiVaraus;
         private System.Windows.Forms.Label lblPostitoimipaikka;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbPostitoimipaikkaAsiakas;
     }
 
 }

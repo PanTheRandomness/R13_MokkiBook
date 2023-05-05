@@ -23,6 +23,7 @@ namespace R13_MokkiBook
         public double arvioituloppuhinta = 0;
 
         public Asiakas valittuasiakas;
+        public Asiakas luotuasiakas;
         public Alue valittualue;
         public Mokki valittumokki;
         public Palvelu valittupalvelu;
@@ -36,6 +37,7 @@ namespace R13_MokkiBook
         public List<Mokki> mokit;
         public List<Posti> postit;
         public List<Varaus> varaukset;
+        public List<TextBox> asiakasboksit;
 
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string asiakasquery;
@@ -61,11 +63,14 @@ namespace R13_MokkiBook
             alueet = GetAlueet();
             mokit = GetMokit();
             postit = GetPostit();
+            LuoBoksiListaAsiakas();
+            
+
             PaivitaAluetaulu(aluequery);
             LokiinTallentaminen("Avattiin uuden varauksen luontisivu käyttäjältä: ");
 
             tamavaraus = new Varaus();
-            tamavaraus.varaus_id = HaeSeuraavaVapaaID();
+            tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
         }
         public void LokiinTallentaminen(string teksti)
         {
@@ -273,10 +278,21 @@ namespace R13_MokkiBook
             }
             return po;
         }
-        public int HaeSeuraavaVapaaID()
+
+        public void LuoBoksiListaAsiakas()
+        {
+            asiakasboksit = new List<TextBox>();
+            asiakasboksit.Add(tbEnimi);
+            asiakasboksit.Add(tbSnimi);
+            asiakasboksit.Add(tbPostinoAsiakas);
+            asiakasboksit.Add(tbLahiosoiteAsiakas);
+            asiakasboksit.Add(tbPostitoimipaikkaAsiakas);
+            asiakasboksit.Add(tbPuhno);
+            asiakasboksit.Add(tbSahkoposti);
+        }
+        public int HaeSeuraavaVapaaVarausID()
         {
             int id = 0;
-
             foreach(Varaus v in varaukset)
             {
                 if(v.varaus_id > id)
@@ -285,7 +301,17 @@ namespace R13_MokkiBook
             id++;
             return id;
         }
-
+        public int HaeSeuraavaVapaaAsiakasID()
+        {
+            int id = 0;
+            foreach (Asiakas a in asiakkaat)
+            {
+                if (a.asiakas_id > id)
+                    id = a.asiakas_id;
+            }
+            id++;
+            return id;
+        }
         public void LuoVaraus()
         {
 
@@ -386,9 +412,34 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            //Tarkista että tyhjä asiakastunnus- hae uusi tunnus
-        }
+            if (tbAsiakastunnus.Text.Length > 0)
+            {
+                int tunnus = int.Parse(tbAsiakastunnus.Text);
+                if(EtsiAsiakas(tunnus))
+                    MessageBox.Show("Asiakas on jo olemassa. Poista asiakastunnus kentästä luodaksesi uusi asiakas.");
+                else
+                {
+                    foreach (TextBox tb in asiakasboksit)
+                    {
+                        if(tb.Text.Length < 1)
+                            MessageBox.Show("Asiakasta ei voitu luoda: Syötä " + tb.Tag.ToString());
+                    }
+                    
+                    luotuasiakas.asiakas_id = HaeSeuraavaVapaaAsiakasID();
 
+                }
+            }
+
+        }
+        public bool EtsiAsiakas(int tunnus)
+        {
+            foreach (Asiakas a in asiakkaat)
+            {
+                if(a.asiakas_id == tunnus)
+                    return true;
+            }
+            return false;
+        }
         private void cbLukitseMokki_CheckedChanged(object sender, EventArgs e)
         {
             if (cbLukitseMokki.Checked == true)
@@ -457,7 +508,8 @@ namespace R13_MokkiBook
         {
             valitturivialue = lbAlue.SelectedIndex;
             valittualue = alueet[valitturivialue];
-                tbAlueid.Text = valittualue.alue_id.ToString();
+            tbAlueid.Text = valittualue.alue_id.ToString();
+            //Häikkää alussa ei tyhjä
         }
 
         private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
@@ -476,7 +528,6 @@ namespace R13_MokkiBook
             {
                 aluequery = "SELECT nimi FROM alue;";
                 PaivitaAluetaulu(aluequery);
-                tbAlueid.Text = String.Empty;
             }
         }
     }
