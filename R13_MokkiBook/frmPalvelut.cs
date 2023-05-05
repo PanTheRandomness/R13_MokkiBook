@@ -19,6 +19,7 @@ namespace R13_MokkiBook
         public List<Palvelu> palvelut;
         public string query;
 
+
         public frmPalvelut()
         {
             InitializeComponent();
@@ -27,25 +28,12 @@ namespace R13_MokkiBook
         }
 
 
-
         private void frmPalvelut_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dataSet1.palvelu' table. You can move, or remove it, as needed.
            this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
         }
 
-        private void label1_Click(object sender, EventArgs e) //otsikko
-        {
-
-        }
-    
-        private void fillByToolStripButton_Click(object sender, EventArgs e)
-        {
-         
-
-        }
-
-    
         public List<Palvelu> GetPalvelut()
         {
             List<Palvelu> pal = new List<Palvelu>();
@@ -62,28 +50,22 @@ namespace R13_MokkiBook
                         while (reader.Read())
                         {
                             Palvelu palvelu = new Palvelu();
-                            palvelu.palvelu_id = reader.GetInt32(0);
-                            palvelu.nimi = reader.GetString(1);
-                            palvelu.tyyppi = reader.GetInt32(2);
-                            palvelu.kuvaus = reader.GetString(3);
-                            palvelu.hinta = reader.GetInt32(4);
-                            palvelu.alv = reader.GetInt32(5);
+                            palvelu.palvelu_id = reader.GetInt32(1); //Muutin että hakee vaan palvelu_id:n (Sama asia)
 
                             pal.Add(palvelu);
                         }
                     }
                 }
             }
-
             return pal;
         }
-
 
         private void TsBtnLisaa_Click_1(object sender, EventArgs e)
         {
             frmUusiPalvelu up = new frmUusiPalvelu();
             up.ShowDialog();
         }
+
 
         public void lokiinTallentaminen(string teksti)
 
@@ -95,19 +77,14 @@ namespace R13_MokkiBook
             sw.Close();
         }
 
-        private void tsTallenna_Click(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void txtHaku_TextChanged(object sender, EventArgs e)
         {
            
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void TsBtnHae_Click(object sender, EventArgs e)
         {
-
+          
         }
     }
 }
