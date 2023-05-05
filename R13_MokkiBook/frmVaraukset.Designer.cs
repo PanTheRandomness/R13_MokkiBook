@@ -61,6 +61,7 @@
             this.btnHae = new System.Windows.Forms.Button();
             this.tbAlue = new System.Windows.Forms.TextBox();
             this.btnTyhjennaHaku = new System.Windows.Forms.Button();
+            this.ttVaraukset = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             this.cmsVaraustaulunMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
@@ -212,6 +213,7 @@
             this.dtpAlku.Name = "dtpAlku";
             this.dtpAlku.Size = new System.Drawing.Size(200, 20);
             this.dtpAlku.TabIndex = 0;
+            this.ttVaraukset.SetToolTip(this.dtpAlku, "Syötä haettavan varauksen alkupäivä");
             this.dtpAlku.ValueChanged += new System.EventHandler(this.dtpAlku_ValueChanged);
             // 
             // lblViiva
@@ -231,6 +233,7 @@
             this.dtpLoppu.Name = "dtpLoppu";
             this.dtpLoppu.Size = new System.Drawing.Size(200, 20);
             this.dtpLoppu.TabIndex = 1;
+            this.ttVaraukset.SetToolTip(this.dtpLoppu, "Syötä haettavan varauksen päättymispäivä");
             this.dtpLoppu.ValueChanged += new System.EventHandler(this.dtpLoppu_ValueChanged);
             // 
             // lblAlue
@@ -261,6 +264,7 @@
             this.btnRaportti.Size = new System.Drawing.Size(97, 23);
             this.btnRaportti.TabIndex = 5;
             this.btnRaportti.Text = "Tulosta raportti";
+            this.ttVaraukset.SetToolTip(this.btnRaportti, "Tulosta haun tulos");
             this.btnRaportti.UseVisualStyleBackColor = true;
             this.btnRaportti.Click += new System.EventHandler(this.btnRaportti_Click);
             // 
@@ -272,6 +276,7 @@
             this.btnUusi.Size = new System.Drawing.Size(75, 23);
             this.btnUusi.TabIndex = 6;
             this.btnUusi.Text = "Uusi varaus";
+            this.ttVaraukset.SetToolTip(this.btnUusi, "Luo uusi varaus");
             this.btnUusi.UseVisualStyleBackColor = true;
             this.btnUusi.Click += new System.EventHandler(this.btnUusi_Click);
             // 
@@ -297,6 +302,7 @@
             this.btnHae.Size = new System.Drawing.Size(39, 23);
             this.btnHae.TabIndex = 3;
             this.btnHae.Text = "Hae";
+            this.ttVaraukset.SetToolTip(this.btnHae, "Hae annetuilla kriteereillä");
             this.btnHae.UseVisualStyleBackColor = true;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click_1);
             // 
@@ -307,6 +313,7 @@
             this.tbAlue.Name = "tbAlue";
             this.tbAlue.Size = new System.Drawing.Size(86, 20);
             this.tbAlue.TabIndex = 2;
+            this.ttVaraukset.SetToolTip(this.tbAlue, "Syötä haettavan varauksen aluetunnus");
             this.tbAlue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlue_KeyPress);
             // 
             // btnTyhjennaHaku
@@ -317,6 +324,7 @@
             this.btnTyhjennaHaku.Size = new System.Drawing.Size(93, 23);
             this.btnTyhjennaHaku.TabIndex = 4;
             this.btnTyhjennaHaku.Text = "Tyhjennä haku";
+            this.ttVaraukset.SetToolTip(this.btnTyhjennaHaku, "Tyhjennä hakukriteerit");
             this.btnTyhjennaHaku.UseVisualStyleBackColor = true;
             this.btnTyhjennaHaku.Click += new System.EventHandler(this.btnTyhjennaHaku_Click);
             // 
@@ -387,5 +395,6 @@
         private System.Windows.Forms.Button btnHae;
         private System.Windows.Forms.TextBox tbAlue;
         private System.Windows.Forms.Button btnTyhjennaHaku;
+        private System.Windows.Forms.ToolTip ttVaraukset;
     }
 }

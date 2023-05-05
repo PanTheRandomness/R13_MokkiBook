@@ -46,6 +46,7 @@
             this.varauksen_palvelutTableAdapter1 = new R13_MokkiBook.VarauksenPAlvelutDataSetTableAdapters.varauksen_palvelutTableAdapter();
             this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varauksenpalvelutBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.ttVarauksenPAlvelut = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSet)).BeginInit();
@@ -69,7 +70,7 @@
             this.dgvVarauksenPalvelut.Location = new System.Drawing.Point(2, 1);
             this.dgvVarauksenPalvelut.Name = "dgvVarauksenPalvelut";
             this.dgvVarauksenPalvelut.Size = new System.Drawing.Size(527, 269);
-            this.dgvVarauksenPalvelut.TabIndex = 0;
+            this.dgvVarauksenPalvelut.TabIndex = 4;
             this.dgvVarauksenPalvelut.SelectionChanged += new System.EventHandler(this.dgvVarauksenPalvelut_SelectionChanged);
             // 
             // varauksenpalvelutBindingSource1
@@ -115,15 +116,17 @@
             this.nudPoistettavat.Location = new System.Drawing.Point(128, 9);
             this.nudPoistettavat.Name = "nudPoistettavat";
             this.nudPoistettavat.Size = new System.Drawing.Size(43, 20);
-            this.nudPoistettavat.TabIndex = 2;
+            this.nudPoistettavat.TabIndex = 1;
+            this.ttVarauksenPAlvelut.SetToolTip(this.nudPoistettavat, "Valitse varauksesta poistettavien palveluiden määrä");
             // 
             // btnPoistaValittuMaara
             // 
             this.btnPoistaValittuMaara.Location = new System.Drawing.Point(3, 7);
             this.btnPoistaValittuMaara.Name = "btnPoistaValittuMaara";
             this.btnPoistaValittuMaara.Size = new System.Drawing.Size(119, 23);
-            this.btnPoistaValittuMaara.TabIndex = 1;
+            this.btnPoistaValittuMaara.TabIndex = 0;
             this.btnPoistaValittuMaara.Text = "Poista valittu määrä";
+            this.ttVarauksenPAlvelut.SetToolTip(this.btnPoistaValittuMaara, "Poista varauksesta valittu määrä valittua palvelua");
             this.btnPoistaValittuMaara.UseVisualStyleBackColor = true;
             this.btnPoistaValittuMaara.Click += new System.EventHandler(this.btnPoistaValittuMaara_Click);
             // 
@@ -132,8 +135,9 @@
             this.btnHaePalvelu.Location = new System.Drawing.Point(372, 7);
             this.btnHaePalvelu.Name = "btnHaePalvelu";
             this.btnHaePalvelu.Size = new System.Drawing.Size(144, 23);
-            this.btnHaePalvelu.TabIndex = 4;
+            this.btnHaePalvelu.TabIndex = 3;
             this.btnHaePalvelu.Text = "Lisää palvelu varaukseen";
+            this.ttVarauksenPAlvelut.SetToolTip(this.btnHaePalvelu, "Lisää varaukseen palvelun erilliseltä sivulta");
             this.btnHaePalvelu.UseVisualStyleBackColor = true;
             this.btnHaePalvelu.Click += new System.EventHandler(this.btnHaePalvelu_Click);
             // 
@@ -142,8 +146,9 @@
             this.btnPoista.Location = new System.Drawing.Point(266, 7);
             this.btnPoista.Name = "btnPoista";
             this.btnPoista.Size = new System.Drawing.Size(100, 23);
-            this.btnPoista.TabIndex = 3;
+            this.btnPoista.TabIndex = 2;
             this.btnPoista.Text = "Poista kokonaan";
+            this.ttVarauksenPAlvelut.SetToolTip(this.btnPoista, "Poista valittu palvelu varauksesta kokonaan");
             this.btnPoista.UseVisualStyleBackColor = true;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
@@ -222,5 +227,6 @@
         private System.Windows.Forms.BindingSource varauksenpalvelutBindingSource2;
         private System.Windows.Forms.NumericUpDown nudPoistettavat;
         private System.Windows.Forms.Button btnPoistaValittuMaara;
+        private System.Windows.Forms.ToolTip ttVarauksenPAlvelut;
     }
 }
