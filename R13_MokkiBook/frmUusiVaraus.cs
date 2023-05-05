@@ -6,6 +6,7 @@ using System.Data.Odbc;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace R13_MokkiBook
         public int valitturivimokki = -1;
         public int valitturivialue = -1;
         public int valitturivipostitoimipaikka = -1;
+        public int valitturivivarauksenpalvelu = -1;
         public double arvioituloppuhinta = 0;
 
         public Asiakas valittuasiakas;
@@ -38,7 +40,7 @@ namespace R13_MokkiBook
 
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string asiakasquery;
-        public string aluequery;
+        public string aluequery = "SELECT nimi FROM alue;";
         public string mokkiquery;
         public string palveluquery;
         public string postiquery;
@@ -60,6 +62,7 @@ namespace R13_MokkiBook
             alueet = GetAlueet();
             mokit = GetMokit();
             postit = GetPostit();
+            PaivitaAluetaulu(aluequery);
             LokiinTallentaminen("Avattiin uuden varauksen luontisivu käyttäjältä: ");
 
             tamavaraus = new Varaus();
@@ -288,17 +291,21 @@ namespace R13_MokkiBook
         {
 
         }
-        private void frmUusiVaraus_Load(object sender, EventArgs e)
-        {
-            
-        }
         public void PaivitaAsiakastaulu(string asiakasquery)
         {
 
         }
         public void PaivitaAluetaulu(string aluequery)
         {
-
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(aluequery, connection))
+            {
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
+            }
+            lbAlue.DataSource = dataTable;
         }
         public void PaivitaMokkitaulu(string mokkiquery)
         {
@@ -379,8 +386,6 @@ namespace R13_MokkiBook
 
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //Ei jää tietokantaan, jollei ole tallennettu
-
 
         }
 
@@ -434,6 +439,52 @@ namespace R13_MokkiBook
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
+        }
+
+        private void dgvAsiakkaat_SelectionChanged(object sender, EventArgs e)
+        {
+            valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;
+            valittuasiakas = asiakkaat[valitturiviasiakas];
+        }
+
+        private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
+        {
+            valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
+            //valittupalvelu = palvelut[valitturivipalvelu];
+        }
+
+        private void dgvMokitUusiVaraus_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbAlue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbPostitoimipaikka_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbAlueid_TextChanged(object sender, EventArgs e)
+        {
+            if (tbAlueid.Text.Length > 0)
+            {
+                aluequery = "SELECT nimi FROM alue WHERE alue_id LIKE '" + tbAlueid.Text + "%';";
+                PaivitaAluetaulu(aluequery);
+            }
+            else
+            {
+                aluequery = "SELECT nimi FROM alue;";
+                PaivitaAluetaulu(aluequery);
+            }
         }
     }
 }

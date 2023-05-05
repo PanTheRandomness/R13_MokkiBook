@@ -317,6 +317,7 @@ namespace R13_MokkiBook
             this.dgvAsiakkaat.Size = new System.Drawing.Size(607, 238);
             this.dgvAsiakkaat.TabIndex = 8;
             this.dgvAsiakkaat.TabStop = false;
+            this.dgvAsiakkaat.SelectionChanged += new System.EventHandler(this.dgvAsiakkaat_SelectionChanged);
             // 
             // asiakasidDataGridViewTextBoxColumn
             // 
@@ -609,6 +610,7 @@ namespace R13_MokkiBook
             this.dgvAlueenPalvelut.Size = new System.Drawing.Size(546, 105);
             this.dgvAlueenPalvelut.TabIndex = 24;
             this.dgvAlueenPalvelut.TabStop = false;
+            this.dgvAlueenPalvelut.SelectionChanged += new System.EventHandler(this.dgvAlueenPalvelut_SelectionChanged);
             // 
             // lblPalvelujenMaara
             // 
@@ -670,6 +672,7 @@ namespace R13_MokkiBook
             this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 82);
             this.lbVarauksenPalvelut.TabIndex = 28;
             this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Näyttää varaukseen lisätyt palvelut");
+            this.lbVarauksenPalvelut.SelectedIndexChanged += new System.EventHandler(this.lbVarauksenPalvelut_SelectedIndexChanged);
             // 
             // dgvMokitUusiVaraus
             // 
@@ -697,6 +700,7 @@ namespace R13_MokkiBook
             this.dgvMokitUusiVaraus.Size = new System.Drawing.Size(1064, 162);
             this.dgvMokitUusiVaraus.TabIndex = 22;
             this.dgvMokitUusiVaraus.TabStop = false;
+            this.dgvMokitUusiVaraus.SelectionChanged += new System.EventHandler(this.dgvMokitUusiVaraus_SelectionChanged);
             // 
             // mokkiidDataGridViewTextBoxColumn
             // 
@@ -857,6 +861,7 @@ namespace R13_MokkiBook
             this.lbPostitoimipaikka.Size = new System.Drawing.Size(162, 56);
             this.lbPostitoimipaikka.TabIndex = 14;
             this.ttUusiVaraus.SetToolTip(this.lbPostitoimipaikka, "Valitse haluttu postitoimipaikka");
+            this.lbPostitoimipaikka.SelectedIndexChanged += new System.EventHandler(this.lbPostitoimipaikka_SelectedIndexChanged);
             // 
             // cmsTyhjennavalinta
             // 
@@ -909,6 +914,7 @@ namespace R13_MokkiBook
             this.lbAlue.Size = new System.Drawing.Size(162, 56);
             this.lbAlue.TabIndex = 12;
             this.ttUusiVaraus.SetToolTip(this.lbAlue, "Valitse haluttu alue");
+            this.lbAlue.SelectedIndexChanged += new System.EventHandler(this.lbAlue_SelectedIndexChanged);
             // 
             // alueBindingSource
             // 
@@ -923,6 +929,7 @@ namespace R13_MokkiBook
             this.tbAlueid.Size = new System.Drawing.Size(111, 20);
             this.tbAlueid.TabIndex = 11;
             this.ttUusiVaraus.SetToolTip(this.tbAlueid, "Syötä halutun alueen tunnus");
+            this.tbAlueid.TextChanged += new System.EventHandler(this.tbAlueid_TextChanged);
             this.tbAlueid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // epUusiVaraus
@@ -966,7 +973,6 @@ namespace R13_MokkiBook
             this.Text = "Uusi varaus";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUusiVaraus_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmUusiVaraus_FormClosed);
-            this.Load += new System.EventHandler(this.frmUusiVaraus_Load);
             this.pnlAsiakastiedot.ResumeLayout(false);
             this.pnlAsiakastiedot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).EndInit();
