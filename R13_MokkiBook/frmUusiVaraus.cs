@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,9 +58,18 @@ namespace R13_MokkiBook
             alueet = GetAlueet();
             mokit = GetMokit();
             postit = GetPostit();
+            LokiinTallentaminen("Avattiin uuden varauksen luontisivu käyttäjältä: ");
 
             tamavaraus = new Varaus();
             tamavaraus.varaus_id = HaeSeuraavaVapaaID();
+        }
+        public void LokiinTallentaminen(string teksti)
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
         public List<Varaus> GetVaraukset()
         {
@@ -378,6 +388,8 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
             //JOS EI TALLENNETTU--> POISTA TÄMÄ VARAUS!! VARMISTA ETTEI JÄÄ TIETOKANTAAN
+
+
         }
 
         private void btnLisaa_Click(object sender, EventArgs e)
@@ -398,6 +410,11 @@ namespace R13_MokkiBook
             if (!mokkilukittu)
                 return false;
             else return true;
+        }
+
+        private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
         }
     }
 }

@@ -962,6 +962,7 @@ namespace R13_MokkiBook
             this.Name = "frmUusiVaraus";
             this.Text = "Uusi varaus";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUusiVaraus_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmUusiVaraus_FormClosed);
             this.Load += new System.EventHandler(this.frmUusiVaraus_Load);
             this.pnlAsiakastiedot.ResumeLayout(false);
             this.pnlAsiakastiedot.PerformLayout();
