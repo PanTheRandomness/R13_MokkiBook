@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace R13_MokkiBook
             InitializeComponent();
             varaukset = GetVaraukset();
             alueet = GetAlueet();
+            lokiinTallentaminen("Varaukset-osio avattiin käyttäjältä: ");
+
         }
         public List<Varaus> GetVaraukset()
         {
@@ -236,5 +239,16 @@ namespace R13_MokkiBook
         {
             hakuloppu = dtpLoppu.Value;
         }
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
+        }
+
     }
 }

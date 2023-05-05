@@ -11,6 +11,7 @@ using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Data.Odbc;
 using System.Drawing.Printing;
+using System.IO;
 
 namespace R13_MokkiBook
 {
@@ -18,7 +19,6 @@ namespace R13_MokkiBook
     {
         public Lasku valittulasku = new Lasku();
         public List<Lasku> laskut;
-
         public string query;
         private OdbcConnection connection;
         private OdbcDataAdapter dataAdapter;
@@ -27,12 +27,14 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             laskut = GetLaskut();
+            lokiinTallentaminen("Laskut-osio avattiin käyttäjältä: ");
         }
 
         private void frmLaskut_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dataSet1.lasku' table. You can move, or remove it, as needed.
-            this.laskuTableAdapter.Fill(this.dataSet1.lasku);
+            try
+            {
+                this.laskuTableAdapter.Fill(this.dataSet1.lasku);
             connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
             connection.Open();
             dataAdapter = new OdbcDataAdapter("SELECT * FROM lasku", connection);
@@ -43,6 +45,11 @@ namespace R13_MokkiBook
             dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
             System.Data.DataSet dataSet = new System.Data.DataSet();
             dataAdapter.Fill(dataSet1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
 
         }
         public List<Lasku> GetLaskut()
@@ -61,10 +68,10 @@ namespace R13_MokkiBook
                         while (reader.Read())
                         {
                             Lasku lasku = new Lasku();
-                            lasku.lasku_id = reader.GetInt32(1);
+                            lasku.lasku_id = reader.GetInt32(0);
                             lasku.varaus_id = reader.GetInt32(1);
-                            lasku.summa = reader.GetInt32(0);
-                            lasku.alv = reader.GetInt32(0);
+                            lasku.summa = reader.GetInt32(2);
+                            lasku.alv = reader.GetInt32(3);
 
                             las.Add(lasku);
                         }
@@ -82,29 +89,55 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
+            try
+            {
+                DataRow newRow = dataTable.NewRow();
+                newRow["lasku_id"] = txtLaskuID.Text;
+                newRow["varaus_id"] = txtVarausID.Text;
+                newRow["summa"] = txtSumma.Text;
+                newRow["alv"] = txtAlv.Text;
 
+                dataTable.Rows.Add(newRow);
+                dataAdapter.Update(dataTable);
+
+                txtLaskuID.Text = String.Empty;
+                txtVarausID.Text = String.Empty;
+                txtSumma.Text = String.Empty;
+                txtAlv.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void btnPaivita_Click(object sender, EventArgs e)
         {
-            // Get the current DataRow from the DataGridView control
-            DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
+            try
+            {
+                DataRow currentRow = ((DataRowView)dataGridView1.CurrentRow.DataBoundItem).Row;
 
-            // Update the values of the current DataRow with the input from the TextBox controls
             currentRow["lasku_id"] = txtLaskuID.Text;
             currentRow["varaus_id"] = txtVarausID.Text;
             currentRow["summa"] = txtSumma.Text;
             currentRow["alv"] = txtAlv.Text;
 
-            // Update the database
             dataAdapter.Update(dataTable);
 
-           /* txtLaskuID.Text = String.Empty;
-            txtVarausID.Text = String.Empty;
+            txtLaskuID.Text = String.Empty;
             txtSumma.Text = String.Empty;
-            txtAlv.Text = String.Empty; */
+            txtVarausID.Text = String.Empty;
+            txtAlv.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            lokiinTallentaminen("Laskut-osiosta muokattiin laskuja käyttäjältä: ");
         }
-        private void dataGridView1_SelectionChanged_1(object sender, EventArgs e)
+
+        private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
             if (dgv.CurrentRow != null)
@@ -114,6 +147,24 @@ namespace R13_MokkiBook
                 txtSumma.Text = dgv.CurrentRow.Cells["summa"].Value.ToString();
                 txtAlv.Text = dgv.CurrentRow.Cells["alv"].Value.ToString();
             }
+        }
+
+        private void btnTyhjenna_Click(object sender, EventArgs e)
+        {
+            txtLaskuID.Text = String.Empty;
+            txtSumma.Text = String.Empty;
+            txtVarausID.Text = String.Empty;
+            txtAlv.Text = String.Empty;
+        }
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
     }
 }

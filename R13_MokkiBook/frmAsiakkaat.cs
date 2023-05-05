@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,11 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             asiakkaat = GetAsiakkaat();
+            lokiinTallentaminen("Asiakkaat-osio avattiin käyttäjältä: ");
+
 
         }
-       
+
         public List<Asiakas> GetAsiakkaat()
         {
             List<Asiakas> asi = new List<Asiakas>();
@@ -48,11 +51,11 @@ namespace R13_MokkiBook
                                 Asiakas a = new Asiakas();
                                 a.asiakas_id = reader.GetInt32(0);
                                 a.postinro = reader.GetString(1);
-                                a.etunimi = reader.GetString(1);
-                                a.sukunimi = reader.GetString(1);
-                                a.lahiosoite = reader.GetString(1);
-                                a.email = reader.GetString(1);
-                                a.puhelinnro = reader.GetString(1);
+                                a.etunimi = reader.GetString(2);
+                                a.sukunimi = reader.GetString(3);
+                                a.lahiosoite = reader.GetString(4);
+                                a.email = reader.GetString(5);
+                                a.puhelinnro = reader.GetString(6);
 
                                 asi.Add(a);
                             }
@@ -124,25 +127,28 @@ namespace R13_MokkiBook
             // Get the current DataRow from the DataGridView control
             DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
 
-            // Update the values of the current DataRow with the input from the TextBox controls
-            currentRow["asiakas_id"] = tbAsiakasid.Text;
-            currentRow["postinro"] = tbPostiNro.Text;
-            currentRow["etunimi"] = tbEtunimi.Text;
-            currentRow["sukunimi"] = tbSukunimi.Text;
-            currentRow["lahiosoite"] = tbLahiosoite.Text;
-            currentRow["email"] = tbEmail.Text;
-            currentRow["puhelinnro"] = tbPuhelinnro.Text;
+                // Update the values of the current DataRow with the input from the TextBox controls
+                currentRow["asiakas_id"] = tbAsiakasid.Text;
+                currentRow["postinro"] = tbPostiNro.Text;
+                currentRow["etunimi"] = tbEtunimi.Text;
+                currentRow["sukunimi"] = tbSukunimi.Text;
+                currentRow["lahiosoite"] = tbLahiosoite.Text;
+                currentRow["email"] = tbEmail.Text;
+                currentRow["puhelinnro"] = tbPuhelinnro.Text;
 
-            // Update the database
-            dataAdapter.Update(dataTable);
+                // Update the database
+                dataAdapter.Update(dataTable);
 
-            tbAsiakasid.Text = String.Empty;
-            tbPostiNro.Text = String.Empty;
-            tbEtunimi.Text = String.Empty;
-            tbSukunimi.Text = String.Empty;
-            tbLahiosoite.Text = String.Empty;
-            tbEmail.Text = String.Empty;
-            tbPuhelinnro.Text = String.Empty;
+                tbAsiakasid.Text = String.Empty;
+                tbPostiNro.Text = String.Empty;
+                tbEtunimi.Text = String.Empty;
+                tbSukunimi.Text = String.Empty;
+                tbLahiosoite.Text = String.Empty;
+                tbEmail.Text = String.Empty;
+                tbPuhelinnro.Text = String.Empty;
+
+            lokiinTallentaminen("Asiakkaat-osiosta muokattiin tietoja käyttäjältä: ");
+
         }
 
         private void btnPoista_Click(object sender, EventArgs e)
@@ -162,7 +168,104 @@ namespace R13_MokkiBook
             tbEmail.Text = String.Empty;
             tbPuhelinnro.Text = String.Empty;
 
+            lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
         }
+
+        private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (dgv.CurrentRow != null)
+            {
+                tbAsiakasid.Text = dgv.CurrentRow.Cells["asiakas_id"].Value.ToString();
+                tbPostiNro.Text = dgv.CurrentRow.Cells["postinro"].Value.ToString();
+                tbEtunimi.Text = dgv.CurrentRow.Cells["etunimi"].Value.ToString();
+                tbSukunimi.Text = dgv.CurrentRow.Cells["sukunimi"].Value.ToString();
+                tbLahiosoite.Text = dgv.CurrentRow.Cells["lahiosoite"].Value.ToString();
+                tbEmail.Text = dgv.CurrentRow.Cells["email"].Value.ToString();
+                tbPuhelinnro.Text = dgv.CurrentRow.Cells["puhelinnro"].Value.ToString();
+            }
+
+        }
+        private void btnTyhjenna_Click(object sender, EventArgs e)
+        {
+            tbAsiakasid.Text = String.Empty;
+            tbPostiNro.Text = String.Empty;
+            tbEtunimi.Text = String.Empty;
+            tbSukunimi.Text = String.Empty;
+            tbLahiosoite.Text = String.Empty;
+            tbEmail.Text = String.Empty;
+            tbPuhelinnro.Text = String.Empty;
+            
+        }
+
+        //Nimen eka kirjain korjataan isoksi
+        private void tbEtunimi_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+
+        }
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
+        }
+
+        //postinumeroksi voi syöttää vain lukuja:
+        private void tbPostiNro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+            string searchValue = tbHae.Text.Trim();
+            if (dgvAsiakkaat != null)
+            {
+                dgvAsiakkaat.ClearSelection();
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (int.TryParse(searchValue, out int id))
+                    {
+                        foreach (DataGridViewRow row in dgvAsiakkaat.Rows)
+                        {
+                            if (row.Cells["asiakas_id"].Value != null && row.Cells["asiakas_id"].Value.ToString().Equals(searchValue))
+                            {
+                                dgvAsiakkaat.CurrentCell = row.Cells["asiakas_id"];
+                                row.Selected = true;
+                                break;
+                            }
+                        }
+                        if (!dgvAsiakkaat.SelectedRows.Count.Equals(1))
+                        {
+                            MessageBox.Show("Asiakasta ei löytynyt");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hae Asiakas_id numerolla");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Haku ei voi olla tyhjä");
+                }
+            }
+        }
+
 
     }
 }

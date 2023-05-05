@@ -4,12 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace R13_MokkiBook
 {
@@ -28,6 +29,7 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             mokit = GetMokit();
+            lokiinTallentaminen("Mökit-osio avattiin käyttäjältä: ");
         }
 
 
@@ -67,95 +69,102 @@ namespace R13_MokkiBook
 
         private void frmMokit_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dataSet1.alue' table. You can move, or remove it, as needed.
             this.alueTableAdapter.Fill(this.dataSet1.alue);
-            // TODO: This line of code loads data into the 'dataSet1.mokki' table. You can move, or remove it, as needed.
             this.mokkiTableAdapter.Fill(this.dataSet1.mokki);
             connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
             connection.Open();
-
-            // Create a new ODBC data adapter and select all rows from the table
             dataAdapter = new OdbcDataAdapter("SELECT * FROM mokki", connection);
-
-            // Create a new DataTable and fill it with the rows from the table
             dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
-
-            // Set the DataSource property of the DataGridView control to the DataTable
             dgvMokit.DataSource = dataTable;
-
-            // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
             OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
-
-            // Set the InsertCommand property of the dataAdapter to the generated insert command
             dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
-
-            // Create a new DataSet object to hold the data retrieved from the database
             System.Data.DataSet dataSet = new System.Data.DataSet();
-
-            // Fill the DataSet with data from the database
             dataAdapter.Fill(dataSet1);
 
         }
 
+        //Lisää uusi mökki. Tarkistaa että kaikki kentät on täytetty, jos ei ole tulee virheilmoitus.
+
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-  
-            DataRow newRow = dataTable.NewRow();
-            newRow["mokki_id"] = tbMokkiId.Text;
-            newRow["alue_id"] = tbAlueId.Text;
-            newRow["postinro"] = tbPostinumero.Text;
-            newRow["mokkinimi"] = tbMokinnimi.Text;
-            newRow["katuosoite"] = tbKatuosoite.Text;
-            newRow["hinta"] = tbHinta.Text;
-            newRow["kuvaus"] = tbKuvaus.Text;
-            newRow["henkilomaara"] = tbHenkilomaara.Text;
-            newRow["varustelu"] = tbVarustelu.Text;
 
-            dataTable.Rows.Add(newRow);
-            dataAdapter.Update(dataTable);
+            if (tbMokkiId.Text.Trim() == "" || tbAlueId.Text.Trim() == "" || tbPostinumero.Text.Trim() == "" ||
+                 tbMokinnimi.Text.Trim() == "" || tbKatuosoite.Text.Trim() == "" || tbHinta.Text.Trim() == "" ||
+                 tbKuvaus.Text.Trim() == "" || tbHenkilomaara.Text.Trim() == "" || tbVarustelu.Text.Trim() == "")
+            {
+                MessageBox.Show("Täytä kaikki kentät!");
+            }
+            else
+            {
+                DataRow newRow = dataTable.NewRow();
+                newRow["mokki_id"] = tbMokkiId.Text;
+                newRow["alue_id"] = tbAlueId.Text;
+                newRow["postinro"] = tbPostinumero.Text;
+                newRow["mokkinimi"] = tbMokinnimi.Text;
+                newRow["katuosoite"] = tbKatuosoite.Text;
+                newRow["hinta"] = tbHinta.Text;
+                newRow["kuvaus"] = tbKuvaus.Text;
+                newRow["henkilomaara"] = tbHenkilomaara.Text;
+                newRow["varustelu"] = tbVarustelu.Text;
 
-            tbMokkiId.Text = String.Empty;
-            tbAlueId.Text = String.Empty;
-            tbPostinumero.Text = String.Empty;
-            tbMokinnimi.Text = String.Empty;
-            tbKatuosoite.Text = String.Empty;
-            tbHinta.Text = String.Empty;
-            tbKuvaus.Text = String.Empty;
-            tbHenkilomaara.Text = String.Empty;
-            tbVarustelu.Text = String.Empty;
+                dataTable.Rows.Add(newRow);
+                dataAdapter.Update(dataTable);
+
+                tbMokkiId.Text = String.Empty;
+                tbAlueId.Text = String.Empty;
+                tbPostinumero.Text = String.Empty;
+                tbMokinnimi.Text = String.Empty;
+                tbKatuosoite.Text = String.Empty;
+                tbHinta.Text = String.Empty;
+                tbKuvaus.Text = String.Empty;
+                tbHenkilomaara.Text = String.Empty;
+                tbVarustelu.Text = String.Empty;
+            }
+
 
         }
+
+        // Muokkaaminen, eli tallentaa muokkauksen.
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
-            
+
             DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
 
+            if (string.IsNullOrEmpty(tbMokkiId.Text) || string.IsNullOrEmpty(tbAlueId.Text) || string.IsNullOrEmpty(tbPostinumero.Text) || string.IsNullOrEmpty(tbMokinnimi.Text) || string.IsNullOrEmpty(tbKatuosoite.Text) || string.IsNullOrEmpty(tbHinta.Text) || string.IsNullOrEmpty(tbKuvaus.Text) || string.IsNullOrEmpty(tbHenkilomaara.Text) || string.IsNullOrEmpty(tbVarustelu.Text))
+            {
+                MessageBox.Show("Täytä kaikki kentät ennen päivitystä.");
+            }
+            else
+            {
+                currentRow["mokki_id"] = tbMokkiId.Text;
+                currentRow["alue_id"] = tbAlueId.Text;
+                currentRow["postinro"] = tbPostinumero.Text;
+                currentRow["mokkinimi"] = tbMokinnimi.Text;
+                currentRow["katuosoite"] = tbKatuosoite.Text;
+                currentRow["hinta"] = tbHinta.Text;
+                currentRow["kuvaus"] = tbKuvaus.Text;
+                currentRow["henkilomaara"] = tbHenkilomaara.Text;
+                currentRow["varustelu"] = tbVarustelu.Text;
 
-            currentRow["mokki_id"] = tbMokkiId.Text;
-            currentRow["alue_id"] = tbAlueId.Text;
-            currentRow["postinro"] = tbPostinumero.Text;
-            currentRow["mokkinimi"] = tbMokinnimi.Text;
-            currentRow["katuosoite"] = tbKatuosoite.Text;
-            currentRow["hinta"] = tbHinta.Text;
-            currentRow["kuvaus"] = tbKuvaus.Text;
-            currentRow["henkilomaara"] = tbHenkilomaara.Text;
-            currentRow["varustelu"] = tbVarustelu.Text;
+                dataAdapter.Update(dataTable);
 
-            dataAdapter.Update(dataTable);
+                tbMokkiId.Text = String.Empty;
+                tbAlueId.Text = String.Empty;
+                tbPostinumero.Text = String.Empty;
+                tbMokinnimi.Text = String.Empty;
+                tbKatuosoite.Text = String.Empty;
+                tbHinta.Text = String.Empty;
+                tbKuvaus.Text = String.Empty;
+                tbHenkilomaara.Text = String.Empty;
+                tbVarustelu.Text = String.Empty;
 
-            tbMokkiId.Text = String.Empty;
-            tbAlueId.Text = String.Empty;
-            tbPostinumero.Text = String.Empty;
-            tbMokinnimi.Text = String.Empty;
-            tbKatuosoite.Text = String.Empty;
-            tbHinta.Text = String.Empty;
-            tbKuvaus.Text = String.Empty;
-            tbHenkilomaara.Text = String.Empty;
-            tbVarustelu.Text = String.Empty;
-
+                lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
+            }
         }
+
+        // Poistaminen. Poistaa valitun rivin.
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
@@ -173,17 +182,21 @@ namespace R13_MokkiBook
             tbKuvaus.Text = String.Empty;
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
+
+            lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
         }
 
         private void tbMokkiId_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void dgvMokit_SelectionChanged(object sender, EventArgs e)
         {
-           
+
         }
+
+        // Avaa rivin tupla clickillä tekstiboxeihin.
 
         private void dgvMokit_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -202,6 +215,8 @@ namespace R13_MokkiBook
             }
         }
 
+        // Tyhjentää kentät
+
         private void btnTyhjenna_Click(object sender, EventArgs e)
         {
             tbMokkiId.Text = String.Empty;
@@ -213,6 +228,169 @@ namespace R13_MokkiBook
             tbKuvaus.Text = String.Empty;
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
+        }
+
+        // Lokiin tallentaminen
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
+        }
+
+        // Haku toiminto, joka hakee mökki id mukaan. Jos mökkiä ei löydy tekee virheilmoitukset.
+
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+            string searchValue = tbHae.Text.Trim();
+            if (dgvMokit != null)
+            {
+                dgvMokit.ClearSelection();
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (int.TryParse(searchValue, out int id))
+                    {
+                        foreach (DataGridViewRow row in dgvMokit.Rows)
+                        {
+                            if (row.Cells["mokki_id"].Value != null && row.Cells["mokki_id"].Value.ToString().Equals(searchValue))
+                            {
+                                dgvMokit.CurrentCell = row.Cells["mokki_id"];
+                                row.Selected = true;
+                                break;
+                            }
+                        }
+                        if (!dgvMokit.SelectedRows.Count.Equals(1))
+                        {
+                            MessageBox.Show("Mökkiä ei löytynyt");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hae Mökki_id numerolla");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Haku ei voi olla tyhjä");
+                }
+            }
+        }
+
+        // Postinumeroon voi syöttää vain numeroita sekä max 5 numeroa.
+
+        private void tbPostinumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 || tbPostinumero.Text.Length >= 5)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Muuttaa mökin nimen ensimmäisen kirjaimen isoksi.Nimessä saa olla max 45 kirjainta.
+
+        private void tbMokinnimi_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+        }
+
+        private void tbMokinnimi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbMokinnimi.MaxLength = 45;
+        }
+
+        // Muuttaa katuosoitteen ensimmäisen kirjaimen isoksi. Katuosoitteessa saa olla max 45 kirjainta.
+
+        private void tbKatuosoite_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+        }
+
+        private void tbKatuosoite_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbKatuosoite.MaxLength = 45;
+        }
+
+
+        // Mökki idseen voi syöttää vain numeroita.
+
+        private void tbMokkiId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Alue idseen voi syöttää vain numeroita.
+
+        private void tbAlueId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Henkilömäärään voi syöttää vain numeroita.
+
+        private void tbHenkilomaara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Tarkistaa, että hinta on double tyyppinen. Hinnassa saa olla 11 merkkiä (8 + 2, sekä pilkku)
+
+        private void tbHinta_Leave(object sender, EventArgs e)
+        {
+            double hinta;
+
+            if (!double.TryParse(tbHinta.Text, out hinta))
+            {
+                MessageBox.Show("Virheellinen hinta!");
+                return;
+            }
+
+        }
+
+        private void tbHinta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbHinta.MaxLength = 11;
+        }
+
+
+        // Varusteluun ei voi syöttää yli 100 merkkiä.
+
+        private void tbVarustelu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbVarustelu.MaxLength = 100;
+        }
+
+        // Kuvaukseen ei voi syöttää yli 150 merkkiä.
+
+        private void tbKuvaus_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbKuvaus.MaxLength = 150;
         }
     }
 }

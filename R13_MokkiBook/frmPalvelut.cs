@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Data.Odbc;
+using System.IO;
 
 namespace R13_MokkiBook
 {
@@ -22,6 +23,7 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             palvelut = GetPalvelut();
+            lokiinTallentaminen("Palvelut-osio avattiin käyttäjältä: ");
         }
 
 
@@ -81,6 +83,16 @@ namespace R13_MokkiBook
         {
             frmUusiPalvelu up = new frmUusiPalvelu();
             up.ShowDialog();
+        }
+
+        public void lokiinTallentaminen(string teksti)
+
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
 
         private void tsTallenna_Click(object sender, EventArgs e)
