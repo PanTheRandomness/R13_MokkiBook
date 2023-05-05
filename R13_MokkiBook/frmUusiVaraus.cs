@@ -46,6 +46,8 @@ namespace R13_MokkiBook
         //HAKU TOTEUTUU SEURAAVASTI: JOKAISTA TAULUA KOHDEN OMA QUERYSTRING, JOIHIN JOKAINEN HAKUKRITEERI LISÄTÄÄN XQUERY = OSAQUERY1 + OSAQUERY2 JNE
        
         public DateTime nyt = DateTime.Now;
+        public DateTime alkupvm;
+        public DateTime loppupvm;
         public bool mokkilukittu = false;
 
         public frmUusiVaraus()
@@ -281,6 +283,11 @@ namespace R13_MokkiBook
             id++;
             return id;
         }
+
+        public void LuoVaraus()
+        {
+
+        }
         private void frmUusiVaraus_Load(object sender, EventArgs e)
         {
             
@@ -311,55 +318,40 @@ namespace R13_MokkiBook
         }
         private void dtmLoppupvm_ValueChanged(object sender, EventArgs e)
         {
-            //Ei voi olla ennen alkupvm
-
+            loppupvm = dtmLoppupvm.Value;
         }
 
         private void dtpAlkupvm_ValueChanged(object sender, EventArgs e)
         {
-            //ei voi olla aiemmin kuin nyt
-            /*if (dtpAlku.Value > haku.varattu_loppupvm)
-            {
-                MessageBox.Show("Alkupäivämäärä ei voi olla loppupäivämäärän jälkeen.");
-                dtpAlku.Value = nyt;
-            }
-            else if (dtpAlku.Value < nyt)
-            {
-                MessageBox.Show("Alkupäivämäärä ei voi olla nykyistä päivämäärää aiemmin.");
-                dtpAlku.Value = nyt;
-            }
-            else
-                haku.varattu_alkupvm = dtpAlku.Value;*/
-        }
-
-        private void dgvMokitUusiVaraus_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            alkupvm = dtpAlkupvm.Value;
         }
 
         private void btnLuoVaraus_Click(object sender, EventArgs e)
         {
-            //Messagebox validointi
-        }
-
-        private void tbEnimi_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbSnimi_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbPostinoAsiakas_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
-        {
-            //Näyttää
+            if(!MokkiLukittu())
+            {
+                MessageBox.Show("Mökkiä ei ole lukittu.");
+            }
+            else
+            {
+                switch(ValidPvm())
+                {
+                    case 0:
+                        //Huom muut vaatimukset! Validoi asiakas, alue, mökki, posti, määrä ja mökin vapaus!
+                        LuoVaraus();
+                        break;
+                    case 1:
+                        if (MessageBox.Show("Varaukselle on valittu vain yksi päivä, luodaanko varaus silti?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            LuoVaraus();
+                        break;
+                    case 2:
+                        MessageBox.Show("Varausta ei voi luoda: Varauksen alkupäivä ei voi olla sen åäättymispäivän jälkeen.");
+                        break;
+                    default:
+                        MessageBox.Show("Jokin meni nyt päiväyksen kanssa vikaan.");
+                        break;
+                }
+            }
         }
 
         private void btnPoistaPalvelu_Click(object sender, EventArgs e)
@@ -387,7 +379,7 @@ namespace R13_MokkiBook
 
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //JOS EI TALLENNETTU--> POISTA TÄMÄ VARAUS!! VARMISTA ETTEI JÄÄ TIETOKANTAAN
+            //Ei jää tietokantaan, jollei ole tallennettu
 
 
         }
@@ -411,10 +403,37 @@ namespace R13_MokkiBook
                 return false;
             else return true;
         }
+        public int ValidPvm()
+        {
+            if (alkupvm < loppupvm)
+                return 0;
+            else if (alkupvm.Equals(loppupvm))
+                return 1;
+            else
+                return 2;
+        }
 
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
+        }
+
+        private void tbEnimi_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+        }
+
+        private void tbPostinoAsiakas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
+                e.Handled = true;
         }
     }
 }

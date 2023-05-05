@@ -220,7 +220,6 @@ namespace R13_MokkiBook
             this.tbLahiosoiteAsiakas.Size = new System.Drawing.Size(185, 20);
             this.tbLahiosoiteAsiakas.TabIndex = 3;
             this.ttUusiVaraus.SetToolTip(this.tbLahiosoiteAsiakas, "Syötä asiakkaan lähiosoite");
-            this.tbLahiosoiteAsiakas.TextChanged += new System.EventHandler(this.tbLahiosoiteAsiakas_TextChanged);
             // 
             // lblLahiosoiteAsiakas
             // 
@@ -238,7 +237,7 @@ namespace R13_MokkiBook
             this.tbPostinoAsiakas.Size = new System.Drawing.Size(101, 20);
             this.tbPostinoAsiakas.TabIndex = 2;
             this.ttUusiVaraus.SetToolTip(this.tbPostinoAsiakas, "Syötä asiakkaan postinumero");
-            this.tbPostinoAsiakas.TextChanged += new System.EventHandler(this.tbPostinoAsiakas_TextChanged);
+            this.tbPostinoAsiakas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // lblPostinoAsiakas
             // 
@@ -265,7 +264,7 @@ namespace R13_MokkiBook
             this.tbSnimi.Size = new System.Drawing.Size(185, 20);
             this.tbSnimi.TabIndex = 1;
             this.ttUusiVaraus.SetToolTip(this.tbSnimi, "Syötä asiakkaan sukunimi");
-            this.tbSnimi.TextChanged += new System.EventHandler(this.tbSnimi_TextChanged);
+            this.tbSnimi.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 
             // tbEnimi
             // 
@@ -274,7 +273,7 @@ namespace R13_MokkiBook
             this.tbEnimi.Size = new System.Drawing.Size(125, 20);
             this.tbEnimi.TabIndex = 0;
             this.ttUusiVaraus.SetToolTip(this.tbEnimi, "Syötä asiakkaan etunimi");
-            this.tbEnimi.TextChanged += new System.EventHandler(this.tbEnimi_TextChanged);
+            this.tbEnimi.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 
             // lblEnimi
             // 
@@ -379,6 +378,7 @@ namespace R13_MokkiBook
             this.tbAsiakastunnus.Size = new System.Drawing.Size(151, 20);
             this.tbAsiakastunnus.TabIndex = 6;
             this.ttUusiVaraus.SetToolTip(this.tbAsiakastunnus, "Syötä asiakkaan asiakastunnus");
+            this.tbAsiakastunnus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // pnlVaraustiedot
             // 
@@ -561,6 +561,7 @@ namespace R13_MokkiBook
             0,
             0,
             0});
+            this.nudHlomaara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // pnlPalvelut
             // 
@@ -696,7 +697,6 @@ namespace R13_MokkiBook
             this.dgvMokitUusiVaraus.Size = new System.Drawing.Size(1064, 162);
             this.dgvMokitUusiVaraus.TabIndex = 22;
             this.dgvMokitUusiVaraus.TabStop = false;
-            this.dgvMokitUusiVaraus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMokitUusiVaraus_CellContentClick);
             // 
             // mokkiidDataGridViewTextBoxColumn
             // 
@@ -793,6 +793,7 @@ namespace R13_MokkiBook
             this.tbMokkitunnus.Size = new System.Drawing.Size(200, 20);
             this.tbMokkitunnus.TabIndex = 16;
             this.ttUusiVaraus.SetToolTip(this.tbMokkitunnus, "Syötä halutun mökin mökkitunnus");
+            this.tbMokkitunnus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // lblMokkitun
             // 
@@ -884,6 +885,7 @@ namespace R13_MokkiBook
             this.tbPostinroMokki.Size = new System.Drawing.Size(111, 20);
             this.tbPostinroMokki.TabIndex = 13;
             this.ttUusiVaraus.SetToolTip(this.tbPostinroMokki, "Syötä halutun alueen/mökin postinumero");
+            this.tbPostinroMokki.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // lbAlueid
             // 
@@ -921,6 +923,7 @@ namespace R13_MokkiBook
             this.tbAlueid.Size = new System.Drawing.Size(111, 20);
             this.tbAlueid.TabIndex = 11;
             this.ttUusiVaraus.SetToolTip(this.tbAlueid, "Syötä halutun alueen tunnus");
+            this.tbAlueid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // epUusiVaraus
             // 
