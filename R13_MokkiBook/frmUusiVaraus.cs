@@ -52,6 +52,7 @@ namespace R13_MokkiBook
         public DateTime alkupvm;
         public DateTime loppupvm;
         public bool mokkilukittu = false;
+        public bool asiakasjuurivalittu = false;
 
         public frmUusiVaraus()
         {
@@ -63,6 +64,13 @@ namespace R13_MokkiBook
             alueet = GetAlueet();
             mokit = GetMokit();
             postit = GetPostit();
+
+            valittuasiakas = new Asiakas();
+            valittualue = new Alue();
+            valittumokki = new Mokki();
+            valittupalvelu = new Palvelu();
+            valittuvarauksenpalvelu = new VarauksenPalvelut();
+            valittuposti = new Posti();
 
             PaivitaAsiakastaulu(asiakasquery);
             PaivitaAluetaulu(aluequery);
@@ -502,9 +510,15 @@ namespace R13_MokkiBook
         private void cbLukitseMokki_CheckedChanged(object sender, EventArgs e)
         {
             if (cbLukitseMokki.Checked == true)
+            { 
                 mokkilukittu = true;
+                pnlMokki.Enabled = false;
+            }
             else if (cbLukitseMokki.Checked == false)
+            {
                 mokkilukittu = false;
+                pnlMokki.Enabled = true;
+            }
         }
 
         public bool MokkiLukittu()
@@ -548,8 +562,6 @@ namespace R13_MokkiBook
 
         private void dgvAsiakkaat_SelectionChanged(object sender, EventArgs e)
         {
-            valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;
-            valittuasiakas = asiakkaat[valitturiviasiakas];
         }
 
         private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
@@ -588,6 +600,90 @@ namespace R13_MokkiBook
                 aluequery = "SELECT nimi FROM alue;";
                 PaivitaAluetaulu(aluequery);
             }
+        }
+
+        private void tbAsiakastunnus_TextChanged(object sender, EventArgs e)
+        {
+            if (tbAsiakastunnus.Text.Length > 0)
+            {
+                aluequery = "SELECT * FROM asiakas WHERE asiakas_id LIKE '" + tbAsiakastunnus.Text + "%';";
+                PaivitaAsiakastaulu(aluequery);
+            }
+            else
+            {
+                aluequery = "SELECT * FROM asiakas;";
+                PaivitaAsiakastaulu(aluequery);
+            }
+        }
+        public void TyhjennaAsiakas()
+        {
+            asiakasjuurivalittu = false;
+            valittuasiakas = null;
+            asiakasquery = "SELECT * FROM asiakas;";
+            PaivitaAsiakastaulu(asiakasquery);
+            tbAsiakastunnus.Text = String.Empty;
+            tbEnimi.Text = String.Empty;
+            tbSnimi.Text = String.Empty;
+            tbPostinoAsiakas.Text = String.Empty;
+            tbLahiosoiteAsiakas.Text = String.Empty;
+            tbSahkoposti.Text = String.Empty;
+            tbPuhno.Text = String.Empty;
+        }
+        private void tbEnimi_TextChanged(object sender, EventArgs e)
+        {
+            if (asiakasjuurivalittu)
+                TyhjennaAsiakas();
+        }
+
+        private void tbSnimi_TextChanged(object sender, EventArgs e)
+        {
+            if (asiakasjuurivalittu)
+                TyhjennaAsiakas();
+        }
+
+        private void tbPostinoAsiakas_TextChanged(object sender, EventArgs e)
+        {
+            if (asiakasjuurivalittu)
+                TyhjennaAsiakas();
+        }
+
+        private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
+        {
+            if (asiakasjuurivalittu)
+                TyhjennaAsiakas();
+        }
+
+        private void tbPostitoimipaikkaAsiakas_TextChanged(object sender, EventArgs e)
+        {
+            if (asiakasjuurivalittu)
+                TyhjennaAsiakas();
+        }
+
+        private void tbPuhno_TextChanged(object sender, EventArgs e)
+        {
+            if (asiakasjuurivalittu)
+                TyhjennaAsiakas();
+        }
+
+        private void tbSahkoposti_TextChanged(object sender, EventArgs e)
+        {
+            if (asiakasjuurivalittu)
+                TyhjennaAsiakas();
+        }
+
+        private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;//Viittaukseksi ei voi objektiesiintymää??
+            valittuasiakas = asiakkaat[valitturiviasiakas];
+            asiakasjuurivalittu = true;
+
+            tbEnimi.Text = valittuasiakas.etunimi;
+            tbSnimi.Text = valittuasiakas.sukunimi;
+            tbPostinoAsiakas.Text = valittuasiakas.postinro;
+            tbAsiakastunnus.Text = valittuasiakas.asiakas_id.ToString();
+            tbLahiosoiteAsiakas.Text = valittuasiakas.lahiosoite;
+            tbSahkoposti.Text = valittuasiakas.email;
+            tbPuhno.Text = valittuasiakas.puhelinnro;
         }
     }
 }
