@@ -30,9 +30,9 @@ namespace R13_MokkiBook
             InitializeComponent();
             varaukset = GetVaraukset();
             alueet = GetAlueet();
-            lokiinTallentaminen("Varaukset-osio avattiin käyttäjältä: ");
-
+            LokiinTallentaminen("Varaukset-osio avattiin käyttäjältä: ");
         }
+
         public List<Varaus> GetVaraukset()
         {
             List<Varaus> var = new List<Varaus>();
@@ -240,8 +240,7 @@ namespace R13_MokkiBook
             hakuloppu = dtpLoppu.Value;
         }
 
-        public void lokiinTallentaminen(string teksti)
-
+        public void LokiinTallentaminen(string teksti)
         {
             string kayttaja = Environment.UserName;
 

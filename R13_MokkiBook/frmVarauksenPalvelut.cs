@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,13 +27,21 @@ namespace R13_MokkiBook
             InitializeComponent();
             kasiteltavavaraus = tuotuvaraus;
             varauksenpalvelut = GetVarauksenPalvelut();
+            LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut avattiin käyttäjältä: ");
         }
 
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
             PaivitaTaulu();
         }
+        public void LokiinTallentaminen(string teksti)
+        {
+            string kayttaja = Environment.UserName;
 
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
+        }
         public List<VarauksenPalvelut> GetVarauksenPalvelut()
         {
             List<VarauksenPalvelut> vP = new List<VarauksenPalvelut>();
@@ -113,6 +122,7 @@ namespace R13_MokkiBook
                 {
                     cmd.ExecuteNonQuery();
                 }
+                LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin palvelu " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
             }
         }
 
@@ -138,6 +148,7 @@ namespace R13_MokkiBook
                         {
                             cmd.ExecuteNonQuery();
                         }
+                        LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin " + uusimaara.ToString() + " kpl palvelua " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
                     }
                 }
                 else
@@ -154,6 +165,11 @@ namespace R13_MokkiBook
             }
 
             PaivitaTaulu();
+        }
+
+        private void frmVarauksenPalvelut_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut suljettiin käyttäjältä: ");
         }
     }
 }

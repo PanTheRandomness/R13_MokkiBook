@@ -192,6 +192,7 @@
             this.MinimumSize = new System.Drawing.Size(546, 349);
             this.Name = "frmVarauksenPalvelut";
             this.Text = "Varauksen palvelut";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmVarauksenPalvelut_FormClosed);
             this.Load += new System.EventHandler(this.frmVarauksenPalvelut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource1)).EndInit();

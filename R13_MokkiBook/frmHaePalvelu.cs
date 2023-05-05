@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,11 +29,20 @@ namespace R13_MokkiBook
         public frmHaePalvelu(Varaus tuotu, List<VarauksenPalvelut> tuotulista)
         {
             InitializeComponent();
+            LokiinTallentaminen("Palvelujen hakusivu avattiin varaukselle " + kasiteltavavaraus.varaus_id.ToString() + " käyttäjältä: ");
             kasiteltavavaraus = tuotu;
             query = "SELECT * FROM palvelu WHERE palvelu.alue_id = (SELECT mokki.alue_id FROM mokki WHERE mokki.mokki_id = (SELECT varaus.mokki_mokki_id FROM varaus WHERE varaus.varaus_id = " + kasiteltavavaraus.varaus_id + "));";
             TuoData();
             palvelut = GetPalvelut();
             varauksenpalvelut = tuotulista;
+        }
+        public void LokiinTallentaminen(string teksti)
+        {
+            string kayttaja = Environment.UserName;
+
+            StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
+            sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
+            sw.Close();
         }
         public void TuoData()
         {
@@ -136,6 +146,7 @@ namespace R13_MokkiBook
                         {
                             cmd.ExecuteNonQuery();
                         }
+                        LokiinTallentaminen("Varaukseen " + lisattava.varaus_id.ToString() + " lisättiin " + lisattava.lkm.ToString() + " kpl palvelua " + lisattava.palvelu_id.ToString() + " käyttäjältä: ");
                     }
                 }
                 else
@@ -148,10 +159,16 @@ namespace R13_MokkiBook
                         {
                             cmd.ExecuteNonQuery();
                         }
+                        LokiinTallentaminen("Varaukseen " + lisattava.varaus_id.ToString() + " lisättiin " + lisattava.lkm.ToString() + " kpl palvelua " + lisattava.palvelu_id.ToString() + " käyttäjältä: ");
                     }
                 }
                 this.Close();
             }
+        }
+
+        private void frmHaePalvelu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LokiinTallentaminen("Palvelujen hakusivu suljettiin varaukselle " + kasiteltavavaraus.varaus_id.ToString() + " käyttäjältä: ");
         }
     }
 }

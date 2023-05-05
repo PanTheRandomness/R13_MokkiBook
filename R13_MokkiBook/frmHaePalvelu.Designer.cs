@@ -88,6 +88,7 @@
             this.MinimumSize = new System.Drawing.Size(556, 283);
             this.Name = "frmHaePalvelu";
             this.Text = "Hae alueen palvelut";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmHaePalvelu_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlueenPalvelut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaara)).EndInit();
             this.ResumeLayout(false);
