@@ -19,7 +19,6 @@ namespace R13_MokkiBook
         public int valitturivipalvelu = -1;
         public int valitturivimokki = -1;
         public int valitturivialue = -1;
-        public int valitturivipostitoimipaikka = -1;
         public int valitturivivarauksenpalvelu = -1;
         public double arvioituloppuhinta = 0;
 
@@ -315,10 +314,6 @@ namespace R13_MokkiBook
         {
 
         }
-        public void PaivitaPostitaulu(string postiquery)
-        {
-
-        }
         public void PaivitaVarauksenPalvelutaulu(string varauksenpalveluquery)
         {
 
@@ -460,12 +455,9 @@ namespace R13_MokkiBook
 
         private void lbAlue_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void lbPostitoimipaikka_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            valitturivialue = lbAlue.SelectedIndex;
+            valittualue = alueet[valitturivialue];
+                tbAlueid.Text = valittualue.alue_id.ToString();
         }
 
         private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
@@ -484,6 +476,7 @@ namespace R13_MokkiBook
             {
                 aluequery = "SELECT nimi FROM alue;";
                 PaivitaAluetaulu(aluequery);
+                tbAlueid.Text = String.Empty;
             }
         }
     }
