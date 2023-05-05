@@ -43,6 +43,10 @@ namespace R13_MokkiBook
         public string postiquery;
         public string varauksenpalveluquery;
         //HAKU TOTEUTUU SEURAAVASTI: JOKAISTA TAULUA KOHDEN OMA QUERYSTRING, JOIHIN JOKAINEN HAKUKRITEERI LISÄTÄÄN XQUERY = OSAQUERY1 + OSAQUERY2 JNE
+       
+        public DateTime nyt = DateTime.Now;
+        public bool mokkilukittu = false;
+
         public frmUusiVaraus()
         {
             InitializeComponent();
@@ -374,6 +378,26 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
             //JOS EI TALLENNETTU--> POISTA TÄMÄ VARAUS!! VARMISTA ETTEI JÄÄ TIETOKANTAAN
+        }
+
+        private void btnLisaa_Click(object sender, EventArgs e)
+        {
+            //Tarkista että tyhjä asiakastunnus- hae uusi tunnus
+        }
+
+        private void cbLukitseMokki_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbLukitseMokki.Checked == true)
+                mokkilukittu = true;
+            else if (cbLukitseMokki.Checked == false)
+                mokkilukittu = false;
+        }
+
+        public bool MokkiLukittu()
+        {
+            if (!mokkilukittu)
+                return false;
+            else return true;
         }
     }
 }

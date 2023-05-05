@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgvAlueenPalvelut = new System.Windows.Forms.DataGridView();
             this.tbKuvaus = new System.Windows.Forms.TextBox();
             this.btnLisaa = new System.Windows.Forms.Button();
             this.nudMaara = new System.Windows.Forms.NumericUpDown();
+            this.ttHaePalvelu = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlueenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaara)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +46,8 @@
             this.dgvAlueenPalvelut.Location = new System.Drawing.Point(0, 0);
             this.dgvAlueenPalvelut.Name = "dgvAlueenPalvelut";
             this.dgvAlueenPalvelut.Size = new System.Drawing.Size(540, 147);
-            this.dgvAlueenPalvelut.TabIndex = 0;
+            this.dgvAlueenPalvelut.TabIndex = 3;
+            this.dgvAlueenPalvelut.TabStop = false;
             this.dgvAlueenPalvelut.SelectionChanged += new System.EventHandler(this.dgvAlueenPalvelut_SelectionChanged);
             // 
             // tbKuvaus
@@ -53,15 +56,17 @@
             this.tbKuvaus.Multiline = true;
             this.tbKuvaus.Name = "tbKuvaus";
             this.tbKuvaus.Size = new System.Drawing.Size(348, 88);
-            this.tbKuvaus.TabIndex = 1;
+            this.tbKuvaus.TabIndex = 2;
+            this.ttHaePalvelu.SetToolTip(this.tbKuvaus, "Valitun palvelun kuvaus");
             // 
             // btnLisaa
             // 
             this.btnLisaa.Location = new System.Drawing.Point(423, 189);
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(105, 23);
-            this.btnLisaa.TabIndex = 2;
+            this.btnLisaa.TabIndex = 1;
             this.btnLisaa.Text = "Lisää varaukseen";
+            this.ttHaePalvelu.SetToolTip(this.btnLisaa, "Lisää valitun palvelun varaukseen");
             this.btnLisaa.UseVisualStyleBackColor = true;
             this.btnLisaa.Click += new System.EventHandler(this.btnLisaa_Click);
             // 
@@ -70,7 +75,8 @@
             this.nudMaara.Location = new System.Drawing.Point(354, 192);
             this.nudMaara.Name = "nudMaara";
             this.nudMaara.Size = new System.Drawing.Size(63, 20);
-            this.nudMaara.TabIndex = 3;
+            this.nudMaara.TabIndex = 0;
+            this.ttHaePalvelu.SetToolTip(this.nudMaara, "Valitse lisättävän palvelun lukumäärä");
             this.nudMaara.ValueChanged += new System.EventHandler(this.nudMaara_ValueChanged);
             // 
             // frmHaePalvelu
@@ -102,5 +108,6 @@
         private System.Windows.Forms.TextBox tbKuvaus;
         private System.Windows.Forms.Button btnLisaa;
         private System.Windows.Forms.NumericUpDown nudMaara;
+        private System.Windows.Forms.ToolTip ttHaePalvelu;
     }
 }

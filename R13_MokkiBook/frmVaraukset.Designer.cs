@@ -93,6 +93,7 @@
             this.dgvVaraukset.Name = "dgvVaraukset";
             this.dgvVaraukset.Size = new System.Drawing.Size(1269, 578);
             this.dgvVaraukset.TabIndex = 7;
+            this.dgvVaraukset.TabStop = false;
             this.dgvVaraukset.SelectionChanged += new System.EventHandler(this.dgvVaraukset_SelectionChanged);
             // 
             // varausidDataGridViewTextBoxColumn
