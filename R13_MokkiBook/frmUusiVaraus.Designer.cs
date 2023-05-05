@@ -171,7 +171,7 @@ namespace R13_MokkiBook
             this.tbPostitoimipaikkaAsiakas.Name = "tbPostitoimipaikkaAsiakas";
             this.tbPostitoimipaikkaAsiakas.Size = new System.Drawing.Size(144, 20);
             this.tbPostitoimipaikkaAsiakas.TabIndex = 4;
-            this.tbPostitoimipaikkaAsiakas.Tag = "Postitoimipaikka";
+            this.tbPostitoimipaikkaAsiakas.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbPostitoimipaikkaAsiakas, "Syötä asiakkaan postitoimipaikka");
             // 
             // lblPostitoimipaikka
@@ -191,7 +191,7 @@ namespace R13_MokkiBook
             this.tbSahkoposti.Name = "tbSahkoposti";
             this.tbSahkoposti.Size = new System.Drawing.Size(150, 20);
             this.tbSahkoposti.TabIndex = 6;
-            this.tbSahkoposti.Tag = "Sähköpostiosoite";
+            this.tbSahkoposti.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbSahkoposti, "Syötä asiakkaan sähköpostiosoite");
             // 
             // tbPuhno
@@ -201,7 +201,7 @@ namespace R13_MokkiBook
             this.tbPuhno.Name = "tbPuhno";
             this.tbPuhno.Size = new System.Drawing.Size(150, 20);
             this.tbPuhno.TabIndex = 5;
-            this.tbPuhno.Tag = "Puhelinnumero";
+            this.tbPuhno.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbPuhno, "Syötä asiakkaan puhelinnumero");
             // 
             // btnLisaa
@@ -242,7 +242,7 @@ namespace R13_MokkiBook
             this.tbLahiosoiteAsiakas.Name = "tbLahiosoiteAsiakas";
             this.tbLahiosoiteAsiakas.Size = new System.Drawing.Size(185, 20);
             this.tbLahiosoiteAsiakas.TabIndex = 3;
-            this.tbLahiosoiteAsiakas.Tag = "Lähiosoite";
+            this.tbLahiosoiteAsiakas.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbLahiosoiteAsiakas, "Syötä asiakkaan lähiosoite");
             // 
             // lblLahiosoiteAsiakas
@@ -260,7 +260,7 @@ namespace R13_MokkiBook
             this.tbPostinoAsiakas.Name = "tbPostinoAsiakas";
             this.tbPostinoAsiakas.Size = new System.Drawing.Size(101, 20);
             this.tbPostinoAsiakas.TabIndex = 2;
-            this.tbPostinoAsiakas.Tag = "Postinumero";
+            this.tbPostinoAsiakas.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbPostinoAsiakas, "Syötä asiakkaan postinumero");
             this.tbPostinoAsiakas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
@@ -288,7 +288,7 @@ namespace R13_MokkiBook
             this.tbSnimi.Name = "tbSnimi";
             this.tbSnimi.Size = new System.Drawing.Size(185, 20);
             this.tbSnimi.TabIndex = 1;
-            this.tbSnimi.Tag = "Sukunimi";
+            this.tbSnimi.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbSnimi, "Syötä asiakkaan sukunimi");
             this.tbSnimi.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 
@@ -298,7 +298,7 @@ namespace R13_MokkiBook
             this.tbEnimi.Name = "tbEnimi";
             this.tbEnimi.Size = new System.Drawing.Size(125, 20);
             this.tbEnimi.TabIndex = 0;
-            this.tbEnimi.Tag = "Etunimi";
+            this.tbEnimi.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbEnimi, "Syötä asiakkaan etunimi");
             this.tbEnimi.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 

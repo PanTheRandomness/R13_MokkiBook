@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,10 +38,9 @@ namespace R13_MokkiBook
         public List<Mokki> mokit;
         public List<Posti> postit;
         public List<Varaus> varaukset;
-        public List<TextBox> asiakasboksit;
 
         public string connectionString = "Dsn=Village Newbies;uid=root";
-        public string asiakasquery;
+        public string asiakasquery = "SELECT * FROM asiakas;";
         public string aluequery = "SELECT nimi FROM alue;";
         public string mokkiquery;
         public string palveluquery;
@@ -63,9 +63,8 @@ namespace R13_MokkiBook
             alueet = GetAlueet();
             mokit = GetMokit();
             postit = GetPostit();
-            LuoBoksiListaAsiakas();
-            
 
+            PaivitaAsiakastaulu(asiakasquery);
             PaivitaAluetaulu(aluequery);
             LokiinTallentaminen("Avattiin uuden varauksen luontisivu käyttäjältä: ");
 
@@ -278,18 +277,6 @@ namespace R13_MokkiBook
             }
             return po;
         }
-
-        public void LuoBoksiListaAsiakas()
-        {
-            asiakasboksit = new List<TextBox>();
-            asiakasboksit.Add(tbEnimi);
-            asiakasboksit.Add(tbSnimi);
-            asiakasboksit.Add(tbPostinoAsiakas);
-            asiakasboksit.Add(tbLahiosoiteAsiakas);
-            asiakasboksit.Add(tbPostitoimipaikkaAsiakas);
-            asiakasboksit.Add(tbPuhno);
-            asiakasboksit.Add(tbSahkoposti);
-        }
         public int HaeSeuraavaVapaaVarausID()
         {
             int id = 0;
@@ -318,7 +305,22 @@ namespace R13_MokkiBook
         }
         public void PaivitaAsiakastaulu(string asiakasquery)
         {
-
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(asiakasquery, connection))
+            {
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
+            }
+            dgvAsiakkaat.DataSource = dataTable;
+            dgvAsiakkaat.Columns[0].HeaderText = "Asiakastunnus";
+            dgvAsiakkaat.Columns[1].HeaderText = "Postinumero";
+            dgvAsiakkaat.Columns[2].HeaderText = "Etunimi";
+            dgvAsiakkaat.Columns[3].HeaderText = "Sukunimi";
+            dgvAsiakkaat.Columns[4].HeaderText = "Lähiosoite";
+            dgvAsiakkaat.Columns[5].HeaderText = "Sähköposti";
+            dgvAsiakkaat.Columns[6].HeaderText = "Puhelinnumero";
         }
         public void PaivitaAluetaulu(string aluequery)
         {
@@ -419,17 +421,9 @@ namespace R13_MokkiBook
                     MessageBox.Show("Asiakas on jo olemassa. Poista asiakastunnus kentästä luodaksesi uusi asiakas.");
                 else
                 {
-                    foreach (TextBox tb in asiakasboksit)
-                    {
-                        if(tb.Text.Length < 1)
-                            MessageBox.Show("Asiakasta ei voitu luoda: Syötä " + tb.Tag.ToString());
-                    }
-                    
-                    luotuasiakas.asiakas_id = HaeSeuraavaVapaaAsiakasID();
-
+                    TarkistaNimi();
                 }
             }
-
         }
         public bool EtsiAsiakas(int tunnus)
         {
@@ -439,6 +433,71 @@ namespace R13_MokkiBook
                     return true;
             }
             return false;
+        }
+        public void TarkistaNimi()
+        {
+            if (tbEnimi.Text.Length > 0)
+            {
+                if (tbSnimi.Text.Length > 0)
+                {
+                    TarkistaOsoite();
+                }
+                else
+                    MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä sukunimi.");
+            }
+            else
+                MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä etunimi.");
+        }
+        public void TarkistaOsoite()
+        {
+            if (tbPostinoAsiakas.Text.Length > 0 && tbPostinoAsiakas.Text.Length < 6)
+            {
+                if(tbLahiosoiteAsiakas.Text.Length > 0)
+                {
+                    //Muotoa ei tarkisteta. Palaan tähän, jos on aikaa
+                    TarkistaPuhno();
+                }
+                else
+                    MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä lähiosoite.");
+            }
+            else if (tbPostinoAsiakas.Text.Length > 5)
+                MessageBox.Show("Uutta asiakasta ei voitu luoda: postinumero on liian pitkä.");
+            else
+                MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä postinumero.");
+        }
+        public void TarkistaPuhno()
+        {
+            if(tbPuhno.Text.Length > 0)
+            {
+                //Muotoa ei tarkisteta. Palaan tähän, jos on aikaa
+                TarkistaSahkoposti();
+            }
+            else
+                MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä puhelinnumero.");
+        }
+        public void TarkistaSahkoposti()
+        {
+            if(tbSahkoposti.Text.Length > 0)
+            {
+                //Muotoa ei tarkisteta. Palaan tähän, jos on aikaa
+                LuoAsiakas();
+            }
+            else
+                MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä shköpostiosoite.");
+        }
+        public void LuoAsiakas()
+        {
+            luotuasiakas.asiakas_id = HaeSeuraavaVapaaAsiakasID();
+            luotuasiakas.postinro = tbPostinoAsiakas.Text;
+            luotuasiakas.etunimi = tbEnimi.Text;
+            luotuasiakas.sukunimi = tbSnimi.Text;
+            luotuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
+            luotuasiakas.email = tbSahkoposti.Text;
+            luotuasiakas.puhelinnro = tbPuhno.Text;
+
+            valittuasiakas = luotuasiakas;
+            asiakasquery = "SELECT * FROM asiakas;";
+            PaivitaAsiakastaulu(asiakasquery);
         }
         private void cbLukitseMokki_CheckedChanged(object sender, EventArgs e)
         {
