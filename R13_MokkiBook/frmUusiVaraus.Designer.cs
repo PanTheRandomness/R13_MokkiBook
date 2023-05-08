@@ -215,10 +215,10 @@ namespace R13_MokkiBook
             // btnLisaa
             // 
             this.btnLisaa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLisaa.Location = new System.Drawing.Point(332, 160);
+            this.btnLisaa.Location = new System.Drawing.Point(332, 205);
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(102, 23);
-            this.btnLisaa.TabIndex = 8;
+            this.btnLisaa.TabIndex = 9;
             this.btnLisaa.Text = "Lisää asiakas";
             this.ttUusiVaraus.SetToolTip(this.btnLisaa, "Lisää asiakkaan tietokantaan");
             this.btnLisaa.UseVisualStyleBackColor = true;
@@ -354,7 +354,7 @@ namespace R13_MokkiBook
             this.dgvAsiakkaat.Location = new System.Drawing.Point(455, 0);
             this.dgvAsiakkaat.Name = "dgvAsiakkaat";
             this.dgvAsiakkaat.Size = new System.Drawing.Size(607, 238);
-            this.dgvAsiakkaat.TabIndex = 8;
+            this.dgvAsiakkaat.TabIndex = 10;
             this.dgvAsiakkaat.TabStop = false;
             this.dgvAsiakkaat.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAsiakkaat_RowHeaderMouseDoubleClick);
             // 
@@ -975,12 +975,13 @@ namespace R13_MokkiBook
             // btnTyhjValinta
             // 
             this.btnTyhjValinta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTyhjValinta.Location = new System.Drawing.Point(332, 189);
+            this.btnTyhjValinta.Location = new System.Drawing.Point(332, 80);
             this.btnTyhjValinta.Name = "btnTyhjValinta";
             this.btnTyhjValinta.Size = new System.Drawing.Size(102, 23);
-            this.btnTyhjValinta.TabIndex = 10;
+            this.btnTyhjValinta.TabIndex = 8;
             this.btnTyhjValinta.Text = "Tyhjennä valinta";
             this.btnTyhjValinta.UseVisualStyleBackColor = true;
+            this.btnTyhjValinta.Click += new System.EventHandler(this.btnTyhjValinta_Click);
             // 
             // frmUusiVaraus
             // 

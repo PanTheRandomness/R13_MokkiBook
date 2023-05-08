@@ -642,6 +642,7 @@ namespace R13_MokkiBook
         public void TyhjennaAsiakas()
         {
             asiakasjuurivalittu = false;
+            valittuasiakas = null;
             asiakasquery = "SELECT * FROM asiakas;";
             PaivitaAsiakastaulu(asiakasquery);
             tbAsiakastunnus.Text = String.Empty;
@@ -651,6 +652,7 @@ namespace R13_MokkiBook
             tbLahiosoiteAsiakas.Text = String.Empty;
             tbSahkoposti.Text = String.Empty;
             tbPuhno.Text = String.Empty;
+            tbPostitoimipaikkaAsiakas.Text = String.Empty;
         }
         private void tbEnimi_TextChanged(object sender, EventArgs e)
         {
@@ -709,8 +711,8 @@ namespace R13_MokkiBook
             Asiakas a = new Asiakas();
             a.asiakas_id = asiakkaat[rivi].asiakas_id;
             a.postinro = asiakkaat[rivi].postinro;
-            a.etunimi = asiakkaat[rivi].postinro;
-            a.sukunimi = asiakkaat[rivi].postinro;
+            a.etunimi = asiakkaat[rivi].etunimi;
+            a.sukunimi = asiakkaat[rivi].sukunimi;
             a.lahiosoite = asiakkaat[rivi].lahiosoite;
             a.email = asiakkaat[rivi].email;
             a.puhelinnro = asiakkaat[rivi].puhelinnro;
@@ -719,15 +721,23 @@ namespace R13_MokkiBook
         }
         public void HaePostinro (string postiqueryasiakas)
         {
-            OdbcConnection connection = new OdbcConnection(connectionString);
-            connection.Open();
-            DataTable dataTable = new DataTable();
-            using (OdbcDataAdapter adapter = new OdbcDataAdapter(postiqueryasiakas, connection))
+
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
-                adapter.FillSchema(dataTable, SchemaType.Source);
-                adapter.Fill(dataTable);
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(postiqueryasiakas, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            string luettutoimipaikka = reader.GetString(0);
+
+                            tbPostitoimipaikkaAsiakas.Text = luettutoimipaikka;
+                        }
+                    }
+                }
             }
-            tbPostitoimipaikkaAsiakas.Text = dataTable.ToString();//TOIMIIKO??
         }
         private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -739,6 +749,11 @@ namespace R13_MokkiBook
         private void dgvMokitUusiVaraus_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
 
+        }
+
+        private void btnTyhjValinta_Click(object sender, EventArgs e)
+        {
+            TyhjennaAsiakas();
         }
     }
 }
