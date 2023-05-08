@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace R13_MokkiBook
 {
-    public partial class frmHaePalvelu : Form //Viittaukseksi ei voi objektiesiintymää??
+    public partial class frmHaePalvelu : Form
     {
         public Varaus kasiteltavavaraus;
         public Palvelu valittupalvelu;

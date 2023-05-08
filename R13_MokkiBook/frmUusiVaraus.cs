@@ -654,63 +654,48 @@ namespace R13_MokkiBook
         }
         private void tbEnimi_TextChanged(object sender, EventArgs e)
         {
-            if (asiakasjuurivalittu)
-                TyhjennaAsiakas();
+
         }
 
         private void tbSnimi_TextChanged(object sender, EventArgs e)
         {
-            if (asiakasjuurivalittu)
-                TyhjennaAsiakas();
+            
         }
 
         private void tbPostinoAsiakas_TextChanged(object sender, EventArgs e)
         {
-            if (asiakasjuurivalittu)
-                TyhjennaAsiakas();
+            
         }
 
         private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
         {
-            if (asiakasjuurivalittu)
-                TyhjennaAsiakas();
+            
         }
 
         private void tbPostitoimipaikkaAsiakas_TextChanged(object sender, EventArgs e)
         {
-            if (asiakasjuurivalittu)
-                TyhjennaAsiakas();
+            
         }
 
         private void tbPuhno_TextChanged(object sender, EventArgs e)
         {
-            if (asiakasjuurivalittu)
-                TyhjennaAsiakas();
+            
         }
 
         private void tbSahkoposti_TextChanged(object sender, EventArgs e)
         {
-            if (asiakasjuurivalittu)
-                TyhjennaAsiakas();
+            
         }
 
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
-            //valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;
             valittuasiakas = GetValittuAsiakas(dgv.CurrentRow.Index);
-            /*valittuasiakas.etunimi = asiakkaat[valitturiviasiakas].etunimi;
-            valittuasiakas.sukunimi = asiakkaat[valitturiviasiakas].sukunimi;
-            valittuasiakas.asiakas_id = asiakkaat[valitturiviasiakas].asiakas_id;
-            valittuasiakas.postinro = asiakkaat[valitturiviasiakas].postinro;
-            valittuasiakas.lahiosoite = asiakkaat[valitturiviasiakas].lahiosoite;
-            valittuasiakas.puhelinnro = asiakkaat[valitturiviasiakas].puhelinnro;
-            valittuasiakas.email = asiakkaat[valitturiviasiakas].email;*/
 
             asiakasjuurivalittu = true;
 
             tbEnimi.Text = valittuasiakas.etunimi;
-            tbSnimi.Text = valittuasiakas.sukunimi;//Viittaukseksi ei voi objektiesiintymää??
+            tbSnimi.Text = valittuasiakas.sukunimi;
             tbPostinoAsiakas.Text = valittuasiakas.postinro;
             tbAsiakastunnus.Text = valittuasiakas.asiakas_id.ToString();
             tbLahiosoiteAsiakas.Text = valittuasiakas.lahiosoite;
