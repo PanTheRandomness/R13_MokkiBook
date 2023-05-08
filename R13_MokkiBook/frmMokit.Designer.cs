@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMokit));
             this.lbMokkiId = new System.Windows.Forms.Label();
             this.lbPostinumero = new System.Windows.Forms.Label();
             this.lbNimi = new System.Windows.Forms.Label();
@@ -68,6 +69,7 @@
             this.btnTyhjenna = new System.Windows.Forms.Button();
             this.tbHae = new System.Windows.Forms.TextBox();
             this.btnHae = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMokit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mokkiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -81,6 +83,7 @@
             this.lbMokkiId.Size = new System.Drawing.Size(62, 16);
             this.lbMokkiId.TabIndex = 0;
             this.lbMokkiId.Text = "Mökki ID:";
+            this.toolTip1.SetToolTip(this.lbMokkiId, "Mökki id, yksilöllinen mökin tunniste numero");
             // 
             // lbPostinumero
             // 
@@ -108,6 +111,7 @@
             this.lbHinta.Size = new System.Drawing.Size(38, 16);
             this.lbHinta.TabIndex = 4;
             this.lbHinta.Text = "Hinta";
+            this.toolTip1.SetToolTip(this.lbHinta, "Käytä hinnassa pilkkua");
             // 
             // lbLahiosoite
             // 
@@ -144,6 +148,7 @@
             this.lbAlueId.Size = new System.Drawing.Size(53, 16);
             this.lbAlueId.TabIndex = 0;
             this.lbAlueId.Text = "Alue ID:";
+            this.toolTip1.SetToolTip(this.lbAlueId, "Alue id, yksilöllinen alueen tunniste numero");
             // 
             // lbVarustelu
             // 
@@ -344,6 +349,7 @@
             this.btnLisaa.Size = new System.Drawing.Size(161, 39);
             this.btnLisaa.TabIndex = 7;
             this.btnLisaa.Text = "Lisää mökki";
+            this.toolTip1.SetToolTip(this.btnLisaa, "Lisää uuden mökin tietokantaan. Täytä ensiksi yläpuolella oleva lomake.");
             this.btnLisaa.UseVisualStyleBackColor = true;
             this.btnLisaa.Click += new System.EventHandler(this.btnLisaa_Click);
             // 
@@ -354,6 +360,7 @@
             this.btnMuokkaa.Size = new System.Drawing.Size(161, 39);
             this.btnMuokkaa.TabIndex = 8;
             this.btnMuokkaa.Text = "Tallenna muutos";
+            this.toolTip1.SetToolTip(this.btnMuokkaa, resources.GetString("btnMuokkaa.ToolTip"));
             this.btnMuokkaa.UseVisualStyleBackColor = true;
             this.btnMuokkaa.Click += new System.EventHandler(this.btnMuokkaa_Click);
             // 
@@ -364,6 +371,7 @@
             this.btnPoista.Size = new System.Drawing.Size(161, 39);
             this.btnPoista.TabIndex = 9;
             this.btnPoista.Text = "Poista";
+            this.toolTip1.SetToolTip(this.btnPoista, "Poista mökin tiedot tietokannasta");
             this.btnPoista.UseVisualStyleBackColor = true;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
@@ -393,6 +401,7 @@
             this.btnTyhjenna.Size = new System.Drawing.Size(161, 39);
             this.btnTyhjenna.TabIndex = 10;
             this.btnTyhjenna.Text = "Tyhjennä rivit";
+            this.toolTip1.SetToolTip(this.btnTyhjenna, "Tyhjentää lomakkeen rivit");
             this.btnTyhjenna.UseVisualStyleBackColor = true;
             this.btnTyhjenna.Click += new System.EventHandler(this.btnTyhjenna_Click);
             // 
@@ -412,6 +421,7 @@
             this.btnHae.Size = new System.Drawing.Size(67, 28);
             this.btnHae.TabIndex = 13;
             this.btnHae.Text = "Hae";
+            this.toolTip1.SetToolTip(this.btnHae, "Hae mökkiä id numerolla. Kirjoita numero viereiseen tekstikenttään.");
             this.btnHae.UseVisualStyleBackColor = true;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
@@ -498,5 +508,6 @@
         private System.Windows.Forms.Button btnTyhjenna;
         private System.Windows.Forms.TextBox tbHae;
         private System.Windows.Forms.Button btnHae;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
