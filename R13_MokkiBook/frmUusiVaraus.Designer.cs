@@ -585,6 +585,7 @@ namespace R13_MokkiBook
             this.tbMokkitunnus.Size = new System.Drawing.Size(182, 20);
             this.tbMokkitunnus.TabIndex = 18;
             this.ttUusiVaraus.SetToolTip(this.tbMokkitunnus, "Syötä halutun mökin mökkitunnus");
+            this.tbMokkitunnus.TextChanged += new System.EventHandler(this.tbMokkitunnus_TextChanged);
             this.tbMokkitunnus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
             // lblMokkitun
@@ -649,7 +650,6 @@ namespace R13_MokkiBook
             this.lbAlue.Size = new System.Drawing.Size(162, 56);
             this.lbAlue.TabIndex = 14;
             this.ttUusiVaraus.SetToolTip(this.lbAlue, "Valitse haluttu alue");
-            this.lbAlue.SelectedIndexChanged += new System.EventHandler(this.lbAlue_SelectedIndexChanged);
             this.lbAlue.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbAlue_MouseDoubleClick);
             // 
             // cmsTyhjennavalinta
@@ -833,7 +833,7 @@ namespace R13_MokkiBook
             this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 82);
             this.lbVarauksenPalvelut.TabIndex = 28;
             this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Näyttää varaukseen lisätyt palvelut");
-            this.lbVarauksenPalvelut.SelectedIndexChanged += new System.EventHandler(this.lbVarauksenPalvelut_SelectedIndexChanged);
+            this.lbVarauksenPalvelut.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbVarauksenPalvelut_MouseDoubleClick);
             // 
             // dgvMokitUusiVaraus
             // 

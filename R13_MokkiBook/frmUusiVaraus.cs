@@ -45,10 +45,10 @@ namespace R13_MokkiBook
         public string aluequery = "SELECT nimi FROM alue;";
         public string mokkiquery = "SELECT * FROM mokki;";
         public string mokkiquerypvmalku, mokkiquerypvmloppu, mokkiqueryalue, mokkiqueryhlolkm, mokkiqueryhintamin, mokkiqueryhintamax;
+        //HAKU TOTEUTUU SEURAAVASTI: JOKAISTA TAULUA KOHDEN OMA QUERYSTRING, JOIHIN JOKAINEN HAKUKRITEERI LISÄTÄÄN XQUERY = OSAQUERY1 + OSAQUERY2 JNE
         public string palveluquery;
         public string postiqueryasiakas;
         public string varauksenpalveluquery;
-        //HAKU TOTEUTUU SEURAAVASTI: JOKAISTA TAULUA KOHDEN OMA QUERYSTRING, JOIHIN JOKAINEN HAKUKRITEERI LISÄTÄÄN XQUERY = OSAQUERY1 + OSAQUERY2 JNE
        
         public DateTime nyt = DateTime.Now;
         public DateTime alkupvm;
@@ -418,8 +418,13 @@ namespace R13_MokkiBook
             string msg = "Varausta ei voitu luoda: ";
             if (ValidAsiakas(ref msg))//toimiiko?
             {
-                LuoVaraus();
-                //Huom muut vaatimukset! Validoi alue, mökki, posti, määrä ja mökin vapaus!
+                if (!mokkilukittu)
+                    MessageBox.Show("Varauskta ei voitu luoda: Mökkiä ei ole lukittu.");
+                else//Huom muut vaatimukset! Validoi alue, mökki, posti, määrä ja mökin vapaus!
+                {
+                    //
+                    LuoVaraus();
+                }
             }
             else
                 MessageBox.Show(msg);
@@ -630,7 +635,7 @@ namespace R13_MokkiBook
 
             if (nimi.Length > 0)
             {
-                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                nimi = nimi.Substring(0,1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
                 tb.Text = nimi;
             }
         }
@@ -639,15 +644,6 @@ namespace R13_MokkiBook
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
-        }
-
-        private void lbAlue_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void tbAlueid_TextChanged(object sender, EventArgs e)
@@ -820,6 +816,16 @@ namespace R13_MokkiBook
             return false;
         }
         private void btnHaemokki_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbVarauksenPalvelut_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void tbMokkitunnus_TextChanged(object sender, EventArgs e)
         {
 
         }
