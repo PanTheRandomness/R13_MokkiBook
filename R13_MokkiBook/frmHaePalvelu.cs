@@ -29,8 +29,8 @@ namespace R13_MokkiBook
         public frmHaePalvelu(Varaus tuotu, List<VarauksenPalvelut> tuotulista)
         {
             InitializeComponent();
-            LokiinTallentaminen("Palvelujen hakusivu avattiin varaukselle " + kasiteltavavaraus.varaus_id.ToString() + " käyttäjältä: ");
             kasiteltavavaraus = tuotu;
+            LokiinTallentaminen("Palvelujen hakusivu avattiin varaukselle " + kasiteltavavaraus.varaus_id.ToString() + " käyttäjältä: ");
             query = "SELECT * FROM palvelu WHERE palvelu.alue_id = (SELECT mokki.alue_id FROM mokki WHERE mokki.mokki_id = (SELECT varaus.mokki_mokki_id FROM varaus WHERE varaus.varaus_id = " + kasiteltavavaraus.varaus_id + "));";
             TuoData();
             palvelut = GetPalvelut();

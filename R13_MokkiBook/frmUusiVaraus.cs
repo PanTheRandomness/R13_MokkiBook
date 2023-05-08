@@ -66,12 +66,12 @@ namespace R13_MokkiBook
             mokit = GetMokit();
             postit = GetPostit();
 
-            valittuasiakas = new Asiakas();
+            /*valittuasiakas = new Asiakas();
             valittualue = new Alue();
             valittumokki = new Mokki();
             valittupalvelu = new Palvelu();
             valittuvarauksenpalvelu = new VarauksenPalvelut();
-            valittuposti = new Posti();
+            valittuposti = new Posti();*/
 
             PaivitaAsiakastaulu(asiakasquery);
             PaivitaAluetaulu(aluequery);
@@ -642,7 +642,6 @@ namespace R13_MokkiBook
         public void TyhjennaAsiakas()
         {
             asiakasjuurivalittu = false;
-            valittuasiakas = null;
             asiakasquery = "SELECT * FROM asiakas;";
             PaivitaAsiakastaulu(asiakasquery);
             tbAsiakastunnus.Text = String.Empty;
@@ -697,15 +696,16 @@ namespace R13_MokkiBook
 
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;
-            valittuasiakas = asiakkaat[valitturiviasiakas];
-            valittuasiakas.etunimi = asiakkaat[valitturiviasiakas].etunimi;
+            DataGridView dgv = (DataGridView)sender;
+            //valitturiviasiakas = dgvAsiakkaat.CurrentRow.Index;
+            valittuasiakas = GetValittuAsiakas(dgv.CurrentRow.Index);
+            /*valittuasiakas.etunimi = asiakkaat[valitturiviasiakas].etunimi;
             valittuasiakas.sukunimi = asiakkaat[valitturiviasiakas].sukunimi;
             valittuasiakas.asiakas_id = asiakkaat[valitturiviasiakas].asiakas_id;
             valittuasiakas.postinro = asiakkaat[valitturiviasiakas].postinro;
             valittuasiakas.lahiosoite = asiakkaat[valitturiviasiakas].lahiosoite;
             valittuasiakas.puhelinnro = asiakkaat[valitturiviasiakas].puhelinnro;
-            valittuasiakas.email = asiakkaat[valitturiviasiakas].email;
+            valittuasiakas.email = asiakkaat[valitturiviasiakas].email;*/
 
             asiakasjuurivalittu = true;
 
@@ -718,6 +718,19 @@ namespace R13_MokkiBook
             tbPuhno.Text = valittuasiakas.puhelinnro;
             postiqueryasiakas = "SELECT toimipaikka FROM posti WHERE postinro = (SELECT postinro FROM asiakas WHERE asiakas_id = " + valittuasiakas.asiakas_id + ");";
             HaePostinro(postiqueryasiakas);
+        }
+        public Asiakas GetValittuAsiakas(int rivi)
+        {
+            Asiakas a = new Asiakas();
+            a.asiakas_id = asiakkaat[rivi].asiakas_id;
+            a.postinro = asiakkaat[rivi].postinro;
+            a.etunimi = asiakkaat[rivi].postinro;
+            a.sukunimi = asiakkaat[rivi].postinro;
+            a.lahiosoite = asiakkaat[rivi].lahiosoite;
+            a.email = asiakkaat[rivi].email;
+            a.puhelinnro = asiakkaat[rivi].puhelinnro;
+
+            return a;
         }
         public void HaePostinro (string postiqueryasiakas)
         {
