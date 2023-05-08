@@ -66,12 +66,13 @@ namespace R13_MokkiBook
             mokit = GetMokit();
             postit = GetPostit();
 
-            /*valittuasiakas = new Asiakas();
+            valittuasiakas = new Asiakas();
+            luotuasiakas = new Asiakas();
             valittualue = new Alue();
             valittumokki = new Mokki();
             valittupalvelu = new Palvelu();
             valittuvarauksenpalvelu = new VarauksenPalvelut();
-            valittuposti = new Posti();*/
+            valittuposti = new Posti();
 
             PaivitaAsiakastaulu(asiakasquery);
             PaivitaAluetaulu(aluequery);
@@ -299,13 +300,14 @@ namespace R13_MokkiBook
         }
         public int HaeSeuraavaVapaaAsiakasID()
         {
-            int id = 0;
+            int id = 1;
             foreach (Asiakas a in asiakkaat)
             {
-                if (a.asiakas_id > id)
-                    id = a.asiakas_id;
+                if (a.asiakas_id == id)
+                    id++;
+                else
+                    return id;
             }
-            id++;
             return id;
         }
         public void LuoVaraus()
@@ -424,24 +426,9 @@ namespace R13_MokkiBook
         private void btnLisaa_Click(object sender, EventArgs e)
         {
             if (tbAsiakastunnus.Text.Length > 0)
-            {
-                int tunnus = int.Parse(tbAsiakastunnus.Text);
-                if(EtsiAsiakas(tunnus))
-                    MessageBox.Show("Asiakas on jo olemassa. Poista asiakastunnus kentästä luodaksesi uusi asiakas.");
-                else
-                {
-                    TarkistaNimi();
-                }
-            }
-        }
-        public bool EtsiAsiakas(int tunnus)
-        {
-            foreach (Asiakas a in asiakkaat)
-            {
-                if(a.asiakas_id == tunnus)
-                    return true;
-            }
-            return false;
+                MessageBox.Show("Asiakas on jo olemassa. Poista asiakastunnus kentästä luodaksesi uusi asiakas.");
+            else
+                TarkistaNimi();
         }
         public void TarkistaNimi()
         {
@@ -510,7 +497,7 @@ namespace R13_MokkiBook
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
                 connection.Open();
-                string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES(" + luotuasiakas.asiakas_id + ", " + luotuasiakas.postinro + ", " + luotuasiakas.etunimi + ", " + luotuasiakas.sukunimi + ", " + luotuasiakas.lahiosoite + ", " + luotuasiakas.email + ", " + luotuasiakas.puhelinnro + ");";
+                string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES(" + luotuasiakas.asiakas_id + ", '" + luotuasiakas.postinro + "', '" + luotuasiakas.etunimi + "', '" + luotuasiakas.sukunimi + "', '" + luotuasiakas.lahiosoite + "', '" + luotuasiakas.email + "', '" + luotuasiakas.puhelinnro + "');";
                 using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
                 {
                     cmd.ExecuteNonQuery();
@@ -537,7 +524,7 @@ namespace R13_MokkiBook
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
                 connection.Open();
-                string lisaysquery = "INSERT INTO posti(postinro, toimipaikka) VALUES(" + pnro + ", " + ptp + ");";
+                string lisaysquery = "INSERT INTO posti(postinro, toimipaikka) VALUES(" + pnro + ", '" + ptp + "');";
                 using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
                 {
                     cmd.ExecuteNonQuery();
