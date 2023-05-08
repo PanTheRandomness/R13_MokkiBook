@@ -134,6 +134,7 @@
             this.tbAsiakasid.Name = "tbAsiakasid";
             this.tbAsiakasid.Size = new System.Drawing.Size(159, 22);
             this.tbAsiakasid.TabIndex = 0;
+            this.tbAsiakasid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAsiakasid_KeyPress);
             // 
             // tbPuhelinnro
             // 

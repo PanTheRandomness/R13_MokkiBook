@@ -168,7 +168,7 @@ namespace R13_MokkiBook
             tbEmail.Text = String.Empty;
             tbPuhelinnro.Text = String.Empty;
 
-            lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
+            lokiinTallentaminen("Asiakas-osiosta poistettiin tietoja käyttäjältä: ");
         }
 
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -222,8 +222,16 @@ namespace R13_MokkiBook
             sw.Close();
         }
 
-        //postinumeroksi voi syöttää vain lukuja:
+        //postinumeroksi voi syöttää vain lukuja ja max 5 merkkiä:
         private void tbPostiNro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 || tbPostiNro.Text.Length >= 5)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbAsiakasid_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
