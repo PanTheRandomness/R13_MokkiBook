@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace R13_MokkiBook
 {
     public partial class frmHaePalvelu : Form
-    {
+    {//Pan
         public Varaus kasiteltavavaraus;
         public Palvelu valittupalvelu;
         public VarauksenPalvelut lisattava;

@@ -14,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace R13_MokkiBook
 {
     public partial class frmVaraukset : Form
-    {
+    {//Pan
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string hakuquery;
         public int valitturivi = -1;

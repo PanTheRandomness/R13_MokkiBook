@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace R13_MokkiBook
 {
     public partial class frmVarauksenPalvelut : Form
-    {
+    {//Pan
         public int valitturivi = -1;
         public Varaus kasiteltavavaraus = new Varaus();
         public List<VarauksenPalvelut> varauksenpalvelut = new List<VarauksenPalvelut>();
