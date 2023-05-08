@@ -405,7 +405,7 @@ namespace R13_MokkiBook
                             Validointi();
                         break;
                     case 2:
-                        MessageBox.Show("Varausta ei voi luoda: Varauksen alkupäivä ei voi olla sen åäättymispäivän jälkeen.");
+                        MessageBox.Show("Varausta ei voi luoda: Varauksen alkupäivä ei voi olla sen päättymispäivän jälkeen.");
                         break;
                     default:
                         MessageBox.Show("Jokin meni nyt päiväyksen kanssa vikaan.");
@@ -592,10 +592,25 @@ namespace R13_MokkiBook
         }
         public bool ValidAsiakas(ref string msg)
         {
-            if(valittuasiakas == null)
+            if(valittuasiakas == null && tbEnimi.Text == "" && tbSnimi.Text == "" && tbAsiakastunnus.Text == "" && tbPostitoimipaikkaAsiakas.Text == "" && tbLahiosoiteAsiakas.Text == "" && tbPostinoAsiakas.Text == "" && tbPuhno.Text == "" && tbSahkoposti.Text == "")
             {
                 msg += "Varaukselle ei ole osoitettu asiakasta.";
                 return false;
+            }
+            else if (valittuasiakas == null && !(tbEnimi.Text == "" && tbSnimi.Text == "" && tbAsiakastunnus.Text == "" && tbPostitoimipaikkaAsiakas.Text == "" && tbLahiosoiteAsiakas.Text == "" && tbPostinoAsiakas.Text == "" && tbPuhno.Text == "" && tbSahkoposti.Text == ""))
+            {
+                if (!AsiakasLoytyi())
+                {
+                    if (MessageBox.Show("Varaukselle ei ole osoitettu valmista olemassa olevaa asiakasta. Luodaanko uusi?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+
+                    }
+                    else
+                    {
+                        msg += "Varaukselle ei ole osoitettu asiakasta.";
+                        return false;
+                    }
+                }
             }
             return true;
         }
@@ -662,7 +677,13 @@ namespace R13_MokkiBook
         public void TyhjennaAsiakas()
         {
             asiakasjuurivalittu = false;
-            valittuasiakas = null;
+            valittuasiakas.asiakas_id = HaeSeuraavaVapaaAsiakasID();
+            valittuasiakas.etunimi = "";
+            valittuasiakas.postinro = "";
+            valittuasiakas.lahiosoite = "";
+            valittuasiakas.email = "";
+            valittuasiakas.puhelinnro = "";
+
             asiakasquery = "SELECT * FROM asiakas;";
             PaivitaAsiakastaulu(asiakasquery);
             tbAsiakastunnus.Text = String.Empty;
@@ -676,27 +697,27 @@ namespace R13_MokkiBook
         }
         private void tbEnimi_TextChanged(object sender, EventArgs e)
         {
-
+            valittuasiakas.etunimi = tbEnimi.Text;
         }
 
         private void tbSnimi_TextChanged(object sender, EventArgs e)
         {
-            
+            valittuasiakas.sukunimi = tbSnimi.Text;
         }
 
         private void tbPostinoAsiakas_TextChanged(object sender, EventArgs e)
         {
-            
+            valittuasiakas.postinro = tbPostinoAsiakas.Text;
         }
 
         private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
         {
-            
+            valittuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
         }
 
         private void tbPostitoimipaikkaAsiakas_TextChanged(object sender, EventArgs e)
         {
-            
+          
         }
 
         private void tbPuhno_TextChanged(object sender, EventArgs e)
@@ -758,7 +779,27 @@ namespace R13_MokkiBook
                 }
             }
         }
+        public bool AsiakasLoytyi()
+        {
+            Asiakas a = new Asiakas();
+            a.asiakas_id = int.Parse(tbAsiakastunnus.Text);
+            a.postinro = tbPostinoAsiakas.Text;
+            a.etunimi = tbEnimi.Text;
+            a.sukunimi = tbSnimi.Text;
+            a.lahiosoite = tbLahiosoiteAsiakas.Text;
+            a.email = tbSahkoposti.Text;
+            a.puhelinnro = tbPuhno.Text;
 
+            foreach(Asiakas asi in asiakkaat)
+            {
+                if(a == asi)
+                {
+                    valittuasiakas = a;
+                    return true;
+                }
+            }
+            return false;
+        }
         private void btnHaemokki_Click(object sender, EventArgs e)
         {
 
