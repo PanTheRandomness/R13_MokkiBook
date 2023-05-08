@@ -218,7 +218,7 @@ namespace R13_MokkiBook
             this.btnLisaa.Location = new System.Drawing.Point(332, 205);
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(102, 23);
-            this.btnLisaa.TabIndex = 9;
+            this.btnLisaa.TabIndex = 8;
             this.btnLisaa.Text = "Lisää asiakas";
             this.ttUusiVaraus.SetToolTip(this.btnLisaa, "Lisää asiakkaan tietokantaan");
             this.btnLisaa.UseVisualStyleBackColor = true;
@@ -330,7 +330,7 @@ namespace R13_MokkiBook
             this.lblAsiakastunnus.Location = new System.Drawing.Point(11, 211);
             this.lblAsiakastunnus.Name = "lblAsiakastunnus";
             this.lblAsiakastunnus.Size = new System.Drawing.Size(76, 13);
-            this.lblAsiakastunnus.TabIndex = 7;
+            this.lblAsiakastunnus.TabIndex = 9;
             this.lblAsiakastunnus.Text = "Asiakastunnus";
             // 
             // dgvAsiakkaat
@@ -416,7 +416,7 @@ namespace R13_MokkiBook
             this.tbAsiakastunnus.Location = new System.Drawing.Point(93, 208);
             this.tbAsiakastunnus.Name = "tbAsiakastunnus";
             this.tbAsiakastunnus.Size = new System.Drawing.Size(151, 20);
-            this.tbAsiakastunnus.TabIndex = 7;
+            this.tbAsiakastunnus.TabIndex = 9;
             this.ttUusiVaraus.SetToolTip(this.tbAsiakastunnus, "Syötä asiakkaan asiakastunnus");
             this.tbAsiakastunnus.TextChanged += new System.EventHandler(this.tbAsiakastunnus_TextChanged);
             this.tbAsiakastunnus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
@@ -978,7 +978,7 @@ namespace R13_MokkiBook
             this.btnTyhjValinta.Location = new System.Drawing.Point(332, 80);
             this.btnTyhjValinta.Name = "btnTyhjValinta";
             this.btnTyhjValinta.Size = new System.Drawing.Size(102, 23);
-            this.btnTyhjValinta.TabIndex = 8;
+            this.btnTyhjValinta.TabIndex = 7;
             this.btnTyhjValinta.Text = "Tyhjennä valinta";
             this.btnTyhjValinta.UseVisualStyleBackColor = true;
             this.btnTyhjValinta.Click += new System.EventHandler(this.btnTyhjValinta_Click);
