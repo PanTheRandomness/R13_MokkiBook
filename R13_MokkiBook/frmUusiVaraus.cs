@@ -597,13 +597,14 @@ namespace R13_MokkiBook
                 msg += "Varaukselle ei ole osoitettu asiakasta.";
                 return false;
             }
-            else if (valittuasiakas == null && !(tbEnimi.Text == "" && tbSnimi.Text == "" && tbAsiakastunnus.Text == "" && tbPostitoimipaikkaAsiakas.Text == "" && tbLahiosoiteAsiakas.Text == "" && tbPostinoAsiakas.Text == "" && tbPuhno.Text == "" && tbSahkoposti.Text == ""))
+            else if (valittuasiakas == null && !(tbEnimi.Text == "" && tbSnimi.Text == "" && tbPostitoimipaikkaAsiakas.Text == "" && tbLahiosoiteAsiakas.Text == "" && tbPostinoAsiakas.Text == "" && tbPuhno.Text == "" && tbSahkoposti.Text == ""))
             {
                 if (!AsiakasLoytyi())
                 {
                     if (MessageBox.Show("Varaukselle ei ole osoitettu valmista olemassa olevaa asiakasta. Luodaanko uusi?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-
+                        LuoAsiakas();
+                        return true;
                     }
                     else
                     {
@@ -611,6 +612,8 @@ namespace R13_MokkiBook
                         return false;
                     }
                 }
+                else
+                    return true;
             }
             return true;
         }
@@ -782,7 +785,6 @@ namespace R13_MokkiBook
         public bool AsiakasLoytyi()
         {
             Asiakas a = new Asiakas();
-            a.asiakas_id = int.Parse(tbAsiakastunnus.Text);
             a.postinro = tbPostinoAsiakas.Text;
             a.etunimi = tbEnimi.Text;
             a.sukunimi = tbSnimi.Text;
@@ -790,14 +792,31 @@ namespace R13_MokkiBook
             a.email = tbSahkoposti.Text;
             a.puhelinnro = tbPuhno.Text;
 
-            foreach(Asiakas asi in asiakkaat)
+            if(tbAsiakastunnus.Text.Length > 0)
             {
-                if(a == asi)
+                a.asiakas_id = int.Parse(tbAsiakastunnus.Text);
+
+                foreach (Asiakas asi in asiakkaat)
                 {
-                    valittuasiakas = a;
-                    return true;
+                    if (a == asi)
+                    {
+                        valittuasiakas = asi;
+                        return true;
+                    }
                 }
             }
+            else
+            {
+                foreach (Asiakas asi in asiakkaat)
+                {
+                    if (a.postinro == asi.postinro && a.etunimi == asi.etunimi && a.sukunimi == asi.sukunimi && a.lahiosoite == asi.lahiosoite && a.email == asi.email && a.puhelinnro == asi.puhelinnro)
+                    {
+                        valittuasiakas = asi;
+                        return true;
+                    }
+                }
+            }
+
             return false;
         }
         private void btnHaemokki_Click(object sender, EventArgs e)
