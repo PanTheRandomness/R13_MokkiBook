@@ -28,8 +28,6 @@ namespace R13_MokkiBook
             InitializeComponent();
             asiakkaat = GetAsiakkaat();
             lokiinTallentaminen("Asiakkaat-osio avattiin käyttäjältä: ");
-
-
         }
 
         public List<Asiakas> GetAsiakkaat()
@@ -67,65 +65,89 @@ namespace R13_MokkiBook
 
         private void frmAsiakkaat_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dataSet1.asiakas' table. You can move, or remove it, as needed.
-            this.asiakasTableAdapter.Fill(this.dataSet1.asiakas);
-            connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
-            connection.Open();
+            try
+            {
+                // TODO: This line of code loads data into the 'dataSet1.asiakas' table. You can move, or remove it, as needed.
+                this.asiakasTableAdapter.Fill(this.dataSet1.asiakas);
+                connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
+                connection.Open();
 
-            // Create a new ODBC data adapter and select all rows from the table
-            dataAdapter = new OdbcDataAdapter("SELECT * FROM asiakas", connection);
+                // Create a new ODBC data adapter and select all rows from the table
+                dataAdapter = new OdbcDataAdapter("SELECT * FROM asiakas", connection);
 
-            // Create a new DataTable and fill it with the rows from the table
-            dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
+                // Create a new DataTable and fill it with the rows from the table
+                dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
 
-            // Set the DataSource property of the DataGridView control to the DataTable
-            dgvAsiakkaat.DataSource = dataTable;
+                // Set the DataSource property of the DataGridView control to the DataTable
+                dgvAsiakkaat.DataSource = dataTable;
 
-            // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
-            OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
+                // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
+                OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
 
-            // Set the InsertCommand property of the dataAdapter to the generated insert command
-            dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
+                // Set the InsertCommand property of the dataAdapter to the generated insert command
+                dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
 
-            // Create a new DataSet object to hold the data retrieved from the database
-            System.Data.DataSet dataSet = new System.Data.DataSet();
+                // Create a new DataSet object to hold the data retrieved from the database
+                System.Data.DataSet dataSet = new System.Data.DataSet();
 
-            // Fill the DataSet with data from the database
-            dataAdapter.Fill(dataSet1);
+                // Fill the DataSet with data from the database
+                dataAdapter.Fill(dataSet1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
-        
-
+       
         private void btnLisaa_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (tbAsiakasid.Text.Trim() == "" || tbPostiNro.Text.Trim() == "" || tbEtunimi.Text.Trim() == "" ||
+                tbSukunimi.Text.Trim() == "" || tbLahiosoite.Text.Trim() == "" || tbEmail.Text.Trim() == "" ||
+                tbPuhelinnro.Text.Trim() == "")
 
-            DataRow newRow = dataTable.NewRow();
-            newRow["asiakas_id"] = tbAsiakasid.Text;
-            newRow["postinro"] = tbPostiNro.Text;
-            newRow["etunimi"] = tbEtunimi.Text;
-            newRow["sukunimi"] = tbSukunimi.Text;
-            newRow["lahiosoite"] = tbLahiosoite.Text;
-            newRow["email"] = tbEmail.Text;
-            newRow["puhelinnro"] = tbPuhelinnro.Text;
-            
+                {
+                    MessageBox.Show("Täytä kaikki kentät!");
+                }
 
-            dataTable.Rows.Add(newRow);
-            dataAdapter.Update(dataTable);
+                else
+                {
+                    DataRow newRow = dataTable.NewRow();
+                    newRow["asiakas_id"] = tbAsiakasid.Text;
+                    newRow["postinro"] = tbPostiNro.Text;
+                    newRow["etunimi"] = tbEtunimi.Text;
+                    newRow["sukunimi"] = tbSukunimi.Text;
+                    newRow["lahiosoite"] = tbLahiosoite.Text;
+                    newRow["email"] = tbEmail.Text;
+                    newRow["puhelinnro"] = tbPuhelinnro.Text;
 
-            tbAsiakasid.Text = String.Empty;
-            tbPostiNro.Text = String.Empty;
-            tbEtunimi.Text = String.Empty;
-            tbSukunimi.Text = String.Empty;
-            tbLahiosoite.Text = String.Empty;
-            tbEmail.Text = String.Empty;
-            tbPuhelinnro.Text = String.Empty;
 
+                    dataTable.Rows.Add(newRow);
+                    dataAdapter.Update(dataTable);
+
+                    tbAsiakasid.Text = String.Empty;
+                    tbPostiNro.Text = String.Empty;
+                    tbEtunimi.Text = String.Empty;
+                    tbSukunimi.Text = String.Empty;
+                    tbLahiosoite.Text = String.Empty;
+                    tbEmail.Text = String.Empty;
+                    tbPuhelinnro.Text = String.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
-            // Get the current DataRow from the DataGridView control
-            DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
+            try
+            {
+                // Get the current DataRow from the DataGridView control
+                DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
 
                 // Update the values of the current DataRow with the input from the TextBox controls
                 currentRow["asiakas_id"] = tbAsiakasid.Text;
@@ -146,6 +168,11 @@ namespace R13_MokkiBook
                 tbLahiosoite.Text = String.Empty;
                 tbEmail.Text = String.Empty;
                 tbPuhelinnro.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
 
             lokiinTallentaminen("Asiakkaat-osiosta muokattiin tietoja käyttäjältä: ");
 
@@ -153,20 +180,27 @@ namespace R13_MokkiBook
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
+            try
+            {
 
-            // Get the current DataRow from the DataGridView control
-            DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
+                // Get the current DataRow from the DataGridView control
+                DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
 
-            // Delete the current DataRow from the DataTable and update the database
-            currentRow.Delete();
-            dataAdapter.Update(dataTable);
-            tbAsiakasid.Text = String.Empty;
-            tbPostiNro.Text = String.Empty;
-            tbEtunimi.Text = String.Empty;
-            tbSukunimi.Text = String.Empty;
-            tbLahiosoite.Text = String.Empty;
-            tbEmail.Text = String.Empty;
-            tbPuhelinnro.Text = String.Empty;
+                // Delete the current DataRow from the DataTable and update the database
+                currentRow.Delete();
+                dataAdapter.Update(dataTable);
+                tbAsiakasid.Text = String.Empty;
+                tbPostiNro.Text = String.Empty;
+                tbEtunimi.Text = String.Empty;
+                tbSukunimi.Text = String.Empty;
+                tbLahiosoite.Text = String.Empty;
+                tbEmail.Text = String.Empty;
+                tbPuhelinnro.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
 
             lokiinTallentaminen("Asiakas-osiosta poistettiin tietoja käyttäjältä: ");
         }
@@ -188,14 +222,20 @@ namespace R13_MokkiBook
         }
         private void btnTyhjenna_Click(object sender, EventArgs e)
         {
-            tbAsiakasid.Text = String.Empty;
-            tbPostiNro.Text = String.Empty;
-            tbEtunimi.Text = String.Empty;
-            tbSukunimi.Text = String.Empty;
-            tbLahiosoite.Text = String.Empty;
-            tbEmail.Text = String.Empty;
-            tbPuhelinnro.Text = String.Empty;
-            
+            try
+            {
+                tbAsiakasid.Text = String.Empty;
+                tbPostiNro.Text = String.Empty;
+                tbEtunimi.Text = String.Empty;
+                tbSukunimi.Text = String.Empty;
+                tbLahiosoite.Text = String.Empty;
+                tbEmail.Text = String.Empty;
+                tbPuhelinnro.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         //Nimen eka kirjain korjataan isoksi
