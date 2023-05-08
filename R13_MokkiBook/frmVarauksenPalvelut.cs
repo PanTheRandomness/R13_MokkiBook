@@ -70,8 +70,7 @@ namespace R13_MokkiBook
         private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
-            if(valitturivi >= varauksenpalvelut.Count)
-                valittupalvelu = GetValittuPalvelu();
+            valittupalvelu = GetValittuPalvelu();
         }
         public VarauksenPalvelut GetValittuPalvelu()
         {
@@ -87,7 +86,6 @@ namespace R13_MokkiBook
 
             OdbcConnection connection = new OdbcConnection(connectionString);
             connection.Open();
-            //datagridviewin yhdistäminen tiettyyn kyselyyn
             DataTable dataTable = new DataTable();
             using (OdbcDataAdapter adapter = new OdbcDataAdapter(tauluquery, connection))
             {
@@ -137,7 +135,7 @@ namespace R13_MokkiBook
         {
             if(nudPoistettavat.Value > 0)
             {
-                int uusimaara = valittupalvelu.lkm - (int)nudPoistettavat.Value;
+                int uusimaara = LaskeUusiMaara();
                 if(uusimaara > 0)
                 {
                     using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -148,13 +146,17 @@ namespace R13_MokkiBook
                         {
                             cmd.ExecuteNonQuery();
                         }
+                        PaivitaTaulu();
                         LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin " + uusimaara.ToString() + " kpl palvelua " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
                     }
                 }
                 else
                 {
                     if (MessageBox.Show("Valitsemillasi arvoilla koko palvelu poistetaan. Poistetaanko silti?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
                         PoistaVarauksesta();
+                        PaivitaTaulu();
+                    }
                     else
                         MessageBox.Show("Mitään ei poistettu. Voit jatkaa muokkausta");
                 }
@@ -163,10 +165,17 @@ namespace R13_MokkiBook
             {
                 MessageBox.Show("Poistettavien määrän on oltava suurempi kuin 0.");
             }
-
-            PaivitaTaulu();
         }
+        public int LaskeUusiMaara()
+        {
+            int uusi;
+            int vanha = valittupalvelu.lkm;
+            int poistettava = int.Parse(nudPoistettavat.Text);
 
+            uusi = vanha - poistettava;
+
+            return uusi;
+        }
         private void frmVarauksenPalvelut_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut suljettiin käyttäjältä: ");
