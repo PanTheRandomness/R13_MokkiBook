@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAlkunaytto));
             this.btnVaraukset = new System.Windows.Forms.Button();
             this.btnMokit = new System.Windows.Forms.Button();
             this.btnAlueet = new System.Windows.Forms.Button();
@@ -166,7 +167,7 @@
             // 
             // pbLogo
             // 
-            this.pbLogo.Image = global::R13_MokkiBook.Properties.Resources.MokkiBookLogo;
+            this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
             this.pbLogo.Location = new System.Drawing.Point(424, 244);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(181, 92);
@@ -186,6 +187,7 @@
             this.Controls.Add(this.pnlMokit);
             this.Controls.Add(this.prnAlueet);
             this.Controls.Add(this.pnlAsiakkaat);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(648, 414);

@@ -243,5 +243,11 @@
   <ItemGroup>
     <None Include="Resources\MokkiBookLogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MokkiBookLogoPieni.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MokkiBookLogo.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

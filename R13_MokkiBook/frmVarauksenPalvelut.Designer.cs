@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVarauksenPalvelut));
             this.dgvVarauksenPalvelut = new System.Windows.Forms.DataGridView();
             this.varauksenpalvelutBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
@@ -187,6 +188,7 @@
             this.ClientSize = new System.Drawing.Size(530, 310);
             this.Controls.Add(this.pnlToiminnot);
             this.Controls.Add(this.dgvVarauksenPalvelut);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(546, 349);
             this.MinimizeBox = false;
