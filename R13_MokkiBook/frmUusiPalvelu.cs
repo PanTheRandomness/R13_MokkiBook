@@ -232,5 +232,44 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        private void tsTxtHae_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchTerm = tsTxtHae.Text;
+                DataTable table = new DataTable();
+                string connectionString = "Dsn=Village Newbies;uid=root";
+
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    string sql = $"SELECT * FROM palvelu";
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        using (OdbcDataAdapter adapter = new OdbcDataAdapter(sql, connection))
+                        {
+                            adapter.Fill(table);
+                        }
+                    }
+                    dataGridView1.DataSource = table;
+                }
+                else
+                {
+                    string sql = $"SELECT * FROM palvelu WHERE palvelu_id = '{searchTerm}'";
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        using (OdbcDataAdapter adapter = new OdbcDataAdapter(sql, connection))
+                        {
+                            adapter.Fill(table);
+                        }
+                    }
+                    dataGridView1.DataSource = table;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

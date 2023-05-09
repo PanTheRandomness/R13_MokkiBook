@@ -38,16 +38,16 @@ namespace R13_MokkiBook
             try
             {
                 this.laskuTableAdapter.Fill(this.dataSet1.lasku);
-            connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
-            connection.Open();
-            dataAdapter = new OdbcDataAdapter("SELECT * FROM lasku", connection);
-            dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-            dataGridView1.DataSource = dataTable;
-            OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
-            dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
-            System.Data.DataSet dataSet = new System.Data.DataSet();
-            dataAdapter.Fill(dataSet1);
+                connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
+                connection.Open();
+                dataAdapter = new OdbcDataAdapter("SELECT * FROM lasku", connection);
+                dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+                OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
+                dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
+                System.Data.DataSet dataSet = new System.Data.DataSet();
+                dataAdapter.Fill(dataSet1);
             }
             catch (Exception ex)
             {
@@ -84,17 +84,7 @@ namespace R13_MokkiBook
 
             return las;
         }
-
-        private void tsBtnTulosta_Click(object sender, EventArgs e)
-        {
-
-
-
-
-            PrintToPdf();
-        }
-
-        private void PrintToPdf()
+        public void tsBtnTulosta_Click(object sender, EventArgs e)
         {
             try
             {
@@ -114,7 +104,7 @@ namespace R13_MokkiBook
                 document.Open();
 
                 // Add a title to the document
-                document.Add(new Paragraph("Invoice"));
+                document.Add(new Paragraph("Lasku"));
 
                 // Check if any row is selected in the DataGridView
                 if (dataGridView1.SelectedRows.Count > 0)
@@ -125,7 +115,25 @@ namespace R13_MokkiBook
                     // Add the transaction data to the document
                     document.Add(new Paragraph("Lasku ID: " + row.Cells["lasku_id"].Value.ToString()));
                     document.Add(new Paragraph("Varaus ID: " + row.Cells["varaus_id"].Value.ToString()));
-                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString()));
+                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString() + " +alv"));
+                    document.Add(new Paragraph("Alv: " + row.Cells["alv"].Value.ToString()));
+
+                    // Search for varaus_id by lasku_id
+                    OdbcConnection connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
+                    
+                    connection.Open();
+                    string lasku_id = row.Cells["lasku_id"].Value.ToString();
+                    OdbcCommand command1 = new OdbcCommand("SELECT varaus_id FROM lasku WHERE lasku_id = ?", connection);
+                    command1.Parameters.AddWithValue("@lasku_id", lasku_id);
+                    OdbcDataReader reader1 = command1.ExecuteReader();
+                    if (reader1.Read())
+                    {
+                        string varaus_id = reader1.GetString(0);
+                        document.Add(new Paragraph("Varaus ID: " + varaus_id));
+                    }
+
+                    // Add the remaining transaction data to the document
+                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString() + " +alv"));
                     document.Add(new Paragraph("Alv: " + row.Cells["alv"].Value.ToString()));
 
                     // Create a new PdfPTable object to hold the line items
@@ -138,19 +146,57 @@ namespace R13_MokkiBook
                     table.AddCell(new PdfPCell(new Phrase("Summa")));
                     table.AddCell(new PdfPCell(new Phrase("alv")));
 
-                    // Add the line items from the selected row to the table
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["lasku_id"].Value.ToString())));
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["varaus_id"].Value.ToString())));
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["summa"].Value.ToString())));
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["alv"].Value.ToString())));
-                    // Add the table to the document
-                    document.Add(table);
+                     // Add the line items from the selected row to the table
+                     table.AddCell(new PdfPCell(new Phrase(row.Cells["lasku_id"].Value.ToString())));
+                     table.AddCell(new PdfPCell(new Phrase(row.Cells["varaus_id"].Value.ToString())));
+                     table.AddCell(new PdfPCell(new Phrase(row.Cells["summa"].Value.ToString())));
+                     table.AddCell(new PdfPCell(new Phrase(row.Cells["alv"].Value.ToString())));
+                     // Add the table to the document
+                     document.Add(table);
+                    
                 }
 
-                // Close the document
-                document.Close();
+                //UUTTA
 
-                // Close the file stream
+                // Create a new ODBC connection to the database
+               
+
+                // Create a new ODBC command to retrieve additional data
+                OdbcCommand command = new OdbcCommand("SELECT * FROM asiakas", connection);
+
+                // Open the database connection
+                
+
+                // Execute the command and retrieve the data using a data reader
+                OdbcDataReader reader = command.ExecuteReader();
+
+                // Create a new PdfPTable object to hold the additional data
+                PdfPTable additionalTable = new PdfPTable(2);
+                additionalTable.WidthPercentage = 100;
+
+                // Add the column headers to the additional table
+
+                additionalTable.AddCell(new PdfPCell(new Phrase("asiakas_id")));
+                additionalTable.AddCell(new PdfPCell(new Phrase("postinro")));
+
+                // Loop through the data reader and add the data to the additional table
+                while (reader.Read())
+                {
+                    additionalTable.AddCell(new PdfPCell(new Phrase(reader.GetString(0))));
+                    additionalTable.AddCell(new PdfPCell(new Phrase(reader.GetString(1))));
+                }
+
+                // Add the additional table to the document
+                document.Add(additionalTable);
+
+                // Close the database connection and data reader
+
+
+                // Close the data reader
+                reader.Close();
+                connection.Close();
+
+                document.Close();
                 fileStream.Close();
 
                 // Open the generated PDF file in the default PDF viewer
@@ -161,8 +207,6 @@ namespace R13_MokkiBook
                 MessageBox.Show(ex.Message);
             }
         }
-
-
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
@@ -282,5 +326,7 @@ namespace R13_MokkiBook
                 MessageBox.Show(ex.Message);
             }
         }
+
+     
     }
 }

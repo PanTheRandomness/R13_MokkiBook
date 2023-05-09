@@ -65,6 +65,9 @@ namespace R13_MokkiBook
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnTyhjenna = new System.Windows.Forms.Button();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsLbHae = new System.Windows.Forms.ToolStripLabel();
+            this.tsTxtHae = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -72,6 +75,7 @@ namespace R13_MokkiBook
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlueenPAlvelutDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNimi
@@ -352,11 +356,38 @@ namespace R13_MokkiBook
             this.ToolTip.InitialDelay = 500;
             this.ToolTip.ReshowDelay = 100;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsLbHae,
+            this.tsTxtHae});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 520);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(865, 25);
+            this.toolStrip1.TabIndex = 22;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tsLbHae
+            // 
+            this.tsLbHae.Name = "tsLbHae";
+            this.tsLbHae.Size = new System.Drawing.Size(87, 22);
+            this.tsLbHae.Text = "Hae palvelu_id:";
+            // 
+            // tsTxtHae
+            // 
+            this.tsTxtHae.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tsTxtHae.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tsTxtHae.Name = "tsTxtHae";
+            this.tsTxtHae.Size = new System.Drawing.Size(100, 25);
+            this.tsTxtHae.TextChanged += new System.EventHandler(this.tsTxtHae_TextChanged);
+            // 
             // frmUusiPalvelu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 545);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnTyhjenna);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPalveluID);
@@ -387,6 +418,8 @@ namespace R13_MokkiBook
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlueenPAlvelutDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,5 +461,8 @@ namespace R13_MokkiBook
         private System.Windows.Forms.DataGridViewTextBoxColumn alv;
         private System.Windows.Forms.Button btnTyhjenna;
         private System.Windows.Forms.ToolTip ToolTip;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel tsLbHae;
+        private System.Windows.Forms.ToolStripTextBox tsTxtHae;
     }
 }
