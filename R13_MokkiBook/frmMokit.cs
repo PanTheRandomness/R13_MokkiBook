@@ -30,6 +30,7 @@ namespace R13_MokkiBook
             InitializeComponent();
             mokit = GetMokit();
             lokiinTallentaminen("Mökit-osio avattiin käyttäjältä: ");
+            this.FormClosing += new FormClosingEventHandler(frmMokit_FormClosing);
         }
 
 
@@ -284,11 +285,12 @@ namespace R13_MokkiBook
 
         private void tbPostinumero_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 || tbPostinumero.Text.Length >= 5)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
             }
-            
+
+            tbPostinumero.MaxLength = 5;
         }
 
         // Muuttaa mökin nimen ensimmäisen kirjaimen isoksi.Nimessä saa olla max 45 kirjainta.
@@ -393,5 +395,16 @@ namespace R13_MokkiBook
         {
             tbKuvaus.MaxLength = 150;
         }
+        
+        // Sulkeminen. Kysyy haluatko varmasti sulkea.
+
+        private void frmMokit_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Haluatko varmasti sulkea ikkunan?", "Varmista", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
     }
 }
