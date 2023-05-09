@@ -456,7 +456,6 @@
             this.Controls.Add(this.lbNimi);
             this.Controls.Add(this.lbPostinumero);
             this.Controls.Add(this.lbMokkiId);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMokit";
             this.Text = "Mokit";
             this.Load += new System.EventHandler(this.frmMokit_Load);

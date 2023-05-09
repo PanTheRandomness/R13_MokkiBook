@@ -210,7 +210,6 @@
             this.Controls.Add(this.tbAlueId);
             this.Controls.Add(this.lbNimi);
             this.Controls.Add(this.lbAlueID);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAlueet";
             this.Text = "Alueet";
             this.Load += new System.EventHandler(this.frmAlueet_Load);
