@@ -28,6 +28,7 @@ namespace R13_MokkiBook
             InitializeComponent();
             asiakkaat = GetAsiakkaat();
             lokiinTallentaminen("Asiakkaat-osio avattiin käyttäjältä: ");
+            this.FormClosing += new FormClosingEventHandler(frmAsiakkaat_FormClosing);
         }
 
         public List<Asiakas> GetAsiakkaat()
@@ -251,6 +252,46 @@ namespace R13_MokkiBook
             }
 
         }
+        //Etunimi voi olla max 20 merkkiä
+        private void tbEtunimi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbEtunimi.MaxLength = 20;
+        }
+
+        //Sukunimi voi olla max 40 merkkiä
+        private void tbSukunimi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbSukunimi.MaxLength = 40;
+        }
+
+        //Osoitteen eka kirjain korjataan isoksi
+        private void tbLahiosoite_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string nimi = tb.Text.Trim();
+
+            if (nimi.Length > 0)
+            {
+                nimi = nimi.Substring(0, 1).ToUpper() + nimi.Substring(1, nimi.Length - 1).ToLower();
+                tb.Text = nimi;
+            }
+
+        }
+        //Osoitteessa voi olla max 40 merkkiä
+        private void tbLahiosoite_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbLahiosoite.MaxLength = 40;
+        }
+        //Emailissa voi olla max 50 merkkiä
+        private void tbEmail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbEmail.MaxLength = 50;
+        }
+        //Puhelinnumerossa voi olla max 15 merkkiä
+        private void tbPuhelinnro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            tbPuhelinnro.MaxLength = 15;
+        }
 
         //Lokiin tallentaminen
 
@@ -264,22 +305,25 @@ namespace R13_MokkiBook
             sw.Close();
         }
 
-        //postinumeroksi voi syöttää vain lukuja ja max 5 merkkiä:
+        //postinumeroksi voi syöttää vain lukuja ja maksimipituus 5 merkkiä:
         private void tbPostiNro_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 || tbPostiNro.Text.Length >= 5)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
             }
+            tbPostiNro.MaxLength = 5;
         }
 
-        //Asiakas-id voi sisältää vain numeroita.
+        //Asiakas-id voi olla vain numero
+
         private void tbAsiakasid_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
             }
+
         }
 
         // Hakutoiminto, joka hakee asiakas-id:n mukaan. Jos asiakasta ei löydy, tekee virheilmoitukset.
@@ -316,6 +360,16 @@ namespace R13_MokkiBook
                 {
                     MessageBox.Show("Haku ei voi olla tyhjä");
                 }
+            }
+        }
+
+        // Sulkeminen. Kysyy haluatko varmasti sulkea.
+
+        private void frmAsiakkaat_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Haluatko varmasti sulkea ikkunan?", "Varmista", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                e.Cancel = true;
             }
         }
 
