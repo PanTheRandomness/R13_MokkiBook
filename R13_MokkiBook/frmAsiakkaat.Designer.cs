@@ -60,6 +60,7 @@
             this.btnTyhjenna = new System.Windows.Forms.Button();
             this.tbHae = new System.Windows.Forms.TextBox();
             this.btnHae = new System.Windows.Forms.Button();
+            this.MyToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -276,6 +277,8 @@
             this.btnLisaa.Size = new System.Drawing.Size(176, 45);
             this.btnLisaa.TabIndex = 15;
             this.btnLisaa.Text = "Lisää asiakas";
+            this.MyToolTip.SetToolTip(this.btnLisaa, "Lisää uuden asiakkaan tiedot tietokantaan. Täytä ensiksi yläpuolella oleva lomake" +
+        ".");
             this.btnLisaa.UseVisualStyleBackColor = true;
             this.btnLisaa.Click += new System.EventHandler(this.btnLisaa_Click);
             // 
@@ -285,7 +288,10 @@
             this.btnMuokkaa.Name = "btnMuokkaa";
             this.btnMuokkaa.Size = new System.Drawing.Size(163, 45);
             this.btnMuokkaa.TabIndex = 16;
-            this.btnMuokkaa.Text = "Muokkaa";
+            this.btnMuokkaa.Text = "Tallenna muutos";
+            this.MyToolTip.SetToolTip(this.btnMuokkaa, "Tuplaklikkaa asiakasriviä, jota haluisit muokata. Tiedot siirtyvät yllä olevaan l" +
+        "omakkeeseen ja voit tehdä tarvittavat muutokset. Lopuksi tallenna muutokset, jot" +
+        "ta ne siirtyvät tietokantaan.");
             this.btnMuokkaa.UseVisualStyleBackColor = true;
             this.btnMuokkaa.Click += new System.EventHandler(this.btnMuokkaa_Click);
             // 
@@ -296,6 +302,7 @@
             this.btnPoista.Size = new System.Drawing.Size(173, 45);
             this.btnPoista.TabIndex = 17;
             this.btnPoista.Text = "Poista";
+            this.MyToolTip.SetToolTip(this.btnPoista, "Poista asiakkaan tiedot tietokannasta");
             this.btnPoista.UseVisualStyleBackColor = true;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
@@ -310,6 +317,7 @@
             this.btnTyhjenna.Size = new System.Drawing.Size(160, 45);
             this.btnTyhjenna.TabIndex = 23;
             this.btnTyhjenna.Text = "Tyhjennä";
+            this.MyToolTip.SetToolTip(this.btnTyhjenna, "Tyhjenää lomakkeen rivit");
             this.btnTyhjenna.UseVisualStyleBackColor = true;
             this.btnTyhjenna.Click += new System.EventHandler(this.btnTyhjenna_Click);
             // 
@@ -327,6 +335,7 @@
             this.btnHae.Size = new System.Drawing.Size(96, 23);
             this.btnHae.TabIndex = 25;
             this.btnHae.Text = "Hae";
+            this.MyToolTip.SetToolTip(this.btnHae, "Hae asiakas id-numerolla. Kirjoita numero viereiseen tekstikenttään.");
             this.btnHae.UseVisualStyleBackColor = true;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
@@ -334,7 +343,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 546);
+            this.ClientSize = new System.Drawing.Size(827, 546);
             this.Controls.Add(this.btnHae);
             this.Controls.Add(this.tbHae);
             this.Controls.Add(this.btnTyhjenna);
@@ -400,5 +409,6 @@
         private System.Windows.Forms.Button btnTyhjenna;
         private System.Windows.Forms.TextBox tbHae;
         private System.Windows.Forms.Button btnHae;
+        private System.Windows.Forms.ToolTip MyToolTip;
     }
 }

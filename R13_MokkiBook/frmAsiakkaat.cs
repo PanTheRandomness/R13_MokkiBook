@@ -99,7 +99,8 @@ namespace R13_MokkiBook
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-       
+
+        //Lisää uusi asiakas. Tarkistaa että kaikki kentät on täytetty, jos ei ole tulee virheilmoitus.
         private void btnLisaa_Click(object sender, EventArgs e)
         {
             try
@@ -142,14 +143,13 @@ namespace R13_MokkiBook
             }
         }
 
+        //Tietojen muokkaaminen
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
             try
             {
-                // Get the current DataRow from the DataGridView control
                 DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
 
-                // Update the values of the current DataRow with the input from the TextBox controls
                 currentRow["asiakas_id"] = tbAsiakasid.Text;
                 currentRow["postinro"] = tbPostiNro.Text;
                 currentRow["etunimi"] = tbEtunimi.Text;
@@ -158,7 +158,6 @@ namespace R13_MokkiBook
                 currentRow["email"] = tbEmail.Text;
                 currentRow["puhelinnro"] = tbPuhelinnro.Text;
 
-                // Update the database
                 dataAdapter.Update(dataTable);
 
                 tbAsiakasid.Text = String.Empty;
@@ -178,15 +177,13 @@ namespace R13_MokkiBook
 
         }
 
+        //Tietojen poistaminen. Poistaa valitun rivin.
         private void btnPoista_Click(object sender, EventArgs e)
         {
             try
             {
-
-                // Get the current DataRow from the DataGridView control
                 DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
 
-                // Delete the current DataRow from the DataTable and update the database
                 currentRow.Delete();
                 dataAdapter.Update(dataTable);
                 tbAsiakasid.Text = String.Empty;
@@ -205,6 +202,7 @@ namespace R13_MokkiBook
             lokiinTallentaminen("Asiakas-osiosta poistettiin tietoja käyttäjältä: ");
         }
 
+        // Avaa rivin tuplaklikillä tekstiboxeihin.
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
@@ -220,6 +218,8 @@ namespace R13_MokkiBook
             }
 
         }
+
+        // Tyhjentää kentät
         private void btnTyhjenna_Click(object sender, EventArgs e)
         {
             try
@@ -252,6 +252,8 @@ namespace R13_MokkiBook
 
         }
 
+        //Lokiin tallentaminen
+
         public void lokiinTallentaminen(string teksti)
 
         {
@@ -271,6 +273,7 @@ namespace R13_MokkiBook
             }
         }
 
+        //Asiakas-id voi sisältää vain numeroita.
         private void tbAsiakasid_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
@@ -278,6 +281,8 @@ namespace R13_MokkiBook
                 e.Handled = true;
             }
         }
+
+        // Hakutoiminto, joka hakee asiakas-id:n mukaan. Jos asiakasta ei löydy, tekee virheilmoitukset.
         private void btnHae_Click(object sender, EventArgs e)
         {
             string searchValue = tbHae.Text.Trim();
