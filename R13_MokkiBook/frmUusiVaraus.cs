@@ -46,7 +46,6 @@ namespace R13_MokkiBook
         public string asiakasquery = "SELECT * FROM asiakas;";
         public string aluequery = "SELECT nimi FROM alue;";
         public string mokkiquery = "SELECT * FROM mokki;";
-        public string mokkihakuquery;
         public string palveluquery = "SELECT * FROM palvelu;";
         public string postiqueryasiakas;
         public string varauksenpalveluquery;
@@ -915,6 +914,7 @@ namespace R13_MokkiBook
             else
             {
                 MuodostaMokkiHakuQuery();
+                PaivitaMokkitaulu(mokkiquery);
             }
         }
 
@@ -983,7 +983,7 @@ namespace R13_MokkiBook
         }
         public void MuodostaMokkiHakuQuery()
         {
-            mokkihakuquery = "SELECT * FROM mokki" + MuodostaPVMHaku() + MuodostaAlueHaku() + MuodostaLKMHaku() + MuodostaHintaHaku() + ";";
+            mokkiquery = "SELECT * FROM mokki" + MuodostaPVMHaku() + MuodostaAlueHaku() + MuodostaLKMHaku() + MuodostaHintaHaku() + ";";
         }
 
         public string MuodostaPVMHaku()
@@ -1028,10 +1028,33 @@ namespace R13_MokkiBook
         public string MuodostaHintaHaku()
         {
             string pal = "";
+            if(aluevalittu || (alkupvmmuutettu && loppupvmmuutettu) || nudHlomaara.Value > 1)
+            {
+                if (minhinta > 0 && maxhinta > 0)
+                    pal = " AND hinta BETWEEN '" + minhinta + "' AND '" + maxhinta;
+                else if (minhinta > 0 && maxhinta <= 0)
+                    pal = " AND hinta > " + minhinta;
+                else if (minhinta <= 0 && maxhinta > 0)
+                    pal = " AND hinta < " + maxhinta;
+            }
+            else
+            {
+                if (minhinta > 0 && maxhinta > 0)
+                    pal = " WHERE hinta BETWEEN '" + minhinta + "' AND '" + maxhinta;
+                else if (minhinta > 0 && maxhinta <= 0)
+                    pal = " WHERE hinta > " + minhinta;
+                else if (minhinta <= 0 && maxhinta > 0)
+                    pal = " WHERE hinta < " + maxhinta;
+            }
             return pal;
         }
 
         private void btnNollaaAika_Click(object sender, EventArgs e)
+        {
+            NollaaAika();
+        }
+
+        public void NollaaAika()
         {
             dtpAlkupvm.Value = nyt;
             dtmLoppupvm.Value = nyt;
@@ -1039,6 +1062,22 @@ namespace R13_MokkiBook
             loppupvm = nyt;
             alkupvmmuutettu = false;
             loppupvmmuutettu = false;
+        }
+        public void NollaaAlue()//TESTAA
+        {
+            aluevalittu = false;
+            tbAlueid.Text = "";
+            aluequery = "SELECT nimi FROM alue;";
+            PaivitaAluetaulu(aluequery);
+        }
+        public void NollaaPalvelut()//MIHIN TÄMÄ?
+        {
+            varauksenpalvelut.Clear();
+            nudPalveluLkm.Value = 0;
+            palveluquery = "SELECT * FROM palvelu;";
+            PaivitaPalvelutaulu(palveluquery);
+            varauksenpalveluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id.ToString() + ";";
+            PaivitaVarauksenPalvelutaulu(varauksenpalveluquery);//TÄMÄ VIELÄ TYHJÄ
         }
 
         private void tbMaxhinta_Leave(object sender, EventArgs e)
@@ -1049,6 +1088,19 @@ namespace R13_MokkiBook
                     MessageBox.Show("Maksimihintaa ei voitu kääntää- olisiko pilkkuvirhe?");
             }
             else maxhinta = 0;
+        }
+
+        private void tbnTyhjennaMokkihaku_Click(object sender, EventArgs e)
+        {
+            mokkiquery = "SELECT * FROM mokki;";
+            PaivitaMokkitaulu(mokkiquery);
+            nudHlomaara.Value = 1;
+            tbMinhinta.Text = "0";
+            tbMaxhinta.Text = "0";
+            minhinta = 0;
+            maxhinta = 0;
+            NollaaAika();
+            NollaaAlue();
         }
     }
 }
