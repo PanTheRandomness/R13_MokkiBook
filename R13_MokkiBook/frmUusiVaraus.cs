@@ -716,17 +716,17 @@ namespace R13_MokkiBook
 
         private void tbPostitoimipaikkaAsiakas_TextChanged(object sender, EventArgs e)
         {
-          
+          //HAE POSTINUMERO POSTITAULUSTA?
         }
 
         private void tbPuhno_TextChanged(object sender, EventArgs e)
         {
-            
+            valittuasiakas.puhelinnro = tbPuhno.Text;
         }
 
         private void tbSahkoposti_TextChanged(object sender, EventArgs e)
         {
-            
+            valittuasiakas.email = tbSahkoposti.Text;
         }
 
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -817,7 +817,18 @@ namespace R13_MokkiBook
         }
         private void btnHaemokki_Click(object sender, EventArgs e)
         {
-
+            if(tbMokkitunnus.Text.Length>0)
+            {
+                valittumokki.mokki_id = int.Parse(tbMokkitunnus.Text);
+                mokkiquery = "SELECT * FROM mokki WHERE mokki_id LIKE '" + valittumokki.mokki_id + "%';";
+                PaivitaMokkitaulu(mokkiquery);
+            }
+            else
+            {
+                mokkiquery = "SELECT * FROM mokki WHERE ";
+                //vapaa between alkupvm & loppupvm
+                //Hakee muilla kriteereillä.
+            }
         }
 
         private void lbVarauksenPalvelut_MouseDoubleClick(object sender, MouseEventArgs e)

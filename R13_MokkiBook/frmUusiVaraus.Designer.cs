@@ -62,6 +62,7 @@ namespace R13_MokkiBook
             this.tbAsiakastunnus = new System.Windows.Forms.TextBox();
             this.pnlVaraustiedot = new System.Windows.Forms.Panel();
             this.pnlMokki = new System.Windows.Forms.Panel();
+            this.btnHaemokki = new System.Windows.Forms.Button();
             this.lblKuvaus = new System.Windows.Forms.Label();
             this.tbKuvaus = new System.Windows.Forms.TextBox();
             this.lblVarustelu = new System.Windows.Forms.Label();
@@ -117,7 +118,6 @@ namespace R13_MokkiBook
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
             this.ttUusiVaraus = new System.Windows.Forms.ToolTip(this.components);
-            this.btnHaemokki = new System.Windows.Forms.Button();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
@@ -474,6 +474,18 @@ namespace R13_MokkiBook
             this.pnlMokki.Size = new System.Drawing.Size(508, 269);
             this.pnlMokki.TabIndex = 10;
             // 
+            // btnHaemokki
+            // 
+            this.btnHaemokki.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHaemokki.Location = new System.Drawing.Point(424, 151);
+            this.btnHaemokki.Name = "btnHaemokki";
+            this.btnHaemokki.Size = new System.Drawing.Size(75, 23);
+            this.btnHaemokki.TabIndex = 19;
+            this.btnHaemokki.Text = "Hae mökkiä";
+            this.ttUusiVaraus.SetToolTip(this.btnHaemokki, "Hae mökkiä annetuilla kriteereillä");
+            this.btnHaemokki.UseVisualStyleBackColor = true;
+            this.btnHaemokki.Click += new System.EventHandler(this.btnHaemokki_Click);
+            // 
             // lblKuvaus
             // 
             this.lblKuvaus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -584,7 +596,8 @@ namespace R13_MokkiBook
             this.tbMokkitunnus.Name = "tbMokkitunnus";
             this.tbMokkitunnus.Size = new System.Drawing.Size(182, 20);
             this.tbMokkitunnus.TabIndex = 18;
-            this.ttUusiVaraus.SetToolTip(this.tbMokkitunnus, "Syötä halutun mökin mökkitunnus");
+            this.ttUusiVaraus.SetToolTip(this.tbMokkitunnus, "Syötä halutun mökin mökkitunnus. HUOM: Jätä tyhjäksi, jos haluat hakea muilla kri" +
+        "teereillä!");
             this.tbMokkitunnus.TextChanged += new System.EventHandler(this.tbMokkitunnus_TextChanged);
             this.tbMokkitunnus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinoAsiakas_KeyPress);
             // 
@@ -964,18 +977,6 @@ namespace R13_MokkiBook
             // varausTableAdapter
             // 
             this.varausTableAdapter.ClearBeforeFill = true;
-            // 
-            // btnHaemokki
-            // 
-            this.btnHaemokki.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHaemokki.Location = new System.Drawing.Point(424, 151);
-            this.btnHaemokki.Name = "btnHaemokki";
-            this.btnHaemokki.Size = new System.Drawing.Size(75, 23);
-            this.btnHaemokki.TabIndex = 19;
-            this.btnHaemokki.Text = "Hae mökkiä";
-            this.ttUusiVaraus.SetToolTip(this.btnHaemokki, "Hae mökkiä annetuilla kriteereillä");
-            this.btnHaemokki.UseVisualStyleBackColor = true;
-            this.btnHaemokki.Click += new System.EventHandler(this.btnHaemokki_Click);
             // 
             // frmUusiVaraus
             // 
