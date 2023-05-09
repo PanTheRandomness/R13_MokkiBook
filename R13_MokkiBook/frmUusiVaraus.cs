@@ -33,7 +33,7 @@ namespace R13_MokkiBook
         public VarauksenPalvelut valittuvarauksenpalvelu;
         public Varaus tamavaraus;
         public List <Palvelu> palvelut;
-        public List<VarauksenPalvelut> varauksienpalvelut;
+        public List<VarauksenPalvelut> varauksenpalvelut;
         public List<Asiakas> asiakkaat;
         public List<Alue> alueet;
         public List<Mokki> mokit;
@@ -60,8 +60,11 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             varaukset = GetVaraukset();
+            tamavaraus = new Varaus();
+            tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
+
             palvelut = GetPalvelut();
-            varauksienpalvelut = GetVarauksenPalvelut();
+            varauksenpalvelut = GetVarauksenPalvelut();
             asiakkaat = GetAsiakkaat();
             alueet = GetAlueet();
             mokit = GetMokit();
@@ -81,9 +84,6 @@ namespace R13_MokkiBook
             PaivitaMokkitaulu(mokkiquery);
             PaivitaPalvelutaulu(palveluquery);
             LokiinTallentaminen("Avattiin uuden varauksen luontisivu käyttäjältä: ");
-
-            tamavaraus = new Varaus();
-            tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
         }
         public void LokiinTallentaminen(string teksti)
         {
@@ -157,7 +157,7 @@ namespace R13_MokkiBook
         public List<VarauksenPalvelut> GetVarauksenPalvelut()
         {
             List<VarauksenPalvelut> vpal = new List<VarauksenPalvelut>();
-            string query = "SELECT * FROM varauksen_palvelut";
+            string query = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id + ";";
 
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
@@ -381,7 +381,7 @@ namespace R13_MokkiBook
                 adapter.Fill(dataTable);
             }
             dgvAlueenPalvelut.DataSource = dataTable;
-            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus";
+            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus"; //??
             dgvAlueenPalvelut.Columns[1].HeaderText = "Aluetunnus";
             dgvAlueenPalvelut.Columns[2].HeaderText = "Nimi";
             dgvAlueenPalvelut.Columns[3].HeaderText = "Tyyppi";
@@ -855,8 +855,8 @@ namespace R13_MokkiBook
         {
             if(tbMokkitunnus.Text.Length>0)
             {
-                valittumokki.mokki_id = int.Parse(tbMokkitunnus.Text);
-                mokkiquery = "SELECT * FROM mokki WHERE mokki_id LIKE '" + valittumokki.mokki_id + "%';";
+                haettavamokki.mokki_id = int.Parse(tbMokkitunnus.Text);
+                mokkiquery = "SELECT * FROM mokki WHERE mokki_id LIKE '" + haettavamokki.mokki_id + "%';";
                 PaivitaMokkitaulu(mokkiquery);
             }
             else
@@ -877,6 +877,25 @@ namespace R13_MokkiBook
 
         }
 
+        private void tbMinhinta_TextChanged(object sender, EventArgs e)
+        {
+            mokkiqueryhintamin = "AND hinta BETWEEN " + tbMinhinta.Text;
+        }
+
+        private void tbMinhinta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8) && (e.KeyChar != (char)46)) //pilkku = 44
+                e.Handled = true;
+        }
+
+        private void tbMinhinta_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            double testi;
+            if (!(Double.TryParse(tb.Text, out testi)))
+                MessageBox.Show("Unable to parse '{0}'.", tb.Text);//TESTAA
+        }
+
         private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
@@ -895,7 +914,8 @@ namespace R13_MokkiBook
 
         private void nudHlomaara_ValueChanged(object sender, EventArgs e)
         {
-
+            haettavamokki.henkilomaara = int.Parse(nudHlomaara.Text);
+            mokkiqueryhlolkm = "AND henkilomaara >= " + haettavamokki.henkilomaara + ";";
         }
 
         private void lbAlue_MouseDoubleClick(object sender, MouseEventArgs e)
