@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHaePalvelu));
             this.dgvAlueenPalvelut = new System.Windows.Forms.DataGridView();
             this.tbKuvaus = new System.Windows.Forms.TextBox();
             this.btnLisaa = new System.Windows.Forms.Button();
@@ -88,6 +89,7 @@
             this.Controls.Add(this.btnLisaa);
             this.Controls.Add(this.tbKuvaus);
             this.Controls.Add(this.dgvAlueenPalvelut);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(556, 283);
             this.MinimizeBox = false;

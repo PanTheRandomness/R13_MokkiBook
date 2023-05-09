@@ -22,10 +22,12 @@ namespace R13_MokkiBook
         private OdbcDataAdapter dataAdapter;
         private DataTable dataTable;
         public frmAlueet()
+
         {
             InitializeComponent();
             alueet = GetAlueet();
             lokiinTallentaminen("Alueet-osio avattiin käyttäjältä: ");
+            this.FormClosing += new FormClosingEventHandler(frmAlueet_FormClosing);
         }
 
         public List<Alue> GetAlueet()
@@ -237,6 +239,15 @@ namespace R13_MokkiBook
             }
         }
 
- 
+        // Sulkeminen. Kysyy haluatko varmasti sulkea.
+
+        private void frmAlueet_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Haluatko varmasti sulkea ikkunan?", "Varmista", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
     }
 }
