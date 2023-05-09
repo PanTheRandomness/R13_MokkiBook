@@ -166,9 +166,11 @@
             // 
             // pbLogo
             // 
+            this.pbLogo.Image = global::R13_MokkiBook.Properties.Resources.MokkiBookLogo;
             this.pbLogo.Location = new System.Drawing.Point(424, 244);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(181, 92);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogo.TabIndex = 6;
             this.pbLogo.TabStop = false;
             // 
