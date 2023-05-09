@@ -264,14 +264,32 @@ namespace R13_MokkiBook
             sw.Close();
         }
 
-        //postinumeroksi voi syöttää vain lukuja ja max 5 merkkiä:
+        //postinumeroksi voi syöttää vain lukuja:
         private void tbPostiNro_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 || tbPostiNro.Text.Length >= 5)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
             }
         }
+  /*      public void TarkistaOsoite()
+        {
+            if (tbPostiNro.Text.Length > 0 && tbPostiNro.Text.Length < 6)
+            {
+                if (tbLahiosoite.Text.Length > 0)
+                {
+                   
+                }
+                else
+                    MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä lähiosoite.");
+            }
+            else if (tbPostiNro.Text.Length > 5)
+                MessageBox.Show("Postinumero on liian pitkä.");
+            else if (tbPostiNro.Text.Length < 5)
+                MessageBox.Show("Postinumero on liian lyhyt.");
+            else
+                MessageBox.Show("Syötä postinumero.");
+        }*/
 
         //Asiakas-id voi sisältää vain numeroita.
         private void tbAsiakasid_KeyPress(object sender, KeyPressEventArgs e)

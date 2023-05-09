@@ -288,6 +288,7 @@ namespace R13_MokkiBook
             {
                 e.Handled = true;
             }
+            
         }
 
         // Muuttaa mökin nimen ensimmäisen kirjaimen isoksi.Nimessä saa olla max 45 kirjainta.
