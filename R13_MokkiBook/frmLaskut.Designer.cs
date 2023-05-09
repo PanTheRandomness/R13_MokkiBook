@@ -40,6 +40,8 @@
             this.laskuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnTulosta = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.lbOtsikko = new System.Windows.Forms.Label();
             this.laskuTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.laskuTableAdapter();
             this.txtLaskuID = new System.Windows.Forms.TextBox();
@@ -128,7 +130,9 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsBtnTulosta});
+            this.tsBtnTulosta,
+            this.toolStripLabel1,
+            this.toolStripTextBox1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 535);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(945, 25);
@@ -145,6 +149,20 @@
             this.tsBtnTulosta.Size = new System.Drawing.Size(79, 22);
             this.tsBtnTulosta.Text = "Tulosta lasku";
             this.tsBtnTulosta.Click += new System.EventHandler(this.tsBtnTulosta_Click);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(92, 22);
+            this.toolStripLabel1.Text = "Hae Lasku_ID:llä";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
+            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
             // 
             // lbOtsikko
             // 
@@ -340,5 +358,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn alv;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnTyhjenna;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
     }
 }
