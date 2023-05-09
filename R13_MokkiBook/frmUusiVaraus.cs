@@ -22,6 +22,8 @@ namespace R13_MokkiBook
         public int valitturivialue = -1;
         public int valitturivivarauksenpalvelu = -1;
         public double arvioituloppuhinta = 0;
+        public double minhinta = 0;
+        public double maxhinta = 0;
 
         public Asiakas valittuasiakas;
         public Asiakas luotuasiakas;
@@ -44,8 +46,7 @@ namespace R13_MokkiBook
         public string asiakasquery = "SELECT * FROM asiakas;";
         public string aluequery = "SELECT nimi FROM alue;";
         public string mokkiquery = "SELECT * FROM mokki;";
-        public string mokkiquerypvmalku, mokkiquerypvmloppu, mokkiqueryalue, mokkiqueryhlolkm, mokkiqueryhintamin, mokkiqueryhintamax;
-        //HAKU TOTEUTUU SEURAAVASTI: JOKAISTA TAULUA KOHDEN OMA QUERYSTRING, JOIHIN JOKAINEN HAKUKRITEERI LISÄTÄÄN XQUERY = OSAQUERY1 + OSAQUERY2 JNE
+        public string mokkihakuquery;
         public string palveluquery = "SELECT * FROM palvelu;";
         public string postiqueryasiakas;
         public string varauksenpalveluquery;
@@ -55,6 +56,9 @@ namespace R13_MokkiBook
         public DateTime loppupvm;
         public bool mokkilukittu = false;
         public bool asiakasjuurivalittu = false;
+        public bool alkupvmmuutettu = false;
+        public bool loppupvmmuutettu = false;
+        public bool aluevalittu = false;
 
         public frmUusiVaraus()
         {
@@ -395,11 +399,13 @@ namespace R13_MokkiBook
         private void dtmLoppupvm_ValueChanged(object sender, EventArgs e)
         {
             loppupvm = dtmLoppupvm.Value;
+            loppupvmmuutettu = true;
         }
 
         private void dtpAlkupvm_ValueChanged(object sender, EventArgs e)
         {
             alkupvm = dtpAlkupvm.Value;
+            alkupvmmuutettu = true;
         }
 
         private void btnLuoVaraus_Click(object sender, EventArgs e)
@@ -434,16 +440,26 @@ namespace R13_MokkiBook
             if (ValidAsiakas(ref msg))//toimiiko?
             {
                 if (!mokkilukittu)
-                    MessageBox.Show("Varauskta ei voitu luoda: Mökkiä ei ole lukittu.");
+                    MessageBox.Show("Varausta ei voitu luoda: Mökkiä ei ole lukittu.");
                 else//Huom muut vaatimukset! Validoi alue, mökki, posti, määrä ja mökin vapaus!
                 {
                     //
-                    LuoVaraus();
+                    if (MokkiVapaa())
+                        LuoVaraus();
+                    else
+                        MessageBox.Show("Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.");
                 }
             }
             else
                 MessageBox.Show(msg);
         }
+
+        public bool MokkiVapaa()
+        {
+            //jos ei return false
+            return true;
+        }
+
         private void btnPoistaPalvelu_Click(object sender, EventArgs e)
         {
             //Poista tietokannasta ko. varauksenpalvelu
@@ -697,11 +713,26 @@ namespace R13_MokkiBook
             {
                 aluequery = "SELECT nimi FROM alue WHERE alue_id LIKE '" + tbAlueid.Text + "%';";
                 PaivitaAluetaulu(aluequery);
+                if (lbAlue.Items.Count > 0)
+                {
+                    if(lbAlue.Items.Count == 1)
+                    {
+                        if (GetValittuAlue(lbAlue.Text))
+                            aluevalittu = true;
+                        else
+                        {
+                            MessageBox.Show("Aluetunnuksen tunnistamisessa häiriö.");
+                            aluevalittu = false;
+                        }
+                    }    
+                }
+                else aluevalittu = false;
             }
             else
             {
                 aluequery = "SELECT nimi FROM alue;";
                 PaivitaAluetaulu(aluequery);
+                aluevalittu = false;
             }
         }
 
@@ -804,6 +835,19 @@ namespace R13_MokkiBook
 
             return a;
         }
+        public bool GetValittuAlue(string nimi)
+        {
+            Alue a = new Alue();
+            a.nimi = nimi;
+
+            foreach(Alue alue in alueet)
+            {
+                if (alue.nimi == nimi)
+                    valittualue = alue;
+                return true;
+            }
+            return false;
+        }
         public void HaePostinro (string postiqueryasiakas)
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -870,9 +914,7 @@ namespace R13_MokkiBook
             }
             else
             {
-                mokkiquery = "SELECT * FROM mokki WHERE ";
-                //vapaa between alkupvm & loppupvm
-                //Hakee muilla kriteereillä.
+                MuodostaMokkiHakuQuery();
             }
         }
 
@@ -886,16 +928,6 @@ namespace R13_MokkiBook
 
         }
 
-        private void tbMinhinta_TextChanged(object sender, EventArgs e)
-        {
-            if (tbMinhinta.Text.Length > 0)
-            {
-                mokkiqueryhintamin = "AND hinta <= " + tbMinhinta.Text;
-            }
-            else
-                mokkiqueryhintamin = "";
-        }
-
         private void tbMinhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8) && (e.KeyChar != (char)46)) //pilkku = 44
@@ -904,10 +936,12 @@ namespace R13_MokkiBook
 
         private void tbMinhinta_Leave(object sender, EventArgs e)
         {
-            TextBox tb = (TextBox)sender;
-            double testi;
-            if (!(Double.TryParse(tb.Text, out testi)))
-                MessageBox.Show("Unable to parse '{0}'.", tb.Text);//TESTAA
+            if (tbMinhinta.Text.Length > 0)
+            {
+                if (!(Double.TryParse(tbMinhinta.Text, out minhinta)))
+                    MessageBox.Show("Minimihintaa ei voitu kääntää- olisiko pilkkuvirhe?");
+            }
+            else minhinta = 0;
         }
 
         private void frmUusiVaraus_Load(object sender, EventArgs e)
@@ -915,14 +949,6 @@ namespace R13_MokkiBook
             // TODO: This line of code loads data into the 'dataSet1.palvelu' table. You can move, or remove it, as needed.
             this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
 
-        }
-
-        private void tbMaxhinta_TextChanged(object sender, EventArgs e)
-        {
-            if (tbMaxhinta.Text.Length > 0)
-                mokkiqueryhintamax = "AND hinta >= " + tbMaxhinta.Text;
-            else
-                mokkiqueryhintamax = ";";//Onko ok?
         }
 
         private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -933,7 +959,8 @@ namespace R13_MokkiBook
 
         private void dgvMokitUusiVaraus_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+            valitturivimokki = dgvMokitUusiVaraus.CurrentRow.Index;
+            valittumokki = mokit[valitturivimokki];
         }
 
         private void btnTyhjValinta_Click(object sender, EventArgs e)
@@ -943,11 +970,8 @@ namespace R13_MokkiBook
 
         private void nudHlomaara_ValueChanged(object sender, EventArgs e)
         {
-            haettavamokki.henkilomaara = int.Parse(nudHlomaara.Text);
-            if (haettavamokki.henkilomaara > 0)
-                mokkiqueryhlolkm = "AND henkilomaara >= " + haettavamokki.henkilomaara + ";";
-            else
-                mokkiqueryhlolkm = "";
+            if(nudHlomaara.Value < 1)
+                nudHlomaara.Value = 1;
         }
 
         private void lbAlue_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -955,6 +979,76 @@ namespace R13_MokkiBook
             valitturivialue = lbAlue.SelectedIndex;
             valittualue = alueet[valitturivialue];
             tbAlueid.Text = valittualue.alue_id.ToString();
+            aluevalittu = true;
+        }
+        public void MuodostaMokkiHakuQuery()
+        {
+            mokkihakuquery = "SELECT * FROM mokki" + MuodostaPVMHaku() + MuodostaAlueHaku() + MuodostaLKMHaku() + MuodostaHintaHaku() + ";";
+        }
+
+        public string MuodostaPVMHaku()
+        {
+            string pal = "";
+            if(alkupvmmuutettu && loppupvmmuutettu)
+            {
+                pal = " WHERE mokki_id NOT IN (SELECT mokki_mokki_id FROM varaus WHERE varattu_alkupvm BETWEEN '" + alkupvm + "' AND '" + loppupvm + "' OR varattu_loppupvm BETWEEN '" + alkupvm + "' AND '" + loppupvm + "')";
+            }
+            return pal;
+        }
+        public string MuodostaAlueHaku()
+        {
+            string pal = "";
+            if(alkupvmmuutettu && loppupvmmuutettu)
+            {
+                if (aluevalittu)
+                    pal = " AND alue_id = " + valittualue.alue_id.ToString();
+            }
+            else
+            {
+                if(aluevalittu)
+                    pal = " WHERE alue_id = " + valittualue.alue_id.ToString();
+            }
+            return pal;
+        }
+        public string MuodostaLKMHaku()
+        {
+            string pal = "";
+            if(aluevalittu || (alkupvmmuutettu && loppupvmmuutettu))
+            {
+                if (nudHlomaara.Value > 1)
+                    pal = " AND henkilomaara >= " + nudHlomaara.Value.ToString();
+            }
+            else
+            {
+                if (nudHlomaara.Value > 1)
+                    pal = " WHERE henkilomaara >= " + nudHlomaara.Value.ToString();
+            }
+            return pal;
+        }
+        public string MuodostaHintaHaku()
+        {
+            string pal = "";
+            return pal;
+        }
+
+        private void btnNollaaAika_Click(object sender, EventArgs e)
+        {
+            dtpAlkupvm.Value = nyt;
+            dtmLoppupvm.Value = nyt;
+            alkupvm = nyt;
+            loppupvm = nyt;
+            alkupvmmuutettu = false;
+            loppupvmmuutettu = false;
+        }
+
+        private void tbMaxhinta_Leave(object sender, EventArgs e)
+        {
+            if(tbMaxhinta.Text.Length > 0)
+            {
+                if (!(Double.TryParse(tbMaxhinta.Text, out maxhinta)))
+                    MessageBox.Show("Maksimihintaa ei voitu kääntää- olisiko pilkkuvirhe?");
+            }
+            else maxhinta = 0;
         }
     }
 }
