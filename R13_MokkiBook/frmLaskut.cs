@@ -12,6 +12,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Data.Odbc;
 using System.Drawing.Printing;
 using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Data.SqlClient;
 
 namespace R13_MokkiBook
 {
@@ -84,8 +87,82 @@ namespace R13_MokkiBook
 
         private void tsBtnTulosta_Click(object sender, EventArgs e)
         {
-          
+
+
+
+
+            PrintToPdf();
         }
+
+        private void PrintToPdf()
+        {
+            try
+            {
+                // Define the path and file name for the generated PDF
+                string fileName = "Bill.pdf";
+
+                // Create a new PDF document
+                Document document = new Document();
+
+                // Create a new FileStream object to write the PDF to disk
+                FileStream fileStream = new FileStream(fileName, FileMode.Create);
+
+                // Create a new PdfWriter object to write to the PDF stream
+                PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
+
+                // Open the document
+                document.Open();
+
+                // Add a title to the document
+                document.Add(new Paragraph("Invoice"));
+
+                // Check if any row is selected in the DataGridView
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    // Get the selected row from the DataGridView
+                    DataGridViewRow row = dataGridView1.SelectedRows[0];
+
+                    // Add the transaction data to the document
+                    document.Add(new Paragraph("Lasku ID: " + row.Cells["lasku_id"].Value.ToString()));
+                    document.Add(new Paragraph("Varaus ID: " + row.Cells["varaus_id"].Value.ToString()));
+                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString()));
+                    document.Add(new Paragraph("Alv: " + row.Cells["alv"].Value.ToString()));
+
+                    // Create a new PdfPTable object to hold the line items
+                    PdfPTable table = new PdfPTable(4);
+                    table.WidthPercentage = 100;
+
+                    // Add the column headers to the table
+                    table.AddCell(new PdfPCell(new Phrase("Lasku_id")));
+                    table.AddCell(new PdfPCell(new Phrase("Varaus_id")));
+                    table.AddCell(new PdfPCell(new Phrase("Summa")));
+                    table.AddCell(new PdfPCell(new Phrase("alv")));
+
+                    // Add the line items from the selected row to the table
+                    table.AddCell(new PdfPCell(new Phrase(row.Cells["lasku_id"].Value.ToString())));
+                    table.AddCell(new PdfPCell(new Phrase(row.Cells["varaus_id"].Value.ToString())));
+                    table.AddCell(new PdfPCell(new Phrase(row.Cells["summa"].Value.ToString())));
+                    table.AddCell(new PdfPCell(new Phrase(row.Cells["alv"].Value.ToString())));
+                    // Add the table to the document
+                    document.Add(table);
+                }
+
+                // Close the document
+                document.Close();
+
+                // Close the file stream
+                fileStream.Close();
+
+                // Open the generated PDF file in the default PDF viewer
+                System.Diagnostics.Process.Start(fileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
