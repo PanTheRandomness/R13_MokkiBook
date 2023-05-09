@@ -46,7 +46,7 @@ namespace R13_MokkiBook
         public string mokkiquery = "SELECT * FROM mokki;";
         public string mokkiquerypvmalku, mokkiquerypvmloppu, mokkiqueryalue, mokkiqueryhlolkm, mokkiqueryhintamin, mokkiqueryhintamax;
         //HAKU TOTEUTUU SEURAAVASTI: JOKAISTA TAULUA KOHDEN OMA QUERYSTRING, JOIHIN JOKAINEN HAKUKRITEERI LISÄTÄÄN XQUERY = OSAQUERY1 + OSAQUERY2 JNE
-        public string palveluquery;
+        public string palveluquery = "SELECT * FROM palvelu;";
         public string postiqueryasiakas;
         public string varauksenpalveluquery;
        
@@ -79,6 +79,7 @@ namespace R13_MokkiBook
             PaivitaAsiakastaulu(asiakasquery);
             PaivitaAluetaulu(aluequery);
             PaivitaMokkitaulu(mokkiquery);
+            PaivitaPalvelutaulu(palveluquery);
             LokiinTallentaminen("Avattiin uuden varauksen luontisivu käyttäjältä: ");
 
             tamavaraus = new Varaus();
@@ -371,7 +372,22 @@ namespace R13_MokkiBook
         }
         public void PaivitaPalvelutaulu(string palveluquery)
         {
-
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(palveluquery, connection))
+            {
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
+            }
+            dgvAlueenPalvelut.DataSource = dataTable;
+            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus";
+            dgvAlueenPalvelut.Columns[1].HeaderText = "Aluetunnus";
+            dgvAlueenPalvelut.Columns[2].HeaderText = "Nimi";
+            dgvAlueenPalvelut.Columns[3].HeaderText = "Tyyppi";
+            dgvAlueenPalvelut.Columns[4].HeaderText = "Kuvaus";
+            dgvAlueenPalvelut.Columns[5].HeaderText = "Hinta";
+            dgvAlueenPalvelut.Columns[6].HeaderText = "ALV";
         }
         public void PaivitaVarauksenPalvelutaulu(string varauksenpalveluquery)
         {
@@ -572,11 +588,25 @@ namespace R13_MokkiBook
             { 
                 mokkilukittu = true;
                 pnlMokki.Enabled = false;
+                pnlPalvelut.Enabled = true;
+
+                if (ValidAlue())
+                {
+                    palveluquery = "SELECT * FROM palvelu WHERE alue_id = " + valittualue.alue_id + ";";
+                    PaivitaPalvelutaulu(palveluquery);
+                }
+                else
+                    MessageBox.Show("Mökkiä tai sen aluetta ei ole valittu riittävän hyvin, joten alueen palveluita ei voida muokata.");
             }
             else if (cbLukitseMokki.Checked == false)
             {
                 mokkilukittu = false;
                 pnlMokki.Enabled = true;
+
+                palveluquery = "SELECT * FROM palvelu;";
+                PaivitaPalvelutaulu(palveluquery);
+                //tyhjentää valitut lisäpalvelut?
+                pnlPalvelut.Enabled = false;
             }
         }
 
@@ -621,6 +651,12 @@ namespace R13_MokkiBook
                     return true;
             }
             return true;
+        }
+        public bool ValidAlue()
+        {
+            if(valittualue != null)
+                return true;//Tarkista vielä- pitäisikö katsoa mätsääkö alue mökkiin??
+            return false;
         }
 
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)

@@ -751,6 +751,7 @@ namespace R13_MokkiBook
             this.pnlPalvelut.Controls.Add(this.lblAlueenPalvelut);
             this.pnlPalvelut.Controls.Add(this.lblVarauksenPalvelut);
             this.pnlPalvelut.Controls.Add(this.lbVarauksenPalvelut);
+            this.pnlPalvelut.Enabled = false;
             this.pnlPalvelut.Location = new System.Drawing.Point(516, -3);
             this.pnlPalvelut.Name = "pnlPalvelut";
             this.pnlPalvelut.Size = new System.Drawing.Size(547, 245);
