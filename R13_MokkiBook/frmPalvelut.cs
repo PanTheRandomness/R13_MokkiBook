@@ -31,13 +31,13 @@ namespace R13_MokkiBook
         private void frmPalvelut_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dataSet1.palvelu' table. You can move, or remove it, as needed.
-           this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
+            this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
         }
 
         public List<Palvelu> GetPalvelut()
         {
             List<Palvelu> pal = new List<Palvelu>();
-            string connectionString = "Dsn=Village Newbies;uid=root"; 
+            string connectionString = "Dsn=Village Newbies;uid=root";
             string query = "SELECT * FROM palvelu";
 
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -79,12 +79,46 @@ namespace R13_MokkiBook
 
         private void txtHaku_TextChanged(object sender, EventArgs e)
         {
-           
+            try
+            {
+                string searchTerm = txtHaku.Text;
+                DataTable table = new DataTable();
+                string connectionString = "Dsn=Village Newbies;uid=root";
+
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    string sql = $"SELECT * FROM palvelu";
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        using (OdbcDataAdapter adapter = new OdbcDataAdapter(sql, connection))
+                        {
+                            adapter.Fill(table);
+                        }
+                    }
+                    dataGridView1.DataSource = table;
+                }
+                else
+                {
+                    string sql = $"SELECT * FROM palvelu WHERE palvelu_id = '{searchTerm}'";
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    {
+                        using (OdbcDataAdapter adapter = new OdbcDataAdapter(sql, connection))
+                        {
+                            adapter.Fill(table);
+                        }
+                    }
+                    dataGridView1.DataSource = table;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void TsBtnHae_Click(object sender, EventArgs e)
+    private void TsBtnHae_Click(object sender, EventArgs e)
         {
-          
+            
         }
     }
 }

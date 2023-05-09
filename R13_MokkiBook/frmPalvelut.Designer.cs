@@ -45,11 +45,11 @@
             this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
             this.TsBtnLisaa = new System.Windows.Forms.ToolStripButton();
+            this.txtHaku = new System.Windows.Forms.ToolStripTextBox();
+            this.TsBtnHae = new System.Windows.Forms.ToolStripButton();
             this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
             this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
             this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.txtHaku = new System.Windows.Forms.ToolStripTextBox();
-            this.TsBtnHae = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -88,7 +88,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(8, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(744, 335);
+            this.dataGridView1.Size = new System.Drawing.Size(744, 440);
             this.dataGridView1.TabIndex = 5;
             // 
             // palveluidDataGridViewTextBoxColumn
@@ -185,6 +185,26 @@
             this.TsBtnLisaa.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.TsBtnLisaa.Click += new System.EventHandler(this.TsBtnLisaa_Click_1);
             // 
+            // txtHaku
+            // 
+            this.txtHaku.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtHaku.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtHaku.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtHaku.Name = "txtHaku";
+            this.txtHaku.Size = new System.Drawing.Size(100, 25);
+            this.txtHaku.TextChanged += new System.EventHandler(this.txtHaku_TextChanged);
+            // 
+            // TsBtnHae
+            // 
+            this.TsBtnHae.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.TsBtnHae.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.TsBtnHae.Image = ((System.Drawing.Image)(resources.GetObject("TsBtnHae.Image")));
+            this.TsBtnHae.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsBtnHae.Name = "TsBtnHae";
+            this.TsBtnHae.Size = new System.Drawing.Size(32, 22);
+            this.TsBtnHae.Text = "Hae";
+            this.TsBtnHae.Click += new System.EventHandler(this.TsBtnHae_Click);
+            // 
             // palveluTableAdapter
             // 
             this.palveluTableAdapter.ClearBeforeFill = true;
@@ -198,23 +218,6 @@
             // 
             this.varauksenPAlvelutDataSetBindingSource.DataSource = this.varauksenPAlvelutDataSet;
             this.varauksenPAlvelutDataSetBindingSource.Position = 0;
-            // 
-            // txtHaku
-            // 
-            this.txtHaku.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtHaku.Name = "txtHaku";
-            this.txtHaku.Size = new System.Drawing.Size(100, 25);
-            this.txtHaku.TextChanged += new System.EventHandler(this.txtHaku_TextChanged);
-            // 
-            // TsBtnHae
-            // 
-            this.TsBtnHae.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.TsBtnHae.Image = ((System.Drawing.Image)(resources.GetObject("TsBtnHae.Image")));
-            this.TsBtnHae.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsBtnHae.Name = "TsBtnHae";
-            this.TsBtnHae.Size = new System.Drawing.Size(32, 22);
-            this.TsBtnHae.Text = "Hae";
-            this.TsBtnHae.Click += new System.EventHandler(this.TsBtnHae_Click);
             // 
             // frmPalvelut
             // 

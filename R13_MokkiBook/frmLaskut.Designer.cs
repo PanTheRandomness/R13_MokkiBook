@@ -271,7 +271,7 @@
             this.btnTyhjenna.Size = new System.Drawing.Size(84, 23);
             this.btnTyhjenna.TabIndex = 33;
             this.btnTyhjenna.Text = "Tyhjennä";
-            this.toolTip1.SetToolTip(this.btnTyhjenna, "Tyhjennä muokkas rivit");
+            this.toolTip1.SetToolTip(this.btnTyhjenna, "Tyhjennä muokkaus rivit");
             this.btnTyhjenna.UseVisualStyleBackColor = true;
             this.btnTyhjenna.Click += new System.EventHandler(this.btnTyhjenna_Click);
             // 
