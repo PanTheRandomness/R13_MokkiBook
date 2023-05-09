@@ -143,6 +143,7 @@
             this.tbPuhelinnro.Name = "tbPuhelinnro";
             this.tbPuhelinnro.Size = new System.Drawing.Size(159, 22);
             this.tbPuhelinnro.TabIndex = 6;
+            this.tbPuhelinnro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPuhelinnro_KeyPress);
             // 
             // tbEmail
             // 
@@ -150,6 +151,7 @@
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(159, 22);
             this.tbEmail.TabIndex = 5;
+            this.tbEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbEmail_KeyPress);
             // 
             // tbLahiosoite
             // 
@@ -157,7 +159,8 @@
             this.tbLahiosoite.Name = "tbLahiosoite";
             this.tbLahiosoite.Size = new System.Drawing.Size(159, 22);
             this.tbLahiosoite.TabIndex = 4;
-            this.tbLahiosoite.Leave += new System.EventHandler(this.tbEtunimi_Leave);
+            this.tbLahiosoite.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbLahiosoite_KeyPress);
+            this.tbLahiosoite.Leave += new System.EventHandler(this.tbLahiosoite_Leave);
             // 
             // tbSukunimi
             // 
@@ -165,6 +168,7 @@
             this.tbSukunimi.Name = "tbSukunimi";
             this.tbSukunimi.Size = new System.Drawing.Size(159, 22);
             this.tbSukunimi.TabIndex = 3;
+            this.tbSukunimi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSukunimi_KeyPress);
             this.tbSukunimi.Leave += new System.EventHandler(this.tbEtunimi_Leave);
             // 
             // tbEtunimi
@@ -173,6 +177,7 @@
             this.tbEtunimi.Name = "tbEtunimi";
             this.tbEtunimi.Size = new System.Drawing.Size(159, 22);
             this.tbEtunimi.TabIndex = 2;
+            this.tbEtunimi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbEtunimi_KeyPress);
             this.tbEtunimi.Leave += new System.EventHandler(this.tbEtunimi_Leave);
             // 
             // tbPostiNro
