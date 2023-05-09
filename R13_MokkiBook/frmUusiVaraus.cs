@@ -380,7 +380,7 @@ namespace R13_MokkiBook
                 adapter.Fill(dataTable);
             }
             dgvAlueenPalvelut.DataSource = dataTable;
-            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus"; //indeksi sallitun alueen ulkopuolella?
+            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus";
             dgvAlueenPalvelut.Columns[1].HeaderText = "Aluetunnus";
             dgvAlueenPalvelut.Columns[2].HeaderText = "Nimi";
             dgvAlueenPalvelut.Columns[3].HeaderText = "Tyyppi";
