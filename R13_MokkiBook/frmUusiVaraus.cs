@@ -62,7 +62,6 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             tamavaraus = new Varaus();
             tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
-
             palvelut = GetPalvelut();
             varauksenpalvelut = GetVarauksenPalvelut();
             asiakkaat = GetAsiakkaat();
@@ -381,7 +380,7 @@ namespace R13_MokkiBook
                 adapter.Fill(dataTable);
             }
             dgvAlueenPalvelut.DataSource = dataTable;
-            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus"; //??
+            dgvAlueenPalvelut.Columns[0].HeaderText = "Palvelutunnus"; //indeksi sallitun alueen ulkopuolella?
             dgvAlueenPalvelut.Columns[1].HeaderText = "Aluetunnus";
             dgvAlueenPalvelut.Columns[2].HeaderText = "Nimi";
             dgvAlueenPalvelut.Columns[3].HeaderText = "Tyyppi";
@@ -894,6 +893,13 @@ namespace R13_MokkiBook
             double testi;
             if (!(Double.TryParse(tb.Text, out testi)))
                 MessageBox.Show("Unable to parse '{0}'.", tb.Text);//TESTAA
+        }
+
+        private void frmUusiVaraus_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dataSet1.palvelu' table. You can move, or remove it, as needed.
+            this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
+
         }
 
         private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
