@@ -724,6 +724,7 @@ namespace R13_MokkiBook
             // btnPoistaPalvelu
             // 
             this.btnPoistaPalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPoistaPalvelu.Enabled = false;
             this.btnPoistaPalvelu.Location = new System.Drawing.Point(456, 219);
             this.btnPoistaPalvelu.Name = "btnPoistaPalvelu";
             this.btnPoistaPalvelu.Size = new System.Drawing.Size(92, 23);
@@ -751,6 +752,7 @@ namespace R13_MokkiBook
             this.hintaDataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn4});
             this.dgvAlueenPalvelut.DataSource = this.palveluBindingSource1;
+            this.dgvAlueenPalvelut.Enabled = false;
             this.dgvAlueenPalvelut.Location = new System.Drawing.Point(1, 6);
             this.dgvAlueenPalvelut.Name = "dgvAlueenPalvelut";
             this.dgvAlueenPalvelut.ReadOnly = true;
@@ -827,6 +829,7 @@ namespace R13_MokkiBook
             // nudPalveluLkm
             // 
             this.nudPalveluLkm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudPalveluLkm.Enabled = false;
             this.nudPalveluLkm.Location = new System.Drawing.Point(336, 117);
             this.nudPalveluLkm.Name = "nudPalveluLkm";
             this.nudPalveluLkm.Size = new System.Drawing.Size(51, 20);
@@ -836,6 +839,7 @@ namespace R13_MokkiBook
             // btnLisaaPalveluVaraukseen
             // 
             this.btnLisaaPalveluVaraukseen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLisaaPalveluVaraukseen.Enabled = false;
             this.btnLisaaPalveluVaraukseen.Location = new System.Drawing.Point(393, 117);
             this.btnLisaaPalveluVaraukseen.Name = "btnLisaaPalveluVaraukseen";
             this.btnLisaaPalveluVaraukseen.Size = new System.Drawing.Size(149, 23);
@@ -849,6 +853,7 @@ namespace R13_MokkiBook
             // 
             this.lbVarauksenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbVarauksenPalvelut.Enabled = false;
             this.lbVarauksenPalvelut.FormattingEnabled = true;
             this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 148);
             this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";

@@ -588,6 +588,11 @@ namespace R13_MokkiBook
                 mokkilukittu = true;
                 pnlMokki.Enabled = false;
                 pnlPalvelut.Enabled = true;
+                dgvAlueenPalvelut.Enabled = true;
+                nudPalveluLkm.Enabled = true;
+                btnLisaaPalveluVaraukseen.Enabled = true;
+                btnPoistaPalvelu.Enabled = true;
+                lbVarauksenPalvelut.Enabled = true;
 
                 if (ValidAlue())
                 {
@@ -601,6 +606,11 @@ namespace R13_MokkiBook
             {
                 mokkilukittu = false;
                 pnlMokki.Enabled = true;
+                dgvAlueenPalvelut.Enabled = false;
+                nudPalveluLkm.Enabled = false;
+                btnLisaaPalveluVaraukseen.Enabled = false;
+                btnPoistaPalvelu.Enabled = false;
+                lbVarauksenPalvelut.Enabled = false;
 
                 palveluquery = "SELECT * FROM palvelu;";
                 PaivitaPalvelutaulu(palveluquery);
