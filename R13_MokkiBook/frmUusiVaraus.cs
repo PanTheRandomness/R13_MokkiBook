@@ -888,7 +888,12 @@ namespace R13_MokkiBook
 
         private void tbMinhinta_TextChanged(object sender, EventArgs e)
         {
-            mokkiqueryhintamin = "AND hinta BETWEEN " + tbMinhinta.Text;
+            if (tbMinhinta.Text.Length > 0)
+            {
+                mokkiqueryhintamin = "AND hinta <= " + tbMinhinta.Text;
+            }
+            else
+                mokkiqueryhintamin = "";
         }
 
         private void tbMinhinta_KeyPress(object sender, KeyPressEventArgs e)
@@ -912,6 +917,14 @@ namespace R13_MokkiBook
 
         }
 
+        private void tbMaxhinta_TextChanged(object sender, EventArgs e)
+        {
+            if (tbMaxhinta.Text.Length > 0)
+                mokkiqueryhintamax = "AND hinta >= " + tbMaxhinta.Text;
+            else
+                mokkiqueryhintamax = ";";//Onko ok?
+        }
+
         private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
@@ -931,7 +944,10 @@ namespace R13_MokkiBook
         private void nudHlomaara_ValueChanged(object sender, EventArgs e)
         {
             haettavamokki.henkilomaara = int.Parse(nudHlomaara.Text);
-            mokkiqueryhlolkm = "AND henkilomaara >= " + haettavamokki.henkilomaara + ";";
+            if (haettavamokki.henkilomaara > 0)
+                mokkiqueryhlolkm = "AND henkilomaara >= " + haettavamokki.henkilomaara + ";";
+            else
+                mokkiqueryhlolkm = "";
         }
 
         private void lbAlue_MouseDoubleClick(object sender, MouseEventArgs e)
