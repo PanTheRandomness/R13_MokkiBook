@@ -553,6 +553,8 @@ namespace R13_MokkiBook
             this.tbMaxhinta.Size = new System.Drawing.Size(100, 20);
             this.tbMaxhinta.TabIndex = 17;
             this.ttUusiVaraus.SetToolTip(this.tbMaxhinta, "Syötä maksimihinta mökille");
+            this.tbMaxhinta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMinhinta_KeyPress);
+            this.tbMaxhinta.Leave += new System.EventHandler(this.tbMinhinta_Leave);
             // 
             // tbMinhinta
             // 
@@ -562,6 +564,9 @@ namespace R13_MokkiBook
             this.tbMinhinta.Size = new System.Drawing.Size(100, 20);
             this.tbMinhinta.TabIndex = 16;
             this.ttUusiVaraus.SetToolTip(this.tbMinhinta, "Syötä minimihinta mökille");
+            this.tbMinhinta.TextChanged += new System.EventHandler(this.tbMinhinta_TextChanged);
+            this.tbMinhinta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMinhinta_KeyPress);
+            this.tbMinhinta.Leave += new System.EventHandler(this.tbMinhinta_Leave);
             // 
             // lblHenkilomaara
             // 
@@ -751,6 +756,7 @@ namespace R13_MokkiBook
             this.pnlPalvelut.Controls.Add(this.lblAlueenPalvelut);
             this.pnlPalvelut.Controls.Add(this.lblVarauksenPalvelut);
             this.pnlPalvelut.Controls.Add(this.lbVarauksenPalvelut);
+            this.pnlPalvelut.Enabled = false;
             this.pnlPalvelut.Location = new System.Drawing.Point(516, -3);
             this.pnlPalvelut.Name = "pnlPalvelut";
             this.pnlPalvelut.Size = new System.Drawing.Size(547, 245);
