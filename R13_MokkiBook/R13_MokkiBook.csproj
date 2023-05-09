@@ -191,6 +191,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="DataSetMokkiBook.xsc">
       <DependentUpon>DataSetMokkiBook.xsd</DependentUpon>
@@ -238,6 +239,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MokkiBookLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MokkiBookLogoPieni.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MokkiBookLogo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

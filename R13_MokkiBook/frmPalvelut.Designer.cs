@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPalvelut));
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,10 +45,10 @@
             this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
             this.TsBtnLisaa = new System.Windows.Forms.ToolStripButton();
             this.txtHaku = new System.Windows.Forms.ToolStripTextBox();
-            this.TsBtnHae = new System.Windows.Forms.ToolStripButton();
             this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
             this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
             this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tslbHae = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -164,9 +163,9 @@
             // 
             this.fillByToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslbHae,
             this.TsBtnLisaa,
-            this.txtHaku,
-            this.TsBtnHae});
+            this.txtHaku});
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 484);
             this.fillByToolStrip.Name = "fillByToolStrip";
             this.fillByToolStrip.Size = new System.Drawing.Size(764, 25);
@@ -194,17 +193,6 @@
             this.txtHaku.Size = new System.Drawing.Size(100, 25);
             this.txtHaku.TextChanged += new System.EventHandler(this.txtHaku_TextChanged);
             // 
-            // TsBtnHae
-            // 
-            this.TsBtnHae.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.TsBtnHae.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.TsBtnHae.Image = ((System.Drawing.Image)(resources.GetObject("TsBtnHae.Image")));
-            this.TsBtnHae.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsBtnHae.Name = "TsBtnHae";
-            this.TsBtnHae.Size = new System.Drawing.Size(32, 22);
-            this.TsBtnHae.Text = "Hae";
-            this.TsBtnHae.Click += new System.EventHandler(this.TsBtnHae_Click);
-            // 
             // palveluTableAdapter
             // 
             this.palveluTableAdapter.ClearBeforeFill = true;
@@ -218,6 +206,12 @@
             // 
             this.varauksenPAlvelutDataSetBindingSource.DataSource = this.varauksenPAlvelutDataSet;
             this.varauksenPAlvelutDataSetBindingSource.Position = 0;
+            // 
+            // tslbHae
+            // 
+            this.tslbHae.Name = "tslbHae";
+            this.tslbHae.Size = new System.Drawing.Size(87, 22);
+            this.tslbHae.Text = "Hae palvelu_id:";
             // 
             // frmPalvelut
             // 
@@ -265,6 +259,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn alvDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource palveluBindingSource1;
         private System.Windows.Forms.ToolStripTextBox txtHaku;
-        private System.Windows.Forms.ToolStripButton TsBtnHae;
+        private System.Windows.Forms.ToolStripLabel tslbHae;
     }
 }
