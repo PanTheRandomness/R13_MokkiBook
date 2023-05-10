@@ -180,5 +180,13 @@ namespace R13_MokkiBook
         {
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut suljettiin käyttäjältä: ");
         }
+
+        private void frmVarauksenPalvelut_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

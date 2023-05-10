@@ -351,6 +351,7 @@
             this.MinimumSize = new System.Drawing.Size(1290, 659);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVaraukset_FormClosing);
             this.Load += new System.EventHandler(this.frmVaraukset_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).EndInit();
             this.cmsVaraustaulunMenu.ResumeLayout(false);

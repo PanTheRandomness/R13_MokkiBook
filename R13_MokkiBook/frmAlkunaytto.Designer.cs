@@ -195,6 +195,7 @@
             this.MinimumSize = new System.Drawing.Size(648, 414);
             this.Name = "frmAlkunaytto";
             this.Text = "MökkiBook";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAlkunaytto_FormClosing);
             this.Load += new System.EventHandler(this.frmAlkunaytto_Load);
             this.pnlAsiakkaat.ResumeLayout(false);
             this.prnAlueet.ResumeLayout(false);

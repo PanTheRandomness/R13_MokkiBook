@@ -249,5 +249,12 @@ namespace R13_MokkiBook
             sw.Close();
         }
 
+        private void frmVaraukset_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

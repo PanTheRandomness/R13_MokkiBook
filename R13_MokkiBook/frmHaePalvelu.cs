@@ -169,5 +169,13 @@ namespace R13_MokkiBook
         {
             LokiinTallentaminen("Palvelujen hakusivu suljettiin varaukselle " + kasiteltavavaraus.varaus_id.ToString() + " käyttäjältä: ");
         }
+
+        private void frmHaePalvelu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

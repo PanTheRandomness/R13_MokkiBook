@@ -471,19 +471,29 @@ namespace R13_MokkiBook
 
         private void btnLisaaPalveluVaraukseen_Click(object sender, EventArgs e)
         {
-            if (nudPalveluLkm.Value == 0)
+            if(!btnLisaaPalveluVaraukseen.Enabled)
             {
-
+                MessageBox.Show("Mökin valintaa ei ole lukittu. Lukitse mökin valinta muokataksesi varauksen palveluja.");
             }
             else
             {
-                
+                if (nudPalveluLkm.Value == 0)
+                {
+
+                }
+                else
+                {
+
+                }
             }
         }
 
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if(MessageBox.Show("Haluatko varmasti poistua?","", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void btnLisaa_Click(object sender, EventArgs e)
@@ -951,14 +961,6 @@ namespace R13_MokkiBook
 
         }
 
-        private void tbMaxhinta_TextChanged(object sender, EventArgs e)
-        {
-            if (tbMaxhinta.Text.Length > 0)
-                mokkiqueryhintamax = "AND hinta >= " + tbMaxhinta.Text;
-            else
-                mokkiqueryhintamax = ";";//Onko ok?
-        }
-
         private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
@@ -969,6 +971,10 @@ namespace R13_MokkiBook
         {
             valitturivimokki = dgvMokitUusiVaraus.CurrentRow.Index;
             valittumokki = mokit[valitturivimokki];
+            arvioituloppuhinta = valittumokki.hinta;
+            tbLoppuhinta.Text = arvioituloppuhinta.ToString();
+            tbAlueid.Text = valittumokki.alue_id.ToString();
+            tbMokkitunnus.Text = valittumokki.mokki_id.ToString();
         }
 
         private void btnTyhjValinta_Click(object sender, EventArgs e)
@@ -1071,7 +1077,7 @@ namespace R13_MokkiBook
             alkupvmmuutettu = false;
             loppupvmmuutettu = false;
         }
-        public void NollaaAlue()//TESTAA
+        public void NollaaAlue()
         {
             aluevalittu = false;
             tbAlueid.Text = "";
@@ -1107,8 +1113,16 @@ namespace R13_MokkiBook
             tbMaxhinta.Text = "0";
             minhinta = 0;
             maxhinta = 0;
+            tbLoppuhinta.Text = "0";
+            arvioituloppuhinta = 0;
+            tbMokkitunnus.Text = "";
             NollaaAika();
             NollaaAlue();
+        }
+
+        private void tbLoppuhinta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

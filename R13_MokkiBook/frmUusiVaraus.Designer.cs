@@ -482,12 +482,12 @@ namespace R13_MokkiBook
             // tbnTyhjennaMokkihaku
             // 
             this.tbnTyhjennaMokkihaku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbnTyhjennaMokkihaku.Location = new System.Drawing.Point(332, 237);
+            this.tbnTyhjennaMokkihaku.Location = new System.Drawing.Point(318, 237);
             this.tbnTyhjennaMokkihaku.Name = "tbnTyhjennaMokkihaku";
-            this.tbnTyhjennaMokkihaku.Size = new System.Drawing.Size(86, 23);
+            this.tbnTyhjennaMokkihaku.Size = new System.Drawing.Size(100, 23);
             this.tbnTyhjennaMokkihaku.TabIndex = 18;
-            this.tbnTyhjennaMokkihaku.Text = "Tyhjennä haku";
-            this.ttUusiVaraus.SetToolTip(this.tbnTyhjennaMokkihaku, "Tyhjentää mökkiin liittyvät hakukriteerit");
+            this.tbnTyhjennaMokkihaku.Text = "Tyhjennä mökki";
+            this.ttUusiVaraus.SetToolTip(this.tbnTyhjennaMokkihaku, "Tyhjentää mökkiin liittyvät hakukriteerit sekä valitun mökin");
             this.tbnTyhjennaMokkihaku.UseVisualStyleBackColor = true;
             this.tbnTyhjennaMokkihaku.Click += new System.EventHandler(this.tbnTyhjennaMokkihaku_Click);
             // 
@@ -544,7 +544,6 @@ namespace R13_MokkiBook
             this.tbMaxhinta.TabIndex = 16;
             this.tbMaxhinta.Text = "0";
             this.ttUusiVaraus.SetToolTip(this.tbMaxhinta, "Syötä maksimihinta mökille");
-            this.tbMaxhinta.TextChanged += new System.EventHandler(this.tbMaxhinta_TextChanged);
             this.tbMaxhinta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMinhinta_KeyPress);
             this.tbMaxhinta.Leave += new System.EventHandler(this.tbMaxhinta_Leave);
             // 
@@ -733,7 +732,9 @@ namespace R13_MokkiBook
             this.tbLoppuhinta.Name = "tbLoppuhinta";
             this.tbLoppuhinta.Size = new System.Drawing.Size(100, 20);
             this.tbLoppuhinta.TabIndex = 27;
+            this.tbLoppuhinta.Text = "0";
             this.ttUusiVaraus.SetToolTip(this.tbLoppuhinta, "Näyttää arvioidun loppuhinnan");
+            this.tbLoppuhinta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbLoppuhinta_KeyPress);
             // 
             // pnlPalvelut
             // 
