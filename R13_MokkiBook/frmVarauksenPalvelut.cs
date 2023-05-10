@@ -120,8 +120,8 @@ namespace R13_MokkiBook
                 {
                     cmd.ExecuteNonQuery();
                 }
-                LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin palvelu " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
             }
+            LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin palvelu " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
         }
 
         private void btnHaePalvelu_Click(object sender, EventArgs e)

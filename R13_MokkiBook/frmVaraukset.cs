@@ -31,6 +31,13 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             alueet = GetAlueet();
             LokiinTallentaminen("Varaukset-osio avattiin käyttäjältä: ");
+
+            //Muista poistaa tämä!! Vain korjausta varten!!!!! (Jos on tullut vahingossa lisäiltyä jotain väärää, joka haluaa kaataa koko homman...)
+            /*foreach (Varaus varaus in varaukset)
+            {
+                if (varaus.varaus_id ==4)
+                    PoistaVaraus(varaus);
+            }*/
         }
 
         public List<Varaus> GetVaraukset()
@@ -49,17 +56,34 @@ namespace R13_MokkiBook
                         {
                             Varaus varaus = new Varaus();
                             varaus.varaus_id = reader.GetInt32(0);
+                            //Muista poistaa tämä!! vain korjausta varten!!!!! Jos on tullut vahingossa lisäiltyä jotain väärää
+                            //if (varaus.varaus_id == 4)
+                            //    break;
                             varaus.asiakas_id = reader.GetInt32(1);
                             varaus.mokki_id = reader.GetInt32(2);
-                            varaus.varattu_pvm = reader.GetDateTime(3);
-                            varaus.vahvistus_pvm = reader.GetDateTime(4);
-                            varaus.varattu_alkupvm = reader.GetDateTime(5);
-                            varaus.varattu_loppupvm = reader.GetDateTime(6);
-
+                            //if (varaus.varaus_id < 4)
+                            //{
+                                varaus.varattu_pvm = reader.GetDateTime(3);
+                                varaus.vahvistus_pvm = reader.GetDateTime(4);
+                                varaus.varattu_alkupvm = reader.GetDateTime(5);
+                                varaus.varattu_loppupvm = reader.GetDateTime(6);
+                            //}
+                            /*else
+                            {
+                                varaus.varattu_pvm = nyt;
+                                varaus.vahvistus_pvm = nyt;
+                                varaus.varattu_alkupvm = nyt;
+                                varaus.varattu_loppupvm = nyt;
+                            }*/
                             var.Add(varaus);
                         }
                     }
                 }
+                /*string korjausquery = "UPDATE varaus SET varattu_pvm = " + nyt.ToShortDateString() + ", vahvistus_pvm = " + nyt.ToShortDateString() + ", varattu_alkupvm = " + nyt.ToShortDateString() + ", varattu_loppupvm = " + nyt.ToShortDateString() + " WHERE varaus_id = 4;";
+                using (OdbcCommand cmd = new OdbcCommand(korjausquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }*/
             }
             return var;
         }
@@ -93,20 +117,18 @@ namespace R13_MokkiBook
             v.varaus_id = varaukset[valitturivi].varaus_id;
             v.asiakas_id = varaukset[valitturivi].asiakas_id;
             v.mokki_id = varaukset[valitturivi].mokki_id;
-            v.varattu_pvm = varaukset[valitturivi].varattu_pvm;
-            v.vahvistus_pvm = varaukset[valitturivi].vahvistus_pvm;
-            v.varattu_alkupvm = varaukset[valitturivi].varattu_alkupvm;
-            v.varattu_loppupvm = varaukset[valitturivi].varattu_loppupvm;
+            //MUISTA POISTAA IFFI
+            //if (v.varaus_id > 4)
+            //{
+                v.varattu_pvm = varaukset[valitturivi].varattu_pvm;
+                v.vahvistus_pvm = varaukset[valitturivi].vahvistus_pvm;
+                v.varattu_alkupvm = varaukset[valitturivi].varattu_alkupvm;
+                v.varattu_loppupvm = varaukset[valitturivi].varattu_loppupvm;
+            //}
             return v;
         }
-
         private void frmVaraukset_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dataSet1.alue' table. You can move, or remove it, as needed.
-            this.alueTableAdapter.Fill(this.dataSet1.alue);
-            // TODO: This line of code loads data into the 'dataSet1.mokki' table. You can move, or remove it, as needed.
-            this.mokkiTableAdapter.Fill(this.dataSet1.mokki);
-            // TODO: This line of code loads data into the 'dataSet1.varaus' table. You can move, or remove it, as needed.
             this.varausTableAdapter.Fill(this.dataSet1.varaus);
         }
 
@@ -145,9 +167,25 @@ namespace R13_MokkiBook
 
         private void tsmiPoista_Click(object sender, EventArgs e)
         {
-            //VALIDOI
+            if (MessageBox.Show("Haluatko varmasti poistaa varauksen?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                PoistaVaraus(valittuvaraus);
+            }
         }
-
+        public void PoistaVaraus(Varaus v)
+        {
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string poistoquery = "DELETE FROM varaus WHERE varaus_id = " + v.varaus_id + ";";
+                using (OdbcCommand cmd = new OdbcCommand(poistoquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            PaivitaTaulu();
+            LokiinTallentaminen("Poistettiin varaus " + v.varaus_id.ToString() + " käyttäjältä: ");
+        }
         private void btnHae_Click_1(object sender, EventArgs e)
         {
             if (ValidPvm())

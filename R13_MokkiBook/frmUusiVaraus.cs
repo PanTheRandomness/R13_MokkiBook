@@ -72,10 +72,12 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             tamavaraus = new Varaus();
             tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
-            varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + ");"; 
-            // Pakko laittaa ykköset nuihin ihan vaan, muuten ei luo HUOM! Jos ei ole olemassa asiakasta 1 ja mökkiä 1, ei toimi!
-            LisaaTamavarausVarauksiin(varausquery);
-            varaukset = GetVaraukset();
+            //varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + ");"; 
+            //Pakko laittaa ykköset nuihin ihan vaan, muuten ei luo HUOM! Jos ei ole olemassa asiakasta 1 ja mökkiä 1, ei toimi!
+            //LisaaTamavarausVarauksiin(varausquery);
+            //varaukset = GetVaraukset();
+            //
+            //Nämä aiheuttivat errorin? 
             palvelut = GetPalvelut();
             varauksenpalvelut = GetVarauksenPalvelut();
             asiakkaat = GetAsiakkaat();
@@ -599,18 +601,9 @@ namespace R13_MokkiBook
         }
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!varausluotu)
+            if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    varausquery = "DELETE FROM varaus WHERE varaus_id = " + tamavaraus.varaus_id + ";";
-                    PoistaTamavarausVarauksista(varausquery);
-                    //tarviiko ? e.Cancel = false;
-                }
+                e.Cancel = true;
             }
         }
         private void btnLisaa_Click(object sender, EventArgs e)
@@ -822,6 +815,11 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
+            if (!varausluotu)
+            {
+                varausquery = "DELETE FROM varaus WHERE varaus_id = " + tamavaraus.varaus_id + ";";
+                PoistaTamavarausVarauksista(varausquery);
+            }
         }
 
         private void tbEnimi_Leave(object sender, EventArgs e)
