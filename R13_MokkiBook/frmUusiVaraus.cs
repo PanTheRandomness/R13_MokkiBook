@@ -72,10 +72,10 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             tamavaraus = new Varaus();
             tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
-            varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ");"; 
+            // varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ");"; 
             //Pakko laittaa ykköset nuihin ihan vaan, muuten ei luo HUOM! Jos ei ole olemassa asiakasta 1 ja mökkiä 1, ei toimi!
-            LisaaTamavarausVarauksiin(varausquery);
-            varaukset = GetVaraukset();
+            //LisaaTamavarausVarauksiin(varausquery);
+            //varaukset = GetVaraukset();
             //
             //Nämä aiheuttivat errorin? 
             palvelut = GetPalvelut();
@@ -189,7 +189,7 @@ namespace R13_MokkiBook
             }
             return pal;
         }
-        public List<VarauksenPalvelut> GetVarauksenPalvelut()
+        public List<VarauksenPalvelut> GetVarauksenPalvelut()// Tässä käsiteltäisiin luomattoman/keskeneräisen varauksen palveluita... ei voi luoda palvelue ennen kuin se on oikeasti valmis!!
         {
             List<VarauksenPalvelut> vpal = new List<VarauksenPalvelut>();
             string query = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id + ";";
@@ -349,7 +349,7 @@ namespace R13_MokkiBook
         {
 
             //jos kaikki onnistuu:
-            //UPDATE!!
+            //UPDATE??
             varausluotu = true;
         }
         public void PaivitaAsiakastaulu(string asiakasquery)
@@ -816,7 +816,7 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
-            if (!varausluotu)
+            if (!varausluotu)//MIKSEI POISTA????????????????????
             {
                 PoistaTamavarausVarauksista();
             }
