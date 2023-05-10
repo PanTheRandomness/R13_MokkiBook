@@ -72,10 +72,10 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             tamavaraus = new Varaus();
             tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
-            //varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + ");"; 
+            varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ");"; 
             //Pakko laittaa ykköset nuihin ihan vaan, muuten ei luo HUOM! Jos ei ole olemassa asiakasta 1 ja mökkiä 1, ei toimi!
-            //LisaaTamavarausVarauksiin(varausquery);
-            //varaukset = GetVaraukset();
+            LisaaTamavarausVarauksiin(varausquery);
+            varaukset = GetVaraukset();
             //
             //Nämä aiheuttivat errorin? 
             palvelut = GetPalvelut();
@@ -119,10 +119,11 @@ namespace R13_MokkiBook
                 }
             }
         }
-        public void PoistaTamavarausVarauksista(string varausquery)
+        public void PoistaTamavarausVarauksista()
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
+                varausquery = "DELETE FROM varaus WHERE varaus_id = " + tamavaraus.varaus_id + ";";
                 connection.Open();
                 using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                 {
@@ -817,8 +818,7 @@ namespace R13_MokkiBook
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
             if (!varausluotu)
             {
-                varausquery = "DELETE FROM varaus WHERE varaus_id = " + tamavaraus.varaus_id + ";";
-                PoistaTamavarausVarauksista(varausquery);
+                PoistaTamavarausVarauksista();
             }
         }
 
