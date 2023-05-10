@@ -105,6 +105,7 @@ namespace R13_MokkiBook
 
                 // Add a title to the document
                 document.Add(new Paragraph("Lasku"));
+                document.Add(new Paragraph(" "));
 
                 // Check if any row is selected in the DataGridView
                 if (dataGridView1.SelectedRows.Count > 0)
@@ -118,6 +119,10 @@ namespace R13_MokkiBook
                     document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString() + " +alv"));
                     document.Add(new Paragraph("Alv: " + row.Cells["alv"].Value.ToString()));
 
+                    document.Add(new Paragraph(" "));
+                    document.Add(new Paragraph("Asiakkaan tiedot:"));
+                    document.Add(new Paragraph(" "));
+
                     // Search for varaus_id by lasku_id
                     OdbcConnection connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
                     
@@ -126,32 +131,15 @@ namespace R13_MokkiBook
                     OdbcCommand command1 = new OdbcCommand("SELECT varaus_id FROM lasku WHERE lasku_id = ?", connection);
                     command1.Parameters.AddWithValue("@lasku_id", lasku_id);
                     OdbcDataReader reader1 = command1.ExecuteReader();
-                    if (reader1.Read())
-                    {
-                        string varaus_id = reader1.GetString(0);
-                        document.Add(new Paragraph("Varaus ID: " + varaus_id));
-                    }
-
+                
                     // Add the remaining transaction data to the document
-                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString() + " +alv"));
-                    document.Add(new Paragraph("Alv: " + row.Cells["alv"].Value.ToString()));
-
+                 
                     // Create a new PdfPTable object to hold the line items
                     PdfPTable table = new PdfPTable(4);
                     table.WidthPercentage = 100;
 
-                    // Add the column headers to the table
-                    table.AddCell(new PdfPCell(new Phrase("Lasku_id")));
-                    table.AddCell(new PdfPCell(new Phrase("Varaus_id")));
-                    table.AddCell(new PdfPCell(new Phrase("Summa")));
-                    table.AddCell(new PdfPCell(new Phrase("alv")));
-
                      // Add the line items from the selected row to the table
-                     table.AddCell(new PdfPCell(new Phrase(row.Cells["lasku_id"].Value.ToString())));
-                     table.AddCell(new PdfPCell(new Phrase(row.Cells["varaus_id"].Value.ToString())));
-                     table.AddCell(new PdfPCell(new Phrase(row.Cells["summa"].Value.ToString())));
-                     table.AddCell(new PdfPCell(new Phrase(row.Cells["alv"].Value.ToString())));
-                     // Add the table to the document
+                   
                      document.Add(table);
                     
                 }
@@ -160,12 +148,8 @@ namespace R13_MokkiBook
 
                 // Create a new ODBC connection to the database
                
-
                 // Create a new ODBC command to retrieve additional data
                 OdbcCommand command = new OdbcCommand("SELECT * FROM asiakas", connection);
-
-                // Open the database connection
-                
 
                 // Execute the command and retrieve the data using a data reader
                 OdbcDataReader reader = command.ExecuteReader();
@@ -190,7 +174,6 @@ namespace R13_MokkiBook
                 document.Add(additionalTable);
 
                 // Close the database connection and data reader
-
 
                 // Close the data reader
                 reader.Close();
