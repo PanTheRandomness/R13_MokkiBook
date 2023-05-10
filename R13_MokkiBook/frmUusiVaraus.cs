@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Utilities.Collections;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,6 +52,7 @@ namespace R13_MokkiBook
         public string palvelulisaysquery;
         public string postiqueryasiakas;
         public string varauksenpalveluquery;
+        public string varausquery;
        
         public DateTime nyt = DateTime.Now;
         public DateTime alkupvm;
@@ -62,6 +64,7 @@ namespace R13_MokkiBook
         public bool aluevalittu = false;
         public bool varausluotu = false;
         public bool varauksessaonjopalvelu = false;
+        public bool palveluvalittu = false;
 
         public frmUusiVaraus()
         {
@@ -69,6 +72,10 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             tamavaraus = new Varaus();
             tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
+            varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + "', '" + nyt.ToShortDateString() + ");"; 
+            // Pakko laittaa ykköset nuihin ihan vaan, muuten ei luo HUOM! Jos ei ole olemassa asiakasta 1 ja mökkiä 1, ei toimi!
+            LisaaTamavarausVarauksiin(varausquery);
+            varaukset = GetVaraukset();
             palvelut = GetPalvelut();
             varauksenpalvelut = GetVarauksenPalvelut();
             asiakkaat = GetAsiakkaat();
@@ -98,6 +105,28 @@ namespace R13_MokkiBook
             StreamWriter sw = new StreamWriter("Kirjautumistiedot.txt", true);
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
+        }
+        public void LisaaTamavarausVarauksiin(string varausquery)
+        {
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void PoistaTamavarausVarauksista(string varausquery)
+        {
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
         public List<Varaus> GetVaraukset()
         {
@@ -317,6 +346,7 @@ namespace R13_MokkiBook
         {
 
             //jos kaikki onnistuu:
+            //UPDATE!!
             varausluotu = true;
         }
         public void PaivitaAsiakastaulu(string asiakasquery)
@@ -393,7 +423,15 @@ namespace R13_MokkiBook
         public void PaivitaVarauksenPalvelutaulu(string varauksenpalveluquery)
         {
             varauksenpalvelut = GetVarauksenPalvelut();
-
+            OdbcConnection connection = new OdbcConnection(connectionString);
+            connection.Open();
+            DataTable dataTable = new DataTable();
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter(varauksenpalveluquery, connection))
+            {
+                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable);
+            }
+            lbVarauksenPalvelut.DataSource = dataTable;
         }
         private void dtmLoppupvm_ValueChanged(object sender, EventArgs e)
         {
@@ -468,20 +506,27 @@ namespace R13_MokkiBook
 
         private void btnPoistaPalvelu_Click(object sender, EventArgs e)
         {
-            palvelupoistoquery = "";
+            palvelupoistoquery = "DELETE FROM varauksen_palvelut WHERE varaus_id = " + valittuvarauksenpalvelu.varaus_id + " AND palvelu_id = " + valittuvarauksenpalvelu.palvelu_id + ";";
             PoistaPalveluVarauskesta(palvelupoistoquery);
         }
 
         public void PoistaPalveluVarauskesta(string poistoquery)
         {
-
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand cmd = new OdbcCommand(poistoquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void TyhjennaVarauksenPalvelut()
         {
             foreach(VarauksenPalvelut vp in varauksenpalvelut)
-            {
-                palvelupoistoquery = "";
+            {   //olisi voinut varmaankin jokun yleisenkin poistokäskyn laittaa, mutta aivot haluaa nyt näin
+                palvelupoistoquery = "DELETE FROM varauksen_palvelut WHERE varaus_id = " + vp.varaus_id + " AND palvelu_id = " + vp.palvelu_id + ";";
                 PoistaPalveluVarauskesta(palvelupoistoquery);
             }
         }
@@ -494,16 +539,23 @@ namespace R13_MokkiBook
             }
             else
             {
-                if (nudPalveluLkm.Value <= 0)
+                if (palveluvalittu)
                 {
-                    MessageBox.Show("Palvelua ei voitu lisätä koska lisättävän palvelun lukumäärä ei kelpaa.");
+
+
+                    if (nudPalveluLkm.Value <= 0)
+                    {
+                        MessageBox.Show("Palvelua ei voitu lisätä: lisättävän palvelun lukumäärä ei kelpaa.");
+                    }
+                    else
+                    {
+                        LisaaPalveluVaraukseen();
+                        varauksenpalveluquery = "SELECT palvelu_id, lkm FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id + ";";
+                        PaivitaVarauksenPalvelutaulu(varauksenpalveluquery);
+                    }
                 }
                 else
-                {
-                    LisaaPalveluVaraukseen();
-                    varauksenpalveluquery = "";
-                    PaivitaVarauksenPalvelutaulu(varauksenpalveluquery);
-                }
+                    MessageBox.Show("Palvelua ei voitu lisätä: Valitse lisättävä palvelu tuplaklillaamalla.");
             }
         }
         public void LisaaPalveluVaraukseen()
@@ -528,7 +580,7 @@ namespace R13_MokkiBook
                     palvelulisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + valittuvarauksenpalvelu.varaus_id + ", " + valittuvarauksenpalvelu.palvelu_id + ", " + valittuvarauksenpalvelu.lkm + ");";
                     using (OdbcCommand cmd = new OdbcCommand(palvelulisaysquery, connection))
                     {
-                        cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery(); //System.Data.Odbc.OdbcException: 'ERROR [23000] [ma-3.1.18][10.6.12-MariaDB]Cannot add or update a child row: a foreign key constraint fails (`vn`.`varauksen_palvelut`, CONSTRAINT `fk_varaus` FOREIGN KEY (`varaus_id`) REFERENCES `varaus` (`varaus_id`))'
                     }
                 }
             }
@@ -552,6 +604,12 @@ namespace R13_MokkiBook
                 if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
                 {
                     e.Cancel = true;
+                }
+                else
+                {
+                    varausquery = "DELETE FROM varaus WHERE varaus_id = " + tamavaraus.varaus_id + ";";
+                    PoistaTamavarausVarauksista(varausquery);
+                    //tarviiko ? e.Cancel = false;
                 }
             }
         }
@@ -685,6 +743,10 @@ namespace R13_MokkiBook
                 }
                 else
                     MessageBox.Show("Mökkiä tai sen aluetta ei ole valittu riittävän hyvin, joten alueen palveluita ei voida muokata.");
+
+                palveluquery = "SELECT * FROM palvelu WHERE alue_id = (SELECT alue_id FROM mokki WHERE mokki_id = " + valittumokki.mokki_id.ToString() + ");";
+                palvelut = GetPalvelut();
+                PaivitaPalvelutaulu(palveluquery);
             }
             else if (cbLukitseMokki.Checked == false)
             {
@@ -698,7 +760,6 @@ namespace R13_MokkiBook
 
                 palveluquery = "SELECT * FROM palvelu;";
                 PaivitaPalvelutaulu(palveluquery);
-                //tyhjentää valitut lisäpalvelut?
                 pnlPalvelut.Enabled = false;
             }
         }
@@ -1034,6 +1095,8 @@ namespace R13_MokkiBook
         {
             valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
             valittupalvelu = palvelut[valitturivipalvelu];
+            palveluvalittu = true;
+            TyhjennaVarauksenPalvelut();
         }
 
         private void dgvMokitUusiVaraus_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1044,6 +1107,7 @@ namespace R13_MokkiBook
             tbLoppuhinta.Text = arvioituloppuhinta.ToString();
             tbAlueid.Text = valittumokki.alue_id.ToString();
             tbMokkitunnus.Text = valittumokki.mokki_id.ToString();
+            TyhjennaVarauksenPalvelut();
         }
 
         private void btnTyhjValinta_Click(object sender, EventArgs e)
@@ -1063,15 +1127,11 @@ namespace R13_MokkiBook
             valittualue = alueet[valitturivialue];
             tbAlueid.Text = valittualue.alue_id.ToString();
             aluevalittu = true;
-            palveluquery = "SELECT * FROM palvelu WHERE alue_id = " + valittualue.alue_id + ";";
-            palvelut = GetPalvelut();
-            PaivitaPalvelutaulu(palveluquery);
         }
         public void MuodostaMokkiHakuQuery()
         {
             mokkiquery = "SELECT * FROM mokki" + MuodostaPVMHaku() + MuodostaAlueHaku() + MuodostaLKMHaku() + MuodostaHintaHaku() + ";";
         }
-
         public string MuodostaPVMHaku()
         {
             string pal = "";
@@ -1134,12 +1194,10 @@ namespace R13_MokkiBook
             }
             return pal;
         }
-
         private void btnNollaaAika_Click(object sender, EventArgs e)
         {
             NollaaAika();
         }
-
         public void NollaaAika()
         {
             dtpAlkupvm.Value = nyt;
@@ -1164,7 +1222,7 @@ namespace R13_MokkiBook
             PaivitaPalvelutaulu(palveluquery);
             varauksenpalveluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id.ToString() + ";";
             //JA poista
-            PaivitaVarauksenPalvelutaulu(varauksenpalveluquery);//TÄMÄ VIELÄ TYHJÄ
+            PaivitaVarauksenPalvelutaulu(varauksenpalveluquery);
         }
 
         private void tbMaxhinta_Leave(object sender, EventArgs e)
@@ -1196,6 +1254,15 @@ namespace R13_MokkiBook
         private void tbLoppuhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void nudPalveluLkm_ValueChanged(object sender, EventArgs e)
+        {
+            if(!palveluvalittu)
+            {
+                MessageBox.Show("Määrää ei voi muokata: Valitse lisättävä palvelu tuplaklillaamalla.");
+                nudPalveluLkm.Value = 0;
+            }
         }
     }
 }

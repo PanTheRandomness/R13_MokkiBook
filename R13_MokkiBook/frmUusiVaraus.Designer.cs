@@ -99,7 +99,6 @@ namespace R13_MokkiBook
             this.lblPalvelujenMaara = new System.Windows.Forms.Label();
             this.nudPalveluLkm = new System.Windows.Forms.NumericUpDown();
             this.btnLisaaPalveluVaraukseen = new System.Windows.Forms.Button();
-            this.lbVarauksenPalvelut = new System.Windows.Forms.ListBox();
             this.dgvMokitUusiVaraus = new System.Windows.Forms.DataGridView();
             this.mokkiidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,6 +124,7 @@ namespace R13_MokkiBook
             this.lblValitseasiakas = new System.Windows.Forms.Label();
             this.lblValitsemokki = new System.Windows.Forms.Label();
             this.lblValitsePalvelut = new System.Windows.Forms.Label();
+            this.lbVarauksenPalvelut = new System.Windows.Forms.ListBox();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
@@ -854,6 +854,7 @@ namespace R13_MokkiBook
             this.nudPalveluLkm.Size = new System.Drawing.Size(51, 20);
             this.nudPalveluLkm.TabIndex = 23;
             this.ttUusiVaraus.SetToolTip(this.nudPalveluLkm, "Valitse lisättävän palvelun lukumäärä");
+            this.nudPalveluLkm.ValueChanged += new System.EventHandler(this.nudPalveluLkm_ValueChanged);
             // 
             // btnLisaaPalveluVaraukseen
             // 
@@ -867,19 +868,6 @@ namespace R13_MokkiBook
             this.ttUusiVaraus.SetToolTip(this.btnLisaaPalveluVaraukseen, "Lisää valitun palvelun varaukseen");
             this.btnLisaaPalveluVaraukseen.UseVisualStyleBackColor = true;
             this.btnLisaaPalveluVaraukseen.Click += new System.EventHandler(this.btnLisaaPalveluVaraukseen_Click);
-            // 
-            // lbVarauksenPalvelut
-            // 
-            this.lbVarauksenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbVarauksenPalvelut.Enabled = false;
-            this.lbVarauksenPalvelut.FormattingEnabled = true;
-            this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
-            this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
-            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 69);
-            this.lbVarauksenPalvelut.TabIndex = 25;
-            this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Valitse varauksesta poistettava palvelu.");
-            this.lbVarauksenPalvelut.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbVarauksenPalvelut_MouseDoubleClick);
             // 
             // dgvMokitUusiVaraus
             // 
@@ -1042,6 +1030,19 @@ namespace R13_MokkiBook
             this.lblValitsePalvelut.TabIndex = 22;
             this.lblValitsePalvelut.Text = "4. Valitse palvelut:";
             // 
+            // lbVarauksenPalvelut
+            // 
+            this.lbVarauksenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbVarauksenPalvelut.Enabled = false;
+            this.lbVarauksenPalvelut.FormattingEnabled = true;
+            this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
+            this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
+            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 69);
+            this.lbVarauksenPalvelut.TabIndex = 25;
+            this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Valitse varauksesta poistettava palvelu.");
+            this.lbVarauksenPalvelut.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbVarauksenPalvelut_MouseDoubleClick);
+            // 
             // frmUusiVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1152,7 +1153,6 @@ namespace R13_MokkiBook
         private System.Windows.Forms.Label lblPalvelujenMaara;
         private System.Windows.Forms.NumericUpDown nudPalveluLkm;
         private System.Windows.Forms.Button btnLisaaPalveluVaraukseen;
-        private System.Windows.Forms.ListBox lbVarauksenPalvelut;
         private System.Windows.Forms.CheckBox cbLukitseMokki;
         private System.Windows.Forms.DataGridViewTextBoxColumn palveluidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn alueidDataGridViewTextBoxColumn1;
@@ -1184,6 +1184,7 @@ namespace R13_MokkiBook
         private System.Windows.Forms.Label lblValitseasiakas;
         private System.Windows.Forms.Label lblValitsemokki;
         private System.Windows.Forms.Label lblValitsePalvelut;
+        private System.Windows.Forms.ListBox lbVarauksenPalvelut;
     }
 
 }
