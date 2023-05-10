@@ -313,6 +313,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "frmLaskut";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLaskut_FormClosing);
             this.Load += new System.EventHandler(this.frmLaskut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laskuBindingSource2)).EndInit();

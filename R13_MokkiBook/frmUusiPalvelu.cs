@@ -271,5 +271,12 @@ namespace R13_MokkiBook
                 MessageBox.Show(ex.Message);
             }
         }
+        private void frmUusiPalvelu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Haluatko varmasti sulkea ikkunan?", "Varmista", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

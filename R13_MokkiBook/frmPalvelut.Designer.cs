@@ -43,12 +43,12 @@
             this.dataSet1 = new R13_MokkiBook.DataSet1();
             this.palveluBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
+            this.tslbHae = new System.Windows.Forms.ToolStripLabel();
             this.TsBtnLisaa = new System.Windows.Forms.ToolStripButton();
             this.txtHaku = new System.Windows.Forms.ToolStripTextBox();
             this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
             this.varauksenPAlvelutDataSet = new R13_MokkiBook.VarauksenPAlvelutDataSet();
             this.varauksenPAlvelutDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tslbHae = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -172,6 +172,12 @@
             this.fillByToolStrip.TabIndex = 1;
             this.fillByToolStrip.Text = "fillByToolStrip";
             // 
+            // tslbHae
+            // 
+            this.tslbHae.Name = "tslbHae";
+            this.tslbHae.Size = new System.Drawing.Size(87, 22);
+            this.tslbHae.Text = "Hae palvelu_id:";
+            // 
             // TsBtnLisaa
             // 
             this.TsBtnLisaa.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -207,12 +213,6 @@
             this.varauksenPAlvelutDataSetBindingSource.DataSource = this.varauksenPAlvelutDataSet;
             this.varauksenPAlvelutDataSetBindingSource.Position = 0;
             // 
-            // tslbHae
-            // 
-            this.tslbHae.Name = "tslbHae";
-            this.tslbHae.Size = new System.Drawing.Size(87, 22);
-            this.tslbHae.Text = "Hae palvelu_id:";
-            // 
             // frmPalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,6 +224,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmPalvelut";
             this.Text = "Palvelut";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPalvelut_FormClosing);
             this.Load += new System.EventHandler(this.frmPalvelut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource1)).EndInit();

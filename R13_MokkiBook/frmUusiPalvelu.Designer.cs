@@ -410,6 +410,7 @@ namespace R13_MokkiBook
             this.Controls.Add(this.txtNimi);
             this.Name = "frmUusiPalvelu";
             this.Text = "Muokkaa palveluita";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUusiPalvelu_FormClosing);
             this.Load += new System.EventHandler(this.frmUusiPalvelu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.palveluBindingSource3)).EndInit();
