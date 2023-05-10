@@ -61,6 +61,7 @@ namespace R13_MokkiBook
         public bool loppupvmmuutettu = false;
         public bool aluevalittu = false;
         public bool varausluotu = false;
+        public bool varauksessaonjopalvelu = false;
 
         public frmUusiVaraus()
         {
@@ -391,6 +392,7 @@ namespace R13_MokkiBook
         }
         public void PaivitaVarauksenPalvelutaulu(string varauksenpalveluquery)
         {
+            varauksenpalvelut = GetVarauksenPalvelut();
 
         }
         private void dtmLoppupvm_ValueChanged(object sender, EventArgs e)
@@ -438,13 +440,20 @@ namespace R13_MokkiBook
             {
                 if (!mokkilukittu)
                     MessageBox.Show("Varausta ei voitu luoda: Mökkiä ei ole lukittu.");
-                else//Huom muut vaatimukset! Validoi alue, mökki, posti, määrä ja mökin vapaus!
+                else//Huom muut vaatimukset! Validoi alue, mökki & sen vapaus, posti, määrä!
                 {
-                    //
-                    if (MokkiVapaa())
-                        LuoVaraus();
+                    if (ValidAlue())
+                    {
+                        if (ValidMokki())
+                        {
+                            if (MokkiVapaa())
+                                LuoVaraus();
+                            else
+                                MessageBox.Show("Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.");
+                        }
+                    }
                     else
-                        MessageBox.Show("Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.");
+                        MessageBox.Show("");
                 }
             }
             else
@@ -491,16 +500,50 @@ namespace R13_MokkiBook
                 }
                 else
                 {
-                    palvelulisaysquery = "";
-                    LisaaPalveluVaraukseen(palvelulisaysquery);
+                    LisaaPalveluVaraukseen();
                     varauksenpalveluquery = "";
                     PaivitaVarauksenPalvelutaulu(varauksenpalveluquery);
                 }
             }
         }
-        public void LisaaPalveluVaraukseen(string palvelulisaysquery)
+        public void LisaaPalveluVaraukseen()
         {
+            valittuvarauksenpalvelu.varaus_id = tamavaraus.varaus_id;
+            valittuvarauksenpalvelu.palvelu_id = valittupalvelu.palvelu_id;
+            valittuvarauksenpalvelu.lkm = (int)nudPalveluLkm.Value;
 
+            foreach (VarauksenPalvelut vap in varauksenpalvelut)
+            {
+                if ((vap.varaus_id == valittuvarauksenpalvelu.varaus_id) && (vap.palvelu_id == valittuvarauksenpalvelu.palvelu_id))
+                {
+                    varauksessaonjopalvelu = true;
+                    valittuvarauksenpalvelu.lkm = vap.lkm + (int)nudPalveluLkm.Value;
+                }
+            }
+            if (!varauksessaonjopalvelu)
+            {
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    connection.Open();
+                    palvelulisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + valittuvarauksenpalvelu.varaus_id + ", " + valittuvarauksenpalvelu.palvelu_id + ", " + valittuvarauksenpalvelu.lkm + ");";
+                    using (OdbcCommand cmd = new OdbcCommand(palvelulisaysquery, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            else
+            {
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    connection.Open();
+                    palvelulisaysquery = "UPDATE varauksen_palvelut SET varaus_id = " + valittuvarauksenpalvelu.varaus_id + ", palvelu_id = " + valittuvarauksenpalvelu.palvelu_id + ", lkm = " + valittuvarauksenpalvelu.lkm + " WHERE varaus_id = " + valittuvarauksenpalvelu.varaus_id + " AND palvelu_id = " + valittuvarauksenpalvelu.palvelu_id + "; ";
+                    using (OdbcCommand cmd = new OdbcCommand(palvelulisaysquery, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
         }
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -702,11 +745,17 @@ namespace R13_MokkiBook
             }
             return true;
         }
-        public bool ValidAlue()
+        public bool ValidAlue()//Tarkista vielä- pitäisikö katsoa mätsääkö alue mökkiin??
         {
             if(valittualue != null)
-                return true;//Tarkista vielä- pitäisikö katsoa mätsääkö alue mökkiin??
+                return true;
             return false;
+        }
+
+        public bool ValidMokki()//Tarkista vielä- pitäisikö katsoa mätsääkö alue mökkiin??
+        {
+            return true;
+            //ei valmis!!
         }
 
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
@@ -1147,11 +1196,6 @@ namespace R13_MokkiBook
         private void tbLoppuhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
-        }
-
-        private void dgvAlueenPalvelut_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
