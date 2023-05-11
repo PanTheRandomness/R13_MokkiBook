@@ -78,7 +78,6 @@ namespace R13_MokkiBook
                     PoistaVaraus(varaus);
             }*/
         }
-
         public List<Varaus> GetVaraukset()
         {
             List<Varaus> var = new List<Varaus>();
@@ -165,14 +164,12 @@ namespace R13_MokkiBook
         {
             this.varausTableAdapter.Fill(this.dataSet1.varaus);
         }
-
         private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
         {
             //HUUTAA JOS KLIKKAA ULKOPUOLELTA
             valitturivi = dgvVaraukset.CurrentRow.Index;
             valittuvaraus = GetValittuVaraus();
         }
-
         private void btnRaportti_Click(object sender, EventArgs e)
         {
             PrintDocument printDocument = new PrintDocument();
@@ -188,30 +185,27 @@ namespace R13_MokkiBook
         }
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
+            //kannattaa tulostaa vaakaan
             DataGridViewPrinter dataGridViewPrinter = new DataGridViewPrinter(dgvVaraukset, e.Graphics, e.MarginBounds, Color.Black, true);
             bool morePages = dataGridViewPrinter.DrawDataGridView();
 
             e.HasMorePages = morePages;
         }
-
         private void btnUusi_Click(object sender, EventArgs e)
         {
             frmUusiVaraus uv = new frmUusiVaraus();
             uv.ShowDialog();
         }
-
         private void tsmiMuokkaa_Click(object sender, EventArgs e)
         {
             //Varauksen palveluja voi muokata toista kautta, mutta palaan tähän, jos  jää aikaa.
             //Priorisoin hakutoiminnon, koska varauksen palvelun muokkaus on jo varauksen muokkausta sinänsä.
         }
-
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
         {
             frmVarauksenPalvelut vp = new frmVarauksenPalvelut(valittuvaraus);
             vp.ShowDialog();
         }
-
         private void tsmiPoista_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistaa varauksen?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -253,7 +247,6 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Hakua ei voitu suorittaa: Varauksen alkupäivämäärän on oltava ennen sen päättymispäivämäärää.");
         }
-
         public bool ValidPvm()
         {
             if(hakualku < hakuloppu)
@@ -263,7 +256,6 @@ namespace R13_MokkiBook
             else
                 return false;
         }
-
         public bool ValidAluetunnus()
         {
             bool tunnus_loytyi = false;
@@ -275,7 +267,6 @@ namespace R13_MokkiBook
             }
             return tunnus_loytyi;
         }
-
         private void btnTyhjennaHaku_Click(object sender, EventArgs e)
         {
             hakuquery = "SELECT * FROM varaus";
@@ -286,7 +277,6 @@ namespace R13_MokkiBook
             hakuloppu = nyt;
             PaivitaTaulu();
         }
-
         public void PaivitaTaulu()
         {
             try
@@ -314,23 +304,19 @@ namespace R13_MokkiBook
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
-
         private void tbAlue_KeyPress(object sender, KeyPressEventArgs e)
         {
             if((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
         }
-
         private void dtpAlku_ValueChanged(object sender, EventArgs e)
         {
             hakualku = dtpAlku.Value;
         }
-
         private void dtpLoppu_ValueChanged(object sender, EventArgs e)
         {
             hakuloppu = dtpLoppu.Value;
         }
-
         public void LokiinTallentaminen(string teksti)
         {
             string kayttaja = Environment.UserName;
@@ -339,7 +325,6 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
-
         private void frmVaraukset_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -347,7 +332,6 @@ namespace R13_MokkiBook
                 e.Cancel = true;
             }
         }
-
     }
     public class DataGridViewPrinter
     {
@@ -358,7 +342,6 @@ namespace R13_MokkiBook
         private bool includeColumnHeaders;
         private int rowIndex;
         private bool morePages;
-
         public DataGridViewPrinter(DataGridView dataGridView, Graphics graphics, Rectangle bounds, Color textColor, bool includeColumnHeaders)
         {
             this.dataGridView = dataGridView;
@@ -370,12 +353,11 @@ namespace R13_MokkiBook
             rowIndex = 0;
             morePages = false;
         }
-
         public bool DrawDataGridView()
         {
             int height = dataGridView.ColumnHeadersHeight + dataGridView.Rows.Cast<DataGridViewRow>().Sum(row => row.Height);
 
-            if (includeColumnHeaders)
+            if (includeColumnHeaders) // noh.. piti saada tulostettua tuo otsikkorivi, mutta ei nyt onnistu, joten tulostaa vaan sen ylimmän rivin :D
             {
                 DrawRow(dataGridView.Rows[rowIndex].Cells, new SolidBrush(textColor), bounds.Y);
                 height += dataGridView.Rows[0].Height;
@@ -388,13 +370,10 @@ namespace R13_MokkiBook
                     morePages = true;
                     return morePages;
                 }
-
-                // Draw data row
                 DrawRow(dataGridView.Rows[rowIndex].Cells, new SolidBrush(textColor), bounds.Y + height);
                 height += dataGridView.Rows[rowIndex].Height;
                 rowIndex++;
             }
-
             morePages = false;
             return morePages;
         }
