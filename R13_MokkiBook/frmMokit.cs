@@ -19,6 +19,8 @@ namespace R13_MokkiBook
 
         public Mokki valittuMokki = new Mokki();
         public List<Mokki> mokit;
+        public List<Posti> postit;
+        public Mokki luotumokki;
 
         public string query;
         private OdbcConnection connection;
@@ -29,6 +31,8 @@ namespace R13_MokkiBook
         {
             InitializeComponent();
             mokit = GetMokit();
+            postit = GetPostit();
+            luotumokki = new Mokki();
             lokiinTallentaminen("Mökit-osio avattiin käyttäjältä: ");
             this.FormClosing += new FormClosingEventHandler(frmMokit_FormClosing);
         }
@@ -89,43 +93,68 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
+            luotumokki.mokki_id = int.Parse(tbMokkiId.Text);
+            luotumokki.alue_id = int.Parse(tbAlueId.Text);
+            luotumokki.postinro = tbPostinumero.Text;
+            luotumokki.mokkinimi = tbMokinnimi.Text;
+            luotumokki.katuosoite = tbKatuosoite.Text;
+            luotumokki.hinta = double.Parse(tbHinta.Text);
+            luotumokki.kuvaus = tbKuvaus.Text;
+            luotumokki.henkilomaara = int.Parse(tbHenkilomaara.Text);
+            luotumokki.varustelu = tbVarustelu.Text;
+            luotumokki.postitoimipaikka = tbPostitoimipaikka.Text;
+
             try
             {
-
-                if (tbMokkiId.Text.Trim() == "" || tbAlueId.Text.Trim() == "" || tbPostinumero.Text.Trim() == "" ||
-                 tbMokinnimi.Text.Trim() == "" || tbKatuosoite.Text.Trim() == "" || tbHinta.Text.Trim() == "" ||
-                 tbKuvaus.Text.Trim() == "" || tbHenkilomaara.Text.Trim() == "" || tbVarustelu.Text.Trim() == "")
+                string connectionString = "Dsn=Village Newbies;uid=root";
+                if (!PostiLoytyi(luotumokki.postinro))
+                    LuoPosti(luotumokki.postinro, tbPostitoimipaikka.Text);
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
-                    MessageBox.Show("Täytä kaikki kentät!");
-                }
-                else
-                {
-                    DataRow newRow = dataTable.NewRow();
-                    newRow["mokki_id"] = tbMokkiId.Text;
-                    newRow["alue_id"] = tbAlueId.Text;
-                    newRow["postinro"] = tbPostinumero.Text;
-                    newRow["mokkinimi"] = tbMokinnimi.Text;
-                    newRow["katuosoite"] = tbKatuosoite.Text;
-                    newRow["hinta"] = tbHinta.Text;
-                    newRow["kuvaus"] = tbKuvaus.Text;
-                    newRow["henkilomaara"] = tbHenkilomaara.Text;
-                    newRow["varustelu"] = tbVarustelu.Text;
+                    connection.Open();
+                    string lisaysquery = "INSERT INTO mokki(mokki_id, alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) VALUES(" + luotumokki.mokki_id + ", '" + luotumokki.alue_id + "', '" + luotumokki.postinro + "', '" + luotumokki.mokkinimi + "', '" + luotumokki.katuosoite + "', '" + luotumokki.hinta + "', '" + luotumokki.kuvaus + "',  '" + luotumokki.henkilomaara + "', '" + luotumokki.varustelu + "');";
+                    using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    {
 
-                    dataTable.Rows.Add(newRow);
-                    dataAdapter.Update(dataTable);
+                        if (tbMokkiId.Text.Trim() == "" || tbAlueId.Text.Trim() == "" || tbPostinumero.Text.Trim() == "" ||
+                         tbMokinnimi.Text.Trim() == "" || tbKatuosoite.Text.Trim() == "" || tbHinta.Text.Trim() == "" ||
+                         tbKuvaus.Text.Trim() == "" || tbHenkilomaara.Text.Trim() == "" || tbVarustelu.Text.Trim() == "" || tbPostitoimipaikka.Text.Trim() == "")
+                        {
+                            MessageBox.Show("Täytä kaikki kentät!");
+                        }
+                        else
+                        {
+                            DataRow newRow = dataTable.NewRow();
+                            newRow["mokki_id"] = tbMokkiId.Text;
+                            newRow["alue_id"] = tbAlueId.Text;
+                            newRow["postinro"] = tbPostinumero.Text;
+                            newRow["mokkinimi"] = tbMokinnimi.Text;
+                            newRow["katuosoite"] = tbKatuosoite.Text;
+                            newRow["hinta"] = tbHinta.Text;
+                            newRow["kuvaus"] = tbKuvaus.Text;
+                            newRow["henkilomaara"] = tbHenkilomaara.Text;
+                            newRow["varustelu"] = tbVarustelu.Text;
 
-                    tbMokkiId.Text = String.Empty;
-                    tbAlueId.Text = String.Empty;
-                    tbPostinumero.Text = String.Empty;
-                    tbMokinnimi.Text = String.Empty;
-                    tbKatuosoite.Text = String.Empty;
-                    tbHinta.Text = String.Empty;
-                    tbKuvaus.Text = String.Empty;
-                    tbHenkilomaara.Text = String.Empty;
-                    tbVarustelu.Text = String.Empty;
+                            dataTable.Rows.Add(newRow);
+                            dataAdapter.Update(dataTable);
+
+                            tbMokkiId.Text = String.Empty;
+                            tbAlueId.Text = String.Empty;
+                            tbPostinumero.Text = String.Empty;
+                            tbMokinnimi.Text = String.Empty;
+                            tbKatuosoite.Text = String.Empty;
+                            tbHinta.Text = String.Empty;
+                            tbKuvaus.Text = String.Empty;
+                            tbHenkilomaara.Text = String.Empty;
+                            tbVarustelu.Text = String.Empty;
+                            tbPostitoimipaikka.Text = String.Empty;
+                        }
+                    }
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
@@ -133,6 +162,49 @@ namespace R13_MokkiBook
         }
 
         // Muokkaaminen, eli tallentaa muokkauksen.
+
+        public void LuoPosti(string pnro, string ptp)
+        {
+            string connectionString = "Dsn=Village Newbies;uid=root";
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string lisaysquery = "INSERT INTO posti(postinro, toimipaikka) VALUES(" + pnro + ", '" + ptp + "');";
+                using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+               
+            }
+            postit = GetPostit();
+        }
+
+
+        public List<Posti> GetPostit()
+        {
+            List<Posti> po = new List<Posti>();
+            string connectionString = "Dsn=Village Newbies;uid=root";
+            string query = "SELECT * FROM posti";
+
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Posti p = new Posti();
+                            p.postinro = reader.GetString(0);
+                            p.toimipaikka = reader.GetString(1);
+                            po.Add(p);
+                        }
+                    }
+                }
+            }
+            return po;
+        }
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
@@ -168,8 +240,9 @@ namespace R13_MokkiBook
                 tbKuvaus.Text = String.Empty;
                 tbHenkilomaara.Text = String.Empty;
                 tbVarustelu.Text = String.Empty;
+                tbPostitoimipaikka.Text = String.Empty;
 
-                lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
+                    lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
             }
 
         }
@@ -200,9 +273,10 @@ namespace R13_MokkiBook
             tbKuvaus.Text = String.Empty;
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
+            tbPostitoimipaikka.Text = String.Empty;
 
-            
-            lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
+
+                lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
             }
 
             catch (Exception ex)
@@ -254,6 +328,7 @@ namespace R13_MokkiBook
             tbKuvaus.Text = String.Empty;
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
+            tbPostitoimipaikka.Text = String.Empty;
         }
 
         // Lokiin tallentaminen
@@ -431,5 +506,47 @@ namespace R13_MokkiBook
             }
         }
 
+       /* public void LuoAsiakas()
+        {
+            luotumokki.asiakas_id = HaeSeuraavaVapaaAsiakasID();
+            luotuasiakas.postinro = tbPostinoAsiakas.Text;
+            luotuasiakas.etunimi = tbEnimi.Text;
+            luotuasiakas.sukunimi = tbSnimi.Text;
+            luotuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
+            luotuasiakas.email = tbSahkoposti.Text;
+            luotuasiakas.puhelinnro = tbPuhno.Text;
+
+            if (!PostiLoytyi(luotuasiakas.postinro))
+                LuoPosti(luotuasiakas.postinro, tbPostitoimipaikkaAsiakas.Text);
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES(" + luotuasiakas.asiakas_id + ", '" + luotuasiakas.postinro + "', '" + luotuasiakas.etunimi + "', '" + luotuasiakas.sukunimi + "', '" + luotuasiakas.lahiosoite + "', '" + luotuasiakas.email + "', '" + luotuasiakas.puhelinnro + "');";
+                using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                LokiinTallentaminen("Luotiin asiakas " + luotuasiakas.asiakas_id + " käyttäjältä: ");
+            }
+            asiakkaat = GetAsiakkaat();
+            asiakasquery = "SELECT * FROM asiakas;";
+            PaivitaAsiakastaulu(asiakasquery);
+
+            valittuasiakas = luotuasiakas;
+        } */
+        public bool PostiLoytyi(string pn)
+        {
+            foreach (Posti p in postit)
+            {
+                if (p.postinro == pn)
+                    return true;
+            }
+            return false;
+        }
+
+        private void tbHenkilomaara_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
