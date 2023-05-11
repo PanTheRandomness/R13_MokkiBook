@@ -345,8 +345,8 @@ namespace R13_MokkiBook
                     using (OdbcConnection connection = new OdbcConnection(connectionString))
                     {
                         connection.Open();
-                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
-                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", '" + tamavaraus.varattu_pvm.ToShortDateString() + "', '" + tamavaraus.vahvistus_pvm.ToShortDateString() + "', '" + tamavaraus.varattu_alkupvm.ToShortDateString() + "', '" + tamavaraus.varattu_loppupvm.ToShortDateString() + "');";
+                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " + //toString??
+                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", " + tamavaraus.varattu_pvm.ToShortDateString() + ", " + tamavaraus.vahvistus_pvm.ToShortDateString() + ", " + tamavaraus.varattu_alkupvm.ToShortDateString() + ", " + tamavaraus.varattu_loppupvm.ToShortDateString() + ");";
                         using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                         {
                             cmd.ExecuteNonQuery();
@@ -499,7 +499,7 @@ namespace R13_MokkiBook
                 }
             }
         }
-        public void Validointi()//toimiiko kaikki?
+        public void Validointi()
         {
             string msg = "Varausta ei voitu luoda: ";
             if (ValidAsiakas(ref msg))

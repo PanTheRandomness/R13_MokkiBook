@@ -32,12 +32,42 @@ namespace R13_MokkiBook
             alueet = GetAlueet();
             LokiinTallentaminen("Varaukset-osio avattiin käyttäjältä: ");
 
+            //jos palveluita ja virheellinen varaus: 
+            /*using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string poistoquery = "DELETE FROM varauksen_palvelut WHERE varaus_id > 3;";
+                using (OdbcCommand cmd = new OdbcCommand(poistoquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }*/
+            //jos laskuja ja virheellinen varaus:
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string poistoquery = "DELETE FROM lasku WHERE varaus_id = 4;";
+                using (OdbcCommand cmd = new OdbcCommand(poistoquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            //poista virheellinen varaus:
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string poistoquery = "DELETE FROM varaus WHERE varaus_id = 4;";
+                using (OdbcCommand cmd = new OdbcCommand(poistoquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
             //Muista poistaa tämä!! Vain korjausta varten!!!!! (Jos on tullut vahingossa lisäiltyä jotain väärää, joka haluaa kaataa koko homman...)
-            foreach (Varaus varaus in varaukset)
+            /*foreach (Varaus varaus in varaukset)
             {
                 if (varaus.varaus_id ==4)
                     PoistaVaraus(varaus);
-            }
+            }*/
         }
 
         public List<Varaus> GetVaraukset()
@@ -57,33 +87,33 @@ namespace R13_MokkiBook
                             Varaus varaus = new Varaus();
                             varaus.varaus_id = reader.GetInt32(0);
                             //Muista poistaa tämä!! vain korjausta varten!!!!! Jos on tullut vahingossa lisäiltyä jotain väärää
-                            //if (varaus.varaus_id == 4)
-                            //    break;
+                            if (varaus.varaus_id == 4)
+                                break;
                             varaus.asiakas_id = reader.GetInt32(1);
                             varaus.mokki_id = reader.GetInt32(2);
-                            //if (varaus.varaus_id < 4)
-                            //{
+                            if (varaus.varaus_id < 4)
+                            {
                                 varaus.varattu_pvm = reader.GetDateTime(3);
                                 varaus.vahvistus_pvm = reader.GetDateTime(4);
                                 varaus.varattu_alkupvm = reader.GetDateTime(5);
                                 varaus.varattu_loppupvm = reader.GetDateTime(6);
-                           /* }
+                            }
                             else
                             {
                                 varaus.varattu_pvm = nyt;
                                 varaus.vahvistus_pvm = nyt;
                                 varaus.varattu_alkupvm = nyt;
                                 varaus.varattu_loppupvm = nyt;
-                            }*/
+                            }
                             var.Add(varaus);
                         }
                     }
                 }
-                /*string korjausquery = "UPDATE varaus SET varattu_pvm = " + nyt.ToShortDateString() + ", vahvistus_pvm = " + nyt.ToShortDateString() + ", varattu_alkupvm = " + nyt.ToShortDateString() + ", varattu_loppupvm = " + nyt.ToShortDateString() + " WHERE varaus_id = 4;";
+                string korjausquery = "UPDATE varaus SET varattu_pvm = " + nyt.ToShortDateString() + ", vahvistus_pvm = " + nyt.ToShortDateString() + ", varattu_alkupvm = " + nyt.ToShortDateString() + ", varattu_loppupvm = " + nyt.ToShortDateString() + " WHERE varaus_id = 4;";
                 using (OdbcCommand cmd = new OdbcCommand(korjausquery, connection))
                 {
                     cmd.ExecuteNonQuery();
-                }*/
+                }
             }
             return var;
         }
