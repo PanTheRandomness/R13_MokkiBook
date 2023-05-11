@@ -128,7 +128,6 @@ namespace R13_MokkiBook
         {
             frmHaePalvelu hp = new frmHaePalvelu(kasiteltavavaraus, varauksenpalvelut);
             hp.ShowDialog();
-            this.Hide();
         }
 
         private void btnPoistaValittuMaara_Click(object sender, EventArgs e)

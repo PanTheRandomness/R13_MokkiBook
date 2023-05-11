@@ -806,6 +806,7 @@ namespace R13_MokkiBook
             this.dgvAlueenPalvelut.TabIndex = 22;
             this.dgvAlueenPalvelut.TabStop = false;
             this.ttUusiVaraus.SetToolTip(this.dgvAlueenPalvelut, "Lukitse mökki käyttääksesi tätä: Valitse lisättävä palvelu");
+            this.dgvAlueenPalvelut.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAlueenPalvelut_RowHeaderMouseClick);
             this.dgvAlueenPalvelut.SelectionChanged += new System.EventHandler(this.dgvAlueenPalvelut_SelectionChanged);
             // 
             // dataGridViewTextBoxColumn1

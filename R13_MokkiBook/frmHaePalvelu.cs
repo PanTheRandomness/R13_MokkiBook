@@ -109,14 +109,7 @@ namespace R13_MokkiBook
         {
             if (nudMaara.Value == 0 || palvelumaara == 0)
             {
-                if (MessageBox.Show("Lisättyjen palvelujen määärä on 0, palvelua ei lisätä. Haluatko silti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Palataan hakuun.");
-                }
+                MessageBox.Show("Ei voi lisätä: määrä 0.");
             }
             else
             {
@@ -134,7 +127,6 @@ namespace R13_MokkiBook
                         lisattava.lkm = vap.lkm + (int)nudMaara.Value;
                     }
                 }
-
                 if (!varauksessaonjopalvelu)
                 {
                     using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -161,7 +153,7 @@ namespace R13_MokkiBook
                         LokiinTallentaminen("Varaukseen " + lisattava.varaus_id.ToString() + " lisättiin " + lisattava.lkm.ToString() + " kpl palvelua " + lisattava.palvelu_id.ToString() + " käyttäjältä: ");
                     }
                 }
-                this.Close();
+                MessageBox.Show("Palvelu lisättiin varaukseen.");
             }
         }
 

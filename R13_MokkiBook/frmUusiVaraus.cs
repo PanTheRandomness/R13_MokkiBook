@@ -875,7 +875,7 @@ namespace R13_MokkiBook
                         msg = "Valittu henkilömäärä on liian pieni. (pienempi kuin 1)";
                 }
                 else
-                    msg = "Mökki ja alue eivät täsmää.";
+                    msg = "Mökki ja alue eivät täsmää.";//Tässä heittää
             }
             else
                 msg = "Mökkiä ei ole valittu.";
@@ -1140,6 +1140,7 @@ namespace R13_MokkiBook
             arvioituloppuhinta = valittumokki.hinta;
             tbLoppuhinta.Text = arvioituloppuhinta.ToString();
             tbAlueid.Text = valittumokki.alue_id.ToString();
+            valittualue = alueet[int.Parse(tbAlueid.Text)];
             tbMokkitunnus.Text = valittumokki.mokki_id.ToString();
             TyhjennaVarauksenPalvelut();
         }
@@ -1245,7 +1246,7 @@ namespace R13_MokkiBook
             aluequery = "SELECT nimi FROM alue;";
             PaivitaAluetaulu(aluequery);
         }
-        public void NollaaPalvelut()//MIHIN TÄMÄ?
+        /*public void NollaaPalvelut()//MIHIN TÄMÄ?
         {
             varauksenpalvelut.Clear();
             varauksenpalvelunimet.Clear();
@@ -1254,7 +1255,7 @@ namespace R13_MokkiBook
             PaivitaPalvelutaulu(palveluquery);
             //JA poista
             PaivitaVarauksenPalvelutaulu();
-        }
+        }*/
         private void tbMaxhinta_Leave(object sender, EventArgs e)
         {
             if(tbMaxhinta.Text.Length > 0)
@@ -1297,16 +1298,21 @@ namespace R13_MokkiBook
         {
             if (mokkilukittu)
             {
-                valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
-                valittupalvelu = palvelut[valitturivipalvelu];
-                palveluvalittu = true;
-                //TyhjennaVarauksenPalvelut();
+                
             }
         }
         private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
         {
             valitturivivarauksenpalvelu = lbVarauksenPalvelut.SelectedIndex;
             varauksenpalveluvalittu = true;
+        }
+
+        private void dgvAlueenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
+            valittupalvelu = palvelut[valitturivipalvelu];
+            palveluvalittu = true;
+            //TyhjennaVarauksenPalvelut();
         }
     }
 }
