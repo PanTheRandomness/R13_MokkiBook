@@ -345,10 +345,17 @@ namespace R13_MokkiBook
                     using (OdbcConnection connection = new OdbcConnection(connectionString))
                     {
                         connection.Open();
-                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
-                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", '" + tamavaraus.varattu_pvm.ToShortDateString() + "', '" + tamavaraus.vahvistus_pvm.ToShortDateString() + "', '" + tamavaraus.varattu_alkupvm.ToShortDateString() + "', '" + tamavaraus.varattu_loppupvm.ToShortDateString() + "');";
+                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm)" +
+                            " VALUES(?, ?, ?, ?, ?, ?, ?);";
                         using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                         {
+                            cmd.Parameters.AddWithValue("@varaus_id", tamavaraus.varaus_id);
+                            cmd.Parameters.AddWithValue("@asiakas_id", tamavaraus.asiakas_id);
+                            cmd.Parameters.AddWithValue("@mokki_id", tamavaraus.mokki_id);
+                            cmd.Parameters.AddWithValue("@varattu_pvm", tamavaraus.varattu_pvm);
+                            cmd.Parameters.AddWithValue("@vahvistus_pvm", tamavaraus.vahvistus_pvm);
+                            cmd.Parameters.AddWithValue("@varattu_alkupvm", tamavaraus.varattu_alkupvm);
+                            cmd.Parameters.AddWithValue("@varattu_loppupvm", tamavaraus.varattu_loppupvm);
                             cmd.ExecuteNonQuery();
                         }
                     }
@@ -358,7 +365,7 @@ namespace R13_MokkiBook
                     }
                     LokiinTallentaminen("Luotiin varaus " + tamavaraus.varaus_id + " käyttäjältä: ");
                     varausluotu = true;
-                    this.Close();//sulkeeko vain tämän formin?
+                    this.Close();
                 }
             }
         }
@@ -499,7 +506,7 @@ namespace R13_MokkiBook
                 }
             }
         }
-        public void Validointi()//toimiiko kaikki?
+        public void Validointi()
         {
             string msg = "Varausta ei voitu luoda: ";
             if (ValidAsiakas(ref msg))
@@ -540,11 +547,22 @@ namespace R13_MokkiBook
         }
         public bool MokkiVapaa()
         {
-            foreach(Varaus v in varaukset)
+            foreach (Varaus v in varaukset)
             {
-                if (((alkupvm >= v.varattu_alkupvm && alkupvm < v.varattu_loppupvm) && v.mokki_id == tamavaraus.mokki_id) /*||*/ )
+                if (v.mokki_id == valittumokki.mokki_id)
                 {
-                    return false;
+                    if (alkupvm >= v.varattu_alkupvm && alkupvm < v.varattu_loppupvm)
+                    {
+                        return false;
+                    }
+                    else if (loppupvm > v.varattu_alkupvm && loppupvm <= v.varattu_loppupvm)
+                    {
+                        return false;
+                    }
+                    else if (alkupvm <= v.varattu_alkupvm && loppupvm >= v.varattu_loppupvm)
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
