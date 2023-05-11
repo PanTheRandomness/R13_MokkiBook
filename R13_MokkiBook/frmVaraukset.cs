@@ -61,20 +61,20 @@ namespace R13_MokkiBook
                             //    break;
                             varaus.asiakas_id = reader.GetInt32(1);
                             varaus.mokki_id = reader.GetInt32(2);
-                            if (varaus.varaus_id < 4)
-                            {
+                            //if (varaus.varaus_id < 4)
+                            //{
                                 varaus.varattu_pvm = reader.GetDateTime(3);
                                 varaus.vahvistus_pvm = reader.GetDateTime(4);
                                 varaus.varattu_alkupvm = reader.GetDateTime(5);
                                 varaus.varattu_loppupvm = reader.GetDateTime(6);
-                            }
+                           /* }
                             else
                             {
                                 varaus.varattu_pvm = nyt;
                                 varaus.vahvistus_pvm = nyt;
                                 varaus.varattu_alkupvm = nyt;
                                 varaus.varattu_loppupvm = nyt;
-                            }
+                            }*/
                             var.Add(varaus);
                         }
                     }
@@ -117,14 +117,14 @@ namespace R13_MokkiBook
             v.varaus_id = varaukset[valitturivi].varaus_id;
             v.asiakas_id = varaukset[valitturivi].asiakas_id;
             v.mokki_id = varaukset[valitturivi].mokki_id;
-            //MUISTA POISTAA IFFI
-            if (v.varaus_id > 4)
-            {
+            //MUISTA POISTAA IFFI Vikakorjaus
+            //if (v.varaus_id > 4)
+            //{
                 v.varattu_pvm = varaukset[valitturivi].varattu_pvm;
                 v.vahvistus_pvm = varaukset[valitturivi].vahvistus_pvm;
                 v.varattu_alkupvm = varaukset[valitturivi].varattu_alkupvm;
                 v.varattu_loppupvm = varaukset[valitturivi].varattu_loppupvm;
-            }
+            //}
             return v;
         }
         private void frmVaraukset_Load(object sender, EventArgs e)
