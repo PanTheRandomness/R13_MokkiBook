@@ -345,10 +345,17 @@ namespace R13_MokkiBook
                     using (OdbcConnection connection = new OdbcConnection(connectionString))
                     {
                         connection.Open();
-                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
-                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", " + tamavaraus.varattu_pvm.ToString("yyyy-MM-dd HH:mm:ss") + ", " + tamavaraus.vahvistus_pvm.ToString("yyyy-MM-dd HH:mm:ss") + ", " + tamavaraus.varattu_alkupvm.ToString("yyyy-MM-dd HH:mm:ss") + ", " + tamavaraus.varattu_loppupvm.ToString("yyyy-MM-dd HH:mm:ss") + ");";
+                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm)" +
+                            " VALUES(?, ?, ?, ?, ?, ?, ?);";
                         using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                         {
+                            cmd.Parameters.AddWithValue("@varaus_id", tamavaraus.varaus_id);
+                            cmd.Parameters.AddWithValue("@asiakas_id", tamavaraus.asiakas_id);
+                            cmd.Parameters.AddWithValue("@mokki_id", tamavaraus.mokki_id);
+                            cmd.Parameters.AddWithValue("@varattu_pvm", tamavaraus.varattu_pvm);
+                            cmd.Parameters.AddWithValue("@vahvistus_pvm", tamavaraus.vahvistus_pvm);
+                            cmd.Parameters.AddWithValue("@varattu_alkupvm", tamavaraus.varattu_alkupvm);
+                            cmd.Parameters.AddWithValue("@varattu_loppupvm", tamavaraus.varattu_loppupvm);
                             cmd.ExecuteNonQuery();
                         }
                     }
