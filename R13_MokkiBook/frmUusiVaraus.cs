@@ -109,29 +109,6 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
-       /* public void LisaaTamavarausVarauksiin(string varausquery)
-        {
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
-            {
-                connection.Open();
-                using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-        public void PoistaTamavarausVarauksista()
-        {
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
-            {
-                varausquery = "DELETE FROM varaus WHERE varaus_id = " + tamavaraus.varaus_id + ";";
-                connection.Open();
-                using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }*/
         public double GetPalvelunHinta(VarauksenPalvelut vp)
         {
             double palhinta = 0;
@@ -211,32 +188,6 @@ namespace R13_MokkiBook
             }
             return pal;
         }
-
-        //public List<VarauksenPalvelut> GetVarauksenPalvelut()// Tässä käsiteltäisiin luomattoman/keskeneräisen varauksen palveluita... ei voi luoda palvelue ennen kuin se on oikeasti valmis!!
-        //{
-            //List<VarauksenPalvelut> vpal = new List<VarauksenPalvelut>();
-            /*string query = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id + ";";
-
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
-            {
-                connection.Open();
-                using (OdbcCommand command = new OdbcCommand(query, connection))
-                {
-                    using (OdbcDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            VarauksenPalvelut vp = new VarauksenPalvelut();
-                            vp.varaus_id = reader.GetInt32(0);
-                            vp.palvelu_id = reader.GetInt32(1);
-                            vp.lkm = reader.GetInt32(2);
-                            vpal.Add(vp);
-                        }
-                    }
-                }
-            }*/
-            //return vpal;
-        //}
         public List<Asiakas> GetAsiakkaat()
         {
             List<Asiakas> asi = new List<Asiakas>();
@@ -484,13 +435,11 @@ namespace R13_MokkiBook
             loppupvm = dtmLoppupvm.Value;
             loppupvmmuutettu = true;
         }
-
         private void dtpAlkupvm_ValueChanged(object sender, EventArgs e)
         {
             alkupvm = dtpAlkupvm.Value;
             alkupvmmuutettu = true;
         }
-
         private void btnLuoVaraus_Click(object sender, EventArgs e)
         {
             if(!MokkiLukittu())
@@ -545,7 +494,6 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show(msg);
         }
-
         public bool MokkiVapaa()//toimiiko?
         {
             foreach(Varaus v in varaukset)
@@ -809,7 +757,6 @@ namespace R13_MokkiBook
                 pnlPalvelut.Enabled = false;
             }
         }
-
         public bool MokkiLukittu()
         {
             if (!mokkilukittu)
@@ -858,13 +805,11 @@ namespace R13_MokkiBook
                 return true;
             return false;
         }
-
         public bool ValidMokki()//Tarkista vielä- pitäisikö katsoa mätsääkö alue mökkiin??
         {
             return true;
             //ei valmis!!
         }
-
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
@@ -881,13 +826,11 @@ namespace R13_MokkiBook
                 tb.Text = nimi;
             }
         }
-
         private void tbPostinoAsiakas_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
         }
-
         private void tbAlueid_TextChanged(object sender, EventArgs e)
         {
             if (tbAlueid.Text.Length > 0)
@@ -927,7 +870,6 @@ namespace R13_MokkiBook
                 PaivitaPalvelutaulu(palveluquery);
             }
         }
-
         private void tbAsiakastunnus_TextChanged(object sender, EventArgs e)
         {
             if (tbAsiakastunnus.Text.Length > 0)
@@ -966,37 +908,30 @@ namespace R13_MokkiBook
         {
             valittuasiakas.etunimi = tbEnimi.Text;
         }
-
         private void tbSnimi_TextChanged(object sender, EventArgs e)
         {
             valittuasiakas.sukunimi = tbSnimi.Text;
         }
-
         private void tbPostinoAsiakas_TextChanged(object sender, EventArgs e)
         {
             valittuasiakas.postinro = tbPostinoAsiakas.Text;
         }
-
         private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
         {
             valittuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
         }
-
         private void tbPostitoimipaikkaAsiakas_TextChanged(object sender, EventArgs e)
         {
           //HAE POSTINUMERO POSTITAULUSTA?
         }
-
         private void tbPuhno_TextChanged(object sender, EventArgs e)
         {
             valittuasiakas.puhelinnro = tbPuhno.Text;
         }
-
         private void tbSahkoposti_TextChanged(object sender, EventArgs e)
         {
             valittuasiakas.email = tbSahkoposti.Text;
         }
-
         private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
@@ -1116,7 +1051,6 @@ namespace R13_MokkiBook
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8) && (e.KeyChar != (char)46)) //Jos ei toimi: pilkku = 44
                 e.Handled = true;
         }
-
         private void tbMinhinta_Leave(object sender, EventArgs e)
         {
             if (tbMinhinta.Text.Length > 0)
@@ -1126,12 +1060,10 @@ namespace R13_MokkiBook
             }
             else minhinta = 0;
         }
-
         private void frmUusiVaraus_Load(object sender, EventArgs e)
         {
             this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
         }
-
         private void dgvMokitUusiVaraus_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivimokki = dgvMokitUusiVaraus.CurrentRow.Index;
@@ -1142,18 +1074,15 @@ namespace R13_MokkiBook
             tbMokkitunnus.Text = valittumokki.mokki_id.ToString();
             TyhjennaVarauksenPalvelut();
         }
-
         private void btnTyhjValinta_Click(object sender, EventArgs e)
         {
             TyhjennaAsiakas();
         }
-
         private void nudHlomaara_ValueChanged(object sender, EventArgs e)
         {
             if(nudHlomaara.Value < 1)
                 nudHlomaara.Value = 1;
         }
-
         private void lbAlue_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             valitturivialue = lbAlue.SelectedIndex;
@@ -1256,7 +1185,6 @@ namespace R13_MokkiBook
             //JA poista
             PaivitaVarauksenPalvelutaulu();
         }
-
         private void tbMaxhinta_Leave(object sender, EventArgs e)
         {
             if(tbMaxhinta.Text.Length > 0)
