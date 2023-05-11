@@ -455,6 +455,7 @@ namespace R13_MokkiBook
         }
         public void PaivitaVarauksenPalvelutaulu() 
         {
+            varauksenpalvelunimet.Clear();
             if (varauksenpalvelut.Count > 0)
             {
                 foreach (VarauksenPalvelut vp in varauksenpalvelut)
@@ -481,8 +482,6 @@ namespace R13_MokkiBook
                 bs.ResetBindings(true);
                 lbVarauksenPalvelut.DataSource = bs;
             }
-            else
-                lbVarauksenPalvelut.Items.Clear();
             /*varauksenpalvelut = GetVarauksenPalvelut();
             OdbcConnection connection = new OdbcConnection(connectionString);
             connection.Open();
