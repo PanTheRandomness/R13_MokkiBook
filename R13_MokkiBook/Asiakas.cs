@@ -16,8 +16,8 @@ namespace R13_MokkiBook
         public string lahiosoite { get;set;}
         public string email { get;set;}
         public string puhelinnro { get; set; }
+     
 
-        
     }
  
 
