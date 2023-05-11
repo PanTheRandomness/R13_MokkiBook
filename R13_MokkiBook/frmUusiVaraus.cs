@@ -136,7 +136,24 @@ namespace R13_MokkiBook
         }
         public double GetPalvelunHinta(VarauksenPalvelut vp)
         {
-
+            double palhinta = 0;
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                string query = "SELECT hinta FROM palvelu WHERE palvelu_id = " + vp.palvelu_id + ";";
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            palhinta = reader.GetDouble(0);
+                            palhinta = palhinta * vp.lkm;
+                        }
+                    }
+                }
+            }
+            return palhinta;
         }
         public List<Varaus> GetVaraukset()
         {
@@ -431,9 +448,9 @@ namespace R13_MokkiBook
             dgvAlueenPalvelut.Columns[5].HeaderText = "Hinta";
             dgvAlueenPalvelut.Columns[6].HeaderText = "ALV";
         }
-        public void PaivitaVarauksenPalvelutaulu()
+        public void PaivitaVarauksenPalvelutaulu() //TOIMIIKO
         {
-            
+            lbVarauksenPalvelut.DataSource = varauksenpalvelut; 
             /*varauksenpalvelut = GetVarauksenPalvelut();
             OdbcConnection connection = new OdbcConnection(connectionString);
             connection.Open();
@@ -865,7 +882,7 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
-            /*if (!varausluotu)//MIKSEI POISTA????????????????????
+            /*if (!varausluotu)//MIKSEI POISTA?
             {
                 PoistaTamavarausVarauksista();
             }*/
