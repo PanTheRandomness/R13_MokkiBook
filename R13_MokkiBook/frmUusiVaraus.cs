@@ -466,21 +466,21 @@ namespace R13_MokkiBook
                 }
             }
         }
-        public void Validointi()
+        public void Validointi()//toimiiko kaikki?
         {
             string msg = "Varausta ei voitu luoda: ";
-            if (ValidAsiakas(ref msg))//toimiiko?
+            if (ValidAsiakas(ref msg))
             {
                 if (!mokkilukittu)
                 {
                     msg += "Mökkiä ei ole lukittu.";
                     MessageBox.Show(msg);
                 }
-                else//Huom muut vaatimukset! Validoi alue, mökki & sen vapaus, posti, määrä!
+                else
                 {
                     if (ValidAlue())
                     {
-                        if (ValidMokki())
+                        if (ValidMokki(ref msg))
                         {
                             if (MokkiVapaa())
                             {
@@ -492,6 +492,8 @@ namespace R13_MokkiBook
                                 MessageBox.Show(msg);
                             }
                         }
+                        else
+                            MessageBox.Show(msg);
                     }
                     else
                     {
@@ -814,20 +816,33 @@ namespace R13_MokkiBook
                 return true;
             return false;
         }
-        public bool ValidMokki()
+        public bool ValidMokki(ref string msg)
         {
-            if(valittumokki != null)
+            if (valittumokki != null)
             {
                 if (valittualue.alue_id == valittumokki.alue_id)
-                    return true;
+                {
+                    if (nudHlomaara.Value >= 1)
+                    {
+                        if (nudHlomaara.Value <= valittumokki.henkilomaara)
+                            return true;
+                        else
+                            msg = "Valitun mökin henkilökapasiteetti on liian pieni valitulle henkilöpäärälle. Valitse toinen mökki tai vähennä henkilömäärää.";
+                    }
+                    else
+                        msg = "Valittu henkilömäärä on liian pieni. (pienempi kuin 1)";
+                }
+                else
+                    msg = "Mökki ja alue eivät täsmää.";
             }
+            else
+                msg = "Mökkiä ei ole valittu.";
             return false;
         }
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
         }
-
         private void tbEnimi_Leave(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -1058,7 +1073,6 @@ namespace R13_MokkiBook
                 PaivitaMokkitaulu(mokkiquery);
             }
         }
-
         private void tbMinhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8) && (e.KeyChar != (char)46)) //Jos ei toimi: pilkku = 44
