@@ -164,7 +164,7 @@
             this.tbMokkiId.Location = new System.Drawing.Point(122, 31);
             this.tbMokkiId.Name = "tbMokkiId";
             this.tbMokkiId.Size = new System.Drawing.Size(168, 22);
-            this.tbMokkiId.TabIndex = 10;
+            this.tbMokkiId.TabIndex = 0;
             this.tbMokkiId.TextChanged += new System.EventHandler(this.tbMokkiId_TextChanged);
             this.tbMokkiId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMokkiId_KeyPress);
             // 
@@ -173,7 +173,7 @@
             this.tbKatuosoite.Location = new System.Drawing.Point(122, 174);
             this.tbKatuosoite.Name = "tbKatuosoite";
             this.tbKatuosoite.Size = new System.Drawing.Size(168, 22);
-            this.tbKatuosoite.TabIndex = 3;
+            this.tbKatuosoite.TabIndex = 4;
             this.tbKatuosoite.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKatuosoite_KeyPress);
             this.tbKatuosoite.Leave += new System.EventHandler(this.tbKatuosoite_Leave);
             // 
@@ -182,7 +182,7 @@
             this.tbVarustelu.Location = new System.Drawing.Point(464, 171);
             this.tbVarustelu.Name = "tbVarustelu";
             this.tbVarustelu.Size = new System.Drawing.Size(168, 22);
-            this.tbVarustelu.TabIndex = 6;
+            this.tbVarustelu.TabIndex = 8;
             this.tbVarustelu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbVarustelu_KeyPress);
             // 
             // tbHenkilomaara
@@ -190,7 +190,7 @@
             this.tbHenkilomaara.Location = new System.Drawing.Point(464, 137);
             this.tbHenkilomaara.Name = "tbHenkilomaara";
             this.tbHenkilomaara.Size = new System.Drawing.Size(168, 22);
-            this.tbHenkilomaara.TabIndex = 5;
+            this.tbHenkilomaara.TabIndex = 7;
             this.tbHenkilomaara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbHenkilomaara_KeyPress);
             // 
             // tbKuvaus
@@ -199,7 +199,7 @@
             this.tbKuvaus.Multiline = true;
             this.tbKuvaus.Name = "tbKuvaus";
             this.tbKuvaus.Size = new System.Drawing.Size(168, 54);
-            this.tbKuvaus.TabIndex = 4;
+            this.tbKuvaus.TabIndex = 6;
             this.tbKuvaus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKuvaus_KeyPress);
             // 
             // tbHinta
@@ -207,7 +207,7 @@
             this.tbHinta.Location = new System.Drawing.Point(464, 31);
             this.tbHinta.Name = "tbHinta";
             this.tbHinta.Size = new System.Drawing.Size(168, 22);
-            this.tbHinta.TabIndex = 18;
+            this.tbHinta.TabIndex = 5;
             this.tbHinta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbHinta_KeyPress);
             this.tbHinta.Leave += new System.EventHandler(this.tbHinta_Leave);
             // 
@@ -216,7 +216,7 @@
             this.tbMokinnimi.Location = new System.Drawing.Point(122, 133);
             this.tbMokinnimi.Name = "tbMokinnimi";
             this.tbMokinnimi.Size = new System.Drawing.Size(168, 22);
-            this.tbMokinnimi.TabIndex = 2;
+            this.tbMokinnimi.TabIndex = 3;
             this.tbMokinnimi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMokinnimi_KeyPress);
             this.tbMokinnimi.Leave += new System.EventHandler(this.tbMokinnimi_Leave);
             // 
@@ -225,7 +225,7 @@
             this.tbPostinumero.Location = new System.Drawing.Point(122, 102);
             this.tbPostinumero.Name = "tbPostinumero";
             this.tbPostinumero.Size = new System.Drawing.Size(168, 22);
-            this.tbPostinumero.TabIndex = 1;
+            this.tbPostinumero.TabIndex = 2;
             this.tbPostinumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPostinumero_KeyPress);
             // 
             // tbAlueId
@@ -233,7 +233,7 @@
             this.tbAlueId.Location = new System.Drawing.Point(122, 64);
             this.tbAlueId.Name = "tbAlueId";
             this.tbAlueId.Size = new System.Drawing.Size(168, 22);
-            this.tbAlueId.TabIndex = 0;
+            this.tbAlueId.TabIndex = 1;
             this.tbAlueId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlueId_KeyPress);
             // 
             // dgvMokit
@@ -347,7 +347,7 @@
             this.btnLisaa.Location = new System.Drawing.Point(31, 214);
             this.btnLisaa.Name = "btnLisaa";
             this.btnLisaa.Size = new System.Drawing.Size(161, 39);
-            this.btnLisaa.TabIndex = 7;
+            this.btnLisaa.TabIndex = 9;
             this.btnLisaa.Text = "Lisää mökki";
             this.toolTip1.SetToolTip(this.btnLisaa, "Lisää uuden mökin tietokantaan. Täytä ensiksi yläpuolella oleva lomake.");
             this.btnLisaa.UseVisualStyleBackColor = true;
@@ -358,7 +358,7 @@
             this.btnMuokkaa.Location = new System.Drawing.Point(214, 214);
             this.btnMuokkaa.Name = "btnMuokkaa";
             this.btnMuokkaa.Size = new System.Drawing.Size(161, 39);
-            this.btnMuokkaa.TabIndex = 8;
+            this.btnMuokkaa.TabIndex = 10;
             this.btnMuokkaa.Text = "Tallenna muutos";
             this.toolTip1.SetToolTip(this.btnMuokkaa, resources.GetString("btnMuokkaa.ToolTip"));
             this.btnMuokkaa.UseVisualStyleBackColor = true;
@@ -369,7 +369,7 @@
             this.btnPoista.Location = new System.Drawing.Point(409, 214);
             this.btnPoista.Name = "btnPoista";
             this.btnPoista.Size = new System.Drawing.Size(161, 39);
-            this.btnPoista.TabIndex = 9;
+            this.btnPoista.TabIndex = 11;
             this.btnPoista.Text = "Poista";
             this.toolTip1.SetToolTip(this.btnPoista, "Poista mökin tiedot tietokannasta");
             this.btnPoista.UseVisualStyleBackColor = true;
@@ -399,7 +399,7 @@
             this.btnTyhjenna.Location = new System.Drawing.Point(589, 214);
             this.btnTyhjenna.Name = "btnTyhjenna";
             this.btnTyhjenna.Size = new System.Drawing.Size(161, 39);
-            this.btnTyhjenna.TabIndex = 10;
+            this.btnTyhjenna.TabIndex = 12;
             this.btnTyhjenna.Text = "Tyhjennä rivit";
             this.toolTip1.SetToolTip(this.btnTyhjenna, "Tyhjentää lomakkeen rivit");
             this.btnTyhjenna.UseVisualStyleBackColor = true;
