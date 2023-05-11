@@ -384,7 +384,7 @@ namespace R13_MokkiBook
             this.dgvAsiakkaat.Size = new System.Drawing.Size(607, 264);
             this.dgvAsiakkaat.TabIndex = 10;
             this.dgvAsiakkaat.TabStop = false;
-            this.dgvAsiakkaat.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAsiakkaat_RowHeaderMouseDoubleClick);
+            this.dgvAsiakkaat.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAsiakkaat_RowHeaderMouseClick);
             // 
             // asiakasidDataGridViewTextBoxColumn
             // 
@@ -807,7 +807,6 @@ namespace R13_MokkiBook
             this.dgvAlueenPalvelut.TabStop = false;
             this.ttUusiVaraus.SetToolTip(this.dgvAlueenPalvelut, "Lukitse mökki käyttääksesi tätä: Valitse lisättävä palvelu");
             this.dgvAlueenPalvelut.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAlueenPalvelut_RowHeaderMouseClick);
-            this.dgvAlueenPalvelut.SelectionChanged += new System.EventHandler(this.dgvAlueenPalvelut_SelectionChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -936,7 +935,7 @@ namespace R13_MokkiBook
             this.dgvMokitUusiVaraus.Size = new System.Drawing.Size(1064, 143);
             this.dgvMokitUusiVaraus.TabIndex = 20;
             this.dgvMokitUusiVaraus.TabStop = false;
-            this.dgvMokitUusiVaraus.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMokitUusiVaraus_RowHeaderMouseDoubleClick);
+            this.dgvMokitUusiVaraus.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMokitUusiVaraus_RowHeaderMouseClick);
             // 
             // mokkiidDataGridViewTextBoxColumn
             // 

@@ -346,7 +346,7 @@ namespace R13_MokkiBook
                     {
                         connection.Open();
                         varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
-                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", '" + tamavaraus.varattu_pvm + "', '" + tamavaraus.vahvistus_pvm + "', '" + tamavaraus.varattu_alkupvm + "', '" + tamavaraus.varattu_loppupvm + "');";
+                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", '" + tamavaraus.varattu_pvm.ToShortDateString() + "', '" + tamavaraus.vahvistus_pvm.ToShortDateString() + "', '" + tamavaraus.varattu_alkupvm.ToShortDateString() + "', '" + tamavaraus.varattu_loppupvm.ToShortDateString() + "');";
                         using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                         {
                             cmd.ExecuteNonQuery();
@@ -515,10 +515,10 @@ namespace R13_MokkiBook
                     {
                         if (ValidMokki(ref msg))
                         {
+                            alkupvm = dtpAlkupvm.Value;
+                            loppupvm = dtmLoppupvm.Value;
                             if (MokkiVapaa())
-                            {
                                 LuoVaraus();
-                            }
                             else
                             {
                                 msg += "Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.";
@@ -538,11 +538,11 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show(msg);
         }
-        public bool MokkiVapaa()//toimiiko?
+        public bool MokkiVapaa()
         {
             foreach(Varaus v in varaukset)
             {
-                if((v.varattu_alkupvm <= tamavaraus.varattu_alkupvm && v.varattu_loppupvm >= tamavaraus.varattu_loppupvm) && v.mokki_id == tamavaraus.mokki_id)
+                if (((alkupvm >= v.varattu_alkupvm && alkupvm < v.varattu_loppupvm) && v.mokki_id == tamavaraus.mokki_id) /*||*/ )
                 {
                     return false;
                 }
@@ -653,9 +653,12 @@ namespace R13_MokkiBook
         }
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (!varausluotu)
             {
-                e.Cancel = true;
+                if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
             }
         }
         private void btnLisaa_Click(object sender, EventArgs e)
@@ -862,20 +865,15 @@ namespace R13_MokkiBook
         {
             if (valittumokki != null)
             {
-                if (valittualue.alue_id == valittumokki.alue_id)
+                if (nudHlomaara.Value >= 1)
                 {
-                    if (nudHlomaara.Value >= 1)
-                    {
-                        if (nudHlomaara.Value <= valittumokki.henkilomaara)
-                            return true;
-                        else
-                            msg = "Valitun mökin henkilökapasiteetti on liian pieni valitulle henkilöpäärälle. Valitse toinen mökki tai vähennä henkilömäärää.";
-                    }
+                    if (nudHlomaara.Value <= valittumokki.henkilomaara)
+                        return true;
                     else
-                        msg = "Valittu henkilömäärä on liian pieni. (pienempi kuin 1)";
+                        msg = "Valitun mökin henkilökapasiteetti on liian pieni valitulle henkilöpäärälle. Valitse toinen mökki tai vähennä henkilömäärää.";
                 }
                 else
-                    msg = "Mökki ja alue eivät täsmää.";//Tässä heittää
+                    msg = "Valittu henkilömäärä on liian pieni. (pienempi kuin 1)";
             }
             else
                 msg = "Mökkiä ei ole valittu.";
@@ -1002,7 +1000,7 @@ namespace R13_MokkiBook
         {
             valittuasiakas.email = tbSahkoposti.Text;
         }
-        private void dgvAsiakkaat_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dgvAsiakkaat_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
             valittuasiakas = GetValittuAsiakas(dgv.CurrentRow.Index);
@@ -1132,17 +1130,6 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_Load(object sender, EventArgs e)
         {
             this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
-        }
-        private void dgvMokitUusiVaraus_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            valitturivimokki = dgvMokitUusiVaraus.CurrentRow.Index;
-            valittumokki = mokit[valitturivimokki];
-            arvioituloppuhinta = valittumokki.hinta;
-            tbLoppuhinta.Text = arvioituloppuhinta.ToString();
-            tbAlueid.Text = valittumokki.alue_id.ToString();
-            valittualue = alueet[int.Parse(tbAlueid.Text)];
-            tbMokkitunnus.Text = valittumokki.mokki_id.ToString();
-            TyhjennaVarauksenPalvelut();
         }
         private void btnTyhjValinta_Click(object sender, EventArgs e)
         {
@@ -1294,25 +1281,27 @@ namespace R13_MokkiBook
             else
                 lisattavapalvelumaara = (int)nudPalveluLkm.Value;
         }
-        private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
-        {
-            if (mokkilukittu)
-            {
-                
-            }
-        }
         private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
         {
             valitturivivarauksenpalvelu = lbVarauksenPalvelut.SelectedIndex;
             varauksenpalveluvalittu = true;
         }
-
         private void dgvAlueenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
             valittupalvelu = palvelut[valitturivipalvelu];
             palveluvalittu = true;
-            //TyhjennaVarauksenPalvelut();
+        }
+        private void dgvMokitUusiVaraus_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            valitturivimokki = dgvMokitUusiVaraus.CurrentRow.Index;
+            valittumokki = mokit[valitturivimokki];
+            arvioituloppuhinta = valittumokki.hinta;
+            tbLoppuhinta.Text = arvioituloppuhinta.ToString();
+            tbAlueid.Text = valittumokki.alue_id.ToString();
+            valittualue = alueet[int.Parse(tbAlueid.Text)];
+            tbMokkitunnus.Text = valittumokki.mokki_id.ToString();
+            TyhjennaVarauksenPalvelut();
         }
     }
 }
