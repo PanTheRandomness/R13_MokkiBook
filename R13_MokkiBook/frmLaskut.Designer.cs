@@ -312,6 +312,7 @@
             this.Controls.Add(this.lbOtsikko);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLaskut";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLaskut_FormClosing);
             this.Load += new System.EventHandler(this.frmLaskut_Load);

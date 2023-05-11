@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPalvelut));
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.palveluidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -193,7 +194,6 @@
             // txtHaku
             // 
             this.txtHaku.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtHaku.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtHaku.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.txtHaku.Name = "txtHaku";
             this.txtHaku.Size = new System.Drawing.Size(100, 25);
@@ -221,6 +221,7 @@
             this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmPalvelut";
             this.Text = "Palvelut";
