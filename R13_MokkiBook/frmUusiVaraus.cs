@@ -531,7 +531,9 @@ namespace R13_MokkiBook
                         if (ValidMokki())
                         {
                             if (MokkiVapaa())
+                            {
                                 LuoVaraus();
+                            }
                             else
                                 MessageBox.Show("Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.");
                         }
@@ -544,9 +546,15 @@ namespace R13_MokkiBook
                 MessageBox.Show(msg);
         }
 
-        public bool MokkiVapaa()
+        public bool MokkiVapaa()//toimiiko?
         {
-            //jos ei return false
+            foreach(Varaus v in varaukset)
+            {
+                if(v.varattu_alkupvm <= tamavaraus.varattu_alkupvm && v.varattu_loppupvm >= tamavaraus.varattu_loppupvm)
+                {
+                    return false;
+                }
+            }
             return true;
         }
         private void btnPoistaPalvelu_Click(object sender, EventArgs e)
