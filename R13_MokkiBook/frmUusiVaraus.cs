@@ -592,7 +592,7 @@ namespace R13_MokkiBook
                 palveluidenhinta += GetPalvelunHinta(vp);
             }
             arvioituloppuhinta = valittumokki.hinta + palveluidenhinta;
-            tbLoppuhinta.Text = arvioituloppuhinta.ToString();//2 desimaalia??
+            tbLoppuhinta.Text = arvioituloppuhinta.ToString();
         }
         public void LisaaPalveluVaraukseen()
         {
