@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAsiakkaat));
             this.lbAsiakasid = new System.Windows.Forms.Label();
             this.lbEmail = new System.Windows.Forms.Label();
             this.lbLahiosoite = new System.Windows.Forms.Label();
@@ -370,6 +371,7 @@
             this.Controls.Add(this.lbLahiosoite);
             this.Controls.Add(this.lbEmail);
             this.Controls.Add(this.lbAsiakasid);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAsiakkaat";
             this.Text = "frmAsiakkaat";
             this.Load += new System.EventHandler(this.frmAsiakkaat_Load);
