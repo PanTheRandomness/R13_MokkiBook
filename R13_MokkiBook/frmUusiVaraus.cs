@@ -540,11 +540,22 @@ namespace R13_MokkiBook
         }
         public bool MokkiVapaa()
         {
-            foreach(Varaus v in varaukset)
+            foreach (Varaus v in varaukset)
             {
-                if (((alkupvm >= v.varattu_alkupvm && alkupvm < v.varattu_loppupvm) && v.mokki_id == tamavaraus.mokki_id) /*||*/ )
+                if (v.mokki_id == valittumokki.mokki_id)
                 {
-                    return false;
+                    if (alkupvm >= v.varattu_alkupvm && alkupvm < v.varattu_loppupvm)
+                    {
+                        return false;
+                    }
+                    else if (loppupvm > v.varattu_alkupvm && loppupvm <= v.varattu_loppupvm)
+                    {
+                        return false;
+                    }
+                    else if (alkupvm <= v.varattu_alkupvm && loppupvm >= v.varattu_loppupvm)
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
