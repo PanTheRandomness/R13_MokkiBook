@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Data.Odbc;
 using System.Drawing;
 using System.IO;
@@ -10,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TextBox = System.Windows.Forms.TextBox;
 
 
 namespace R13_MokkiBook
@@ -109,8 +110,7 @@ namespace R13_MokkiBook
 
             try
             {
-
-                string connectionString = "Dns=Village Newbies;uib=root";
+                string connectionString = "Dsn=Village Newbies;uib=root";
                 if (!PostiLoytyi(luotuasiakas.postinro))
                     LuoPosti(luotuasiakas.postinro, tbPostitoimipaikka.Text);
                 using (OdbcConnection connection = new OdbcConnection(connectionString))
