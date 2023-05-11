@@ -116,7 +116,7 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
-        public void LisaaTamavarausVarauksiin(string varausquery)
+       /* public void LisaaTamavarausVarauksiin(string varausquery)
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
@@ -138,7 +138,7 @@ namespace R13_MokkiBook
                     cmd.ExecuteNonQuery();
                 }
             }
-        }
+        }*/
         public double GetPalvelunHinta(VarauksenPalvelut vp)
         {
             double palhinta = 0;
@@ -640,7 +640,7 @@ namespace R13_MokkiBook
             if(!PalveluJoVarauksessa(vp))
             {
                 varauksenpalvelut.Add(vp);
-            }
+            }   
             PaivitaVarauksenPalvelutaulu();
             PaivitaLoppuhinta();
         }
@@ -654,6 +654,7 @@ namespace R13_MokkiBook
                     uusimaara = v.lkm + vp.lkm;
                     vp.lkm = uusimaara;
                     v.lkm = uusimaara;
+                    //Päivitä palvelun nimi-lista!!!
                     varauksessaonjopalvelu = true;
                 }
             }
@@ -1179,11 +1180,6 @@ namespace R13_MokkiBook
             }
         }
 
-        private void lbVarauksenPalvelut_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
         private void tbMinhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8) && (e.KeyChar != (char)46)) //Jos ei toimi: pilkku = 44
@@ -1203,11 +1199,6 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_Load(object sender, EventArgs e)
         {
             this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
-        }
-
-        private void dgvAlueenPalvelut_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            
         }
 
         private void dgvMokitUusiVaraus_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1345,7 +1336,6 @@ namespace R13_MokkiBook
             }
             else maxhinta = 0;
         }
-
         private void tbnTyhjennaMokkihaku_Click(object sender, EventArgs e)
         {
             mokkiquery = "SELECT * FROM mokki;";
@@ -1361,12 +1351,10 @@ namespace R13_MokkiBook
             NollaaAika();
             NollaaAlue();
         }
-
         private void tbLoppuhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
-
         private void nudPalveluLkm_ValueChanged(object sender, EventArgs e)
         {
             if (!palveluvalittu)
@@ -1377,7 +1365,6 @@ namespace R13_MokkiBook
             else
                 lisattavapalvelumaara = (int)nudPalveluLkm.Value;
         }
-
         private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             if (mokkilukittu)
@@ -1388,7 +1375,6 @@ namespace R13_MokkiBook
                 //TyhjennaVarauksenPalvelut();
             }
         }
-
         private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
         {
             valitturivivarauksenpalvelu = lbVarauksenPalvelut.SelectedIndex;
