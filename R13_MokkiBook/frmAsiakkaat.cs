@@ -18,17 +18,21 @@ namespace R13_MokkiBook
     {
         public Asiakas valittuAsiakas = new Asiakas();
         public List<Asiakas> asiakkaat;
+        public List<Posti> postit;
+        public Asiakas luotuasiakas;
 
         public string query;
         private OdbcConnection connection;
         private OdbcDataAdapter dataAdapter;
         private DataTable dataTable;
-        public Asiakas luotuasiakas = new Asiakas();
-        
+
+
         public frmAsiakkaat()
         {
             InitializeComponent();
             asiakkaat = GetAsiakkaat();
+            postit = GetPostit();
+            luotuasiakas = new Asiakas();
             lokiinTallentaminen("Asiakkaat-osio avattiin käyttäjältä: ");
             this.FormClosing += new FormClosingEventHandler(frmAsiakkaat_FormClosing);
         }
@@ -40,62 +44,48 @@ namespace R13_MokkiBook
             string query = "SELECT * FROM asiakas";
 
 
-                using (OdbcConnection connection = new OdbcConnection(connectionString))
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
                 {
-                    connection.Open();
-                    using (OdbcCommand command = new OdbcCommand(query, connection))
+                    using (OdbcDataReader reader = command.ExecuteReader())
                     {
-                        using (OdbcDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                Asiakas a = new Asiakas();
-                                a.asiakas_id = reader.GetInt32(0);
-                                a.postinro = reader.GetString(1);
-                                a.etunimi = reader.GetString(2);
-                                a.sukunimi = reader.GetString(3);
-                                a.lahiosoite = reader.GetString(4);
-                                a.email = reader.GetString(5);
-                                a.puhelinnro = reader.GetString(6);
+                            Asiakas a = new Asiakas();
+                            a.asiakas_id = reader.GetInt32(0);
+                            a.postinro = reader.GetString(1);
+                            a.etunimi = reader.GetString(2);
+                            a.sukunimi = reader.GetString(3);
+                            a.lahiosoite = reader.GetString(4);
+                            a.email = reader.GetString(5);
+                            a.puhelinnro = reader.GetString(6);
 
-                                asi.Add(a);
-                            }
+                            asi.Add(a);
                         }
                     }
                 }
-                return asi;
             }
+            return asi;
+        }
 
 
         private void frmAsiakkaat_Load(object sender, EventArgs e)
         {
             try
             {
-                // TODO: This line of code loads data into the 'dataSet1.asiakas' table. You can move, or remove it, as needed.
+
                 this.asiakasTableAdapter.Fill(this.dataSet1.asiakas);
                 connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
                 connection.Open();
-
-                // Create a new ODBC data adapter and select all rows from the table
                 dataAdapter = new OdbcDataAdapter("SELECT * FROM asiakas", connection);
-
-                // Create a new DataTable and fill it with the rows from the table
                 dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
-
-                // Set the DataSource property of the DataGridView control to the DataTable
                 dgvAsiakkaat.DataSource = dataTable;
-
-                // Create an OdbcCommandBuilder object to automatically generate insert, update, and delete commands
                 OdbcCommandBuilder commandBuilder = new OdbcCommandBuilder(dataAdapter);
-
-                // Set the InsertCommand property of the dataAdapter to the generated insert command
                 dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
-
-                // Create a new DataSet object to hold the data retrieved from the database
                 System.Data.DataSet dataSet = new System.Data.DataSet();
-
-                // Fill the DataSet with data from the database
                 dataAdapter.Fill(dataSet1);
             }
             catch (Exception ex)
@@ -107,7 +97,7 @@ namespace R13_MokkiBook
         //Lisää uusi asiakas. Tarkistaa että kaikki kentät on täytetty, jos ei ole tulee virheilmoitus.
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-           /* 
+
             luotuasiakas.asiakas_id = int.Parse(tbAsiakasid.Text);
             luotuasiakas.postinro = tbPostiNro.Text;
             luotuasiakas.etunimi = tbEtunimi.Text;
@@ -116,56 +106,113 @@ namespace R13_MokkiBook
             luotuasiakas.email = tbEmail.Text;
             luotuasiakas.puhelinnro = tbPuhelinnro.Text;
 
-            try 
-            {
-                string connectionString = "Dns=Village Newbies;uib=root";
-            if (!PostiLoytyi(luotuasiakas.postinro))
-                LuoPosti(luotuasiakas.postinro, tbPostitoimipaikka.Text);
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
-            {
-                connection.Open();
-                    string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro)";
-                    using (OdbcConnection cmd = new OdbcConnection(Lisaysquery, connection))*/
 
             try
-            { 
+            {
 
-                        if (tbAsiakasid.Text.Trim() == "" || tbPostiNro.Text.Trim() == "" || tbEtunimi.Text.Trim() == "" ||
-                tbSukunimi.Text.Trim() == "" || tbLahiosoite.Text.Trim() == "" || tbEmail.Text.Trim() == "" ||
-                tbPuhelinnro.Text.Trim() == "")
-
+                string connectionString = "Dns=Village Newbies;uib=root";
+                if (!PostiLoytyi(luotuasiakas.postinro))
+                    LuoPosti(luotuasiakas.postinro, tbPostitoimipaikka.Text);
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
-                    MessageBox.Show("Täytä kaikki kentät!");
+                    connection.Open();
+                    string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES(" + luotuasiakas.asiakas_id + ", '" + luotuasiakas.postinro + "', '" + luotuasiakas.etunimi + "', '" + luotuasiakas.sukunimi + "', '" + luotuasiakas.lahiosoite + "', '" + luotuasiakas.email + "', '" + luotuasiakas.puhelinnro + "');";
+                    using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                    if (tbAsiakasid.Text.Trim() == "" || tbPostiNro.Text.Trim() == "" || tbEtunimi.Text.Trim() == "" ||
+                    tbSukunimi.Text.Trim() == "" || tbLahiosoite.Text.Trim() == "" || tbEmail.Text.Trim() == "" ||
+                    tbPuhelinnro.Text.Trim() == "")
+
+                    {
+                        MessageBox.Show("Täytä kaikki kentät!");
+                    }
+
+                    else
+                    {
+                        DataRow newRow = dataTable.NewRow();
+                        newRow["asiakas_id"] = tbAsiakasid.Text;
+                        newRow["postinro"] = tbPostiNro.Text;
+                        newRow["etunimi"] = tbEtunimi.Text;
+                        newRow["sukunimi"] = tbSukunimi.Text;
+                        newRow["lahiosoite"] = tbLahiosoite.Text;
+                        newRow["email"] = tbEmail.Text;
+                        newRow["puhelinnro"] = tbPuhelinnro.Text;
+
+
+                        dataTable.Rows.Add(newRow);
+                        dataAdapter.Update(dataTable);
+
+                        tbAsiakasid.Text = String.Empty;
+                        tbPostiNro.Text = String.Empty;
+                        tbEtunimi.Text = String.Empty;
+                        tbSukunimi.Text = String.Empty;
+                        tbLahiosoite.Text = String.Empty;
+                        tbEmail.Text = String.Empty;
+                        tbPuhelinnro.Text = String.Empty;
+
+                    }
                 }
-
-                else
-                {
-                    DataRow newRow = dataTable.NewRow();
-                    newRow["asiakas_id"] = tbAsiakasid.Text;
-                    newRow["postinro"] = tbPostiNro.Text;
-                    newRow["etunimi"] = tbEtunimi.Text;
-                    newRow["sukunimi"] = tbSukunimi.Text;
-                    newRow["lahiosoite"] = tbLahiosoite.Text;
-                    newRow["email"] = tbEmail.Text;
-                    newRow["puhelinnro"] = tbPuhelinnro.Text;
-
-
-                    dataTable.Rows.Add(newRow);
-                    dataAdapter.Update(dataTable);
-
-                    tbAsiakasid.Text = String.Empty;
-                    tbPostiNro.Text = String.Empty;
-                    tbEtunimi.Text = String.Empty;
-                    tbSukunimi.Text = String.Empty;
-                    tbLahiosoite.Text = String.Empty;
-                    tbEmail.Text = String.Empty;
-                    tbPuhelinnro.Text = String.Empty;
-                }
+            
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        public void LuoPosti(string pnro, string ptp)
+        {
+            string connectionString = "Dsn=Village Newbies;uid=root";
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                string lisaysquery = "INSERT INTO posti(postinro, toimipaikka) VALUES(" + pnro + ", '" + ptp + "');";
+                using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+            postit = GetPostit();
+        }
+
+        public List<Posti> GetPostit()
+        {
+            List<Posti> po = new List<Posti>();
+            string connectionString = "Dsn=Village Newbies;uid=root";
+            string query = "SELECT * FROM posti;";
+
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Posti p = new Posti();
+                            p.postinro = reader.GetString(0);
+                            p.toimipaikka = reader.GetString(1);
+                            po.Add(p);
+                        }
+                    }
+                }
+            }
+            return po;
+        }
+        public bool PostiLoytyi(string pn)
+        {
+            foreach (Posti p in postit)
+            {
+                if (p.postinro == pn)
+                    return true;
+            }
+            return false;
         }
 
         //Tietojen muokkaaminen
