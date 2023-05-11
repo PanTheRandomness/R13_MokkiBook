@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Utilities.Collections;
+﻿using iTextSharp.text;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,12 +39,14 @@ namespace R13_MokkiBook
         public Varaus tamavaraus;
         public List <Palvelu> palvelut;
         public List<VarauksenPalvelut> varauksenpalvelut;
+        public List<String> varauksenpalvelunimet;
         public List<Asiakas> asiakkaat;
         public List<Alue> alueet;
         public List<Mokki> mokit;
         public List<Posti> postit;
         public List<Varaus> varaukset;
 
+        BindingSource bs = new BindingSource();
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string asiakasquery = "SELECT * FROM asiakas;";
         public string aluequery = "SELECT nimi FROM alue;";
@@ -83,6 +86,7 @@ namespace R13_MokkiBook
             palvelut = GetPalvelut();
             //varauksenpalvelut = GetVarauksenPalvelut();
             varauksenpalvelut = new List<VarauksenPalvelut>();
+            bs.DataSource = varauksenpalvelunimet;
             asiakkaat = GetAsiakkaat();
             alueet = GetAlueet();
             mokit = GetMokit();
@@ -450,7 +454,28 @@ namespace R13_MokkiBook
         }
         public void PaivitaVarauksenPalvelutaulu() //TOIMIIKO
         {
-            lbVarauksenPalvelut.DataSource = varauksenpalvelut; 
+            foreach(VarauksenPalvelut vp in varauksenpalvelut)
+            {
+                string palvelunnimi = "";
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    string query = "SELECT nimi FROM palvelu WHERE palvelu_id = " + vp.palvelu_id + ";";
+                    connection.Open();
+                    using (OdbcCommand command = new OdbcCommand(query, connection))
+                    {
+                        using (OdbcDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                palvelunnimi = reader.GetString(0);
+                            }
+                        }
+                    }
+                }
+                varauksenpalvelunimet.Add(palvelunnimi);
+            }
+            bs.ResetBindings(true);
+            lbVarauksenPalvelut.DataSource = bs;
             /*varauksenpalvelut = GetVarauksenPalvelut();
             OdbcConnection connection = new OdbcConnection(connectionString);
             connection.Open();
