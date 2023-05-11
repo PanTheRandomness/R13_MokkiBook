@@ -23,6 +23,8 @@ namespace R13_MokkiBook
         private OdbcConnection connection;
         private OdbcDataAdapter dataAdapter;
         private DataTable dataTable;
+        public Asiakas luotuasiakas = new Asiakas();
+        
         public frmAsiakkaat()
         {
             InitializeComponent();
@@ -64,6 +66,7 @@ namespace R13_MokkiBook
                 return asi;
             }
 
+
         private void frmAsiakkaat_Load(object sender, EventArgs e)
         {
             try
@@ -104,9 +107,30 @@ namespace R13_MokkiBook
         //Lisää uusi asiakas. Tarkistaa että kaikki kentät on täytetty, jos ei ole tulee virheilmoitus.
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            try
+           /* 
+            luotuasiakas.asiakas_id = int.Parse(tbAsiakasid.Text);
+            luotuasiakas.postinro = tbPostiNro.Text;
+            luotuasiakas.etunimi = tbEtunimi.Text;
+            luotuasiakas.sukunimi = tbSukunimi.Text;
+            luotuasiakas.lahiosoite = tbLahiosoite.Text;
+            luotuasiakas.email = tbEmail.Text;
+            luotuasiakas.puhelinnro = tbPuhelinnro.Text;
+
+            try 
             {
-                if (tbAsiakasid.Text.Trim() == "" || tbPostiNro.Text.Trim() == "" || tbEtunimi.Text.Trim() == "" ||
+                string connectionString = "Dns=Village Newbies;uib=root";
+            if (!PostiLoytyi(luotuasiakas.postinro))
+                LuoPosti(luotuasiakas.postinro, tbPostitoimipaikka.Text);
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                    string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro)";
+                    using (OdbcConnection cmd = new OdbcConnection(Lisaysquery, connection))*/
+
+            try
+            { 
+
+                        if (tbAsiakasid.Text.Trim() == "" || tbPostiNro.Text.Trim() == "" || tbEtunimi.Text.Trim() == "" ||
                 tbSukunimi.Text.Trim() == "" || tbLahiosoite.Text.Trim() == "" || tbEmail.Text.Trim() == "" ||
                 tbPuhelinnro.Text.Trim() == "")
 

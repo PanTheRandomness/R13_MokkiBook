@@ -62,6 +62,8 @@
             this.tbHae = new System.Windows.Forms.TextBox();
             this.btnHae = new System.Windows.Forms.Button();
             this.MyToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbPostitoimipaikka = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -79,7 +81,7 @@
             // lbEmail
             // 
             this.lbEmail.AutoSize = true;
-            this.lbEmail.Location = new System.Drawing.Point(396, 82);
+            this.lbEmail.Location = new System.Drawing.Point(396, 114);
             this.lbEmail.Name = "lbEmail";
             this.lbEmail.Size = new System.Drawing.Size(41, 16);
             this.lbEmail.TabIndex = 5;
@@ -88,7 +90,7 @@
             // lbLahiosoite
             // 
             this.lbLahiosoite.AutoSize = true;
-            this.lbLahiosoite.Location = new System.Drawing.Point(396, 52);
+            this.lbLahiosoite.Location = new System.Drawing.Point(396, 87);
             this.lbLahiosoite.Name = "lbLahiosoite";
             this.lbLahiosoite.Size = new System.Drawing.Size(69, 16);
             this.lbLahiosoite.TabIndex = 4;
@@ -124,7 +126,7 @@
             // lbPuhelinnumero
             // 
             this.lbPuhelinnumero.AutoSize = true;
-            this.lbPuhelinnumero.Location = new System.Drawing.Point(396, 117);
+            this.lbPuhelinnumero.Location = new System.Drawing.Point(396, 143);
             this.lbPuhelinnumero.Name = "lbPuhelinnumero";
             this.lbPuhelinnumero.Size = new System.Drawing.Size(96, 16);
             this.lbPuhelinnumero.TabIndex = 6;
@@ -140,7 +142,7 @@
             // 
             // tbPuhelinnro
             // 
-            this.tbPuhelinnro.Location = new System.Drawing.Point(516, 114);
+            this.tbPuhelinnro.Location = new System.Drawing.Point(516, 140);
             this.tbPuhelinnro.Name = "tbPuhelinnro";
             this.tbPuhelinnro.Size = new System.Drawing.Size(159, 22);
             this.tbPuhelinnro.TabIndex = 6;
@@ -148,7 +150,7 @@
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(516, 82);
+            this.tbEmail.Location = new System.Drawing.Point(516, 112);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(159, 22);
             this.tbEmail.TabIndex = 5;
@@ -156,7 +158,7 @@
             // 
             // tbLahiosoite
             // 
-            this.tbLahiosoite.Location = new System.Drawing.Point(516, 52);
+            this.tbLahiosoite.Location = new System.Drawing.Point(516, 80);
             this.tbLahiosoite.Name = "tbLahiosoite";
             this.tbLahiosoite.Size = new System.Drawing.Size(159, 22);
             this.tbLahiosoite.TabIndex = 4;
@@ -345,11 +347,29 @@
             this.btnHae.UseVisualStyleBackColor = true;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(396, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 16);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Postitoimipaikka";
+            // 
+            // tbPostitoimipaikka
+            // 
+            this.tbPostitoimipaikka.Location = new System.Drawing.Point(516, 52);
+            this.tbPostitoimipaikka.Name = "tbPostitoimipaikka";
+            this.tbPostitoimipaikka.Size = new System.Drawing.Size(159, 22);
+            this.tbPostitoimipaikka.TabIndex = 27;
+            // 
             // frmAsiakkaat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 546);
+            this.Controls.Add(this.tbPostitoimipaikka);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnHae);
             this.Controls.Add(this.tbHae);
             this.Controls.Add(this.btnTyhjenna);
@@ -417,5 +437,7 @@
         private System.Windows.Forms.TextBox tbHae;
         private System.Windows.Forms.Button btnHae;
         private System.Windows.Forms.ToolTip MyToolTip;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbPostitoimipaikka;
     }
 }
