@@ -18,5 +18,6 @@ namespace R13_MokkiBook
         public string kuvaus { get; set; }
         public int henkilomaara { get; set; }
         public string varustelu { get; set; }
+        public string postitoimipaikka { get; set; }
     }
 }
