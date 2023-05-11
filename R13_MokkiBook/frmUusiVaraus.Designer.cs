@@ -33,6 +33,7 @@ namespace R13_MokkiBook
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUusiVaraus));
             this.pnlAsiakastiedot = new System.Windows.Forms.Panel();
+            this.lblValitseasiakas = new System.Windows.Forms.Label();
             this.btnTyhjValinta = new System.Windows.Forms.Button();
             this.tbPostitoimipaikkaAsiakas = new System.Windows.Forms.TextBox();
             this.lblPostitoimipaikka = new System.Windows.Forms.Label();
@@ -63,6 +64,7 @@ namespace R13_MokkiBook
             this.tbAsiakastunnus = new System.Windows.Forms.TextBox();
             this.pnlVaraustiedot = new System.Windows.Forms.Panel();
             this.pnlMokki = new System.Windows.Forms.Panel();
+            this.lblValitsemokki = new System.Windows.Forms.Label();
             this.tbnTyhjennaMokkihaku = new System.Windows.Forms.Button();
             this.btnNollaaAika = new System.Windows.Forms.Button();
             this.btnHaemokki = new System.Windows.Forms.Button();
@@ -86,6 +88,7 @@ namespace R13_MokkiBook
             this.lblLoppuhinta = new System.Windows.Forms.Label();
             this.tbLoppuhinta = new System.Windows.Forms.TextBox();
             this.pnlPalvelut = new System.Windows.Forms.Panel();
+            this.lblValitsePalvelut = new System.Windows.Forms.Label();
             this.btnPoistaPalvelu = new System.Windows.Forms.Button();
             this.dgvAlueenPalvelut = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,6 +102,7 @@ namespace R13_MokkiBook
             this.lblPalvelujenMaara = new System.Windows.Forms.Label();
             this.nudPalveluLkm = new System.Windows.Forms.NumericUpDown();
             this.btnLisaaPalveluVaraukseen = new System.Windows.Forms.Button();
+            this.lbVarauksenPalvelut = new System.Windows.Forms.ListBox();
             this.dgvMokitUusiVaraus = new System.Windows.Forms.DataGridView();
             this.mokkiidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,10 +125,6 @@ namespace R13_MokkiBook
             this.varausTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.varausTableAdapter();
             this.ttUusiVaraus = new System.Windows.Forms.ToolTip(this.components);
             this.palveluTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.palveluTableAdapter();
-            this.lblValitseasiakas = new System.Windows.Forms.Label();
-            this.lblValitsemokki = new System.Windows.Forms.Label();
-            this.lblValitsePalvelut = new System.Windows.Forms.Label();
-            this.lbVarauksenPalvelut = new System.Windows.Forms.ListBox();
             this.pnlAsiakastiedot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsiakkaat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asiakasBindingSource)).BeginInit();
@@ -174,6 +174,15 @@ namespace R13_MokkiBook
             this.pnlAsiakastiedot.Name = "pnlAsiakastiedot";
             this.pnlAsiakastiedot.Size = new System.Drawing.Size(1068, 268);
             this.pnlAsiakastiedot.TabIndex = 0;
+            // 
+            // lblValitseasiakas
+            // 
+            this.lblValitseasiakas.AutoSize = true;
+            this.lblValitseasiakas.Location = new System.Drawing.Point(11, 16);
+            this.lblValitseasiakas.Name = "lblValitseasiakas";
+            this.lblValitseasiakas.Size = new System.Drawing.Size(92, 13);
+            this.lblValitseasiakas.TabIndex = 0;
+            this.lblValitseasiakas.Text = "1. Valitse asiakas:";
             // 
             // btnTyhjValinta
             // 
@@ -481,6 +490,15 @@ namespace R13_MokkiBook
             this.pnlMokki.Size = new System.Drawing.Size(508, 258);
             this.pnlMokki.TabIndex = 10;
             // 
+            // lblValitsemokki
+            // 
+            this.lblValitsemokki.AutoSize = true;
+            this.lblValitsemokki.Location = new System.Drawing.Point(7, 26);
+            this.lblValitsemokki.Name = "lblValitsemokki";
+            this.lblValitsemokki.Size = new System.Drawing.Size(84, 13);
+            this.lblValitsemokki.TabIndex = 9;
+            this.lblValitsemokki.Text = "2. Valitse mökki:";
+            // 
             // tbnTyhjennaMokkihaku
             // 
             this.tbnTyhjennaMokkihaku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -740,6 +758,15 @@ namespace R13_MokkiBook
             this.pnlPalvelut.Size = new System.Drawing.Size(547, 258);
             this.pnlPalvelut.TabIndex = 24;
             // 
+            // lblValitsePalvelut
+            // 
+            this.lblValitsePalvelut.AutoSize = true;
+            this.lblValitsePalvelut.Location = new System.Drawing.Point(3, 10);
+            this.lblValitsePalvelut.Name = "lblValitsePalvelut";
+            this.lblValitsePalvelut.Size = new System.Drawing.Size(93, 13);
+            this.lblValitsePalvelut.TabIndex = 22;
+            this.lblValitsePalvelut.Text = "4. Valitse palvelut:";
+            // 
             // btnPoistaPalvelu
             // 
             this.btnPoistaPalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -779,7 +806,7 @@ namespace R13_MokkiBook
             this.dgvAlueenPalvelut.TabIndex = 22;
             this.dgvAlueenPalvelut.TabStop = false;
             this.ttUusiVaraus.SetToolTip(this.dgvAlueenPalvelut, "Lukitse mökki käyttääksesi tätä: Valitse lisättävä palvelu");
-            this.dgvAlueenPalvelut.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAlueenPalvelut_RowHeaderMouseDoubleClick);
+            this.dgvAlueenPalvelut.SelectionChanged += new System.EventHandler(this.dgvAlueenPalvelut_SelectionChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -868,6 +895,19 @@ namespace R13_MokkiBook
             this.ttUusiVaraus.SetToolTip(this.btnLisaaPalveluVaraukseen, "Lisää valitun palvelun varaukseen");
             this.btnLisaaPalveluVaraukseen.UseVisualStyleBackColor = true;
             this.btnLisaaPalveluVaraukseen.Click += new System.EventHandler(this.btnLisaaPalveluVaraukseen_Click);
+            // 
+            // lbVarauksenPalvelut
+            // 
+            this.lbVarauksenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbVarauksenPalvelut.Enabled = false;
+            this.lbVarauksenPalvelut.FormattingEnabled = true;
+            this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
+            this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
+            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 69);
+            this.lbVarauksenPalvelut.TabIndex = 25;
+            this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Valitse varauksesta poistettava palvelu.");
+            this.lbVarauksenPalvelut.SelectedIndexChanged += new System.EventHandler(this.lbVarauksenPalvelut_SelectedIndexChanged);
             // 
             // dgvMokitUusiVaraus
             // 
@@ -1002,46 +1042,6 @@ namespace R13_MokkiBook
             // palveluTableAdapter
             // 
             this.palveluTableAdapter.ClearBeforeFill = true;
-            // 
-            // lblValitseasiakas
-            // 
-            this.lblValitseasiakas.AutoSize = true;
-            this.lblValitseasiakas.Location = new System.Drawing.Point(11, 16);
-            this.lblValitseasiakas.Name = "lblValitseasiakas";
-            this.lblValitseasiakas.Size = new System.Drawing.Size(92, 13);
-            this.lblValitseasiakas.TabIndex = 0;
-            this.lblValitseasiakas.Text = "1. Valitse asiakas:";
-            // 
-            // lblValitsemokki
-            // 
-            this.lblValitsemokki.AutoSize = true;
-            this.lblValitsemokki.Location = new System.Drawing.Point(7, 26);
-            this.lblValitsemokki.Name = "lblValitsemokki";
-            this.lblValitsemokki.Size = new System.Drawing.Size(84, 13);
-            this.lblValitsemokki.TabIndex = 9;
-            this.lblValitsemokki.Text = "2. Valitse mökki:";
-            // 
-            // lblValitsePalvelut
-            // 
-            this.lblValitsePalvelut.AutoSize = true;
-            this.lblValitsePalvelut.Location = new System.Drawing.Point(3, 10);
-            this.lblValitsePalvelut.Name = "lblValitsePalvelut";
-            this.lblValitsePalvelut.Size = new System.Drawing.Size(93, 13);
-            this.lblValitsePalvelut.TabIndex = 22;
-            this.lblValitsePalvelut.Text = "4. Valitse palvelut:";
-            // 
-            // lbVarauksenPalvelut
-            // 
-            this.lbVarauksenPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbVarauksenPalvelut.Enabled = false;
-            this.lbVarauksenPalvelut.FormattingEnabled = true;
-            this.lbVarauksenPalvelut.Location = new System.Drawing.Point(0, 161);
-            this.lbVarauksenPalvelut.Name = "lbVarauksenPalvelut";
-            this.lbVarauksenPalvelut.Size = new System.Drawing.Size(546, 69);
-            this.lbVarauksenPalvelut.TabIndex = 25;
-            this.ttUusiVaraus.SetToolTip(this.lbVarauksenPalvelut, "Valitse varauksesta poistettava palvelu.");
-            this.lbVarauksenPalvelut.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbVarauksenPalvelut_MouseDoubleClick);
             // 
             // frmUusiVaraus
             // 
