@@ -1179,6 +1179,7 @@ namespace R13_MokkiBook
         public void NollaaPalvelut()//MIHIN TÄMÄ?
         {
             varauksenpalvelut.Clear();
+            varauksenpalvelunimet.Clear();
             nudPalveluLkm.Value = 0;
             palveluquery = "SELECT * FROM palvelu;";
             PaivitaPalvelutaulu(palveluquery);
