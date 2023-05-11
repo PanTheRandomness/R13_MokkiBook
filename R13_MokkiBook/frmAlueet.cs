@@ -61,21 +61,28 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
-            if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Täytä kaikki kentät!");
+                if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
+                {
+                    MessageBox.Show("Täytä kaikki kentät!");
+                }
+                else
+                {
+                    DataRow newRow = dataTable.NewRow();
+                    newRow["alue_id"] = tbAlueId.Text;
+                    newRow["nimi"] = tbNimi.Text;
+
+                    dataTable.Rows.Add(newRow);
+                    dataAdapter.Update(dataTable);
+
+                    tbAlueId.Text = String.Empty;
+                    tbNimi.Text = String.Empty;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                DataRow newRow = dataTable.NewRow();
-                newRow["alue_id"] = tbAlueId.Text;
-                newRow["nimi"] = tbNimi.Text;
-
-                dataTable.Rows.Add(newRow);
-                dataAdapter.Update(dataTable);
-
-                tbAlueId.Text = String.Empty;
-                tbNimi.Text = String.Empty;
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -97,7 +104,9 @@ namespace R13_MokkiBook
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
-            if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
+            try
+            {
+                if (tbAlueId.Text.Trim() == "" || tbNimi.Text.Trim() == "")
             {
                 MessageBox.Show("Täytä kaikki kentät!");
             }
@@ -118,20 +127,32 @@ namespace R13_MokkiBook
                 lokiinTallentaminen("Alueet-osiosta muokattiin tietoja käyttäjältä: ");
             }
         }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+}
 
         // Poistaminen. Poistaa valitun rivin.
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
-            DataRow currentRow = ((DataRowView)dgvAlue.CurrentRow.DataBoundItem).Row;
+            try
+            {
+                DataRow currentRow = ((DataRowView)dgvAlue.CurrentRow.DataBoundItem).Row;
 
-            currentRow.Delete();
-            dataAdapter.Update(dataTable);
+                currentRow.Delete();
+                dataAdapter.Update(dataTable);
 
-            tbAlueId.Text = String.Empty;
-            tbNimi.Text = String.Empty;
+                tbAlueId.Text = String.Empty;
+                tbNimi.Text = String.Empty;
 
-            lokiinTallentaminen("Alueet-osiosta poistettiin tietoja käyttäjältä: ");
+                lokiinTallentaminen("Alueet-osiosta poistettiin tietoja käyttäjältä: ");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void dgvAlue_SelectionChanged(object sender, EventArgs e)
@@ -176,37 +197,44 @@ namespace R13_MokkiBook
 
         private void btnHae_Click(object sender, EventArgs e)
         {
-            string searchValue = tbHae.Text.Trim();
-            if (dgvAlue != null)
+            try
             {
-                dgvAlue.ClearSelection();
-                if (!string.IsNullOrEmpty(searchValue))
+                string searchValue = tbHae.Text.Trim();
+                if (dgvAlue != null)
                 {
-                    if (int.TryParse(searchValue, out int id))
+                    dgvAlue.ClearSelection();
+                    if (!string.IsNullOrEmpty(searchValue))
                     {
-                        foreach (DataGridViewRow row in dgvAlue.Rows)
+                        if (int.TryParse(searchValue, out int id))
                         {
-                            if (row.Cells["alue_id"].Value != null && row.Cells["alue_id"].Value.ToString().Equals(searchValue))
+                            foreach (DataGridViewRow row in dgvAlue.Rows)
                             {
-                                dgvAlue.CurrentCell = row.Cells["alue_id"];
-                                row.Selected = true;
-                                break;
+                                if (row.Cells["alue_id"].Value != null && row.Cells["alue_id"].Value.ToString().Equals(searchValue))
+                                {
+                                    dgvAlue.CurrentCell = row.Cells["alue_id"];
+                                    row.Selected = true;
+                                    break;
+                                }
+                            }
+                            if (!dgvAlue.SelectedRows.Count.Equals(1))
+                            {
+                                MessageBox.Show("Aluetta ei löytynyt");
                             }
                         }
-                        if (!dgvAlue.SelectedRows.Count.Equals(1))
+                        else
                         {
-                            MessageBox.Show("Aluetta ei löytynyt");
+                            MessageBox.Show("Hae Alue_id numerolla");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Hae Alue_id numerolla");
+                        MessageBox.Show("Haku ei voi olla tyhjä");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Haku ei voi olla tyhjä");
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
