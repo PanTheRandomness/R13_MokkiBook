@@ -326,31 +326,40 @@ namespace R13_MokkiBook
             tamavaraus.mokki_id = valittumokki.mokki_id;
             tamavaraus.varattu_alkupvm = alkupvm;
             tamavaraus.varattu_loppupvm = loppupvm;
-            string varmistus = "Luodaanko varaus \n ID:" + tamavaraus.varaus_id.ToString() + 
-                "\n Asiakas: " + valittuasiakas.etunimi + " " + valittuasiakas.sukunimi + ", tunnus: " + valittuasiakas.asiakas_id.ToString() + 
-                "\n Mökki: "
-            if (MessageBox.Show(varmistus, "Varmistus", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+            if (MessageBox.Show("Olethan varmistanut lisäpalvelut?", "Varmistus", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 tamavaraus.varattu_pvm = DateTime.Now;
                 tamavaraus.vahvistus_pvm = DateTime.Now;
+                string varmistus = "Luodaanko varaus \n ID:" + tamavaraus.varaus_id.ToString() + ", ajankohta: " + tamavaraus.varattu_alkupvm + " - " + tamavaraus.varattu_loppupvm +
+                "\n Asiakas: " + valittuasiakas.etunimi + " " + valittuasiakas.sukunimi + ", ID: " + valittuasiakas.asiakas_id.ToString() +
+                "\n Alue: " + valittualue.nimi + ", ID:" + valittualue.alue_id.ToString() +
+                "\n Mökki: " + valittumokki.mokkinimi + ", ID: " + valittumokki.mokki_id.ToString() + ", henkilökapasiteetti: " + valittumokki.henkilomaara.ToString() + ", mökin hinta: " + valittumokki.hinta.ToString() + " €" +
+                "\n Arvioitu loppuhinta lisäpalveluineen: " + arvioituloppuhinta.ToString() + " €";
 
-                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                if (MessageBox.Show(varmistus, "Varmistus", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    connection.Open();
-                    varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
-                        "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", '" + tamavaraus.varattu_pvm + "', '" + tamavaraus.vahvistus_pvm + "', '" + tamavaraus.varattu_alkupvm + "', '" + tamavaraus.varattu_loppupvm + "');";
-                    using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
+                    tamavaraus.varattu_pvm = DateTime.Now;
+                    tamavaraus.vahvistus_pvm = DateTime.Now;
+
+                    using (OdbcConnection connection = new OdbcConnection(connectionString))
                     {
-                        cmd.ExecuteNonQuery();
+                        connection.Open();
+                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
+                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", '" + tamavaraus.varattu_pvm + "', '" + tamavaraus.vahvistus_pvm + "', '" + tamavaraus.varattu_alkupvm + "', '" + tamavaraus.varattu_loppupvm + "');";
+                        using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
                     }
+                    foreach (VarauksenPalvelut vp in varauksenpalvelut)
+                    {
+                        LisaaPalveluVaraukseen(vp);
+                    }
+                    LokiinTallentaminen("Luotiin varaus " + tamavaraus.varaus_id + " käyttäjältä: ");
+                    varausluotu = true;
+                    this.Close();//sulkeeko vain tämän formin?
                 }
-                foreach (VarauksenPalvelut vp in varauksenpalvelut)
-                {
-                    LisaaPalveluVaraukseen(vp);
-                }
-                LokiinTallentaminen("Luotiin varaus " + tamavaraus.varaus_id + " käyttäjältä: ");
-                varausluotu = true;
-                this.Close();//sulkeeko vain tämän formin?
             }
         }
         public void PaivitaAsiakastaulu(string asiakasquery)
