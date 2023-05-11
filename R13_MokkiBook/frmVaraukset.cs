@@ -15,6 +15,7 @@ namespace R13_MokkiBook
 {
     public partial class frmVaraukset : Form
     {//Pan
+        //Kommenteissa virheellisistä varauksista (lähinnä tässä pähkäillessä) syntyneiden varauksien yms. poistokoodit
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string hakuquery;
         public int valitturivi = -1;
@@ -33,6 +34,7 @@ namespace R13_MokkiBook
             LokiinTallentaminen("Varaukset-osio avattiin käyttäjältä: ");
 
             //jos palveluita ja virheellinen varaus: 
+
             /*using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
                 connection.Open();
@@ -42,8 +44,10 @@ namespace R13_MokkiBook
                     cmd.ExecuteNonQuery();
                 }
             }*/
+
             //jos laskuja ja virheellinen varaus:
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
+
+            /*using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
                 connection.Open();
                 string poistoquery = "DELETE FROM lasku WHERE varaus_id = 4;";
@@ -51,9 +55,11 @@ namespace R13_MokkiBook
                 {
                     cmd.ExecuteNonQuery();
                 }
-            }
+            }*/
+
             //poista virheellinen varaus:
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
+
+            /*using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
                 connection.Open();
                 string poistoquery = "DELETE FROM varaus WHERE varaus_id = 4;";
@@ -61,8 +67,10 @@ namespace R13_MokkiBook
                 {
                     cmd.ExecuteNonQuery();
                 }
-            }
-            //Muista poistaa tämä!! Vain korjausta varten!!!!! (Jos on tullut vahingossa lisäiltyä jotain väärää, joka haluaa kaataa koko homman...)
+            }*/
+
+            // jos on tullut virheellisiä varauksia useampia:
+
             /*foreach (Varaus varaus in varaukset)
             {
                 if (varaus.varaus_id ==4)
@@ -86,25 +94,25 @@ namespace R13_MokkiBook
                         {
                             Varaus varaus = new Varaus();
                             varaus.varaus_id = reader.GetInt32(0);
-                            //Muista poistaa tämä!! vain korjausta varten!!!!! Jos on tullut vahingossa lisäiltyä jotain väärää
-                            if (varaus.varaus_id == 4)
-                                break;
+                            //Korjausta varten
+                            /*if (varaus.varaus_id == 4)
+                                //break;*/
                             varaus.asiakas_id = reader.GetInt32(1);
                             varaus.mokki_id = reader.GetInt32(2);
-                            if (varaus.varaus_id < 4)
-                            {
+                            /*if (varaus.varaus_id < 4)
+                            {*/
                                 varaus.varattu_pvm = reader.GetDateTime(3);
                                 varaus.vahvistus_pvm = reader.GetDateTime(4);
                                 varaus.varattu_alkupvm = reader.GetDateTime(5);
                                 varaus.varattu_loppupvm = reader.GetDateTime(6);
-                            }
+                            /*}
                             else
                             {
                                 varaus.varattu_pvm = nyt;
                                 varaus.vahvistus_pvm = nyt;
                                 varaus.varattu_alkupvm = nyt;
                                 varaus.varattu_loppupvm = nyt;
-                            }
+                            }*/
                             var.Add(varaus);
                         }
                     }
@@ -147,9 +155,9 @@ namespace R13_MokkiBook
             v.varaus_id = varaukset[valitturivi].varaus_id;
             v.asiakas_id = varaukset[valitturivi].asiakas_id;
             v.mokki_id = varaukset[valitturivi].mokki_id;
-            //MUISTA POISTAA IFFI Vikakorjaus
-            //if (v.varaus_id > 4)
-            //{
+            //Vikakorjaus
+            /*if (v.varaus_id > 4)
+            {*/
                 v.varattu_pvm = varaukset[valitturivi].varattu_pvm;
                 v.vahvistus_pvm = varaukset[valitturivi].vahvistus_pvm;
                 v.varattu_alkupvm = varaukset[valitturivi].varattu_alkupvm;

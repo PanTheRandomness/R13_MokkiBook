@@ -345,8 +345,8 @@ namespace R13_MokkiBook
                     using (OdbcConnection connection = new OdbcConnection(connectionString))
                     {
                         connection.Open();
-                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " + //toString??
-                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", " + tamavaraus.varattu_pvm.ToShortDateString() + ", " + tamavaraus.vahvistus_pvm.ToShortDateString() + ", " + tamavaraus.varattu_alkupvm.ToShortDateString() + ", " + tamavaraus.varattu_loppupvm.ToShortDateString() + ");";
+                        varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
+                            "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", " + tamavaraus.varattu_pvm.ToString("yyyy-MM-dd HH:mm:ss") + ", " + tamavaraus.vahvistus_pvm.ToString("yyyy-MM-dd HH:mm:ss") + ", " + tamavaraus.varattu_alkupvm.ToString("yyyy-MM-dd HH:mm:ss") + ", " + tamavaraus.varattu_loppupvm.ToString("yyyy-MM-dd HH:mm:ss") + ");";
                         using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                         {
                             cmd.ExecuteNonQuery();
@@ -358,7 +358,7 @@ namespace R13_MokkiBook
                     }
                     LokiinTallentaminen("Luotiin varaus " + tamavaraus.varaus_id + " käyttäjältä: ");
                     varausluotu = true;
-                    this.Close();//sulkeeko vain tämän formin?
+                    this.Close();
                 }
             }
         }
