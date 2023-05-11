@@ -30,6 +30,7 @@ namespace R13_MokkiBook
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUusiPalvelu));
             this.txtNimi = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -408,6 +409,7 @@ namespace R13_MokkiBook
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.txtNimi);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmUusiPalvelu";
             this.Text = "Muokkaa palveluita";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUusiPalvelu_FormClosing);
