@@ -550,7 +550,7 @@ namespace R13_MokkiBook
         {
             foreach(Varaus v in varaukset)
             {
-                if(v.varattu_alkupvm <= tamavaraus.varattu_alkupvm && v.varattu_loppupvm >= tamavaraus.varattu_loppupvm)
+                if((v.varattu_alkupvm <= tamavaraus.varattu_alkupvm && v.varattu_loppupvm >= tamavaraus.varattu_loppupvm) && v.mokki_id == tamavaraus.mokki_id)
                 {
                     return false;
                 }
