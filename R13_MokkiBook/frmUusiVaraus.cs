@@ -875,7 +875,7 @@ namespace R13_MokkiBook
                         msg = "Valittu henkilömäärä on liian pieni. (pienempi kuin 1)";
                 }
                 else
-                    msg = "Mökki ja alue eivät täsmää.";
+                    msg = "Mökki ja alue eivät täsmää.";//Tässä heittää
             }
             else
                 msg = "Mökkiä ei ole valittu.";
