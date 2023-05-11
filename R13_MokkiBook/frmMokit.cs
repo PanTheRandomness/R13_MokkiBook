@@ -89,49 +89,57 @@ namespace R13_MokkiBook
 
         private void btnLisaa_Click(object sender, EventArgs e)
         {
+            try
+            {
 
-            if (tbMokkiId.Text.Trim() == "" || tbAlueId.Text.Trim() == "" || tbPostinumero.Text.Trim() == "" ||
+                if (tbMokkiId.Text.Trim() == "" || tbAlueId.Text.Trim() == "" || tbPostinumero.Text.Trim() == "" ||
                  tbMokinnimi.Text.Trim() == "" || tbKatuosoite.Text.Trim() == "" || tbHinta.Text.Trim() == "" ||
                  tbKuvaus.Text.Trim() == "" || tbHenkilomaara.Text.Trim() == "" || tbVarustelu.Text.Trim() == "")
-            {
-                MessageBox.Show("Täytä kaikki kentät!");
+                {
+                    MessageBox.Show("Täytä kaikki kentät!");
+                }
+                else
+                {
+                    DataRow newRow = dataTable.NewRow();
+                    newRow["mokki_id"] = tbMokkiId.Text;
+                    newRow["alue_id"] = tbAlueId.Text;
+                    newRow["postinro"] = tbPostinumero.Text;
+                    newRow["mokkinimi"] = tbMokinnimi.Text;
+                    newRow["katuosoite"] = tbKatuosoite.Text;
+                    newRow["hinta"] = tbHinta.Text;
+                    newRow["kuvaus"] = tbKuvaus.Text;
+                    newRow["henkilomaara"] = tbHenkilomaara.Text;
+                    newRow["varustelu"] = tbVarustelu.Text;
+
+                    dataTable.Rows.Add(newRow);
+                    dataAdapter.Update(dataTable);
+
+                    tbMokkiId.Text = String.Empty;
+                    tbAlueId.Text = String.Empty;
+                    tbPostinumero.Text = String.Empty;
+                    tbMokinnimi.Text = String.Empty;
+                    tbKatuosoite.Text = String.Empty;
+                    tbHinta.Text = String.Empty;
+                    tbKuvaus.Text = String.Empty;
+                    tbHenkilomaara.Text = String.Empty;
+                    tbVarustelu.Text = String.Empty;
+                }
             }
-            else
+
+            catch (Exception ex)
             {
-                DataRow newRow = dataTable.NewRow();
-                newRow["mokki_id"] = tbMokkiId.Text;
-                newRow["alue_id"] = tbAlueId.Text;
-                newRow["postinro"] = tbPostinumero.Text;
-                newRow["mokkinimi"] = tbMokinnimi.Text;
-                newRow["katuosoite"] = tbKatuosoite.Text;
-                newRow["hinta"] = tbHinta.Text;
-                newRow["kuvaus"] = tbKuvaus.Text;
-                newRow["henkilomaara"] = tbHenkilomaara.Text;
-                newRow["varustelu"] = tbVarustelu.Text;
-
-                dataTable.Rows.Add(newRow);
-                dataAdapter.Update(dataTable);
-
-                tbMokkiId.Text = String.Empty;
-                tbAlueId.Text = String.Empty;
-                tbPostinumero.Text = String.Empty;
-                tbMokinnimi.Text = String.Empty;
-                tbKatuosoite.Text = String.Empty;
-                tbHinta.Text = String.Empty;
-                tbKuvaus.Text = String.Empty;
-                tbHenkilomaara.Text = String.Empty;
-                tbVarustelu.Text = String.Empty;
+                MessageBox.Show("Error: " + ex.Message);
             }
-
-
         }
 
         // Muokkaaminen, eli tallentaa muokkauksen.
 
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
+            try
+            {
 
-            DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
+                DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
 
             if (string.IsNullOrEmpty(tbMokkiId.Text) || string.IsNullOrEmpty(tbAlueId.Text) || string.IsNullOrEmpty(tbPostinumero.Text) || string.IsNullOrEmpty(tbMokinnimi.Text) || string.IsNullOrEmpty(tbKatuosoite.Text) || string.IsNullOrEmpty(tbHinta.Text) || string.IsNullOrEmpty(tbKuvaus.Text) || string.IsNullOrEmpty(tbHenkilomaara.Text) || string.IsNullOrEmpty(tbVarustelu.Text))
             {
@@ -163,14 +171,23 @@ namespace R13_MokkiBook
 
                 lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
             }
+
         }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+}
 
         // Poistaminen. Poistaa valitun rivin.
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
+            try
+            {
 
-            DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
+                DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
 
             currentRow.Delete();
             dataAdapter.Update(dataTable);
@@ -184,8 +201,16 @@ namespace R13_MokkiBook
             tbHenkilomaara.Text = String.Empty;
             tbVarustelu.Text = String.Empty;
 
+            
             lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
+
 
         private void tbMokkiId_TextChanged(object sender, EventArgs e)
         {
