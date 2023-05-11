@@ -67,7 +67,7 @@ namespace R13_MokkiBook
         public bool loppupvmmuutettu = false;
         public bool aluevalittu = false;
         public bool varausluotu = false;
-        public bool varauksessaonjopalvelu = false;//?
+        public bool varauksessaonjopalvelu = false;
         public bool palveluvalittu = false;
         public bool varauksenpalveluvalittu = false;
 
@@ -77,12 +77,7 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             tamavaraus = new Varaus();
             tamavaraus.varaus_id = HaeSeuraavaVapaaVarausID();
-            // varausquery = "INSERT INTO varaus (varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) VALUES('" + tamavaraus.varaus_id + "', '1', '1', " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ", " + nyt.ToShortDateString() + ");"; 
-            //Pakko laittaa ykköset nuihin ihan vaan, muuten ei luo HUOM! Jos ei ole olemassa asiakasta 1 ja mökkiä 1, ei toimi!
-            //LisaaTamavarausVarauksiin(varausquery);
-            //varaukset = GetVaraukset();
             palvelut = GetPalvelut();
-            //varauksenpalvelut = GetVarauksenPalvelut();
             varauksenpalvelut = new List<VarauksenPalvelut>();
             varauksenpalvelunimet = new List<String>();
             bs.DataSource = varauksenpalvelunimet;
@@ -377,7 +372,10 @@ namespace R13_MokkiBook
         {
 
             //jos kaikki onnistuu:
-            //UPDATE??
+            foreach(VarauksenPalvelut vp in varauksenpalvelut)
+            {
+                LisaaPalveluVaraukseen();
+            }
             varausluotu = true;
         }
         public void PaivitaAsiakastaulu(string asiakasquery)
@@ -480,16 +478,6 @@ namespace R13_MokkiBook
             }
             bs.ResetBindings(true);
             lbVarauksenPalvelut.DataSource = bs;
-            /*varauksenpalvelut = GetVarauksenPalvelut();
-            OdbcConnection connection = new OdbcConnection(connectionString);
-            connection.Open();
-            DataTable dataTable = new DataTable();
-            using (OdbcDataAdapter adapter = new OdbcDataAdapter(varauksenpalveluquery, connection))
-            {
-                adapter.FillSchema(dataTable, SchemaType.Source);
-                adapter.Fill(dataTable);
-            }
-            lbVarauksenPalvelut.DataSource = dataTable;*/
         }
         private void dtmLoppupvm_ValueChanged(object sender, EventArgs e)
         {
@@ -561,32 +549,16 @@ namespace R13_MokkiBook
             //jos ei return false
             return true;
         }
-
         private void btnPoistaPalvelu_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistaa palvelun varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                //palvelupoistoquery = "DELETE FROM varauksen_palvelut WHERE varaus_id = " + valittuvarauksenpalvelu.varaus_id + " AND palvelu_id = " + valittuvarauksenpalvelu.palvelu_id + ";";
-                //PoistaPalveluVarauskesta(palvelupoistoquery);
                 if (varauksenpalveluvalittu)
                     PoistaPalveluListasta(valitturivivarauksenpalvelu);
                 else
                     MessageBox.Show("Poistettavaa varausta ei ole valittu.");
             }
         }
-
-       /* public void PoistaPalveluVarauskesta(string poistoquery)
-        {
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
-            {
-                connection.Open();
-                using (OdbcCommand cmd = new OdbcCommand(poistoquery, connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }*/
-
         public void TyhjennaVarauksenPalvelut()
         {
             varauksenpalvelut.Clear();
@@ -596,13 +568,7 @@ namespace R13_MokkiBook
             nudPalveluLkm.Value = 0;
             PaivitaVarauksenPalvelutaulu();
             varauksenpalveluvalittu = false;
-            /*foreach(VarauksenPalvelut vp in varauksenpalvelut)
-            {   //olisi voinut varmaankin jokun yleisenkin poistokäskyn laittaa, mutta aivot haluaa nyt näin
-                palvelupoistoquery = "DELETE FROM varauksen_palvelut WHERE varaus_id = " + vp.varaus_id + " AND palvelu_id = " + vp.palvelu_id + ";";
-                PoistaPalveluVarauskesta(palvelupoistoquery);
-            }*/
         }
-
         private void btnLisaaPalveluVaraukseen_Click(object sender, EventArgs e)
         {
             if(!btnLisaaPalveluVaraukseen.Enabled)
@@ -619,8 +585,6 @@ namespace R13_MokkiBook
                     }
                     else
                     {
-                        //LisaaPalveluVaraukseen();
-                        //varauksenpalveluquery = "SELECT palvelu_id, lkm FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id + ";";
                         LisaaPalveluListaan(lisattavapalvelumaara, valittupalvelu);
                     }
                 }
@@ -637,7 +601,8 @@ namespace R13_MokkiBook
             if(!PalveluJoVarauksessa(vp))
             {
                 varauksenpalvelut.Add(vp);
-            }   
+            }
+            varauksessaonjopalvelu = false;
             PaivitaVarauksenPalvelutaulu();
             PaivitaLoppuhinta();
         }
@@ -675,42 +640,7 @@ namespace R13_MokkiBook
         }
         public void LisaaPalveluVaraukseen()
         {
-            /*valittuvarauksenpalvelu.varaus_id = tamavaraus.varaus_id;
-            valittuvarauksenpalvelu.palvelu_id = valittupalvelu.palvelu_id;
-            valittuvarauksenpalvelu.lkm = (int)nudPalveluLkm.Value;
 
-            foreach (VarauksenPalvelut vap in varauksenpalvelut)
-            {
-                if ((vap.varaus_id == valittuvarauksenpalvelu.varaus_id) && (vap.palvelu_id == valittuvarauksenpalvelu.palvelu_id))
-                {
-                    varauksessaonjopalvelu = true;
-                    valittuvarauksenpalvelu.lkm = vap.lkm + (int)nudPalveluLkm.Value;
-                }
-            }
-            if (!varauksessaonjopalvelu)
-            {
-                using (OdbcConnection connection = new OdbcConnection(connectionString))
-                {
-                    connection.Open();
-                    palvelulisaysquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) VALUES(" + valittuvarauksenpalvelu.varaus_id + ", " + valittuvarauksenpalvelu.palvelu_id + ", " + valittuvarauksenpalvelu.lkm + ");";
-                    using (OdbcCommand cmd = new OdbcCommand(palvelulisaysquery, connection))
-                    {
-                        cmd.ExecuteNonQuery(); //System.Data.Odbc.OdbcException: 'ERROR [23000] [ma-3.1.18][10.6.12-MariaDB]Cannot add or update a child row: a foreign key constraint fails (`vn`.`varauksen_palvelut`, CONSTRAINT `fk_varaus` FOREIGN KEY (`varaus_id`) REFERENCES `varaus` (`varaus_id`))'
-                    }
-                }
-            }
-            else
-            {
-                using (OdbcConnection connection = new OdbcConnection(connectionString))
-                {
-                    connection.Open();
-                    palvelulisaysquery = "UPDATE varauksen_palvelut SET varaus_id = " + valittuvarauksenpalvelu.varaus_id + ", palvelu_id = " + valittuvarauksenpalvelu.palvelu_id + ", lkm = " + valittuvarauksenpalvelu.lkm + " WHERE varaus_id = " + valittuvarauksenpalvelu.varaus_id + " AND palvelu_id = " + valittuvarauksenpalvelu.palvelu_id + "; ";
-                    using (OdbcCommand cmd = new OdbcCommand(palvelulisaysquery, connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }*/
         }
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -930,10 +860,6 @@ namespace R13_MokkiBook
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
-            /*if (!varausluotu)//MIKSEI POISTA?
-            {
-                PoistaTamavarausVarauksista();
-            }*/
         }
 
         private void tbEnimi_Leave(object sender, EventArgs e)
@@ -1319,7 +1245,6 @@ namespace R13_MokkiBook
             nudPalveluLkm.Value = 0;
             palveluquery = "SELECT * FROM palvelu;";
             PaivitaPalvelutaulu(palveluquery);
-            //varauksenpalveluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + tamavaraus.varaus_id.ToString() + ";";
             //JA poista
             PaivitaVarauksenPalvelutaulu();
         }
