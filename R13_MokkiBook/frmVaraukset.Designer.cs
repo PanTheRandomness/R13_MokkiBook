@@ -58,7 +58,6 @@
             this.btnUusi = new System.Windows.Forms.Button();
             this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
             this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
-            this.pdRaportti = new System.Windows.Forms.PrintDialog();
             this.btnHae = new System.Windows.Forms.Button();
             this.tbAlue = new System.Windows.Forms.TextBox();
             this.btnTyhjennaHaku = new System.Windows.Forms.Button();
@@ -150,9 +149,11 @@
             // 
             // tsmiMuokkaa
             // 
+            this.tsmiMuokkaa.Enabled = false;
             this.tsmiMuokkaa.Name = "tsmiMuokkaa";
             this.tsmiMuokkaa.Size = new System.Drawing.Size(206, 22);
             this.tsmiMuokkaa.Text = "Muokkaa varausta";
+            this.tsmiMuokkaa.Visible = false;
             this.tsmiMuokkaa.Click += new System.EventHandler(this.tsmiMuokkaa_Click);
             // 
             // tsmiVarauksenPalvelut
@@ -290,12 +291,6 @@
             // 
             this.alueTableAdapter.ClearBeforeFill = true;
             // 
-            // pdRaportti
-            // 
-            this.pdRaportti.PrintToFile = true;
-            this.pdRaportti.ShowHelp = true;
-            this.pdRaportti.UseEXDialog = true;
-            // 
             // btnHae
             // 
             this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -395,7 +390,6 @@
         private DataSet1TableAdapters.mokkiTableAdapter mokkiTableAdapter;
         private System.Windows.Forms.BindingSource alueBindingSource;
         private DataSet1TableAdapters.alueTableAdapter alueTableAdapter;
-        private System.Windows.Forms.PrintDialog pdRaportti;
         private System.Windows.Forms.Button btnHae;
         private System.Windows.Forms.TextBox tbAlue;
         private System.Windows.Forms.Button btnTyhjennaHaku;

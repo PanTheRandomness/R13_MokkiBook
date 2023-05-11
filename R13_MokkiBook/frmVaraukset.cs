@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -96,7 +97,7 @@ namespace R13_MokkiBook
                             varaus.varaus_id = reader.GetInt32(0);
                             //Korjausta varten
                             /*if (varaus.varaus_id == 4)
-                                //break;*/
+                                break;*/
                             varaus.asiakas_id = reader.GetInt32(1);
                             varaus.mokki_id = reader.GetInt32(2);
                             /*if (varaus.varaus_id < 4)
@@ -105,7 +106,7 @@ namespace R13_MokkiBook
                                 varaus.vahvistus_pvm = reader.GetDateTime(4);
                                 varaus.varattu_alkupvm = reader.GetDateTime(5);
                                 varaus.varattu_loppupvm = reader.GetDateTime(6);
-                            /*}
+                           /* }
                             else
                             {
                                 varaus.varattu_pvm = nyt;
@@ -116,11 +117,6 @@ namespace R13_MokkiBook
                             var.Add(varaus);
                         }
                     }
-                }
-                string korjausquery = "UPDATE varaus SET varattu_pvm = " + nyt.ToShortDateString() + ", vahvistus_pvm = " + nyt.ToShortDateString() + ", varattu_alkupvm = " + nyt.ToShortDateString() + ", varattu_loppupvm = " + nyt.ToShortDateString() + " WHERE varaus_id = 4;";
-                using (OdbcCommand cmd = new OdbcCommand(korjausquery, connection))
-                {
-                    cmd.ExecuteNonQuery();
                 }
             }
             return var;
@@ -179,8 +175,23 @@ namespace R13_MokkiBook
 
         private void btnRaportti_Click(object sender, EventArgs e)
         {
-            pdRaportti.ShowDialog();
-            //MITÄ VIELÄ?
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
+
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                printDocument.Print();
+            }
+        }
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            DataGridViewPrinter dataGridViewPrinter = new DataGridViewPrinter(dgvVaraukset, e.Graphics, e.MarginBounds, Color.Black, true);
+            bool morePages = dataGridViewPrinter.DrawDataGridView();
+
+            e.HasMorePages = morePages;
         }
 
         private void btnUusi_Click(object sender, EventArgs e)
@@ -191,10 +202,8 @@ namespace R13_MokkiBook
 
         private void tsmiMuokkaa_Click(object sender, EventArgs e)
         {
-            //VALIDOI
-
-            //frmUusiVaraus muokkaus = new frmUusiVaraus();
-            //muokkaus.ShowDialog();
+            //Varauksen palveluja voi muokata toista kautta, mutta palaan tähän, jos  jää aikaa.
+            //Priorisoin hakutoiminnon, koska varauksen palvelun muokkaus on jo varauksen muokkausta sinänsä.
         }
 
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
@@ -232,9 +241,8 @@ namespace R13_MokkiBook
                 {
                     if (ValidAluetunnus())
                     {
-                        hakuquery = "SELECT * FROM varaus WHERE varattu_alkupvm >= " + hakualku.ToShortDateString() + " AND varattu_loppupvm <= " + hakuloppu.ToShortDateString() + " AND mokki_mokki_id IN (SELECT mokki_id FROM mokki WHERE alue_id = " + tbAlue.Text + ");";
+                        hakuquery = "SELECT * FROM varaus WHERE varattu_alkupvm >= '" + hakualku.ToString("yyyy-MM-dd") + "' AND varattu_loppupvm <= '" + hakuloppu.ToString("yyyy-MM-dd") + "' AND mokki_mokki_id IN (SELECT mokki_id FROM mokki WHERE alue_id = " + tbAlue.Text + ");";
                         PaivitaTaulu();
-                        //MIKSEI NÄYTÄ??
                     }
                     else
                         MessageBox.Show("Aluetunnusta ei tunnistettu.");
@@ -281,23 +289,30 @@ namespace R13_MokkiBook
 
         public void PaivitaTaulu()
         {
-            OdbcConnection connection = new OdbcConnection(connectionString);
-            connection.Open();
-            DataTable dataTable = new DataTable();
-            using (OdbcDataAdapter adapter = new OdbcDataAdapter(hakuquery, connection))
+            try
             {
-                adapter.FillSchema(dataTable, SchemaType.Source);
-                adapter.Fill(dataTable);
-            }
-            dgvVaraukset.DataSource = dataTable;
+                OdbcConnection connection = new OdbcConnection(connectionString);
+                connection.Open();
+                DataTable dataTable = new DataTable();
+                using (OdbcDataAdapter adapter = new OdbcDataAdapter(hakuquery, connection))
+                {
+                    adapter.FillSchema(dataTable, SchemaType.Source);
+                    adapter.Fill(dataTable);
+                }
+                dgvVaraukset.DataSource = dataTable;
 
-            dgvVaraukset.Columns[0].HeaderText = "Varaustunnus";
-            dgvVaraukset.Columns[1].HeaderText = "Asiakastunnus";
-            dgvVaraukset.Columns[2].HeaderText = "Mökki";
-            dgvVaraukset.Columns[3].HeaderText = "Varaus tehty";
-            dgvVaraukset.Columns[4].HeaderText = "Varaus vahvistettu";
-            dgvVaraukset.Columns[5].HeaderText = "Varauksen alkupäivä";
-            dgvVaraukset.Columns[6].HeaderText = "Varauksen päättymispäivä";
+                dgvVaraukset.Columns[0].HeaderText = "Varaustunnus";
+                dgvVaraukset.Columns[1].HeaderText = "Asiakastunnus";
+                dgvVaraukset.Columns[2].HeaderText = "Mökki";
+                dgvVaraukset.Columns[3].HeaderText = "Varaus tehty";
+                dgvVaraukset.Columns[4].HeaderText = "Varaus vahvistettu";
+                dgvVaraukset.Columns[5].HeaderText = "Varauksen alkupäivä";
+                dgvVaraukset.Columns[6].HeaderText = "Varauksen päättymispäivä";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
 
         private void tbAlue_KeyPress(object sender, KeyPressEventArgs e)
@@ -330,6 +345,70 @@ namespace R13_MokkiBook
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 e.Cancel = true;
+            }
+        }
+
+    }
+    public class DataGridViewPrinter
+    {
+        private DataGridView dataGridView;
+        private Graphics graphics;
+        private Rectangle bounds;
+        private Color textColor;
+        private bool includeColumnHeaders;
+        private int rowIndex;
+        private bool morePages;
+
+        public DataGridViewPrinter(DataGridView dataGridView, Graphics graphics, Rectangle bounds, Color textColor, bool includeColumnHeaders)
+        {
+            this.dataGridView = dataGridView;
+            this.graphics = graphics;
+            this.bounds = bounds;
+            this.textColor = textColor;
+            this.includeColumnHeaders = includeColumnHeaders;
+
+            rowIndex = 0;
+            morePages = false;
+        }
+
+        public bool DrawDataGridView()
+        {
+            int height = dataGridView.ColumnHeadersHeight + dataGridView.Rows.Cast<DataGridViewRow>().Sum(row => row.Height);
+
+            if (includeColumnHeaders)
+            {
+                DrawRow(dataGridView.Rows[rowIndex].Cells, new SolidBrush(textColor), bounds.Y);
+                height += dataGridView.Rows[0].Height;
+            }
+
+            while (rowIndex < dataGridView.Rows.Count)
+            {
+                if (height + dataGridView.Rows[rowIndex].Height > bounds.Height)
+                {
+                    morePages = true;
+                    return morePages;
+                }
+
+                // Draw data row
+                DrawRow(dataGridView.Rows[rowIndex].Cells, new SolidBrush(textColor), bounds.Y + height);
+                height += dataGridView.Rows[rowIndex].Height;
+                rowIndex++;
+            }
+
+            morePages = false;
+            return morePages;
+        }
+
+        private void DrawRow(DataGridViewCellCollection cells, Brush brush, int y)
+        {
+            int x = bounds.X;
+
+            foreach (DataGridViewCell cell in cells)
+            {
+                Rectangle cellBounds = new Rectangle(x, y, cell.OwningColumn.Width, cell.Size.Height);
+                graphics.DrawString(cell.FormattedValue.ToString(), dataGridView.Font, brush, cellBounds, StringFormat.GenericDefault);
+
+                x += cell.OwningColumn.Width;
             }
         }
     }
