@@ -81,8 +81,6 @@ namespace R13_MokkiBook
             //Pakko laittaa ykköset nuihin ihan vaan, muuten ei luo HUOM! Jos ei ole olemassa asiakasta 1 ja mökkiä 1, ei toimi!
             //LisaaTamavarausVarauksiin(varausquery);
             //varaukset = GetVaraukset();
-            //
-            //Nämä aiheuttivat errorin? 
             palvelut = GetPalvelut();
             //varauksenpalvelut = GetVarauksenPalvelut();
             varauksenpalvelut = new List<VarauksenPalvelut>();
@@ -473,15 +471,15 @@ namespace R13_MokkiBook
                                 {
                                     palvelunnimi = reader.GetString(0);
                                     palvelunnimi += ", " + vp.lkm;
+                                    varauksenpalvelunimet.Add(palvelunnimi);
                                 }
                             }
                         }
                     }
-                    varauksenpalvelunimet.Add(palvelunnimi);
                 }
-                bs.ResetBindings(true);
-                lbVarauksenPalvelut.DataSource = bs;
             }
+            bs.ResetBindings(true);
+            lbVarauksenPalvelut.DataSource = bs;
             /*varauksenpalvelut = GetVarauksenPalvelut();
             OdbcConnection connection = new OdbcConnection(connectionString);
             connection.Open();
@@ -653,7 +651,6 @@ namespace R13_MokkiBook
                     uusimaara = v.lkm + vp.lkm;
                     vp.lkm = uusimaara;
                     v.lkm = uusimaara;
-                    //Päivitä palvelun nimi-lista!!!
                     varauksessaonjopalvelu = true;
                 }
             }
@@ -844,6 +841,7 @@ namespace R13_MokkiBook
                 btnLisaaPalveluVaraukseen.Enabled = true;
                 btnPoistaPalvelu.Enabled = true;
                 lbVarauksenPalvelut.Enabled = true;
+                PaivitaLoppuhinta();
 
                 if (ValidAlue())
                 {
