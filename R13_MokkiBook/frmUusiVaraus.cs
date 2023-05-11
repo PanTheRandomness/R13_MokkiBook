@@ -472,7 +472,10 @@ namespace R13_MokkiBook
             if (ValidAsiakas(ref msg))//toimiiko?
             {
                 if (!mokkilukittu)
-                    MessageBox.Show("Varausta ei voitu luoda: Mökkiä ei ole lukittu.");
+                {
+                    msg += "Mökkiä ei ole lukittu.";
+                    MessageBox.Show(msg);
+                }
                 else//Huom muut vaatimukset! Validoi alue, mökki & sen vapaus, posti, määrä!
                 {
                     if (ValidAlue())
@@ -484,11 +487,17 @@ namespace R13_MokkiBook
                                 LuoVaraus();
                             }
                             else
-                                MessageBox.Show("Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.");
+                            {
+                                msg += "Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.";
+                                MessageBox.Show(msg);
+                            }
                         }
                     }
                     else
-                        MessageBox.Show("");
+                    {
+                        msg += "";
+                        MessageBox.Show(msg);
+                    }
                 }
             }
             else
@@ -799,16 +808,20 @@ namespace R13_MokkiBook
             }
             return true;
         }
-        public bool ValidAlue()//Tarkista vielä- pitäisikö katsoa mätsääkö alue mökkiin??
+        public bool ValidAlue()
         {
             if(valittualue != null)
                 return true;
             return false;
         }
-        public bool ValidMokki()//Tarkista vielä- pitäisikö katsoa mätsääkö alue mökkiin??
+        public bool ValidMokki()
         {
-            return true;
-            //ei valmis!!
+            if(valittumokki != null)
+            {
+                if (valittualue.alue_id == valittumokki.alue_id)
+                    return true;
+            }
+            return false;
         }
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
