@@ -13,6 +13,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 
 namespace R13_MokkiBook
 {
@@ -319,15 +320,38 @@ namespace R13_MokkiBook
             }
             return id;
         }
-        public void LuoVaraus()
+        public void LuoVaraus()//minne menee  '' - merkit queryssä?
         {
-
-            //jos kaikki onnistuu:
-            foreach(VarauksenPalvelut vp in varauksenpalvelut)
+            tamavaraus.asiakas_id = valittuasiakas.asiakas_id;
+            tamavaraus.mokki_id = valittumokki.mokki_id;
+            tamavaraus.varattu_alkupvm = alkupvm;
+            tamavaraus.varattu_loppupvm = loppupvm;
+            string varmistus = "Luodaanko varaus \n ID:" + tamavaraus.varaus_id.ToString() + 
+                "\n Asiakas: " + valittuasiakas.etunimi + " " + valittuasiakas.sukunimi + ", tunnus: " + valittuasiakas.asiakas_id.ToString() + 
+                "\n Mökki: "
+            if (MessageBox.Show(varmistus, "Varmistus", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                LisaaPalveluVaraukseen();
+                tamavaraus.varattu_pvm = DateTime.Now;
+                tamavaraus.vahvistus_pvm = DateTime.Now;
+
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    connection.Open();
+                    varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
+                        "VALUES(" + tamavaraus.varaus_id + ", " + tamavaraus.asiakas_id + ", " + tamavaraus.mokki_id + ", '" + tamavaraus.varattu_pvm + "', '" + tamavaraus.vahvistus_pvm + "', '" + tamavaraus.varattu_alkupvm + "', '" + tamavaraus.varattu_loppupvm + "');";
+                    using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                foreach (VarauksenPalvelut vp in varauksenpalvelut)
+                {
+                    LisaaPalveluVaraukseen(vp);
+                }
+                LokiinTallentaminen("Luotiin varaus " + tamavaraus.varaus_id + " käyttäjältä: ");
+                varausluotu = true;
+                this.Close();//sulkeeko vain tämän formin?
             }
-            varausluotu = true;
         }
         public void PaivitaAsiakastaulu(string asiakasquery)
         {
@@ -605,9 +629,18 @@ namespace R13_MokkiBook
             arvioituloppuhinta = valittumokki.hinta + palveluidenhinta;
             tbLoppuhinta.Text = arvioituloppuhinta.ToString();
         }
-        public void LisaaPalveluVaraukseen()
+        public void LisaaPalveluVaraukseen(VarauksenPalvelut vp)
         {
-
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                varauksenpalveluquery = "INSERT INTO varauksen_palvelut(varaus_id, palvelu_id, lkm) " +
+                    "VALUES(" + vp.varaus_id + ", " + vp.palvelu_id + ", " + vp.lkm + ");";
+                using (OdbcCommand cmd = new OdbcCommand(varauksenpalveluquery, connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
