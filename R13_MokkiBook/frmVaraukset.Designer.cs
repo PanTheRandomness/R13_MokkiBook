@@ -39,7 +39,6 @@
             this.varattualkupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattuloppupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmsVaraustaulunMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiMuokkaa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiVarauksenPalvelut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPoista = new System.Windows.Forms.ToolStripMenuItem();
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -58,11 +57,11 @@
             this.btnUusi = new System.Windows.Forms.Button();
             this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
             this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
-            this.pdRaportti = new System.Windows.Forms.PrintDialog();
             this.btnHae = new System.Windows.Forms.Button();
             this.tbAlue = new System.Windows.Forms.TextBox();
             this.btnTyhjennaHaku = new System.Windows.Forms.Button();
             this.ttVaraukset = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPaivita = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             this.cmsVaraustaulunMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
@@ -92,7 +91,7 @@
             this.dgvVaraukset.DataSource = this.varausBindingSource;
             this.dgvVaraukset.Location = new System.Drawing.Point(2, 3);
             this.dgvVaraukset.Name = "dgvVaraukset";
-            this.dgvVaraukset.Size = new System.Drawing.Size(1269, 578);
+            this.dgvVaraukset.Size = new System.Drawing.Size(1269, 580);
             this.dgvVaraukset.TabIndex = 7;
             this.dgvVaraukset.TabStop = false;
             this.dgvVaraukset.SelectionChanged += new System.EventHandler(this.dgvVaraukset_SelectionChanged);
@@ -142,30 +141,23 @@
             // cmsVaraustaulunMenu
             // 
             this.cmsVaraustaulunMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMuokkaa,
             this.tsmiVarauksenPalvelut,
             this.tsmiPoista});
             this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
-            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 70);
-            // 
-            // tsmiMuokkaa
-            // 
-            this.tsmiMuokkaa.Name = "tsmiMuokkaa";
-            this.tsmiMuokkaa.Size = new System.Drawing.Size(206, 22);
-            this.tsmiMuokkaa.Text = "Muokkaa varausta";
-            this.tsmiMuokkaa.Click += new System.EventHandler(this.tsmiMuokkaa_Click);
+            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(171, 48);
             // 
             // tsmiVarauksenPalvelut
             // 
             this.tsmiVarauksenPalvelut.Name = "tsmiVarauksenPalvelut";
-            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(206, 22);
-            this.tsmiVarauksenPalvelut.Text = "Näytä varauksen palvelut";
+            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(170, 22);
+            this.tsmiVarauksenPalvelut.Text = "Muokkaa varausta";
+            this.tsmiVarauksenPalvelut.ToolTipText = "Muokkaa vaalittua varausta ja sen palveluja";
             this.tsmiVarauksenPalvelut.Click += new System.EventHandler(this.tsmiVarauksenPalvelut_Click);
             // 
             // tsmiPoista
             // 
             this.tsmiPoista.Name = "tsmiPoista";
-            this.tsmiPoista.Size = new System.Drawing.Size(206, 22);
+            this.tsmiPoista.Size = new System.Drawing.Size(170, 22);
             this.tsmiPoista.Text = "Poista varaus";
             this.tsmiPoista.Click += new System.EventHandler(this.tsmiPoista_Click);
             // 
@@ -276,7 +268,7 @@
             this.btnUusi.Location = new System.Drawing.Point(1187, 591);
             this.btnUusi.Name = "btnUusi";
             this.btnUusi.Size = new System.Drawing.Size(75, 23);
-            this.btnUusi.TabIndex = 6;
+            this.btnUusi.TabIndex = 7;
             this.btnUusi.Text = "Uusi varaus";
             this.ttVaraukset.SetToolTip(this.btnUusi, "Luo uusi varaus");
             this.btnUusi.UseVisualStyleBackColor = true;
@@ -289,12 +281,6 @@
             // alueTableAdapter
             // 
             this.alueTableAdapter.ClearBeforeFill = true;
-            // 
-            // pdRaportti
-            // 
-            this.pdRaportti.PrintToFile = true;
-            this.pdRaportti.ShowHelp = true;
-            this.pdRaportti.UseEXDialog = true;
             // 
             // btnHae
             // 
@@ -330,11 +316,23 @@
             this.btnTyhjennaHaku.UseVisualStyleBackColor = true;
             this.btnTyhjennaHaku.Click += new System.EventHandler(this.btnTyhjennaHaku_Click);
             // 
+            // btnPaivita
+            // 
+            this.btnPaivita.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPaivita.Location = new System.Drawing.Point(1106, 591);
+            this.btnPaivita.Name = "btnPaivita";
+            this.btnPaivita.Size = new System.Drawing.Size(75, 23);
+            this.btnPaivita.TabIndex = 6;
+            this.btnPaivita.Text = "Päivitä taulu";
+            this.btnPaivita.UseVisualStyleBackColor = true;
+            this.btnPaivita.Click += new System.EventHandler(this.btnPaivita_Click);
+            // 
             // frmVaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1274, 620);
+            this.Controls.Add(this.btnPaivita);
             this.Controls.Add(this.btnTyhjennaHaku);
             this.Controls.Add(this.tbAlue);
             this.Controls.Add(this.btnHae);
@@ -348,6 +346,7 @@
             this.Controls.Add(this.pnlToiminnot);
             this.Controls.Add(this.dgvVaraukset);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1290, 659);
             this.MinimumSize = new System.Drawing.Size(1290, 659);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
@@ -380,7 +379,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn varattualkupvmDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn varattuloppupvmDataGridViewTextBoxColumn;
         private System.Windows.Forms.ContextMenuStrip cmsVaraustaulunMenu;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMuokkaa;
         private System.Windows.Forms.ToolStripMenuItem tsmiVarauksenPalvelut;
         private System.Windows.Forms.ToolStripMenuItem tsmiPoista;
         private System.Windows.Forms.Panel pnlToiminnot;
@@ -395,10 +393,10 @@
         private DataSet1TableAdapters.mokkiTableAdapter mokkiTableAdapter;
         private System.Windows.Forms.BindingSource alueBindingSource;
         private DataSet1TableAdapters.alueTableAdapter alueTableAdapter;
-        private System.Windows.Forms.PrintDialog pdRaportti;
         private System.Windows.Forms.Button btnHae;
         private System.Windows.Forms.TextBox tbAlue;
         private System.Windows.Forms.Button btnTyhjennaHaku;
         private System.Windows.Forms.ToolTip ttVaraukset;
+        private System.Windows.Forms.Button btnPaivita;
     }
 }

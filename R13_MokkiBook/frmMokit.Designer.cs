@@ -63,7 +63,6 @@
             this.btnLisaa = new System.Windows.Forms.Button();
             this.btnMuokkaa = new System.Windows.Forms.Button();
             this.btnPoista = new System.Windows.Forms.Button();
-            this.lblViiva = new System.Windows.Forms.Label();
             this.mokkiTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.mokkiTableAdapter();
             this.alueTableAdapter = new R13_MokkiBook.DataSet1TableAdapters.alueTableAdapter();
             this.btnTyhjenna = new System.Windows.Forms.Button();
@@ -379,17 +378,6 @@
             this.btnPoista.UseVisualStyleBackColor = true;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
-            // lblViiva
-            // 
-            this.lblViiva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblViiva.AutoSize = true;
-            this.lblViiva.Location = new System.Drawing.Point(364, 680);
-            this.lblViiva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblViiva.Name = "lblViiva";
-            this.lblViiva.Size = new System.Drawing.Size(11, 16);
-            this.lblViiva.TabIndex = 29;
-            this.lblViiva.Text = "-";
-            // 
             // mokkiTableAdapter
             // 
             this.mokkiTableAdapter.ClearBeforeFill = true;
@@ -418,7 +406,6 @@
             // 
             // btnHae
             // 
-            this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnHae.Location = new System.Drawing.Point(1434, 225);
             this.btnHae.Margin = new System.Windows.Forms.Padding(4);
             this.btnHae.Name = "btnHae";
@@ -455,7 +442,6 @@
             this.Controls.Add(this.tbHae);
             this.Controls.Add(this.btnHae);
             this.Controls.Add(this.btnTyhjenna);
-            this.Controls.Add(this.lblViiva);
             this.Controls.Add(this.btnPoista);
             this.Controls.Add(this.btnMuokkaa);
             this.Controls.Add(this.btnLisaa);
@@ -514,7 +500,6 @@
         private System.Windows.Forms.Button btnLisaa;
         private System.Windows.Forms.Button btnMuokkaa;
         private System.Windows.Forms.Button btnPoista;
-        private System.Windows.Forms.Label lblViiva;
         private DataSet1 dataSet1;
         private System.Windows.Forms.BindingSource mokkiBindingSource;
         private DataSet1TableAdapters.mokkiTableAdapter mokkiTableAdapter;

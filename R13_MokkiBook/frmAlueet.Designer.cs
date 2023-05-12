@@ -165,7 +165,6 @@
             // 
             // btnHae
             // 
-            this.btnHae.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnHae.Location = new System.Drawing.Point(705, 442);
             this.btnHae.Margin = new System.Windows.Forms.Padding(4);
             this.btnHae.Name = "btnHae";

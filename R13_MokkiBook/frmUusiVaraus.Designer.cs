@@ -205,7 +205,6 @@ namespace R13_MokkiBook
             this.tbPostitoimipaikkaAsiakas.TabIndex = 4;
             this.tbPostitoimipaikkaAsiakas.Tag = "";
             this.ttUusiVaraus.SetToolTip(this.tbPostitoimipaikkaAsiakas, "Syötä asiakkaan postitoimipaikka");
-            this.tbPostitoimipaikkaAsiakas.TextChanged += new System.EventHandler(this.tbPostitoimipaikkaAsiakas_TextChanged);
             this.tbPostitoimipaikkaAsiakas.Leave += new System.EventHandler(this.tbEnimi_Leave);
             // 
             // lblPostitoimipaikka

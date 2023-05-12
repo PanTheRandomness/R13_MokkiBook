@@ -49,7 +49,7 @@
             this.dgvAlueenPalvelut.Size = new System.Drawing.Size(540, 147);
             this.dgvAlueenPalvelut.TabIndex = 3;
             this.dgvAlueenPalvelut.TabStop = false;
-            this.dgvAlueenPalvelut.SelectionChanged += new System.EventHandler(this.dgvAlueenPalvelut_SelectionChanged);
+            this.dgvAlueenPalvelut.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAlueenPalvelut_RowHeaderMouseClick);
             // 
             // tbKuvaus
             // 
