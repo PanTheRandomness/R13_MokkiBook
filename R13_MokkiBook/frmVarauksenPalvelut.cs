@@ -304,7 +304,32 @@ namespace R13_MokkiBook
         }
         public void TallennaVarauksenMuutokset()
         {
+            string varmistus = "Muokataanko varausta \n ID:" + kasiteltavavaraus.varaus_id.ToString() + ", ajankohta: " + alku + " - " + loppu;
+            if (MessageBox.Show(varmistus, "Varmistus", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                kasiteltavavaraus.varattu_pvm = DateTime.Now;
+                kasiteltavavaraus.vahvistus_pvm = DateTime.Now;
+                kasiteltavavaraus.varattu_alkupvm = alku;
+                kasiteltavavaraus.varattu_loppupvm = loppu;
 
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    connection.Open();
+                    string varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm)" +
+                        " VALUES(?, ?, ?, ?, ?, ?, ?);";
+                    using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@varaus_id", kasiteltavavaraus.varaus_id);
+                        cmd.Parameters.AddWithValue("@asiakas_id", kasiteltavavaraus.asiakas_id);
+                        cmd.Parameters.AddWithValue("@mokki_id", kasiteltavavaraus.mokki_id);
+                        cmd.Parameters.AddWithValue("@varattu_pvm", kasiteltavavaraus.varattu_pvm);
+                        cmd.Parameters.AddWithValue("@vahvistus_pvm", kasiteltavavaraus.vahvistus_pvm);
+                        cmd.Parameters.AddWithValue("@varattu_alkupvm", kasiteltavavaraus.varattu_alkupvm);
+                        cmd.Parameters.AddWithValue("@varattu_loppupvm", kasiteltavavaraus.varattu_loppupvm);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
         }
         private void btnPaivita_Click(object sender, EventArgs e)
         {
