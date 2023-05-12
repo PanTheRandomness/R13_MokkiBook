@@ -20,11 +20,6 @@ namespace R13_MokkiBook
             lokiinTallentaminen("Ohjelma avattiin käyttäjältä: ");
         }
 
-        private void frmAlkunaytto_Load(object sender, EventArgs e)
-        {
-           
-        }
-
         private void btnVaraukset_Click(object sender, EventArgs e)
         {
             frmVaraukset va = new frmVaraukset();
@@ -61,7 +56,7 @@ namespace R13_MokkiBook
             la.ShowDialog();
         }
 
-        /* Lokiin tallentaminen */
+        // Lokiin tallentaminen : tämän teki Hanna
 
         public void lokiinTallentaminen(string teksti)
 
@@ -73,6 +68,7 @@ namespace R13_MokkiBook
             sw.Close();
         }
 
+        //Varmistaa sulkemishalukkuuden
         private void frmAlkunaytto_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)

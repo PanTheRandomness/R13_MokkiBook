@@ -219,7 +219,7 @@ namespace R13_MokkiBook
                     cmd.ExecuteNonQuery();
                 }
             }
-            PaivitaTaulu();
+            PaivitaTaulu();// Lähettää "ei alustettu" errorin, mutta toimii.
             LokiinTallentaminen("Poistettiin varaus " + v.varaus_id.ToString() + " käyttäjältä: ");
         }
         private void btnHae_Click_1(object sender, EventArgs e)
