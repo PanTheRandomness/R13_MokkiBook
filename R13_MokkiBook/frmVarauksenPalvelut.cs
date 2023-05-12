@@ -22,12 +22,14 @@ namespace R13_MokkiBook
         public string tauluquery;
         public string palveluquery;
         public string connectionString = "Dsn=Village Newbies;uid=root";
+        public bool palveluvalittu = false;
         public frmVarauksenPalvelut(Varaus tuotuvaraus)
         {
             InitializeComponent();
             kasiteltavavaraus = tuotuvaraus;
             varauksenpalvelut = GetVarauksenPalvelut();
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut avattiin käyttäjältä: ");
+            lblVarausId.Text = "Varaustunnus: " + kasiteltavavaraus.varaus_id.ToString();
         }
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
@@ -65,11 +67,6 @@ namespace R13_MokkiBook
             }
             return vP;
         }
-        private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
-        {
-            valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
-            valittupalvelu = GetValittuPalvelu();
-        }
         public VarauksenPalvelut GetValittuPalvelu()
         {
             VarauksenPalvelut vp = new VarauksenPalvelut();
@@ -98,15 +95,20 @@ namespace R13_MokkiBook
         }
         private void btnPoista_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (palveluvalittu)
             {
-                PoistaVarauksesta();
-                PaivitaTaulu();
+                if (MessageBox.Show("Haluatko varmasti poistaa palvelun tästä varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    PoistaVarauksesta();
+                    PaivitaTaulu();
+                }
+                else
+                {
+                    MessageBox.Show("Mitään ei poistettu.");
+                }
             }
             else
-            {
-                MessageBox.Show("Mitään ei poistettu.");
-            }
+                MessageBox.Show("Palvelua ei ole valittu. Valitse palvelu klikkaamalla sen riviä.");
         }
         public void PoistaVarauksesta()
         {
@@ -128,38 +130,43 @@ namespace R13_MokkiBook
         }
         private void btnPoistaValittuMaara_Click(object sender, EventArgs e)
         {
-            if(nudPoistettavat.Value > 0)
+            if (palveluvalittu)
             {
-                int uusimaara = LaskeUusiMaara();
-                if(uusimaara > 0)
+                if (nudPoistettavat.Value > 0)
                 {
-                    using (OdbcConnection connection = new OdbcConnection(connectionString))
+                    int uusimaara = LaskeUusiMaara();
+                    if (uusimaara > 0)
                     {
-                        connection.Open();
-                        string paivitysquery = "UPDATE varauksen_palvelut SET varaus_id = " + valittupalvelu.varaus_id + ", palvelu_id = " + valittupalvelu.palvelu_id + ", lkm = " + uusimaara + " WHERE varaus_id = " + valittupalvelu.varaus_id + " AND palvelu_id = " + valittupalvelu.palvelu_id + "; ";
-                        using (OdbcCommand cmd = new OdbcCommand(paivitysquery, connection))
+                        using (OdbcConnection connection = new OdbcConnection(connectionString))
                         {
-                            cmd.ExecuteNonQuery();
+                            connection.Open();
+                            string paivitysquery = "UPDATE varauksen_palvelut SET varaus_id = " + valittupalvelu.varaus_id + ", palvelu_id = " + valittupalvelu.palvelu_id + ", lkm = " + uusimaara + " WHERE varaus_id = " + valittupalvelu.varaus_id + " AND palvelu_id = " + valittupalvelu.palvelu_id + "; ";
+                            using (OdbcCommand cmd = new OdbcCommand(paivitysquery, connection))
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            PaivitaTaulu();
+                            LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin " + uusimaara.ToString() + " kpl palvelua " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
                         }
-                        PaivitaTaulu();
-                        LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin " + uusimaara.ToString() + " kpl palvelua " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Valitsemillasi arvoilla koko palvelu poistetaan. Poistetaanko silti?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            PoistaVarauksesta();
+                            PaivitaTaulu();
+                        }
+                        else
+                            MessageBox.Show("Mitään ei poistettu. Voit jatkaa muokkausta");
                     }
                 }
                 else
                 {
-                    if (MessageBox.Show("Valitsemillasi arvoilla koko palvelu poistetaan. Poistetaanko silti?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        PoistaVarauksesta();
-                        PaivitaTaulu();
-                    }
-                    else
-                        MessageBox.Show("Mitään ei poistettu. Voit jatkaa muokkausta");
+                    MessageBox.Show("Poistettavien määrän on oltava suurempi kuin 0.");
                 }
             }
             else
-            {
-                MessageBox.Show("Poistettavien määrän on oltava suurempi kuin 0.");
-            }
+                MessageBox.Show("Palvelua ei ole valittu. Valitse palvelu klikkaamalla sen riviä.");
         }
         public int LaskeUusiMaara()
         {
@@ -181,6 +188,24 @@ namespace R13_MokkiBook
             {
                 e.Cancel = true;
             }
+        }
+        private void btnVahvista_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void stpAlku_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void stpLoppu_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void dgvVarauksenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
+            valittupalvelu = GetValittuPalvelu();
+            palveluvalittu = true;
         }
     }
 }
