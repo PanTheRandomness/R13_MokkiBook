@@ -161,7 +161,7 @@ namespace R13_MokkiBook
             }
         }
 
-        // Muokkaaminen, eli tallentaa muokkauksen.
+      
 
         public void LuoPosti(string pnro, string ptp)
         {
@@ -206,52 +206,85 @@ namespace R13_MokkiBook
             return po;
         }
 
+        // Muokkaaminen, eli tallentaa muokkauksen.
+
         private void btnMuokkaa_Click(object sender, EventArgs e)
         {
-            try
+           try
+           
             {
+                luotumokki.mokki_id = int.Parse(tbMokkiId.Text);
+                luotumokki.alue_id = int.Parse(tbAlueId.Text);
+                luotumokki.postinro = tbPostinumero.Text;
+                luotumokki.mokkinimi = tbMokinnimi.Text;
+                luotumokki.katuosoite = tbKatuosoite.Text;
+                luotumokki.hinta = double.Parse(tbHinta.Text);
+                luotumokki.kuvaus = tbKuvaus.Text;
+                luotumokki.henkilomaara = int.Parse(tbHenkilomaara.Text);
+                luotumokki.varustelu = tbVarustelu.Text;
+                luotumokki.postitoimipaikka = tbPostitoimipaikka.Text;
+                string connectionString = "Dsn=Village Newbies;uid=root";
+                using (OdbcConnection connection = new OdbcConnection(connectionString))
+                {
+                    connection.Open();
+                    string mokkiquery = "UPDATE mokki SET alue_id = ?, postinro = ?, mokkinimi = ?, katuosoite = ?, hinta = ?, kuvaus = ?, henkilomaara = ?, varustelu = ? WHERE mokki_id = ?";
+                    using (OdbcCommand cmd = new OdbcCommand(mokkiquery, connection))
+                    {
+                        if (tbMokkiId.Text.Trim() == "" || tbAlueId.Text.Trim() == "" || tbPostinumero.Text.Trim() == "" ||
+                      tbMokinnimi.Text.Trim() == "" || tbKatuosoite.Text.Trim() == "" || tbHinta.Text.Trim() == "" ||
+                      tbKuvaus.Text.Trim() == "" || tbHenkilomaara.Text.Trim() == "" || tbVarustelu.Text.Trim() == "")
+                        {
+                            MessageBox.Show("Täytä kaikki kentät!");
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@alue_id", luotumokki.alue_id);
+                            cmd.Parameters.AddWithValue("@postinro", luotumokki.postinro);
+                            cmd.Parameters.AddWithValue("@mokkinimi", luotumokki.mokkinimi);
+                            cmd.Parameters.AddWithValue("@katuosoite", luotumokki.katuosoite);
+                            cmd.Parameters.AddWithValue("@hinta", luotumokki.hinta);
+                            cmd.Parameters.AddWithValue("@kuvaus", luotumokki.kuvaus);
+                            cmd.Parameters.AddWithValue("@henkilomaara", luotumokki.henkilomaara);
+                            cmd.Parameters.AddWithValue("@varustelu", luotumokki.varustelu);
+                            cmd.Parameters.AddWithValue("@mokki_id", luotumokki.mokki_id);
+                            cmd.ExecuteNonQuery();
 
-                DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
 
-            if (string.IsNullOrEmpty(tbMokkiId.Text) || string.IsNullOrEmpty(tbAlueId.Text) || string.IsNullOrEmpty(tbPostinumero.Text) || string.IsNullOrEmpty(tbMokinnimi.Text) || string.IsNullOrEmpty(tbKatuosoite.Text) || string.IsNullOrEmpty(tbHinta.Text) || string.IsNullOrEmpty(tbKuvaus.Text) || string.IsNullOrEmpty(tbHenkilomaara.Text) || string.IsNullOrEmpty(tbVarustelu.Text))
-            {
-                MessageBox.Show("Täytä kaikki kentät ennen päivitystä.");
-            }
-            else
-            {
-                currentRow["mokki_id"] = tbMokkiId.Text;
-                currentRow["alue_id"] = tbAlueId.Text;
-                currentRow["postinro"] = tbPostinumero.Text;
-                currentRow["mokkinimi"] = tbMokinnimi.Text;
-                currentRow["katuosoite"] = tbKatuosoite.Text;
-                currentRow["hinta"] = tbHinta.Text;
-                currentRow["kuvaus"] = tbKuvaus.Text;
-                currentRow["henkilomaara"] = tbHenkilomaara.Text;
-                currentRow["varustelu"] = tbVarustelu.Text;
+                            string queryString = "SELECT * FROM mokki";
+                            using (OdbcCommand command = new OdbcCommand(queryString, connection))
+                            {
+                                using (OdbcDataReader reader = command.ExecuteReader())
+                                {
+                                    DataTable table = new DataTable();
+                                    table.Load(reader);
+                                    dgvMokit.DataSource = table;
+                                }
+                            }
 
-                dataAdapter.Update(dataTable);
 
-                tbMokkiId.Text = String.Empty;
-                tbAlueId.Text = String.Empty;
-                tbPostinumero.Text = String.Empty;
-                tbMokinnimi.Text = String.Empty;
-                tbKatuosoite.Text = String.Empty;
-                tbHinta.Text = String.Empty;
-                tbKuvaus.Text = String.Empty;
-                tbHenkilomaara.Text = String.Empty;
-                tbVarustelu.Text = String.Empty;
-                tbPostitoimipaikka.Text = String.Empty;
+                            tbMokkiId.Text = String.Empty;
+                            tbAlueId.Text = String.Empty;
+                            tbPostinumero.Text = String.Empty;
+                            tbMokinnimi.Text = String.Empty;
+                            tbKatuosoite.Text = String.Empty;
+                            tbHinta.Text = String.Empty;
+                            tbKuvaus.Text = String.Empty;
+                            tbHenkilomaara.Text = String.Empty;
+                            tbVarustelu.Text = String.Empty;
+                            tbPostitoimipaikka.Text = String.Empty;
+                        }
+                    }
 
                     lokiinTallentaminen("Mökit-osiosta muokattiin tietoja käyttäjältä: ");
+                }
             }
-
-        }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-}
+        }
+
+
 
         // Poistaminen. Poistaa valitun rivin.
 
@@ -262,18 +295,18 @@ namespace R13_MokkiBook
 
                 DataRow currentRow = ((DataRowView)dgvMokit.CurrentRow.DataBoundItem).Row;
 
-            currentRow.Delete();
-            dataAdapter.Update(dataTable);
-            tbMokkiId.Text = String.Empty;
-            tbAlueId.Text = String.Empty;
-            tbPostinumero.Text = String.Empty;
-            tbMokinnimi.Text = String.Empty;
-            tbKatuosoite.Text = String.Empty;
-            tbHinta.Text = String.Empty;
-            tbKuvaus.Text = String.Empty;
-            tbHenkilomaara.Text = String.Empty;
-            tbVarustelu.Text = String.Empty;
-            tbPostitoimipaikka.Text = String.Empty;
+                    currentRow.Delete();
+                    dataAdapter.Update(dataTable);
+                    tbMokkiId.Text = String.Empty;
+                    tbAlueId.Text = String.Empty;
+                    tbPostinumero.Text = String.Empty;
+                    tbMokinnimi.Text = String.Empty;
+                    tbKatuosoite.Text = String.Empty;
+                    tbHinta.Text = String.Empty;
+                    tbKuvaus.Text = String.Empty;
+                    tbHenkilomaara.Text = String.Empty;
+                    tbVarustelu.Text = String.Empty;
+                    tbPostitoimipaikka.Text = String.Empty;
 
 
                 lokiinTallentaminen("Mökit-osiosta poistettiin tietoja käyttäjältä: ");
@@ -506,34 +539,7 @@ namespace R13_MokkiBook
             }
         }
 
-       /* public void LuoAsiakas()
-        {
-            luotumokki.asiakas_id = HaeSeuraavaVapaaAsiakasID();
-            luotuasiakas.postinro = tbPostinoAsiakas.Text;
-            luotuasiakas.etunimi = tbEnimi.Text;
-            luotuasiakas.sukunimi = tbSnimi.Text;
-            luotuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
-            luotuasiakas.email = tbSahkoposti.Text;
-            luotuasiakas.puhelinnro = tbPuhno.Text;
-
-            if (!PostiLoytyi(luotuasiakas.postinro))
-                LuoPosti(luotuasiakas.postinro, tbPostitoimipaikkaAsiakas.Text);
-            using (OdbcConnection connection = new OdbcConnection(connectionString))
-            {
-                connection.Open();
-                string lisaysquery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES(" + luotuasiakas.asiakas_id + ", '" + luotuasiakas.postinro + "', '" + luotuasiakas.etunimi + "', '" + luotuasiakas.sukunimi + "', '" + luotuasiakas.lahiosoite + "', '" + luotuasiakas.email + "', '" + luotuasiakas.puhelinnro + "');";
-                using (OdbcCommand cmd = new OdbcCommand(lisaysquery, connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                LokiinTallentaminen("Luotiin asiakas " + luotuasiakas.asiakas_id + " käyttäjältä: ");
-            }
-            asiakkaat = GetAsiakkaat();
-            asiakasquery = "SELECT * FROM asiakas;";
-            PaivitaAsiakastaulu(asiakasquery);
-
-            valittuasiakas = luotuasiakas;
-        } */
+     
         public bool PostiLoytyi(string pn)
         {
             foreach (Posti p in postit)

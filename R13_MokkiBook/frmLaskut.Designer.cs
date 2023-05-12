@@ -148,6 +148,7 @@
             this.tsBtnTulosta.Name = "tsBtnTulosta";
             this.tsBtnTulosta.Size = new System.Drawing.Size(79, 22);
             this.tsBtnTulosta.Text = "Tulosta lasku";
+            this.tsBtnTulosta.ToolTipText = "Tulosta valitsemasi lasku kaksopainalluksella";
             this.tsBtnTulosta.Click += new System.EventHandler(this.tsBtnTulosta_Click);
             // 
             // toolStripLabel1
@@ -185,6 +186,7 @@
             this.txtLaskuID.Name = "txtLaskuID";
             this.txtLaskuID.Size = new System.Drawing.Size(100, 20);
             this.txtLaskuID.TabIndex = 16;
+            this.txtLaskuID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLaskuID_KeyPress);
             // 
             // btnPaivita
             // 
@@ -244,6 +246,7 @@
             this.txtSumma.Name = "txtSumma";
             this.txtSumma.Size = new System.Drawing.Size(100, 20);
             this.txtSumma.TabIndex = 22;
+            this.txtSumma.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSumma_KeyPress);
             // 
             // lbTyyppi
             // 

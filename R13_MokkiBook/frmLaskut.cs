@@ -15,23 +15,45 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace R13_MokkiBook
 {
+
     public partial class frmLaskut : Form
     {
+
+        public double loppusumma = 0;
+        public double loppualv = 0;
+        public List<VarauksenPalvelut> palvelut;
+        public List<Varaus> varaukset;
+        public List<Mokki> mokit;
+        public Mokki tamamokki;
+        public Varaus tamavaraus;
         public Lasku valittulasku = new Lasku();
         public List<Lasku> laskut;
+        public List<Palvelu> kaikkipalvelut;
         public string query;
         private OdbcConnection connection;
         private OdbcDataAdapter dataAdapter;
         private DataTable dataTable;
+
         public frmLaskut()
         {
             InitializeComponent();
             laskut = GetLaskut();
             lokiinTallentaminen("Laskut-osio avattiin käyttäjältä: ");
+
+            laskut = GetLaskut();
+            palvelut = GetPalvelut();
+            varaukset = GetVaraukset();
+            mokit = GetMokit();
+            valittulasku = new Lasku();
+            tamavaraus = new Varaus();
+            tamamokki = new Mokki();
+            kaikkipalvelut = GetKaikkiPalvelut();
         }
+
 
         private void frmLaskut_Load(object sender, EventArgs e)
         {
@@ -55,6 +77,160 @@ namespace R13_MokkiBook
             }
 
         }
+        public List<VarauksenPalvelut> GetPalvelut()
+        {
+            List<VarauksenPalvelut> vP = new List<VarauksenPalvelut>();
+            string connectionString = "Dsn=Village Newbies;uid=root";
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand("SELECT * FROM varauksen_palvelut", connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            VarauksenPalvelut vv = new VarauksenPalvelut();
+                            vv.varaus_id = reader.GetInt32(0);
+                            vv.palvelu_id = reader.GetInt32(1);
+                            vv.lkm = reader.GetInt32(2);
+                            vP.Add(vv);
+                        }
+                    }
+                }
+            }
+            return vP;
+        }
+      
+        public List<Varaus> GetVaraukset()
+        {
+            List<Varaus> var = new List<Varaus>();
+            string query = "SELECT * FROM varaus";
+            string connectionString = "Dsn=Village Newbies;uid=root";
+
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Varaus varaus = new Varaus();
+                            varaus.varaus_id = reader.GetInt32(0);
+                            //Korjausta varten
+                            /*if (varaus.varaus_id == 4)
+                                break;*/
+                            varaus.asiakas_id = reader.GetInt32(1);
+                            varaus.mokki_id = reader.GetInt32(2);
+                            /*if (varaus.varaus_id < 4)
+                            {*/
+                            varaus.varattu_pvm = reader.GetDateTime(3);
+                            varaus.vahvistus_pvm = reader.GetDateTime(4);
+                            varaus.varattu_alkupvm = reader.GetDateTime(5);
+                            varaus.varattu_loppupvm = reader.GetDateTime(6);
+                            /* }
+                             else
+                             {
+                                 varaus.varattu_pvm = nyt;
+                                 varaus.vahvistus_pvm = nyt;
+                                 varaus.varattu_alkupvm = nyt;
+                                 varaus.varattu_loppupvm = nyt;
+                             }*/
+                            var.Add(varaus);
+                        }
+                    }
+                }
+            }
+            return var;
+        }
+
+        public List<Mokki> GetMokit()
+        {
+            List<Mokki> mo = new List<Mokki>();
+            string query = "SELECT * FROM mokki";
+            string connectionString = "Dsn=Village Newbies;uid=root";
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Mokki m = new Mokki();
+                            m.mokki_id = reader.GetInt32(0);
+                            m.alue_id = reader.GetInt32(1);
+                            m.postinro = reader.GetString(2);
+                            m.mokkinimi = reader.GetString(3);
+                            m.katuosoite = reader.GetString(4);
+                            m.hinta = reader.GetDouble(5);
+                            m.kuvaus = reader.GetString(6);
+                            m.henkilomaara = reader.GetInt32(7);
+                            m.varustelu = reader.GetString(8);
+                            mo.Add(m);
+                        }
+                    }
+                }
+            }
+            return mo;
+        }
+
+        public Varaus GetVaraus(int varausid)
+        {
+            try
+            {
+                Varaus v = varaukset[varausid];
+                return v;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        public Mokki GetMokki(int mokkiid)
+        {
+            if (mokit != null && mokkiid >= 0 && mokkiid < mokit.Count)
+            {
+                Mokki m = mokit[mokkiid];
+                return m;
+            }
+            else
+            {
+                MessageBox.Show("Mökki_id ei ole olemassa.");
+                return null;
+            }
+        }
+
+
+        public void LaskeLoppuHinta()
+        {
+            loppusumma += tamamokki.hinta;
+            foreach (VarauksenPalvelut vp in palvelut)
+            {
+                if (vp.varaus_id == tamavaraus.varaus_id)
+                {
+                    loppusumma += (Palvelunhinta(vp.palvelu_id) * vp.lkm);
+                 }
+            }
+            loppualv += loppusumma * (valittulasku.alv / 100.0);
+         }
+
+        public double Palvelunhinta(int palveluid)
+        {
+            double palhinta = 0;
+            foreach (Palvelu p in kaikkipalvelut)
+            {
+                if (p.palvelu_id == palveluid)
+                    palhinta = p.hinta;
+            }
+            return palhinta;
+        }
+
         public List<Lasku> GetLaskut()
         {
             List<Lasku> las = new List<Lasku>();
@@ -84,105 +260,92 @@ namespace R13_MokkiBook
 
             return las;
         }
+
+        public List<Palvelu> GetKaikkiPalvelut()
+        {
+            List<Palvelu> pal = new List<Palvelu>();
+            string connectionString = "Dsn=Village Newbies;uid=root";
+            string palveluquery = "SELECT * FROM palvelu;";
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(palveluquery, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Palvelu p = new Palvelu();
+                            p.palvelu_id = reader.GetInt32(0);
+                            p.alue_id = reader.GetInt32(1);
+                            p.nimi = reader.GetString(2);
+                            p.tyyppi = reader.GetInt32(3);
+                            p.kuvaus = reader.GetString(4);
+                            p.hinta = reader.GetDouble(5);
+                            p.alv = reader.GetDouble(6);
+                            pal.Add(p);
+                        }
+                    }
+                }
+            }
+            return pal;
+        }
+
         public void tsBtnTulosta_Click(object sender, EventArgs e)
         {
             try
             {
-                // Define the path and file name for the generated PDF
-                string fileName = "Bill.pdf";
+                string fileName = "Lasku.pdf";
 
-                // Create a new PDF document
                 Document document = new Document();
 
-                // Create a new FileStream object to write the PDF to disk
                 FileStream fileStream = new FileStream(fileName, FileMode.Create);
 
-                // Create a new PdfWriter object to write to the PDF stream
                 PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
 
-                // Open the document
                 document.Open();
 
-                // Add a title to the document
-                document.Add(new Paragraph("Lasku"));
+
+                Bitmap image = Properties.Resources.MokkiBookLogo;
+                iTextSharp.text.Image logoImage = iTextSharp.text.Image.GetInstance(Properties.Resources.MokkiBookLogo, System.Drawing.Imaging.ImageFormat.Png);
+
+                PdfContentByte canvas = writer.DirectContent;
+                logoImage.SetAbsolutePosition(470, 770);
+                logoImage.ScaleAbsolute(90, 50);
+                canvas.AddImage(logoImage);
+
+
+                document.Add(new Paragraph("Varauksenne lasku"));
                 document.Add(new Paragraph(" "));
 
-                // Check if any row is selected in the DataGridView
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    // Get the selected row from the DataGridView
                     DataGridViewRow row = dataGridView1.SelectedRows[0];
 
                     // Add the transaction data to the document
                     document.Add(new Paragraph("Lasku ID: " + row.Cells["lasku_id"].Value.ToString()));
                     document.Add(new Paragraph("Varaus ID: " + row.Cells["varaus_id"].Value.ToString()));
-                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString() + " +alv"));
+                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString()));
                     document.Add(new Paragraph("Alv: " + row.Cells["alv"].Value.ToString()));
 
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph("Asiakkaan tiedot:"));
-                    document.Add(new Paragraph(" "));
 
-                    // Search for varaus_id by lasku_id
-                    OdbcConnection connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
-                    
-                    connection.Open();
-                    string lasku_id = row.Cells["lasku_id"].Value.ToString();
-                    OdbcCommand command1 = new OdbcCommand("SELECT varaus_id FROM lasku WHERE lasku_id = ?", connection);
-                    command1.Parameters.AddWithValue("@lasku_id", lasku_id);
-                    OdbcDataReader reader1 = command1.ExecuteReader();
-                
-                    // Add the remaining transaction data to the document
-                 
-                    // Create a new PdfPTable object to hold the line items
+
+                    LaskeLoppuHinta();
+
+                    Paragraph totalParagraph = new Paragraph("Loppusumma: " + loppusumma.ToString("0.00") + " Loppu Alv: " + loppualv.ToString("0.00"));
+                    document.Add(totalParagraph);
+
+
                     PdfPTable table = new PdfPTable(4);
                     table.WidthPercentage = 100;
-
-                     // Add the line items from the selected row to the table
-                   
                      document.Add(table);
-                    
                 }
 
-                //UUTTA
-
-                // Create a new ODBC connection to the database
-               
-                // Create a new ODBC command to retrieve additional data
-                OdbcCommand command = new OdbcCommand("SELECT * FROM asiakas", connection);
-
-                // Execute the command and retrieve the data using a data reader
-                OdbcDataReader reader = command.ExecuteReader();
-
-                // Create a new PdfPTable object to hold the additional data
-                PdfPTable additionalTable = new PdfPTable(2);
-                additionalTable.WidthPercentage = 100;
-
-                // Add the column headers to the additional table
-
-                additionalTable.AddCell(new PdfPCell(new Phrase("asiakas_id")));
-                additionalTable.AddCell(new PdfPCell(new Phrase("postinro")));
-
-                // Loop through the data reader and add the data to the additional table
-                while (reader.Read())
-                {
-                    additionalTable.AddCell(new PdfPCell(new Phrase(reader.GetString(0))));
-                    additionalTable.AddCell(new PdfPCell(new Phrase(reader.GetString(1))));
-                }
-
-                // Add the additional table to the document
-                document.Add(additionalTable);
-
-                // Close the database connection and data reader
-
-                // Close the data reader
-                reader.Close();
                 connection.Close();
 
                 document.Close();
                 fileStream.Close();
 
-                // Open the generated PDF file in the default PDF viewer
                 System.Diagnostics.Process.Start(fileName);
             }
             catch (Exception ex)
@@ -246,10 +409,14 @@ namespace R13_MokkiBook
             DataGridView dgv = (DataGridView)sender;
             if (dgv.CurrentRow != null)
             {
-                txtLaskuID.Text = dgv.CurrentRow.Cells["lasku_id"].Value.ToString();
-                txtVarausID.Text = dgv.CurrentRow.Cells["varaus_id"].Value.ToString();
-                txtSumma.Text = dgv.CurrentRow.Cells["summa"].Value.ToString();
-                txtAlv.Text = dgv.CurrentRow.Cells["alv"].Value.ToString();
+                txtLaskuID.Text = dgv.CurrentRow.Cells["lasku_id"].Value?.ToString();
+                txtVarausID.Text = dgv.CurrentRow.Cells["varaus_id"].Value?.ToString();
+                txtSumma.Text = dgv.CurrentRow.Cells["summa"].Value?.ToString();
+                txtAlv.Text = dgv.CurrentRow.Cells["alv"].Value?.ToString();
+
+                valittulasku = laskut[dgv.CurrentRow.Index];
+                tamavaraus = GetVaraus(valittulasku.varaus_id);
+                tamamokki = GetMokki(tamavaraus.mokki_id);
             }
         }
 
@@ -316,6 +483,16 @@ namespace R13_MokkiBook
             {
                 e.Cancel = true;
             }
+        }
+
+        private void txtLaskuID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtSumma_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
         }
     }
 }

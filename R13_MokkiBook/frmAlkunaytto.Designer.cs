@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAlkunaytto));
             this.btnVaraukset = new System.Windows.Forms.Button();
             this.btnMokit = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             this.pnlPalvelut = new System.Windows.Forms.Panel();
             this.pnlLaskut = new System.Windows.Forms.Panel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.ttAlkunaytto = new System.Windows.Forms.ToolTip(this.components);
             this.pnlAsiakkaat.SuspendLayout();
             this.prnAlueet.SuspendLayout();
             this.pnlMokit.SuspendLayout();
@@ -59,6 +61,7 @@
             this.btnVaraukset.Size = new System.Drawing.Size(100, 27);
             this.btnVaraukset.TabIndex = 0;
             this.btnVaraukset.Text = "Varaukset";
+            this.ttAlkunaytto.SetToolTip(this.btnVaraukset, "Luo uusi varaus, hallinnoi luotuja varauksia");
             this.btnVaraukset.UseVisualStyleBackColor = true;
             this.btnVaraukset.Click += new System.EventHandler(this.btnVaraukset_Click);
             // 
@@ -70,6 +73,7 @@
             this.btnMokit.Size = new System.Drawing.Size(100, 27);
             this.btnMokit.TabIndex = 1;
             this.btnMokit.Text = "Mökit";
+            this.ttAlkunaytto.SetToolTip(this.btnMokit, "Tarkastele ja hallinnoi mökkejä");
             this.btnMokit.UseVisualStyleBackColor = true;
             this.btnMokit.Click += new System.EventHandler(this.btnMokit_Click);
             // 
@@ -81,6 +85,7 @@
             this.btnAlueet.Size = new System.Drawing.Size(100, 27);
             this.btnAlueet.TabIndex = 2;
             this.btnAlueet.Text = "Alueet";
+            this.ttAlkunaytto.SetToolTip(this.btnAlueet, "Tarkastele ja hallinnoi alueita");
             this.btnAlueet.UseVisualStyleBackColor = true;
             this.btnAlueet.Click += new System.EventHandler(this.btnAlueet_Click);
             // 
@@ -92,6 +97,7 @@
             this.btnAsiakkaat.Size = new System.Drawing.Size(100, 27);
             this.btnAsiakkaat.TabIndex = 3;
             this.btnAsiakkaat.Text = "Asiakkaat";
+            this.ttAlkunaytto.SetToolTip(this.btnAsiakkaat, "Tarkastele ja hallinnoi asiakkaita");
             this.btnAsiakkaat.UseVisualStyleBackColor = true;
             this.btnAsiakkaat.Click += new System.EventHandler(this.btnAsiakkaat_Click);
             // 
@@ -103,6 +109,7 @@
             this.btnPalvelut.Size = new System.Drawing.Size(100, 27);
             this.btnPalvelut.TabIndex = 4;
             this.btnPalvelut.Text = "Palvelut";
+            this.ttAlkunaytto.SetToolTip(this.btnPalvelut, "Tarkastele ja hallinnoi palveluita");
             this.btnPalvelut.UseVisualStyleBackColor = true;
             this.btnPalvelut.Click += new System.EventHandler(this.btnPalvelut_Click);
             // 
@@ -114,6 +121,7 @@
             this.btnLaskut.Size = new System.Drawing.Size(100, 27);
             this.btnLaskut.TabIndex = 5;
             this.btnLaskut.Text = "Laskut";
+            this.ttAlkunaytto.SetToolTip(this.btnLaskut, "Seuraa ja hallinnoi laskuja");
             this.btnLaskut.UseVisualStyleBackColor = true;
             this.btnLaskut.Click += new System.EventHandler(this.btnLaskut_Click);
             // 
@@ -223,6 +231,7 @@
         private System.Windows.Forms.Panel pnlPalvelut;
         private System.Windows.Forms.Panel pnlLaskut;
         private System.Windows.Forms.PictureBox pbLogo;
+        private System.Windows.Forms.ToolTip ttAlkunaytto;
     }
 }
 
