@@ -25,7 +25,6 @@ namespace R13_MokkiBook
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public string query;
         public bool varauksessaonjopalvelu = false;
-
         public frmHaePalvelu(Varaus tuotu, List<VarauksenPalvelut> tuotulista)
         {
             InitializeComponent();
@@ -91,20 +90,15 @@ namespace R13_MokkiBook
             }
             return pp;
         }
-
         private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             //HUUTAA JOS KLIKKAA ULKOPUOLELTA
-            valitturivi = dgvAlueenPalvelut.CurrentRow.Index;
-            valittupalvelu = palvelut[valitturivi];
-            tbKuvaus.Text = valittupalvelu.kuvaus;
+            
         }
-
         private void nudMaara_ValueChanged(object sender, EventArgs e)
         {
             palvelumaara = (int)nudMaara.Value;
         }
-
         private void btnLisaa_Click(object sender, EventArgs e)
         {
             if (nudMaara.Value == 0 || palvelumaara == 0)
@@ -156,17 +150,24 @@ namespace R13_MokkiBook
                 MessageBox.Show("Palvelu lisättiin varaukseen.");
             }
         }
-
         private void frmHaePalvelu_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Palvelujen hakusivu suljettiin varaukselle " + kasiteltavavaraus.varaus_id.ToString() + " käyttäjältä: ");
         }
-
         private void frmHaePalvelu_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 e.Cancel = true;
+            }
+        }
+        private void dgvAlueenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(dgvAlueenPalvelut.CurrentRow.Index <= palvelut.Count)
+            {
+                valitturivi = dgvAlueenPalvelut.CurrentRow.Index;
+                valittupalvelu = palvelut[valitturivi];
+                tbKuvaus.Text = valittupalvelu.kuvaus;
             }
         }
     }
