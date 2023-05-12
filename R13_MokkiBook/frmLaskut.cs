@@ -15,6 +15,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace R13_MokkiBook
 {
@@ -88,101 +89,68 @@ namespace R13_MokkiBook
         {
             try
             {
-                // Define the path and file name for the generated PDF
-                string fileName = "Bill.pdf";
+                string fileName = "Lasku.pdf";
 
-                // Create a new PDF document
                 Document document = new Document();
 
-                // Create a new FileStream object to write the PDF to disk
                 FileStream fileStream = new FileStream(fileName, FileMode.Create);
 
-                // Create a new PdfWriter object to write to the PDF stream
                 PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
 
-                // Open the document
                 document.Open();
 
-                // Add a title to the document
-                document.Add(new Paragraph("Lasku"));
+
+                Bitmap image = Properties.Resources.MokkiBookLogo;
+                iTextSharp.text.Image logoImage = iTextSharp.text.Image.GetInstance(Properties.Resources.MokkiBookLogo, System.Drawing.Imaging.ImageFormat.Png);
+
+                PdfContentByte canvas = writer.DirectContent;
+                logoImage.SetAbsolutePosition(470, 770);
+                logoImage.ScaleAbsolute(90, 50);
+                canvas.AddImage(logoImage);
+
+
+                document.Add(new Paragraph("Varauksenne lasku"));
                 document.Add(new Paragraph(" "));
 
-                // Check if any row is selected in the DataGridView
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    // Get the selected row from the DataGridView
                     DataGridViewRow row = dataGridView1.SelectedRows[0];
 
                     // Add the transaction data to the document
                     document.Add(new Paragraph("Lasku ID: " + row.Cells["lasku_id"].Value.ToString()));
                     document.Add(new Paragraph("Varaus ID: " + row.Cells["varaus_id"].Value.ToString()));
-                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString() + " +alv"));
+                    document.Add(new Paragraph("Summa: " + row.Cells["summa"].Value.ToString() + " + alv"));
                     document.Add(new Paragraph("Alv: " + row.Cells["alv"].Value.ToString()));
 
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph("Asiakkaan tiedot:"));
-                    document.Add(new Paragraph(" "));
 
-                    // Search for varaus_id by lasku_id
-                    OdbcConnection connection = new OdbcConnection("Dsn=Village Newbies;uid=root");
-                    
-                    connection.Open();
-                    string lasku_id = row.Cells["lasku_id"].Value.ToString();
-                    OdbcCommand command1 = new OdbcCommand("SELECT varaus_id FROM lasku WHERE lasku_id = ?", connection);
-                    command1.Parameters.AddWithValue("@lasku_id", lasku_id);
-                    OdbcDataReader reader1 = command1.ExecuteReader();
-                
-                    // Add the remaining transaction data to the document
-                 
-                    // Create a new PdfPTable object to hold the line items
                     PdfPTable table = new PdfPTable(4);
                     table.WidthPercentage = 100;
-
-                     // Add the line items from the selected row to the table
-                   
                      document.Add(table);
-                    
                 }
-
-                //UUTTA
-
-                // Create a new ODBC connection to the database
-               
-                // Create a new ODBC command to retrieve additional data
-                OdbcCommand command = new OdbcCommand("SELECT * FROM asiakas", connection);
-
-                // Execute the command and retrieve the data using a data reader
-                OdbcDataReader reader = command.ExecuteReader();
-
-                // Create a new PdfPTable object to hold the additional data
-                PdfPTable additionalTable = new PdfPTable(2);
-                additionalTable.WidthPercentage = 100;
-
-                // Add the column headers to the additional table
-
-                additionalTable.AddCell(new PdfPCell(new Phrase("asiakas_id")));
-                additionalTable.AddCell(new PdfPCell(new Phrase("postinro")));
-
-                // Loop through the data reader and add the data to the additional table
-                while (reader.Read())
+                double totalSum = 0.0;
+                // iterate over the rows in the DataTable
+                foreach (DataRow rows in dataTable.Rows)
                 {
-                    additionalTable.AddCell(new PdfPCell(new Phrase(reader.GetString(0))));
-                    additionalTable.AddCell(new PdfPCell(new Phrase(reader.GetString(1))));
+                    // add the value of the "Summa" column to the total sum
+                    totalSum += Convert.ToDouble(rows["Summa"]);
+
+                    // convert the "Alv" value from a percentage to a decimal value and add it to the total sum
+                    double alvPercentage = Convert.ToDouble(rows["alv"]);
+                    double alvDecimal = alvPercentage / 100.0;
+                    totalSum += (Convert.ToDouble(rows["summa"]) * alvDecimal);
                 }
 
-                // Add the additional table to the document
-                document.Add(additionalTable);
+                // output the total sum to the PDF document
+                document.Add(new Paragraph("Total sum: " + totalSum));
 
-                // Close the database connection and data reader
 
-                // Close the data reader
-                reader.Close();
+
+
                 connection.Close();
 
                 document.Close();
                 fileStream.Close();
 
-                // Open the generated PDF file in the default PDF viewer
                 System.Diagnostics.Process.Start(fileName);
             }
             catch (Exception ex)
@@ -316,6 +284,16 @@ namespace R13_MokkiBook
             {
                 e.Cancel = true;
             }
+        }
+
+        private void txtLaskuID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtSumma_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
         }
     }
 }
