@@ -315,11 +315,9 @@ namespace R13_MokkiBook
                 using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
                     connection.Open();
-                    string varausquery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm)" +
-                        " VALUES(?, ?, ?, ?, ?, ?, ?);";
+                    string varausquery = "UPDATE varaus SET asiakas_id = ?, mokki_mokki_id = ?, varattu_pvm = ?, vahvistus_pvm = ?, varattu_alkupvm = ?, varattu_loppupvm = ? WHERE varaus_id = ?;";
                     using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                     {
-                        cmd.Parameters.AddWithValue("@varaus_id", kasiteltavavaraus.varaus_id);
                         cmd.Parameters.AddWithValue("@asiakas_id", kasiteltavavaraus.asiakas_id);
                         cmd.Parameters.AddWithValue("@mokki_id", kasiteltavavaraus.mokki_id);
                         cmd.Parameters.AddWithValue("@varattu_pvm", kasiteltavavaraus.varattu_pvm);
