@@ -272,7 +272,8 @@
             // 
             // btnVahvista
             // 
-            this.btnVahvista.Location = new System.Drawing.Point(438, 42);
+            this.btnVahvista.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnVahvista.Location = new System.Drawing.Point(438, 38);
             this.btnVahvista.Name = "btnVahvista";
             this.btnVahvista.Size = new System.Drawing.Size(78, 23);
             this.btnVahvista.TabIndex = 2;
@@ -300,8 +301,9 @@
             this.Controls.Add(this.pnlPalvelut);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(603, 399);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(546, 349);
+            this.MinimumSize = new System.Drawing.Size(603, 399);
             this.Name = "frmVarauksenPalvelut";
             this.Text = "Muokkaa varausta";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVarauksenPalvelut_FormClosing);
