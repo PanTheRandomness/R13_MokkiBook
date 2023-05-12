@@ -90,11 +90,6 @@ namespace R13_MokkiBook
             }
             return pp;
         }
-        private void dgvAlueenPalvelut_SelectionChanged(object sender, EventArgs e)
-        {
-            //HUUTAA JOS KLIKKAA ULKOPUOLELTA
-            
-        }
         private void nudMaara_ValueChanged(object sender, EventArgs e)
         {
             palvelumaara = (int)nudMaara.Value;
@@ -163,12 +158,10 @@ namespace R13_MokkiBook
         }
         private void dgvAlueenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(dgvAlueenPalvelut.CurrentRow.Index <= palvelut.Count)
-            {
-                valitturivi = dgvAlueenPalvelut.CurrentRow.Index;
-                valittupalvelu = palvelut[valitturivi];
-                tbKuvaus.Text = valittupalvelu.kuvaus;
-            }
+            valitturivi = dgvAlueenPalvelut.CurrentRow.Index;
+            valittupalvelu = palvelut[valitturivi];
+            tbKuvaus.Text = valittupalvelu.kuvaus;
+            //HUUTAA JOS KLIKKAA ULKOPUOLELTA
         }
     }
 }

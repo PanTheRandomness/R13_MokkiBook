@@ -29,7 +29,6 @@ namespace R13_MokkiBook
             varauksenpalvelut = GetVarauksenPalvelut();
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut avattiin käyttäjältä: ");
         }
-
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
             PaivitaTaulu();
@@ -66,7 +65,6 @@ namespace R13_MokkiBook
             }
             return vP;
         }
-
         private void dgvVarauksenPalvelut_SelectionChanged(object sender, EventArgs e)
         {
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
@@ -123,13 +121,11 @@ namespace R13_MokkiBook
             }
             LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin palvelu " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
         }
-
         private void btnHaePalvelu_Click(object sender, EventArgs e)
         {
             frmHaePalvelu hp = new frmHaePalvelu(kasiteltavavaraus, varauksenpalvelut);
             hp.ShowDialog();
         }
-
         private void btnPoistaValittuMaara_Click(object sender, EventArgs e)
         {
             if(nudPoistettavat.Value > 0)
@@ -179,7 +175,6 @@ namespace R13_MokkiBook
         {
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut suljettiin käyttäjältä: ");
         }
-
         private void frmVarauksenPalvelut_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
