@@ -320,7 +320,7 @@ namespace R13_MokkiBook
             }
             return id;
         }
-        public void LuoVaraus()//minne menee  '' - merkit queryssä?
+        public void LuoVaraus()
         {
             tamavaraus.asiakas_id = valittuasiakas.asiakas_id;
             tamavaraus.mokki_id = valittumokki.mokki_id;
@@ -706,7 +706,7 @@ namespace R13_MokkiBook
             {
                 if(tbLahiosoiteAsiakas.Text.Length > 0)
                 {
-                    //Muotoa ei tarkisteta. Palaan tähän, jos on aikaa
+                    //Muotoa ei tarkisteta.
                     TarkistaPuhno();
                 }
                 else
@@ -721,7 +721,7 @@ namespace R13_MokkiBook
         {
             if(tbPuhno.Text.Length > 0)
             {
-                //Muotoa ei tarkisteta. Palaan tähän, jos on aikaa
+                //Muotoa ei tarkisteta.
                 TarkistaSahkoposti();
             }
             else
@@ -731,7 +731,7 @@ namespace R13_MokkiBook
         {
             if(tbSahkoposti.Text.Length > 0)
             {
-                //Muotoa ei tarkisteta. Palaan tähän, jos on aikaa
+                //Muotoa ei tarkisteta.
                 LuoAsiakas();
             }
             else
@@ -824,7 +824,7 @@ namespace R13_MokkiBook
                 btnLisaaPalveluVaraukseen.Enabled = false;
                 btnPoistaPalvelu.Enabled = false;
                 lbVarauksenPalvelut.Enabled = false;
-                varauksenpalveluvalittu = false;//MENEEKÖ TÄHÄN VAI MUUALLE
+                varauksenpalveluvalittu = false;
 
                 palveluquery = "SELECT * FROM palvelu;";
                 PaivitaPalvelutaulu(palveluquery);
@@ -1005,10 +1005,6 @@ namespace R13_MokkiBook
         private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
         {
             valittuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
-        }
-        private void tbPostitoimipaikkaAsiakas_TextChanged(object sender, EventArgs e)
-        {
-          //HAE POSTINUMERO POSTITAULUSTA?
         }
         private void tbPuhno_TextChanged(object sender, EventArgs e)
         {
@@ -1251,16 +1247,6 @@ namespace R13_MokkiBook
             aluequery = "SELECT nimi FROM alue;";
             PaivitaAluetaulu(aluequery);
         }
-        /*public void NollaaPalvelut()//MIHIN TÄMÄ?
-        {
-            varauksenpalvelut.Clear();
-            varauksenpalvelunimet.Clear();
-            nudPalveluLkm.Value = 0;
-            palveluquery = "SELECT * FROM palvelu;";
-            PaivitaPalvelutaulu(palveluquery);
-            //JA poista
-            PaivitaVarauksenPalvelutaulu();
-        }*/
         private void tbMaxhinta_Leave(object sender, EventArgs e)
         {
             if(tbMaxhinta.Text.Length > 0)
