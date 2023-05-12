@@ -78,6 +78,8 @@ namespace R13_MokkiBook
                     PoistaVaraus(varaus);
             }*/
         }
+
+        //Hakee listan kaikista tehdyistä varauksista
         public List<Varaus> GetVaraukset()
         {
             List<Varaus> var = new List<Varaus>();
@@ -120,6 +122,8 @@ namespace R13_MokkiBook
             }
             return var;
         }
+
+        //Hakee listan kaikista alueista
         public List<Alue> GetAlueet()
         {
             List<Alue> alu = new List<Alue>();
@@ -144,6 +148,8 @@ namespace R13_MokkiBook
             }
             return alu;
         }
+
+        //Hakee käsiteltävän varauksen
         public Varaus GetValittuVaraus()
         {
             Varaus v = new Varaus();
@@ -164,12 +170,16 @@ namespace R13_MokkiBook
         {
             this.varausTableAdapter.Fill(this.dataSet1.varaus);
         }
+
+        //Valitsee rivin datagridview:sta
         private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
         {
-            //HUUTAA JOS KLIKKAA ULKOPUOLELTA
+            //Error, jos valitaan tyhjä dgv-rivi
             valitturivi = dgvVaraukset.CurrentRow.Index;
             valittuvaraus = GetValittuVaraus();
         }
+
+        //Käynnistää raportin tulostuksen
         private void btnRaportti_Click(object sender, EventArgs e)
         {
             PrintDocument printDocument = new PrintDocument();
@@ -183,6 +193,8 @@ namespace R13_MokkiBook
                 printDocument.Print();
             }
         }
+
+        //Tulostaa raportin
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
             //kannattaa tulostaa vaakaan
@@ -191,16 +203,22 @@ namespace R13_MokkiBook
 
             e.HasMorePages = morePages;
         }
+
+        //Avaa uuden varauksen luontisivun
         private void btnUusi_Click(object sender, EventArgs e)
         {
             frmUusiVaraus uv = new frmUusiVaraus();
             uv.ShowDialog();
         }
+
+        //Avaa varauksen muokkaussivun (uusi nimi contextmenussa text.ominaisuudella "Muokkaa"
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
         {
             frmVarauksenPalvelut vp = new frmVarauksenPalvelut(valittuvaraus);
             vp.ShowDialog();
         }
+
+        //Varmistaa poistohalukkuuden.
         private void tsmiPoista_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistaa varauksen?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -208,6 +226,8 @@ namespace R13_MokkiBook
                 PoistaVaraus(valittuvaraus);
             }
         }
+
+        //Poistaa varauksen. Tässä tulee error 'ei alustettu', mutta poisto onnistuu, kun taulun päivittää
         public void PoistaVaraus(Varaus v)
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -219,9 +239,11 @@ namespace R13_MokkiBook
                     cmd.ExecuteNonQuery();
                 }
             }
-            PaivitaTaulu();// Lähettää "ei alustettu" errorin, mutta toimii.
+            PaivitaTaulu();
             LokiinTallentaminen("Poistettiin varaus " + v.varaus_id.ToString() + " käyttäjältä: ");
         }
+
+        //Hakee varauksista annetuihin kriteereihin sopivat
         private void btnHae_Click_1(object sender, EventArgs e)
         {
             if (ValidPvm())
@@ -242,6 +264,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Hakua ei voitu suorittaa: Varauksen alkupäivämäärän on oltava ennen sen päättymispäivämäärää.");
         }
+
+        //Varmistaa, että haun päivämäärät on syötetty oikein
         public bool ValidPvm()
         {
             if(hakualku < hakuloppu)
@@ -251,6 +275,8 @@ namespace R13_MokkiBook
             else
                 return false;
         }
+
+        //Varmistaa, että haun aluetunnus on syötetty oikein
         public bool ValidAluetunnus()
         {
             bool tunnus_loytyi = false;
@@ -262,6 +288,8 @@ namespace R13_MokkiBook
             }
             return tunnus_loytyi;
         }
+
+        //Tyhjentää haun ja palauttaa alkuperäisen näkymän
         private void btnTyhjennaHaku_Click(object sender, EventArgs e)
         {
             hakuquery = "SELECT * FROM varaus";
@@ -272,6 +300,8 @@ namespace R13_MokkiBook
             hakuloppu = nyt;
             PaivitaTaulu();
         }
+
+        //Päivittää datagrigview:n
         public void PaivitaTaulu()
         {
             try
@@ -299,19 +329,27 @@ namespace R13_MokkiBook
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
+
+        //Varmistaa, että alue-boksiin syötetään vain numeroita
         private void tbAlue_KeyPress(object sender, KeyPressEventArgs e)
         {
             if((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
         }
+
+        //Ottaa haun alkupäivämäärän talteen
         private void dtpAlku_ValueChanged(object sender, EventArgs e)
         {
             hakualku = dtpAlku.Value;
         }
+
+        //Ottaa haun loppupäivämäärän talteen
         private void dtpLoppu_ValueChanged(object sender, EventArgs e)
         {
             hakuloppu = dtpLoppu.Value;
         }
+
+        //Lokiin tallennus: tämän teki Hanna
         public void LokiinTallentaminen(string teksti)
         {
             string kayttaja = Environment.UserName;
@@ -320,6 +358,8 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        //Varmistaa sulkemishalukkuuden
         private void frmVaraukset_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -327,12 +367,15 @@ namespace R13_MokkiBook
                 e.Cancel = true;
             }
         }
+
+        //Käyttäjälle mahdollisuus päivittää taulu (esim. uuden lisäyksen tai muutoksen jälkeen) sulkematta nykyistä ikkunaa
         private void btnPaivita_Click(object sender, EventArgs e)
         {
             hakuquery = "SELECT * FROM varaus;";
             PaivitaTaulu();
         }
     }
+    //Luokka & sen funktiot tulostusta varten, ei täydellinen, mutta toimii
     public class DataGridViewPrinter
     {
         private DataGridView dataGridView;

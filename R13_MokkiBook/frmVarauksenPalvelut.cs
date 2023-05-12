@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace R13_MokkiBook
 {
-    public partial class frmVarauksenPalvelut : Form
+    public partial class frmVarauksenPalvelut : Form //Tämän nimi käytännössä "Muokkaa varausta"
     {//Pan
         public int valitturivi = -1;
         public Varaus kasiteltavavaraus = new Varaus();
@@ -41,6 +41,8 @@ namespace R13_MokkiBook
         {
             PaivitaTaulu();
         }
+
+        //Lokiin tallentaminen: Tämän teki Hanna
         public void LokiinTallentaminen(string teksti)
         {
             string kayttaja = Environment.UserName;
@@ -49,6 +51,8 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        //Hakee taulusta varauksen_palvelut
         public List<VarauksenPalvelut> GetVarauksenPalvelut()
         {
             List<VarauksenPalvelut> vP = new List<VarauksenPalvelut>();
@@ -73,6 +77,8 @@ namespace R13_MokkiBook
             }
             return vP;
         }
+
+        //Hakee halutun varauksen_palvelu-instancen
         public VarauksenPalvelut GetValittuPalvelu()
         {
             VarauksenPalvelut vp = new VarauksenPalvelut();
@@ -81,6 +87,8 @@ namespace R13_MokkiBook
             vp.lkm = varauksenpalvelut[valitturivi].lkm;
             return vp;
         }
+
+        //Hakee listan kaikista varauksista
         public List<Varaus> GetVaraukset()
         {
             List<Varaus> var = new List<Varaus>();
@@ -111,6 +119,8 @@ namespace R13_MokkiBook
             }
             return var;
         }
+
+        //Päivittää datagridview:n
         public void PaivitaTaulu()
         {
             tauluquery = "SELECT * FROM varauksen_palvelut WHERE varaus_id = " + kasiteltavavaraus.varaus_id.ToString();
@@ -129,6 +139,8 @@ namespace R13_MokkiBook
             dgvVarauksenPalvelut.Columns[1].HeaderText = "Palvelutunnus";
             dgvVarauksenPalvelut.Columns[2].HeaderText = "Lkm";
         }
+
+        //Käynnistää palvelun poistoprosessin varauksesta
         private void btnPoista_Click(object sender, EventArgs e)
         {
             if (palveluvalittu)
@@ -146,6 +158,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Palvelua ei ole valittu. Valitse palvelu klikkaamalla sen riviä.");
         }
+
+        //Poistaa palvelun varauksesta kokonaan
         public void PoistaVarauksesta()
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -159,11 +173,15 @@ namespace R13_MokkiBook
             }
             LokiinTallentaminen("Varauksesta " + valittupalvelu.varaus_id.ToString() + " poistettiin palvelu " + valittupalvelu.palvelu_id.ToString() + " käyttäjältä: ");
         }
+
+        //Avaa näkymän, josta varaukseen voi lisätä olemassa olevia palveluita
         private void btnHaePalvelu_Click(object sender, EventArgs e)
         {
             frmHaePalvelu hp = new frmHaePalvelu(kasiteltavavaraus, varauksenpalvelut);
             hp.ShowDialog();
         }
+
+        //Poistaa tietyn määrän tietystä palvelusta varauskesta
         private void btnPoistaValittuMaara_Click(object sender, EventArgs e)
         {
             if (palveluvalittu)
@@ -204,6 +222,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Palvelua ei ole valittu. Valitse palvelu klikkaamalla sen riviä.");
         }
+
+        //Laskee poistoa jälkeisen määrän palvelulle, josta poistettiin vain osa
         public int LaskeUusiMaara()
         {
             int uusi;
@@ -214,10 +234,14 @@ namespace R13_MokkiBook
 
             return uusi;
         }
+
+        //Kirjaa poistumisen lokiin
         private void frmVarauksenPalvelut_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut suljettiin käyttäjältä: ");
         }
+
+        //Varmistaa sulkemishalukkuuden
         private void frmVarauksenPalvelut_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -225,6 +249,8 @@ namespace R13_MokkiBook
                 e.Cancel = true;
             }
         }
+
+        //Käynnistää päivämäärän muutosprosessin
         private void btnVahvista_Click(object sender, EventArgs e)
         {
             switch (ValidPvm())
@@ -256,20 +282,28 @@ namespace R13_MokkiBook
                     break;
             }
         }
+
+        //Ottaa uuden halutun alkupäivämäärän talteen
         private void stpAlku_ValueChanged(object sender, EventArgs e)
         {
             alku = stpAlku.Value;
         }
+
+        //Ottaa uuden halutun loppupäivämäärän talteen
         private void stpLoppu_ValueChanged(object sender, EventArgs e)
         {
             loppu = stpLoppu.Value;
         }
+
+        //Valitsee muokattavan palvelun
         private void dgvVarauksenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
             valittupalvelu = GetValittuPalvelu();
             palveluvalittu = true;
         }
+
+        //Varmistaa, että päivämäärät on syötetty oikein
         public int ValidPvm()
         {
             if (alku < loppu)
@@ -279,6 +313,8 @@ namespace R13_MokkiBook
             else
                 return 2;
         }
+
+        //Varmistaa mökin vapauden muutetulle ajanjaksolle
         public bool MokkiVapaa()
         {
             foreach (Varaus v in varaukset)
@@ -304,6 +340,8 @@ namespace R13_MokkiBook
             }
             return true;
         }
+
+        //Varmistaa muokkaushalukkuuden päivämäärälle ja tallentaa muutokset tietokantaan
         public void TallennaVarauksenMuutokset()
         {
             string varmistus = "Muokataanko varausta \n ID:" + kasiteltavavaraus.varaus_id.ToString() + ", ajankohta: " + alku + " - " + loppu;
@@ -332,6 +370,8 @@ namespace R13_MokkiBook
                 }
             }
         }
+
+        //Käyttäjälle mahdollisuus päivittää taulu (esim. uuden lisäyksen tai muutoksen jälkeen) sulkematta nykyistä ikkunaa
         private void btnPaivita_Click(object sender, EventArgs e)
         {
             PaivitaTaulu();
