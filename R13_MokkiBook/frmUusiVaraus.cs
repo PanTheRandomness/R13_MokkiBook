@@ -19,6 +19,7 @@ namespace R13_MokkiBook
 {
     public partial class frmUusiVaraus : Form
     {//Pan
+        //Validointia olisi voinut lisätä, mutta ei nyt enää kerkeä
         public int valitturiviasiakas = -1;
         public int valitturivipalvelu = -1;
         public int valitturivimokki = -1;
@@ -102,6 +103,8 @@ namespace R13_MokkiBook
             PaivitaPalvelutaulu(palveluquery);
             LokiinTallentaminen("Avattiin uuden varauksen luontisivu käyttäjältä: ");
         }
+
+        //Lokiin tallentaminen: Tämän teki Hanna
         public void LokiinTallentaminen(string teksti)
         {
             string kayttaja = Environment.UserName;
@@ -110,6 +113,8 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        //Hakee ko. palvelun hinnan
         public double GetPalvelunHinta(VarauksenPalvelut vp)
         {
             double palhinta = 0;
@@ -131,6 +136,8 @@ namespace R13_MokkiBook
             }
             return palhinta;
         }
+
+        //Palauttaa listan kaikista varauksista
         public List<Varaus> GetVaraukset()
         {
             List<Varaus> var = new List<Varaus>();
@@ -161,6 +168,8 @@ namespace R13_MokkiBook
             }
             return var;
         }
+
+        //Palauttaa listan kaikista palveluista
         public List<Palvelu> GetPalvelut()
         {
             List<Palvelu> pal = new List<Palvelu>();
@@ -189,6 +198,8 @@ namespace R13_MokkiBook
             }
             return pal;
         }
+
+        //Palauttaa listan kaikista asiakkaista
         public List<Asiakas> GetAsiakkaat()
         {
             List<Asiakas> asi = new List<Asiakas>();
@@ -218,6 +229,8 @@ namespace R13_MokkiBook
             }
             return asi;
         }
+
+        //Palauttaa listan kaikista alueista
         public List<Alue> GetAlueet()
         {
             List<Alue> alu = new List<Alue>();
@@ -242,6 +255,8 @@ namespace R13_MokkiBook
             }
             return alu;
         }
+
+        //Palauttaa listan kaikista mökeistä
         public List<Mokki> GetMokit()
         {
             List<Mokki> mo = new List<Mokki>();
@@ -273,6 +288,8 @@ namespace R13_MokkiBook
             }
             return mo;
         }
+
+        //Palauttaa listan kaikista postitoimipaikoista
         public List<Posti> GetPostit()
         {
             List<Posti> po = new List<Posti>();
@@ -297,6 +314,8 @@ namespace R13_MokkiBook
             }
             return po;
         }
+
+        //Hakee seuraavan vapaan varaustunnuksen nykyiselle varaukselle käytettäväksi
         public int HaeSeuraavaVapaaVarausID()
         {
             int id = 0;
@@ -308,6 +327,8 @@ namespace R13_MokkiBook
             id++;
             return id;
         }
+
+        //Hakee seuraavan vapaan asiakastunnuksen uudelle asiakkaalle
         public int HaeSeuraavaVapaaAsiakasID()
         {
             int id = 1;
@@ -320,6 +341,9 @@ namespace R13_MokkiBook
             }
             return id;
         }
+
+        //Varmistaa annettujen tietojen olevan oikeat ja luo uuden varauksen järjestelmään.
+        //Voisi luoda myös laskun, mutta se tehdään omassa osiossaan
         public void LuoVaraus()
         {
             tamavaraus.asiakas_id = valittuasiakas.asiakas_id;
@@ -369,6 +393,8 @@ namespace R13_MokkiBook
                 }
             }
         }
+
+        //Päivittää asiakkaita käsittelevän datagrigview:n
         public void PaivitaAsiakastaulu(string asiakasquery)
         {
             OdbcConnection connection = new OdbcConnection(connectionString);
@@ -388,6 +414,8 @@ namespace R13_MokkiBook
             dgvAsiakkaat.Columns[5].HeaderText = "Sähköposti";
             dgvAsiakkaat.Columns[6].HeaderText = "Puhelinnumero";
         }
+
+        //Päivittää alueita käsittelevän listboxin
         public void PaivitaAluetaulu(string aluequery)
         {
             OdbcConnection connection = new OdbcConnection(connectionString);
@@ -400,6 +428,8 @@ namespace R13_MokkiBook
             }
             lbAlue.DataSource = dataTable;
         }
+
+        //Päivittää mökkejä käsittelevän datagrigview:n
         public void PaivitaMokkitaulu(string mokkiquery)
         {
             OdbcConnection connection = new OdbcConnection(connectionString);
@@ -421,6 +451,8 @@ namespace R13_MokkiBook
             dgvMokitUusiVaraus.Columns[7].HeaderText = "Henkilömäärä";
             dgvMokitUusiVaraus.Columns[8].HeaderText = "Varustelu";
         }
+
+        //Päivittää  valitun mökin alueelta löytyviä palveluita käsittelevän datagrigview:n
         public void PaivitaPalvelutaulu(string palveluquery)
         {
             OdbcConnection connection = new OdbcConnection(connectionString);
@@ -440,6 +472,8 @@ namespace R13_MokkiBook
             dgvAlueenPalvelut.Columns[5].HeaderText = "Hinta";
             dgvAlueenPalvelut.Columns[6].HeaderText = "ALV";
         }
+
+        //Päivittää uuteen varaukseen lisättyjä lisäpalveluita käsittelevän listboxin
         public void PaivitaVarauksenPalvelutaulu() 
         {
             varauksenpalvelunimet.Clear();
@@ -470,16 +504,22 @@ namespace R13_MokkiBook
             bs.ResetBindings(true);
             lbVarauksenPalvelut.DataSource = bs;
         }
+
+        //Ottaa talteen varauksen päättymispäivän
         private void dtmLoppupvm_ValueChanged(object sender, EventArgs e)
         {
             loppupvm = dtmLoppupvm.Value;
             loppupvmmuutettu = true;
         }
+
+        //Ottaa talteen varauksen alkamispäivän
         private void dtpAlkupvm_ValueChanged(object sender, EventArgs e)
         {
             alkupvm = dtpAlkupvm.Value;
             alkupvmmuutettu = true;
         }
+
+        //Käynnistää varauksen luomisprosessin
         private void btnLuoVaraus_Click(object sender, EventArgs e)
         {
             if(!MokkiLukittu())
@@ -506,6 +546,8 @@ namespace R13_MokkiBook
                 }
             }
         }
+
+        //Käynnistää annettujen tietojen validoinnin
         public void Validointi()
         {
             string msg = "Varausta ei voitu luoda: ";
@@ -545,6 +587,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show(msg);
         }
+
+        //Varmistaa ko. mökin varauden varauken aikavälillä
         public bool MokkiVapaa()
         {
             foreach (Varaus v in varaukset)
@@ -567,6 +611,8 @@ namespace R13_MokkiBook
             }
             return true;
         }
+
+        //Varmistaa poistohalukkuuden ja käynnistää palvelun poistamisen varauksesta
         private void btnPoistaPalvelu_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistaa palvelun varauksesta?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -577,6 +623,8 @@ namespace R13_MokkiBook
                     MessageBox.Show("Poistettavaa varausta ei ole valittu.");
             }
         }
+
+        //Tyhjentää kaikki palvelut varauksesta
         public void TyhjennaVarauksenPalvelut()
         {
             varauksenpalvelut.Clear();
@@ -587,6 +635,8 @@ namespace R13_MokkiBook
             PaivitaVarauksenPalvelutaulu();
             varauksenpalveluvalittu = false;
         }
+
+        //Käynnistää ja validoi palvelun lisäyksen varaukseen
         private void btnLisaaPalveluVaraukseen_Click(object sender, EventArgs e)
         {
             if(!btnLisaaPalveluVaraukseen.Enabled)
@@ -610,6 +660,9 @@ namespace R13_MokkiBook
                     MessageBox.Show("Palvelua ei voitu lisätä: Valitse lisättävä palvelu.");
             }
         }
+
+        //Lisää palvelun varaukseen
+        //(tai siis listaan, varauksen_palvelu-instancet luodaan tietokantaan vasta varauksen luonnin jälkeen (kustutaan LuoVaraus-funtiossa)
         public void LisaaPalveluListaan(int lkm, Palvelu lisattava)
         {
             VarauksenPalvelut vp = new VarauksenPalvelut();
@@ -624,6 +677,9 @@ namespace R13_MokkiBook
             PaivitaVarauksenPalvelutaulu();
             PaivitaLoppuhinta();
         }
+
+        //Palauttaa tiedon siitä, onko palvelu jo lisättyy varaukseen.
+        //Jos on, sitä muokataan, jos ei, se lisätään listaan.
         public bool PalveluJoVarauksessa(VarauksenPalvelut vp)
         {
             int uusimaara = 0;
@@ -639,6 +695,8 @@ namespace R13_MokkiBook
             }
             return varauksessaonjopalvelu;
         }
+
+        //Poistaa palvelun varauksen palveluiden listasta
         public void PoistaPalveluListasta(int rivi)
         {
             varauksenpalvelut.RemoveAt(rivi);
@@ -646,6 +704,8 @@ namespace R13_MokkiBook
             PaivitaVarauksenPalvelutaulu();
             PaivitaLoppuhinta();
         }
+
+        //Päivittää arvioidun loppuhinnan
         public void PaivitaLoppuhinta()
         {
             double palveluidenhinta = 0;
@@ -656,6 +716,8 @@ namespace R13_MokkiBook
             arvioituloppuhinta = valittumokki.hinta + palveluidenhinta;
             tbLoppuhinta.Text = arvioituloppuhinta.ToString();
         }
+
+        //Luo järjestelmään instancet varauksen palveluista
         public void LisaaPalveluVaraukseen(VarauksenPalvelut vp)
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -669,6 +731,8 @@ namespace R13_MokkiBook
                 }
             }
         }
+
+        //Varmistaa poistumishalukkuuden
         private void frmUusiVaraus_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!varausluotu)
@@ -679,6 +743,8 @@ namespace R13_MokkiBook
                 }
             }
         }
+
+        //Käynnistää uuden asiakkaan luonnin
         private void btnLisaa_Click(object sender, EventArgs e)
         {
             if (tbAsiakastunnus.Text.Length > 0)
@@ -686,6 +752,8 @@ namespace R13_MokkiBook
             else
                 TarkistaNimi();
         }
+
+        //Tarkistaa uuden asiakkaan nimen
         public void TarkistaNimi()
         {
             if (tbEnimi.Text.Length > 0)
@@ -700,6 +768,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä etunimi.");
         }
+
+        //Tarkistaa uuden asiakkaan osoitteen olemassaolon
         public void TarkistaOsoite()
         {
             if (tbPostinoAsiakas.Text.Length > 0 && tbPostinoAsiakas.Text.Length < 6)
@@ -717,6 +787,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä postinumero.");
         }
+
+        //Tarkistaa uuden asiakkan puhelinnumeron olemassaolon
         public void TarkistaPuhno()
         {
             if(tbPuhno.Text.Length > 0)
@@ -727,6 +799,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä puhelinnumero.");
         }
+
+        //Tarkistaa uuden asiakkan sähköpostiosoitteen olemassaolon
         public void TarkistaSahkoposti()
         {
             if(tbSahkoposti.Text.Length > 0)
@@ -737,6 +811,8 @@ namespace R13_MokkiBook
             else
                 MessageBox.Show("Uutta asiakasta ei voitu luoda: syötä shköpostiosoite.");
         }
+
+        //Luo uuden asiakkaan
         public void LuoAsiakas()
         {
             luotuasiakas.asiakas_id = HaeSeuraavaVapaaAsiakasID();
@@ -766,6 +842,8 @@ namespace R13_MokkiBook
 
             valittuasiakas = luotuasiakas;
         }
+
+        //Palauttaa tiedon, löytyykö postinumero jo tietokannasta
         public bool PostiLoytyi(string pn)
         {
             foreach(Posti p in postit)
@@ -775,6 +853,8 @@ namespace R13_MokkiBook
             }
             return false;
         }
+
+        //Luo uuden postitoimipaikan tietokantaan (ja postinumeron)
         public void LuoPosti(string pnro, string ptp)
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -789,6 +869,9 @@ namespace R13_MokkiBook
             }
             postit = GetPostit();
         }
+
+        //Varmistaa onko "vastaus lukittu" mökin kannalta
+        //Ei siis anna muokata lisäpalveluita, ennen kuin mökin valinta on varmistettu
         private void cbLukitseMokki_CheckedChanged(object sender, EventArgs e)
         {
             if (cbLukitseMokki.Checked == true)
@@ -831,12 +914,16 @@ namespace R13_MokkiBook
                 pnlPalvelut.Enabled = false;
             }
         }
+
+        //Palauttaa tiedon siitä, onko mökkivalinta lukittu
         public bool MokkiLukittu()
         {
             if (!mokkilukittu)
                 return false;
             else return true;
         }
+
+        //Varmistaa varauksen päivämäärien oikean muodon
         public int ValidPvm()
         {
             if (alkupvm < loppupvm)
@@ -846,6 +933,8 @@ namespace R13_MokkiBook
             else
                 return 2;
         }
+
+        //Varmistaa, ettei asiakas ole jäänyt tyhjäksi
         public bool ValidAsiakas(ref string msg)
         {
             if(valittuasiakas == null && tbEnimi.Text == "" && tbSnimi.Text == "" && tbAsiakastunnus.Text == "" && tbPostitoimipaikkaAsiakas.Text == "" && tbLahiosoiteAsiakas.Text == "" && tbPostinoAsiakas.Text == "" && tbPuhno.Text == "" && tbSahkoposti.Text == "")
@@ -873,12 +962,16 @@ namespace R13_MokkiBook
             }
             return true;
         }
+
+        //Varmistaa, ettei alue ole jäänyt tyhjäksi
         public bool ValidAlue()
         {
             if(valittualue != null)
                 return true;
             return false;
         }
+
+        //Varmistaa, että mökki on valittu, ja sen tiedot eivät ole ristiriidassa muiden varauksen tietojen kanssa
         public bool ValidMokki(ref string msg)
         {
             if (valittumokki != null)
@@ -897,10 +990,14 @@ namespace R13_MokkiBook
                 msg = "Mökkiä ei ole valittu.";
             return false;
         }
+
+        //Kirjaa sulkemisen lokiin
         private void frmUusiVaraus_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Suljettiin uuden varauksen luontisivu käyttäjältä: ");
         }
+
+        //Tarkistaa uuden asiakkaan etu- ja sukunimen, sekä postitoimipaikan muodon
         private void tbEnimi_Leave(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -912,11 +1009,16 @@ namespace R13_MokkiBook
                 tb.Text = nimi;
             }
         }
+
+        //Varmistaa, että kutsuvaan kenttään syötetään vain numeroita
         private void tbPostinoAsiakas_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8))
                 e.Handled = true;
         }
+
+        //Hakee syötetyn aluetunnuksen alueen nimen.
+        //Voi palauttaa useampia, jos alueiden tunnukset yltävät useampinumeroisiin lukuihin ja on syötetty tunnusta lyhyempi luku
         private void tbAlueid_TextChanged(object sender, EventArgs e)
         {
             if (tbAlueid.Text.Length > 0)
@@ -956,6 +1058,8 @@ namespace R13_MokkiBook
                 PaivitaPalvelutaulu(palveluquery);
             }
         }
+
+        //Päivittää asiakastaulun päivityslauseen
         private void tbAsiakastunnus_TextChanged(object sender, EventArgs e)
         {
             if (tbAsiakastunnus.Text.Length > 0)
@@ -969,6 +1073,8 @@ namespace R13_MokkiBook
                 PaivitaAsiakastaulu(aluequery);
             }
         }
+
+        //Tyhjentää valinnan asiakkaasta
         public void TyhjennaAsiakas()
         {
             asiakasjuurivalittu = false;
@@ -990,30 +1096,44 @@ namespace R13_MokkiBook
             tbPuhno.Text = String.Empty;
             tbPostitoimipaikkaAsiakas.Text = String.Empty;
         }
+
+        //Ottaa etunimen talteen uutta asiakasta varten
         private void tbEnimi_TextChanged(object sender, EventArgs e)
         {
-            valittuasiakas.etunimi = tbEnimi.Text;
+            luotuasiakas.etunimi = tbEnimi.Text;
         }
+
+        //Ottaa sukunimen talteen uutta asiakasta varten
         private void tbSnimi_TextChanged(object sender, EventArgs e)
         {
-            valittuasiakas.sukunimi = tbSnimi.Text;
+            luotuasiakas.sukunimi = tbSnimi.Text;
         }
+
+        //Ottaa postinumeron talteen uutta asiakasta varten
         private void tbPostinoAsiakas_TextChanged(object sender, EventArgs e)
         {
-            valittuasiakas.postinro = tbPostinoAsiakas.Text;
+            luotuasiakas.postinro = tbPostinoAsiakas.Text;
         }
+
+        //Ottaa lähiosoitteen talteen uutta asiakasta varten
         private void tbLahiosoiteAsiakas_TextChanged(object sender, EventArgs e)
         {
-            valittuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
+            luotuasiakas.lahiosoite = tbLahiosoiteAsiakas.Text;
         }
+
+        //Ottaa puhelinnumeron talteen uutta asiakasta varten
         private void tbPuhno_TextChanged(object sender, EventArgs e)
         {
-            valittuasiakas.puhelinnro = tbPuhno.Text;
+            luotuasiakas.puhelinnro = tbPuhno.Text;
         }
+
+        //Ottaa sähköpostiosoitteen talteen uutta asiakasta varten
         private void tbSahkoposti_TextChanged(object sender, EventArgs e)
         {
-            valittuasiakas.email = tbSahkoposti.Text;
+            luotuasiakas.email = tbSahkoposti.Text;
         }
+
+        //Ottaa datagridview:sta valitun asiakkaan talteen
         private void dgvAsiakkaat_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
@@ -1031,6 +1151,8 @@ namespace R13_MokkiBook
             postiqueryasiakas = "SELECT toimipaikka FROM posti WHERE postinro = (SELECT postinro FROM asiakas WHERE asiakas_id = " + valittuasiakas.asiakas_id + ");";
             HaePostinro(postiqueryasiakas);
         }
+
+        //Palauttaa käsiteltävän asiakkaan
         public Asiakas GetValittuAsiakas(int rivi)
         {
             Asiakas a = new Asiakas();
@@ -1044,6 +1166,8 @@ namespace R13_MokkiBook
 
             return a;
         }
+
+        //Ottaa valitun alueen talteen, ja palauttaa onnistuiko se
         public bool GetValittuAlue(string nimi)
         {
             Alue a = new Alue();
@@ -1057,6 +1181,8 @@ namespace R13_MokkiBook
             }
             return false;
         }
+
+        //Hakee tietokannasta postinumeron
         public void HaePostinro (string postiqueryasiakas)
         {
             using (OdbcConnection connection = new OdbcConnection(connectionString))
@@ -1076,6 +1202,9 @@ namespace R13_MokkiBook
                 }
             }
         }
+
+        //Tarkistaa onko annettu asiakas jo olemassa
+        //Jos on, ottaa sen talteen
         public bool AsiakasLoytyi()
         {
             Asiakas a = new Asiakas();
@@ -1113,6 +1242,8 @@ namespace R13_MokkiBook
 
             return false;
         }
+
+        //Käynnistää mökin haun
         private void btnHaemokki_Click(object sender, EventArgs e)
         {
             if(tbMokkitunnus.Text.Length>0)
@@ -1127,11 +1258,15 @@ namespace R13_MokkiBook
                 PaivitaMokkitaulu(mokkiquery);
             }
         }
+
+        //Varmistaa, syötetään vain muneroita tai välimerkki
         private void tbMinhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)8) && (e.KeyChar != (char)46)) //Jos ei toimi: pilkku = 44
                 e.Handled = true;
         }
+
+        //Varmistaa, että hinta on syötetty oikein
         private void tbMinhinta_Leave(object sender, EventArgs e)
         {
             if (tbMinhinta.Text.Length > 0)
@@ -1145,15 +1280,21 @@ namespace R13_MokkiBook
         {
             this.palveluTableAdapter.Fill(this.dataSet1.palvelu);
         }
+
+        //Tyhjentää asiakasvalinnan
         private void btnTyhjValinta_Click(object sender, EventArgs e)
         {
             TyhjennaAsiakas();
         }
+
+        //Varmistaa, ettei haettavassa mökissä ole liian pieni määrä henkilöitä
         private void nudHlomaara_ValueChanged(object sender, EventArgs e)
         {
             if(nudHlomaara.Value < 1)
                 nudHlomaara.Value = 1;
         }
+
+        //Ottaa valitun alueen talteen
         private void lbAlue_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             valitturivialue = lbAlue.SelectedIndex;
@@ -1161,10 +1302,15 @@ namespace R13_MokkiBook
             tbAlueid.Text = valittualue.alue_id.ToString();
             aluevalittu = true;
         }
+
+        //Yhdistää kaikki mökin hakukriteerit yhdeksi hakulauseeksi
         public void MuodostaMokkiHakuQuery()
         {
             mokkiquery = "SELECT * FROM mokki" + MuodostaPVMHaku() + MuodostaAlueHaku() + MuodostaLKMHaku() + MuodostaHintaHaku() + ";";
         }
+
+        //Muodostaa hakulauseen ajanjaksosta (mitkä mökit vapaita)
+        //Saattaa olla keskeneräinen, en nyt muista juuri ennen palautusta
         public string MuodostaPVMHaku()
         {
             string pal = "";
@@ -1174,6 +1320,8 @@ namespace R13_MokkiBook
             }
             return pal;
         }
+
+        //Muodostaa hakulauseen alueesta
         public string MuodostaAlueHaku()
         {
             string pal = "";
@@ -1189,6 +1337,8 @@ namespace R13_MokkiBook
             }
             return pal;
         }
+
+        //Muodostaa hakulauseen henkilömäärästä
         public string MuodostaLKMHaku()
         {
             string pal = "";
@@ -1204,6 +1354,8 @@ namespace R13_MokkiBook
             }
             return pal;
         }
+
+        //Muodostaa hakulauseen minimi- ja maksimihinnoista
         public string MuodostaHintaHaku()
         {
             string pal = "";
@@ -1227,10 +1379,14 @@ namespace R13_MokkiBook
             }
             return pal;
         }
+
+        //Käynnistää ajan nollauksen
         private void btnNollaaAika_Click(object sender, EventArgs e)
         {
             NollaaAika();
         }
+
+        //Nollaa varauksen ajanjakson
         public void NollaaAika()
         {
             dtpAlkupvm.Value = nyt;
@@ -1240,6 +1396,8 @@ namespace R13_MokkiBook
             alkupvmmuutettu = false;
             loppupvmmuutettu = false;
         }
+
+        //Nollaa varauksen aluevalinnan
         public void NollaaAlue()
         {
             aluevalittu = false;
@@ -1247,6 +1405,8 @@ namespace R13_MokkiBook
             aluequery = "SELECT nimi FROM alue;";
             PaivitaAluetaulu(aluequery);
         }
+
+        //Varmistaa, että hinta on syötetty oikein
         private void tbMaxhinta_Leave(object sender, EventArgs e)
         {
             if(tbMaxhinta.Text.Length > 0)
@@ -1256,6 +1416,8 @@ namespace R13_MokkiBook
             }
             else maxhinta = 0;
         }
+
+        //Tyhjentää mökin haun
         private void tbnTyhjennaMokkihaku_Click(object sender, EventArgs e)
         {
             mokkiquery = "SELECT * FROM mokki;";
@@ -1271,10 +1433,14 @@ namespace R13_MokkiBook
             NollaaAika();
             NollaaAlue();
         }
+
+        //Varmistaa, ettei loppuhintaan syötetä mitään
         private void tbLoppuhinta_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
+
+        //Ottaa talteen lisättävän palvelun lukumäärän, jos palvelu on valittu
         private void nudPalveluLkm_ValueChanged(object sender, EventArgs e)
         {
             if (!palveluvalittu)
@@ -1285,17 +1451,23 @@ namespace R13_MokkiBook
             else
                 lisattavapalvelumaara = (int)nudPalveluLkm.Value;
         }
+
+        //Ottaa talteen valitun palvelun
         private void lbVarauksenPalvelut_SelectedIndexChanged(object sender, EventArgs e)
         {
             valitturivivarauksenpalvelu = lbVarauksenPalvelut.SelectedIndex;
             varauksenpalveluvalittu = true;
         }
+
+        //Ottaa talteen valitun varaukseen lisätyn palvelun
         private void dgvAlueenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivipalvelu = dgvAlueenPalvelut.CurrentRow.Index;
             valittupalvelu = palvelut[valitturivipalvelu];
             palveluvalittu = true;
         }
+
+        //Ottaa talteen valitun mökin
         private void dgvMokitUusiVaraus_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivimokki = dgvMokitUusiVaraus.CurrentRow.Index;
