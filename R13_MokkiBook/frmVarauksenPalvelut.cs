@@ -34,6 +34,8 @@ namespace R13_MokkiBook
             varaukset = GetVaraukset();
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut avattiin käyttäjältä: ");
             lblVarausId.Text = "Varaustunnus: " + kasiteltavavaraus.varaus_id.ToString();
+            stpAlku.Value = kasiteltavavaraus.varattu_alkupvm;
+            stpLoppu.Value = kasiteltavavaraus.varattu_loppupvm;
         }
         private void frmVarauksenPalvelut_Load(object sender, EventArgs e)
         {
@@ -319,11 +321,12 @@ namespace R13_MokkiBook
                     using (OdbcCommand cmd = new OdbcCommand(varausquery, connection))
                     {
                         cmd.Parameters.AddWithValue("@asiakas_id", kasiteltavavaraus.asiakas_id);
-                        cmd.Parameters.AddWithValue("@mokki_id", kasiteltavavaraus.mokki_id);
+                        cmd.Parameters.AddWithValue("@mokki_mokki_id", kasiteltavavaraus.mokki_id);
                         cmd.Parameters.AddWithValue("@varattu_pvm", kasiteltavavaraus.varattu_pvm);
                         cmd.Parameters.AddWithValue("@vahvistus_pvm", kasiteltavavaraus.vahvistus_pvm);
                         cmd.Parameters.AddWithValue("@varattu_alkupvm", kasiteltavavaraus.varattu_alkupvm);
                         cmd.Parameters.AddWithValue("@varattu_loppupvm", kasiteltavavaraus.varattu_loppupvm);
+                        cmd.Parameters.AddWithValue("@varaus_id", kasiteltavavaraus.varaus_id);
                         cmd.ExecuteNonQuery();
                     }
                 }
