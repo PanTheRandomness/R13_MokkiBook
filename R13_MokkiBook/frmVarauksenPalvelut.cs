@@ -306,5 +306,9 @@ namespace R13_MokkiBook
         {
 
         }
+        private void btnPaivita_Click(object sender, EventArgs e)
+        {
+            PaivitaTaulu();
+        }
     }
 }

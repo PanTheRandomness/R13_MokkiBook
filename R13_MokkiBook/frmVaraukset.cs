@@ -327,6 +327,11 @@ namespace R13_MokkiBook
                 e.Cancel = true;
             }
         }
+        private void btnPaivita_Click(object sender, EventArgs e)
+        {
+            hakuquery = "SELECT * FROM varaus;";
+            PaivitaTaulu();
+        }
     }
     public class DataGridViewPrinter
     {

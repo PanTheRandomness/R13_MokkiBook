@@ -61,6 +61,7 @@
             this.tbAlue = new System.Windows.Forms.TextBox();
             this.btnTyhjennaHaku = new System.Windows.Forms.Button();
             this.ttVaraukset = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPaivita = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVaraukset)).BeginInit();
             this.cmsVaraustaulunMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.varausBindingSource)).BeginInit();
@@ -143,12 +144,12 @@
             this.tsmiVarauksenPalvelut,
             this.tsmiPoista});
             this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
-            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(181, 70);
+            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(171, 48);
             // 
             // tsmiVarauksenPalvelut
             // 
             this.tsmiVarauksenPalvelut.Name = "tsmiVarauksenPalvelut";
-            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(180, 22);
+            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(170, 22);
             this.tsmiVarauksenPalvelut.Text = "Muokkaa varausta";
             this.tsmiVarauksenPalvelut.ToolTipText = "Muokkaa vaalittua varausta ja sen palveluja";
             this.tsmiVarauksenPalvelut.Click += new System.EventHandler(this.tsmiVarauksenPalvelut_Click);
@@ -156,7 +157,7 @@
             // tsmiPoista
             // 
             this.tsmiPoista.Name = "tsmiPoista";
-            this.tsmiPoista.Size = new System.Drawing.Size(180, 22);
+            this.tsmiPoista.Size = new System.Drawing.Size(170, 22);
             this.tsmiPoista.Text = "Poista varaus";
             this.tsmiPoista.Click += new System.EventHandler(this.tsmiPoista_Click);
             // 
@@ -267,7 +268,7 @@
             this.btnUusi.Location = new System.Drawing.Point(1187, 591);
             this.btnUusi.Name = "btnUusi";
             this.btnUusi.Size = new System.Drawing.Size(75, 23);
-            this.btnUusi.TabIndex = 6;
+            this.btnUusi.TabIndex = 7;
             this.btnUusi.Text = "Uusi varaus";
             this.ttVaraukset.SetToolTip(this.btnUusi, "Luo uusi varaus");
             this.btnUusi.UseVisualStyleBackColor = true;
@@ -315,11 +316,23 @@
             this.btnTyhjennaHaku.UseVisualStyleBackColor = true;
             this.btnTyhjennaHaku.Click += new System.EventHandler(this.btnTyhjennaHaku_Click);
             // 
+            // btnPaivita
+            // 
+            this.btnPaivita.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPaivita.Location = new System.Drawing.Point(1106, 591);
+            this.btnPaivita.Name = "btnPaivita";
+            this.btnPaivita.Size = new System.Drawing.Size(75, 23);
+            this.btnPaivita.TabIndex = 6;
+            this.btnPaivita.Text = "Päivitä taulu";
+            this.btnPaivita.UseVisualStyleBackColor = true;
+            this.btnPaivita.Click += new System.EventHandler(this.btnPaivita_Click);
+            // 
             // frmVaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1274, 620);
+            this.Controls.Add(this.btnPaivita);
             this.Controls.Add(this.btnTyhjennaHaku);
             this.Controls.Add(this.tbAlue);
             this.Controls.Add(this.btnHae);
@@ -383,5 +396,6 @@
         private System.Windows.Forms.TextBox tbAlue;
         private System.Windows.Forms.Button btnTyhjennaHaku;
         private System.Windows.Forms.ToolTip ttVaraukset;
+        private System.Windows.Forms.Button btnPaivita;
     }
 }

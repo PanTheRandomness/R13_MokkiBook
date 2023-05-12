@@ -56,6 +56,7 @@
             this.lblViiva = new System.Windows.Forms.Label();
             this.lblVarausId = new System.Windows.Forms.Label();
             this.btnVahvista = new System.Windows.Forms.Button();
+            this.btnPaivita = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenPalvelut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenpalvelutBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.varauksenPAlvelutDataSet)).BeginInit();
@@ -79,7 +80,7 @@
             this.dgvVarauksenPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVarauksenPalvelut.Location = new System.Drawing.Point(10, 22);
             this.dgvVarauksenPalvelut.Name = "dgvVarauksenPalvelut";
-            this.dgvVarauksenPalvelut.Size = new System.Drawing.Size(506, 175);
+            this.dgvVarauksenPalvelut.Size = new System.Drawing.Size(563, 225);
             this.dgvVarauksenPalvelut.TabIndex = 3;
             this.dgvVarauksenPalvelut.TabStop = false;
             this.dgvVarauksenPalvelut.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvVarauksenPalvelut_RowHeaderMouseClick);
@@ -113,6 +114,7 @@
             this.pnlPalvelut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPalvelut.Controls.Add(this.btnPaivita);
             this.pnlPalvelut.Controls.Add(this.lblPalvelut);
             this.pnlPalvelut.Controls.Add(this.nudPoistettavat);
             this.pnlPalvelut.Controls.Add(this.btnPoista);
@@ -121,13 +123,13 @@
             this.pnlPalvelut.Controls.Add(this.btnHaePalvelu);
             this.pnlPalvelut.Location = new System.Drawing.Point(2, 72);
             this.pnlPalvelut.Name = "pnlPalvelut";
-            this.pnlPalvelut.Size = new System.Drawing.Size(526, 237);
+            this.pnlPalvelut.Size = new System.Drawing.Size(583, 287);
             this.pnlPalvelut.TabIndex = 1;
             // 
             // nudPoistettavat
             // 
             this.nudPoistettavat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudPoistettavat.Location = new System.Drawing.Point(10, 206);
+            this.nudPoistettavat.Location = new System.Drawing.Point(10, 256);
             this.nudPoistettavat.Name = "nudPoistettavat";
             this.nudPoistettavat.Size = new System.Drawing.Size(43, 20);
             this.nudPoistettavat.TabIndex = 4;
@@ -136,7 +138,7 @@
             // btnPoistaValittuMaara
             // 
             this.btnPoistaValittuMaara.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPoistaValittuMaara.Location = new System.Drawing.Point(59, 203);
+            this.btnPoistaValittuMaara.Location = new System.Drawing.Point(59, 253);
             this.btnPoistaValittuMaara.Name = "btnPoistaValittuMaara";
             this.btnPoistaValittuMaara.Size = new System.Drawing.Size(119, 23);
             this.btnPoistaValittuMaara.TabIndex = 5;
@@ -148,11 +150,11 @@
             // btnHaePalvelu
             // 
             this.btnHaePalvelu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHaePalvelu.Location = new System.Drawing.Point(348, 203);
+            this.btnHaePalvelu.Location = new System.Drawing.Point(450, 253);
             this.btnHaePalvelu.Name = "btnHaePalvelu";
-            this.btnHaePalvelu.Size = new System.Drawing.Size(168, 23);
-            this.btnHaePalvelu.TabIndex = 7;
-            this.btnHaePalvelu.Text = "Lisää palvelu varaukseen";
+            this.btnHaePalvelu.Size = new System.Drawing.Size(123, 23);
+            this.btnHaePalvelu.TabIndex = 8;
+            this.btnHaePalvelu.Text = "Lisää palvelu";
             this.ttVarauksenPAlvelut.SetToolTip(this.btnHaePalvelu, "Lisää varaukseen palvelun erilliseltä sivulta");
             this.btnHaePalvelu.UseVisualStyleBackColor = true;
             this.btnHaePalvelu.Click += new System.EventHandler(this.btnHaePalvelu_Click);
@@ -160,7 +162,7 @@
             // btnPoista
             // 
             this.btnPoista.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnPoista.Location = new System.Drawing.Point(210, 203);
+            this.btnPoista.Location = new System.Drawing.Point(184, 253);
             this.btnPoista.Name = "btnPoista";
             this.btnPoista.Size = new System.Drawing.Size(100, 23);
             this.btnPoista.TabIndex = 6;
@@ -209,13 +211,13 @@
             this.pnlTiedot.Controls.Add(this.stpAlku);
             this.pnlTiedot.Location = new System.Drawing.Point(2, 1);
             this.pnlTiedot.Name = "pnlTiedot";
-            this.pnlTiedot.Size = new System.Drawing.Size(526, 77);
+            this.pnlTiedot.Size = new System.Drawing.Size(583, 74);
             this.pnlTiedot.TabIndex = 0;
             // 
             // stpAlku
             // 
             this.stpAlku.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.stpAlku.Location = new System.Drawing.Point(10, 45);
+            this.stpAlku.Location = new System.Drawing.Point(10, 41);
             this.stpAlku.Name = "stpAlku";
             this.stpAlku.Size = new System.Drawing.Size(200, 20);
             this.stpAlku.TabIndex = 0;
@@ -224,7 +226,7 @@
             // stpLoppu
             // 
             this.stpLoppu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.stpLoppu.Location = new System.Drawing.Point(232, 45);
+            this.stpLoppu.Location = new System.Drawing.Point(232, 41);
             this.stpLoppu.Name = "stpLoppu";
             this.stpLoppu.Size = new System.Drawing.Size(200, 20);
             this.stpLoppu.TabIndex = 1;
@@ -234,11 +236,11 @@
             // 
             this.lblAjankohta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAjankohta.AutoSize = true;
-            this.lblAjankohta.Location = new System.Drawing.Point(7, 29);
+            this.lblAjankohta.Location = new System.Drawing.Point(10, 25);
             this.lblAjankohta.Name = "lblAjankohta";
-            this.lblAjankohta.Size = new System.Drawing.Size(108, 13);
+            this.lblAjankohta.Size = new System.Drawing.Size(111, 13);
             this.lblAjankohta.TabIndex = 0;
-            this.lblAjankohta.Text = "Muokkaa ajankohtaa";
+            this.lblAjankohta.Text = "Muokkaa ajankohtaa:";
             // 
             // lblPalvelut
             // 
@@ -253,7 +255,7 @@
             // 
             this.lblViiva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblViiva.AutoSize = true;
-            this.lblViiva.Location = new System.Drawing.Point(216, 51);
+            this.lblViiva.Location = new System.Drawing.Point(216, 47);
             this.lblViiva.Name = "lblViiva";
             this.lblViiva.Size = new System.Drawing.Size(10, 13);
             this.lblViiva.TabIndex = 1;
@@ -278,11 +280,22 @@
             this.btnVahvista.UseVisualStyleBackColor = true;
             this.btnVahvista.Click += new System.EventHandler(this.btnVahvista_Click);
             // 
+            // btnPaivita
+            // 
+            this.btnPaivita.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPaivita.Location = new System.Drawing.Point(345, 253);
+            this.btnPaivita.Name = "btnPaivita";
+            this.btnPaivita.Size = new System.Drawing.Size(75, 23);
+            this.btnPaivita.TabIndex = 7;
+            this.btnPaivita.Text = "Päivitä taulu";
+            this.btnPaivita.UseVisualStyleBackColor = true;
+            this.btnPaivita.Click += new System.EventHandler(this.btnPaivita_Click);
+            // 
             // frmVarauksenPalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 310);
+            this.ClientSize = new System.Drawing.Size(587, 360);
             this.Controls.Add(this.pnlTiedot);
             this.Controls.Add(this.pnlPalvelut);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -340,5 +353,6 @@
         private System.Windows.Forms.DateTimePicker stpLoppu;
         private System.Windows.Forms.DateTimePicker stpAlku;
         private System.Windows.Forms.Button btnVahvista;
+        private System.Windows.Forms.Button btnPaivita;
     }
 }
