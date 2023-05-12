@@ -171,10 +171,9 @@ namespace R13_MokkiBook
             this.varausTableAdapter.Fill(this.dataSet1.varaus);
         }
 
-        //Valitsee rivin datagridview:sta
+        //Valitsee rivin datagridview:sta. Error, jos valitaan tyhjä dgv-rivi
         private void dgvVaraukset_SelectionChanged(object sender, EventArgs e)
         {
-            //Error, jos valitaan tyhjä dgv-rivi
             valitturivi = dgvVaraukset.CurrentRow.Index;
             valittuvaraus = GetValittuVaraus();
         }
@@ -211,7 +210,7 @@ namespace R13_MokkiBook
             uv.ShowDialog();
         }
 
-        //Avaa varauksen muokkaussivun (uusi nimi contextmenussa text.ominaisuudella "Muokkaa"
+        //Avaa varauksen muokkaussivun (uusi nimi contextmenussa text.ominaisuudella "Muokkaa")
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
         {
             frmVarauksenPalvelut vp = new frmVarauksenPalvelut(valittuvaraus);

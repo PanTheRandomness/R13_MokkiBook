@@ -35,6 +35,8 @@ namespace R13_MokkiBook
             palvelut = GetPalvelut();
             varauksenpalvelut = tuotulista;
         }
+
+        //Lokiin tallentaminen: Tämän teki Hanna
         public void LokiinTallentaminen(string teksti)
         {
             string kayttaja = Environment.UserName;
@@ -43,6 +45,8 @@ namespace R13_MokkiBook
             sw.WriteLine(DateTime.Now.ToString() + " " + teksti + " " + kayttaja);
             sw.Close();
         }
+
+        //Täyttää datagridview:n
         public void TuoData()
         {
             OdbcConnection connection = new OdbcConnection(connectionString);
@@ -62,6 +66,8 @@ namespace R13_MokkiBook
             dgvAlueenPalvelut.Columns[5].HeaderText = "Hinta";
             dgvAlueenPalvelut.Columns[6].HeaderText = "ALV";
         }
+
+        //Palauttaa listan kaikista palveluista
         public List<Palvelu> GetPalvelut()
         {
             List<Palvelu> pp = new List<Palvelu>();
@@ -90,10 +96,14 @@ namespace R13_MokkiBook
             }
             return pp;
         }
+
+        //Ottaa talteen lisättävän määrän
         private void nudMaara_ValueChanged(object sender, EventArgs e)
         {
             palvelumaara = (int)nudMaara.Value;
         }
+
+        //Validoi lisäyksen ja luo uuden varausken_palvelut-instancen tai muokkaa vanhaa
         private void btnLisaa_Click(object sender, EventArgs e)
         {
             if (nudMaara.Value == 0 || palvelumaara == 0)
@@ -145,10 +155,14 @@ namespace R13_MokkiBook
                 MessageBox.Show("Palvelu lisättiin varaukseen.");
             }
         }
+
+        //Tallentaa sulkemisen lokiin
         private void frmHaePalvelu_FormClosed(object sender, FormClosedEventArgs e)
         {
             LokiinTallentaminen("Palvelujen hakusivu suljettiin varaukselle " + kasiteltavavaraus.varaus_id.ToString() + " käyttäjältä: ");
         }
+
+        //Varmistaa sulkemishalukkuuden
         private void frmHaePalvelu_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Haluatko varmasti poistua?", "", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -156,12 +170,13 @@ namespace R13_MokkiBook
                 e.Cancel = true;
             }
         }
+
+        //Valitsee rivin datagridview:sta. Error, jos valitaan tyhjä dgv-rivi
         private void dgvAlueenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivi = dgvAlueenPalvelut.CurrentRow.Index;
             valittupalvelu = palvelut[valitturivi];
             tbKuvaus.Text = valittupalvelu.kuvaus;
-            //HUUTAA JOS KLIKKAA ULKOPUOLELTA
         }
     }
 }
