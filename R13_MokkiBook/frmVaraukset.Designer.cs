@@ -39,7 +39,6 @@
             this.varattualkupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varattuloppupvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmsVaraustaulunMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiMuokkaa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiVarauksenPalvelut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPoista = new System.Windows.Forms.ToolStripMenuItem();
             this.varausBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -141,32 +140,23 @@
             // cmsVaraustaulunMenu
             // 
             this.cmsVaraustaulunMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMuokkaa,
             this.tsmiVarauksenPalvelut,
             this.tsmiPoista});
             this.cmsVaraustaulunMenu.Name = "cmsVaraustaulunMenu";
-            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(207, 70);
-            // 
-            // tsmiMuokkaa
-            // 
-            this.tsmiMuokkaa.Enabled = false;
-            this.tsmiMuokkaa.Name = "tsmiMuokkaa";
-            this.tsmiMuokkaa.Size = new System.Drawing.Size(206, 22);
-            this.tsmiMuokkaa.Text = "Muokkaa varausta";
-            this.tsmiMuokkaa.Visible = false;
-            this.tsmiMuokkaa.Click += new System.EventHandler(this.tsmiMuokkaa_Click);
+            this.cmsVaraustaulunMenu.Size = new System.Drawing.Size(181, 70);
             // 
             // tsmiVarauksenPalvelut
             // 
             this.tsmiVarauksenPalvelut.Name = "tsmiVarauksenPalvelut";
-            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(206, 22);
-            this.tsmiVarauksenPalvelut.Text = "Näytä varauksen palvelut";
+            this.tsmiVarauksenPalvelut.Size = new System.Drawing.Size(180, 22);
+            this.tsmiVarauksenPalvelut.Text = "Muokkaa varausta";
+            this.tsmiVarauksenPalvelut.ToolTipText = "Muokkaa vaalittua varausta ja sen palveluja";
             this.tsmiVarauksenPalvelut.Click += new System.EventHandler(this.tsmiVarauksenPalvelut_Click);
             // 
             // tsmiPoista
             // 
             this.tsmiPoista.Name = "tsmiPoista";
-            this.tsmiPoista.Size = new System.Drawing.Size(206, 22);
+            this.tsmiPoista.Size = new System.Drawing.Size(180, 22);
             this.tsmiPoista.Text = "Poista varaus";
             this.tsmiPoista.Click += new System.EventHandler(this.tsmiPoista_Click);
             // 
@@ -375,7 +365,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn varattualkupvmDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn varattuloppupvmDataGridViewTextBoxColumn;
         private System.Windows.Forms.ContextMenuStrip cmsVaraustaulunMenu;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMuokkaa;
         private System.Windows.Forms.ToolStripMenuItem tsmiVarauksenPalvelut;
         private System.Windows.Forms.ToolStripMenuItem tsmiPoista;
         private System.Windows.Forms.Panel pnlToiminnot;

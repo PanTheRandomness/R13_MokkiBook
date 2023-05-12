@@ -196,11 +196,6 @@ namespace R13_MokkiBook
             frmUusiVaraus uv = new frmUusiVaraus();
             uv.ShowDialog();
         }
-        private void tsmiMuokkaa_Click(object sender, EventArgs e)
-        {
-            //Varauksen palveluja voi muokata toista kautta, mutta palaan tähän, jos  jää aikaa.
-            //Priorisoin hakutoiminnon, koska varauksen palvelun muokkaus on jo varauksen muokkausta sinänsä.
-        }
         private void tsmiVarauksenPalvelut_Click(object sender, EventArgs e)
         {
             frmVarauksenPalvelut vp = new frmVarauksenPalvelut(valittuvaraus);
@@ -357,8 +352,8 @@ namespace R13_MokkiBook
         {
             int height = dataGridView.ColumnHeadersHeight + dataGridView.Rows.Cast<DataGridViewRow>().Sum(row => row.Height);
 
-            if (includeColumnHeaders) // noh.. piti saada tulostettua tuo otsikkorivi, mutta ei nyt onnistu, joten tulostaa vaan sen ylimmän rivin :D
-            {
+            if (includeColumnHeaders)
+            {// noh.. piti saada tulostettua tuo otsikkorivi, mutta ei nyt onnistu, joten tulostaa vaan sen ylimmän rivin :D
                 DrawRow(dataGridView.Rows[rowIndex].Cells, new SolidBrush(textColor), bounds.Y);
                 height += dataGridView.Rows[0].Height;
             }
@@ -377,7 +372,6 @@ namespace R13_MokkiBook
             morePages = false;
             return morePages;
         }
-
         private void DrawRow(DataGridViewCellCollection cells, Brush brush, int y)
         {
             int x = bounds.X;
