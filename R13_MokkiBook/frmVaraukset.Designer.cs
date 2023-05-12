@@ -91,7 +91,7 @@
             this.dgvVaraukset.DataSource = this.varausBindingSource;
             this.dgvVaraukset.Location = new System.Drawing.Point(2, 3);
             this.dgvVaraukset.Name = "dgvVaraukset";
-            this.dgvVaraukset.Size = new System.Drawing.Size(1269, 578);
+            this.dgvVaraukset.Size = new System.Drawing.Size(1269, 580);
             this.dgvVaraukset.TabIndex = 7;
             this.dgvVaraukset.TabStop = false;
             this.dgvVaraukset.SelectionChanged += new System.EventHandler(this.dgvVaraukset_SelectionChanged);
@@ -346,6 +346,7 @@
             this.Controls.Add(this.pnlToiminnot);
             this.Controls.Add(this.dgvVaraukset);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1290, 659);
             this.MinimumSize = new System.Drawing.Size(1290, 659);
             this.Name = "frmVaraukset";
             this.Text = "Varaukset";
