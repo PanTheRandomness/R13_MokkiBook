@@ -367,7 +367,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(827, 546);
+            this.ClientSize = new System.Drawing.Size(817, 475);
             this.Controls.Add(this.tbPostitoimipaikka);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnHae);
