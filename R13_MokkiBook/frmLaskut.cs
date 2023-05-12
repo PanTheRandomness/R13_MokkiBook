@@ -332,7 +332,7 @@ namespace R13_MokkiBook
 
                     LaskeLoppuHinta();
 
-                    Paragraph totalParagraph = new Paragraph("Total sum: " + loppusumma.ToString("0.00") + " Total VAT: " + loppualv.ToString("0.00"));
+                    Paragraph totalParagraph = new Paragraph("Loppusumma: " + loppusumma.ToString("0.00") + " Loppu Alv: " + loppualv.ToString("0.00"));
                     document.Add(totalParagraph);
 
 
