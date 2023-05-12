@@ -18,16 +18,20 @@ namespace R13_MokkiBook
         public int valitturivi = -1;
         public Varaus kasiteltavavaraus = new Varaus();
         public List<VarauksenPalvelut> varauksenpalvelut = new List<VarauksenPalvelut>();
+        public List<Varaus> varaukset = new List<Varaus>();
         public VarauksenPalvelut valittupalvelu = new VarauksenPalvelut();
         public string tauluquery;
         public string palveluquery;
         public string connectionString = "Dsn=Village Newbies;uid=root";
         public bool palveluvalittu = false;
+        public DateTime alku;
+        public DateTime loppu;
         public frmVarauksenPalvelut(Varaus tuotuvaraus)
         {
             InitializeComponent();
             kasiteltavavaraus = tuotuvaraus;
             varauksenpalvelut = GetVarauksenPalvelut();
+            varaukset = GetVaraukset();
             LokiinTallentaminen("Varauksen " + kasiteltavavaraus.varaus_id.ToString() + " palvelut avattiin käyttäjältä: ");
             lblVarausId.Text = "Varaustunnus: " + kasiteltavavaraus.varaus_id.ToString();
         }
@@ -74,6 +78,36 @@ namespace R13_MokkiBook
             vp.palvelu_id = varauksenpalvelut[valitturivi].palvelu_id;
             vp.lkm = varauksenpalvelut[valitturivi].lkm;
             return vp;
+        }
+        public List<Varaus> GetVaraukset()
+        {
+            List<Varaus> var = new List<Varaus>();
+            string query = "SELECT * FROM varaus";
+
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    using (OdbcDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Varaus varaus = new Varaus();
+                            varaus.varaus_id = reader.GetInt32(0);
+                            varaus.asiakas_id = reader.GetInt32(1);
+                            varaus.mokki_id = reader.GetInt32(2);
+                            varaus.varattu_pvm = reader.GetDateTime(3);
+                            varaus.vahvistus_pvm = reader.GetDateTime(4);
+                            varaus.varattu_alkupvm = reader.GetDateTime(5);
+                            varaus.varattu_loppupvm = reader.GetDateTime(6);
+
+                            var.Add(varaus);
+                        }
+                    }
+                }
+            }
+            return var;
         }
         public void PaivitaTaulu()
         {
@@ -191,21 +225,86 @@ namespace R13_MokkiBook
         }
         private void btnVahvista_Click(object sender, EventArgs e)
         {
-
+            switch (ValidPvm())
+            {
+                case 0:
+                    if (MokkiVapaa())
+                    {
+                        TallennaVarauksenMuutokset();
+                    }
+                    else
+                        MessageBox.Show("Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla."); ;
+                    break;
+                case 1:
+                    if (MessageBox.Show("Varaukselle on valittu vain yksi päivä, luodaanko varaus silti?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        if (MokkiVapaa())
+                        {
+                            TallennaVarauksenMuutokset();
+                        }
+                        else
+                            MessageBox.Show("Kyseinen mökki ei ole vapaa kyseisellä ajanjaksolla.");
+                    }
+                    break;
+                case 2:
+                    MessageBox.Show("Varausta ei voi luoda: Varauksen alkupäivä ei voi olla sen päättymispäivän jälkeen.");
+                    break;
+                default:
+                    MessageBox.Show("Jokin meni nyt päiväyksen kanssa vikaan.");
+                    break;
+            }
         }
         private void stpAlku_ValueChanged(object sender, EventArgs e)
         {
-
+            alku = stpAlku.Value;
         }
         private void stpLoppu_ValueChanged(object sender, EventArgs e)
         {
-
+            loppu = stpLoppu.Value;
         }
         private void dgvVarauksenPalvelut_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             valitturivi = dgvVarauksenPalvelut.CurrentRow.Index;
             valittupalvelu = GetValittuPalvelu();
             palveluvalittu = true;
+        }
+        public int ValidPvm()
+        {
+            if (alku < loppu)
+                return 0;
+            else if (alku.Equals(loppu))
+                return 1;
+            else
+                return 2;
+        }
+        public bool MokkiVapaa()
+        {
+            foreach (Varaus v in varaukset)
+            {
+                if (v.varaus_id != kasiteltavavaraus.varaus_id)
+                {
+                    if (v.mokki_id == kasiteltavavaraus.mokki_id)
+                    {
+                        if (alku >= v.varattu_alkupvm && alku < v.varattu_loppupvm)
+                        {
+                            return false;
+                        }
+                        else if (loppu > v.varattu_alkupvm && loppu <= v.varattu_loppupvm)
+                        {
+                            return false;
+                        }
+                        else if (alku <= v.varattu_alkupvm && loppu >= v.varattu_loppupvm)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        public void TallennaVarauksenMuutokset()
+        {
+
         }
     }
 }
