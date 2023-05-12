@@ -227,11 +227,12 @@ namespace R13_MokkiBook
                 luotuasiakas.lahiosoite = tbLahiosoite.Text;
                 luotuasiakas.email = tbEmail.Text;
                 luotuasiakas.puhelinnro = tbPuhelinnro.Text;
+                
                 string connectionString = "Dsn=Village Newbies;uid=root";
                 using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
                     connection.Open();
-                    string asiakasquery = "UPDATE asiakas SET asiakas_id = ?, postinro = ?, etunimi = ?, sukunimi = ?, lahiosoite = ?, email = ? WHERE puhelinnro = ?";
+                    string asiakasquery = "UPDATE asiakas SET postinro = ?, etunimi = ?, sukunimi = ?, lahiosoite = ?, email = ?, puhelinnro = ? WHERE asiakas_id = ?";
                     using (OdbcCommand cmd = new OdbcCommand(asiakasquery, connection))
                     {
                         if (tbAsiakasid.Text.Trim() == "" || tbPostiNro.Text.Trim() == "" || tbEtunimi.Text.Trim() == "" ||
@@ -242,13 +243,13 @@ namespace R13_MokkiBook
                         }
                         else
                         {
-                            cmd.Parameters.AddWithValue("@asiakas_id", luotuasiakas.asiakas_id);
                             cmd.Parameters.AddWithValue("@postinro", luotuasiakas.postinro);
                             cmd.Parameters.AddWithValue("@etunimi", luotuasiakas.etunimi);
                             cmd.Parameters.AddWithValue("@sukunimi", luotuasiakas.sukunimi);
                             cmd.Parameters.AddWithValue("@lahiosoite", luotuasiakas.lahiosoite);
                             cmd.Parameters.AddWithValue("@email", luotuasiakas.email);
                             cmd.Parameters.AddWithValue("@puhelinnro", luotuasiakas.puhelinnro);
+                            cmd.Parameters.AddWithValue("@asiakas_id", luotuasiakas.asiakas_id);
                             cmd.ExecuteNonQuery();
 
 
@@ -270,6 +271,7 @@ namespace R13_MokkiBook
                             tbLahiosoite.Text = String.Empty;
                             tbEmail.Text = String.Empty;
                             tbPuhelinnro.Text = String.Empty;
+                            
                         }
                     }
                     lokiinTallentaminen("Asiakkaat-osiosta muokattiin tietoja käyttäjältä: ");
