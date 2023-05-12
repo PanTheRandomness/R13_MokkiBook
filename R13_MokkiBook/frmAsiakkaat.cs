@@ -220,6 +220,7 @@ namespace R13_MokkiBook
         {
             try
             {
+
                 DataRow currentRow = ((DataRowView)dgvAsiakkaat.CurrentRow.DataBoundItem).Row;
 
                 currentRow["asiakas_id"] = tbAsiakasid.Text;
