@@ -224,6 +224,8 @@ namespace R13_MokkiBook
                 luotumokki.varustelu = tbVarustelu.Text;
                 luotumokki.postitoimipaikka = tbPostitoimipaikka.Text;
                 string connectionString = "Dsn=Village Newbies;uid=root";
+                if (!PostiLoytyi(luotumokki.postinro))
+                    LuoPosti(luotumokki.postinro, tbPostitoimipaikka.Text);
                 using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
                     connection.Open();

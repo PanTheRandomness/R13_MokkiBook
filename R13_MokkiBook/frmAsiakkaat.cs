@@ -227,8 +227,10 @@ namespace R13_MokkiBook
                 luotuasiakas.lahiosoite = tbLahiosoite.Text;
                 luotuasiakas.email = tbEmail.Text;
                 luotuasiakas.puhelinnro = tbPuhelinnro.Text;
-                
-                string connectionString = "Dsn=Village Newbies;uid=root";
+
+                string connectionString = "Dsn=Village Newbies;uib=root";
+                if (!PostiLoytyi(luotuasiakas.postinro))
+                    LuoPosti(luotuasiakas.postinro, tbPostitoimipaikka.Text);
                 using (OdbcConnection connection = new OdbcConnection(connectionString))
                 {
                     connection.Open();
